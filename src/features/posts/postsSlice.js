@@ -58,6 +58,7 @@ const postsSlice = createSlice({
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       // Add any fetched posts to the array
+      // Use the `upsertMany` reducer as a mutating update utility
       postsAdapter.upsertMany(state, action.payload)
     },
     [fetchPosts.rejected]: (state, action) => {
