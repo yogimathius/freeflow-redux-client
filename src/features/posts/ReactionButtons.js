@@ -8,11 +8,11 @@ const reactionEmoji = {
   hooray: '🎉',
   heart: '❤️',
   rocket: '🚀',
-  eyes: '👀'
+  eyes: '👀',
 }
 
 export const ReactionButtons = ({ post }) => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     return (

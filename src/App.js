@@ -6,12 +6,12 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import { Navbar } from './app/Navbar';
+import { Navbar } from './app/Navbar'
 
-import { PostsList } from './features/posts/PostsList';
-import { AddPostForm } from './features/posts/AddPostForm';
-import { SinglePostPage } from './features/posts/SinglePostPage'
+import { PostsList } from './features/posts/PostsList'
+import { AddPostForm } from './features/posts/AddPostForm'
 import { EditPostForm } from './features/posts/EditPostForm'
+import { SinglePostPage } from './features/posts/SinglePostPage'
 import { UsersList } from './features/users/UsersList'
 import { UserPage } from './features/users/UserPage'
 import { NotificationsList } from './features/notifications/NotificationsList'
@@ -22,7 +22,6 @@ function App() {
       <Navbar />
       <div className="App">
         <Switch>
-          <Route exact path="/notifications" component={NotificationsList} />
           <Route
             exact
             path="/"
@@ -36,7 +35,9 @@ function App() {
           <Route exact path="/posts/:postId" component={SinglePostPage} />
           <Route exact path="/editPost/:postId" component={EditPostForm} />
           <Route exact path="/users" component={UsersList} />
-          <Route exact path="/users/:userId" component={UserPage} />          <Redirect to="/" />
+          <Route exact path="/users/:userId" component={UserPage} />
+          <Route exact path="/notifications" component={NotificationsList} />
+          <Redirect to="/" />
         </Switch>
       </div>
     </Router>

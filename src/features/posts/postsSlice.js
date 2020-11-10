@@ -22,11 +22,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
-  // The payload creator receives the partial `{title, content, user}` object
-  async initialPost => {
-    // We send the initial data to the fake API server
+  async (initialPost) => {
     const response = await client.post('/fakeApi/posts', { post: initialPost })
-    // The response includes the complete post object, including unique ID
     return response.post
   }
 )
@@ -58,7 +55,6 @@ const postsSlice = createSlice({
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       // Add any fetched posts to the array
-      // Use the `upsertMany` reducer as a mutating update utility
       postsAdapter.upsertMany(state, action.payload)
     },
     [fetchPosts.rejected]: (state, action) => {
