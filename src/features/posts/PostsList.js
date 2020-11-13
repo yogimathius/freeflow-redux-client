@@ -22,7 +22,7 @@ let PostExcerpt = ({ postId }) => {
         <PostAuthor userId={post.owner_id} />
         <TimeAgo timestamp={post.time_posted} />
       </div>
-      <p className="post-content">{post.text_body.substring(0, 100)}</p>
+      <p className="post-content">{post.content.substring(0, 100)}</p>
 
       {/* <ReactionButtons post={post} />
       <Link to={`/posts/${post.post_id}`} className="button muted-button">

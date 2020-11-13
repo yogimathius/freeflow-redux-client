@@ -7,7 +7,8 @@ import {
 import axios from 'axios';
 // import { client } from '../../api/client'
 // import { api } from '../../.api/index'
-const url = 'http://localhost:8001/api/posts'
+
+const url = 'http://localhost:8000/api/postings'
 // const getPosts = () => {
 //   try {
 //     const response = axios.get(url); 
@@ -29,7 +30,7 @@ const url = 'http://localhost:8001/api/posts'
 // }
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
+  // sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -37,14 +38,14 @@ const initialState = postsAdapter.getInitialState({
   error: null,
 })
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('http://localhost:8001/api/posts');
+export const fetchPosts = createAsyncThunk('postings/fetchPosts', async () => {
+  const response = await axios.get('http://localhost:8000/api/postings');
   console.log('fetchPosts from postsSlice: ', response.data)
   return response.data
 })
 
 export const addNewPost = createAsyncThunk(
-  'posts/addNewPost',
+  'postings/addNewPost',
   async (initialPost) => {
     const response = await axios.post(url, {});
     return response.post
@@ -52,7 +53,7 @@ export const addNewPost = createAsyncThunk(
 )
 
 const postsSlice = createSlice({
-  name: 'posts',
+  name: 'postings',
   initialState,
   reducers: {
     reactionAdded(state, action) {
@@ -73,6 +74,7 @@ const postsSlice = createSlice({
   },
   extraReducers: {
     [fetchPosts.pending]: (state, action) => {
+      console.log("action in pending: ", action);
       state.status = 'loading'
     },
     [fetchPosts.fulfilled]: (state, action) => {
@@ -84,7 +86,7 @@ const postsSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addNewPost.fulfilled]: postsAdapter.addOne,
+    // [addNewPost.fulfilled]: postsAdapter.addOne,
   },
 })
 
