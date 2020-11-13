@@ -5,32 +5,11 @@ import {
   createEntityAdapter,
 } from '@reduxjs/toolkit'
 import axios from 'axios';
-// import { client } from '../../api/client'
-// import { api } from '../../.api/index'
 
 const url = 'http://localhost:8000/api/postings'
-// const getPosts = () => {
-//   try {
-//     const response = axios.get(url); 
-//     console.log("fetchPosts request from postsSlice: ", response)
-//     return response;
-//   } catch (err) {
-//     throw err;
-//   }
-// };
-
-// const postPosts = () => {
-//   const url = 'http://localhost:8001/api/posts'
-//   try {
-//     const response = axios.post(url, {  });
-//     return response
-//   } catch (err) {
-//     throw err
-//   }
-// }
 
 const postsAdapter = createEntityAdapter({
-  // sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
+  sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -47,7 +26,13 @@ export const fetchPosts = createAsyncThunk('postings/fetchPosts', async () => {
 export const addNewPost = createAsyncThunk(
   'postings/addNewPost',
   async (initialPost) => {
-    const response = await axios.post(url, {});
+    // const newPost = {
+    //   ...initialPost, is_request: false
+    // }
+    const { title, content, is_request, owner_id} = initialPost
+    console.log("initial post in addnewpost: ", initialPost);
+    const response = await axios.post(url, {posting: title, content, is_request, owner_id});
+    console.log("response in thunk: ", response);
     return response.post
   }
 )
@@ -86,7 +71,7 @@ const postsSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    // [addNewPost.fulfilled]: postsAdapter.addOne,
+    [addNewPost.fulfilled]: postsAdapter.addOne,
   },
 })
 
@@ -102,5 +87,8 @@ export const {
 
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter((post) => post.user === userId)
+  (state, userId) => {
+    console.log("state in filter: ", state);
+   state.postings.filter((posting) => posting.owner_id === userId)
+  }
 )

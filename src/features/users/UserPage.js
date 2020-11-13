@@ -11,8 +11,8 @@ export const UserPage = ({ match }) => {
   const user = useSelector((state) => selectUserById(state, userId))
 
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
-
-  const postTitles = postsForUser.map((post) => (
+  
+  const postTitles = postsForUser.map((post) => ( 
     <li key={post.id}>
       <Link to={`/posts/${post.id}`}>{post.title}</Link>
     </li>
@@ -20,7 +20,7 @@ export const UserPage = ({ match }) => {
 
   return (
     <section>
-      <h2>{user.name}</h2>
+      <h2>{user.first_name}{user.last_name}</h2>
 
       <ul>{postTitles}</ul>
     </section>

@@ -17,6 +17,12 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   return response.data;
 });
 
+export const fetchUserPosts = createAsyncThunk('users/fetchUserPostings', async () => {
+  const response = await axios.get('http://localhost:8000/api/users/:id/postings');
+  console.log('fetchPosts from postsSlice: ', response.data)
+  return response.data
+})
+
 const usersSlice = createSlice({
   name: 'users',
   initialState,
