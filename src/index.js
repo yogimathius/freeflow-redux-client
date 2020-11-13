@@ -6,7 +6,9 @@ import store from './app/store'
 import { Provider } from 'react-redux'
 import { fetchUsers } from './features/users/usersSlice'
 
-import './api/server'
+// import './api/server'
+
+
 store.dispatch(fetchUsers())
 
 ReactDOM.render(

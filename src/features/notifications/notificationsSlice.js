@@ -4,7 +4,8 @@ import {
   createEntityAdapter,
 } from '@reduxjs/toolkit'
 
-import { client } from '../../api/client'
+// import { client } from '../../api/client'
+import { api } from '../../.api/index'
 
 const notificationsAdapter = createEntityAdapter({
   sortComparer: (a, b) => b.date.localeCompare(a.date),
@@ -16,7 +17,7 @@ export const fetchNotifications = createAsyncThunk(
     const allNotifications = selectAllNotifications(getState())
     const [latestNotification] = allNotifications
     const latestTimestamp = latestNotification ? latestNotification.date : ''
-    const response = await client.get(
+    const response = await api.get(
       `/fakeApi/notifications?since=${latestTimestamp}`
     )
     return response.notifications

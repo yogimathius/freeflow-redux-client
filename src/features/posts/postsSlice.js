@@ -4,10 +4,32 @@ import {
   createSelector,
   createEntityAdapter,
 } from '@reduxjs/toolkit'
-import { client } from '../../api/client'
+import axios from 'axios';
+// import { client } from '../../api/client'
+// import { api } from '../../.api/index'
+const getPosts = () => {
+  const url = 'http://localhost:8001/api/posts';
+  try {
+    const response = axios.get(url); 
+    console.log("fetchPosts request from postsSlice: ", response)
+    return response;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const postPosts = () => {
+  const url = 'http://localhost:8001/api/posts'
+  try {
+    const response = axios.post(url, {  });
+    return response
+  } catch (err) {
+    throw err
+  }
+}
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.date.localeCompare(a.date),
+  // sortComparer: (a, b) => b.date.localeCompare(a.date),
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -16,14 +38,14 @@ const initialState = postsAdapter.getInitialState({
 })
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await client.get('/fakeApi/posts')
-  return response.posts
+  const response = await getPosts();
+  return response
 })
 
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
   async (initialPost) => {
-    const response = await client.post('/fakeApi/posts', { post: initialPost })
+    const response = await postPosts();
     return response.post
   }
 )
