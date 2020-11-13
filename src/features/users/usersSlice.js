@@ -12,9 +12,9 @@ const usersAdapter = createEntityAdapter();
 const initialState = usersAdapter.getInitialState();
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get('http://localhost:8001/api/users')
-  console.log("fetchUsers from userSlice: ", response)
-  return response.data.data
+  const response = await axios.get('http://localhost:8001/api/users');
+  console.log("fetchUsers from userSlice: ", response.data);
+  return response.data;
 });
 
 const usersSlice = createSlice({
