@@ -83,14 +83,6 @@ export const {
   selectIds: selectPostIds,
 } = postsAdapter.getSelectors((state) => state.posts)
 
-// export const selectPostsByUser = createSelector(
-//   [selectAllPosts, (state, userId) => userId],
-//   (state, userId) => {
-//     console.log("state in filter: ", state, "userId", userId);
-//    state.filter((posting) => posting.owner_id === userId)
-//   }
-// )
-
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
   (posts, userId) => posts.filter((post) => post.owner_id == userId)
