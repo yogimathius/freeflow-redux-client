@@ -13,6 +13,7 @@ export const AddPostForm = () => {
 
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
+  // console.log("users in addpostform: ", users);
 
   const onTitleChanged = (e) => setTitle(e.target.value)
   const onContentChanged = (e) => setContent(e.target.value)
@@ -24,9 +25,10 @@ export const AddPostForm = () => {
   const onSavePostClicked = async () => {
     if (canSave) {
       try {
+        console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewPost({ title, content, user: userId })
+          addNewPost({ title, content,  is_request: false, owner_id: userId })
         )
         unwrapResult(resultAction)
         setTitle('')
@@ -42,7 +44,7 @@ export const AddPostForm = () => {
 
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
-      {user.name}
+      {user.first_name} {user.last_name}
     </option>
   ))
 

@@ -4,10 +4,12 @@ import {
   createSelector,
   createEntityAdapter,
 } from '@reduxjs/toolkit'
-import { client } from '../../api/client'
+import axios from 'axios';
+
+const url = 'http://localhost:8000/api/postings'
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.date.localeCompare(a.date),
+  sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -15,21 +17,27 @@ const initialState = postsAdapter.getInitialState({
   error: null,
 })
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await client.get('/fakeApi/posts')
-  return response.posts
+export const fetchPosts = createAsyncThunk('postings/fetchPosts', async () => {
+  const response = await axios.get('http://localhost:8000/api/postings');
+  return response.data
 })
 
 export const addNewPost = createAsyncThunk(
-  'posts/addNewPost',
+  'postings/addNewPost',
   async (initialPost) => {
-    const response = await client.post('/fakeApi/posts', { post: initialPost })
+    // const newPost = {
+    //   ...initialPost, is_request: false
+    // }
+    const { title, content, is_request, owner_id} = initialPost
+    console.log("initial post in addnewpost: ", initialPost);
+    const response = await axios.post(url, {posting: title, content, is_request, owner_id});
+    console.log("response in thunk: ", response);
     return response.post
   }
 )
 
 const postsSlice = createSlice({
-  name: 'posts',
+  name: 'postings',
   initialState,
   reducers: {
     reactionAdded(state, action) {
@@ -77,5 +85,5 @@ export const {
 
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter((post) => post.user === userId)
+  (posts, userId) => posts.filter((post) => post.owner_id == userId)
 )

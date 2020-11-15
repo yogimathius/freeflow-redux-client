@@ -14,20 +14,20 @@ import {
 
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
-
+  
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
       <div>
-        <PostAuthor userId={post.user} />
-        <TimeAgo timestamp={post.date} />
+        <PostAuthor userId={post.owner_id} />
+        <TimeAgo timestamp={post.created_at} />
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
-      <ReactionButtons post={post} />
-      <Link to={`/posts/${post.id}`} className="button muted-button">
+      {/* <ReactionButtons post={post} />
+      <Link to={`/posts/${post.post_id}`} className="button muted-button">
         View Post
-      </Link>
+      </Link> */}
     </article>
   )
 }
