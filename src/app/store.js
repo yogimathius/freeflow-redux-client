@@ -9,6 +9,6 @@ export default configureStore({
   reducer: {
     posts: postsReducer,
     users: usersReducer,
-    notifications: notificationsReducer,
+    // notifications: notificationsReducer,
   },
 })
