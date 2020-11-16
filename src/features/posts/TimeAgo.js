@@ -5,7 +5,7 @@ export const TimeAgo = ({ timestamp }) => {
   let timeAgo = ''
   if (timestamp) {
     const date = parseISO(timestamp)
-    const timePeriod = formatDistanceToNow(date)
+    const timePeriod = formatDistanceToNow(date, {includeSeconds: true})
     timeAgo = `${timePeriod} ago`
   }
 
