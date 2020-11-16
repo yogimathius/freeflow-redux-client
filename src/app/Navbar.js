@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import './Navbar.scss';
 // import {
 //   fetchNotifications,
 //   selectAllNotifications,
@@ -27,7 +27,7 @@ export const Navbar = () => {
   return (
     <nav>
       <section>
-        <h1>Redux Essentials Example</h1>
+        <h1>Freeflow</h1>
 
         <div className="navContent">
           <div className="navLinks">
