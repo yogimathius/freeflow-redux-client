@@ -5,10 +5,6 @@ import { reactionAdded } from './postsSlice'
 
 const reactionEmoji = {
   thumbsUp: '👍',
-  hooray: '🎉',
-  heart: '❤️',
-  rocket: '🚀',
-  eyes: '👀',
 }
 
 export const ReactionButtons = ({ post }) => {
@@ -21,7 +17,7 @@ export const ReactionButtons = ({ post }) => {
         type="button"
         className="muted-button reaction-button"
         onClick={() =>
-          dispatch(reactionAdded({ postId: post.id, reaction: name }))
+          dispatch(reactionAdded({ postId: post.posting_id, likerId: post.liker_id }))
         }
       >
         {emoji} {post.reactions[name]}
