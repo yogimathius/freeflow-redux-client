@@ -12,9 +12,17 @@ import {
   selectPostById,
 } from './postsSlice'
 
+import {
+  selectLikesByPostId,
+  fetchLikes
+} from './likes/likesSlice'
+
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
-  
+  // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
+
+  // const likesCount = likesList.length;
+  // console.log(likesCount);
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
@@ -24,10 +32,10 @@ let PostExcerpt = ({ postId }) => {
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
-      {/* <ReactionButtons post={post} />
+      {/* <ReactionButtons post={post} /> */}
       <Link to={`/posts/${post.post_id}`} className="button muted-button">
         View Post
-      </Link> */}
+      </Link>
     </article>
   )
 }
@@ -42,6 +50,12 @@ export const PostsList = () => {
   useEffect(() => {
     if (postStatus === 'idle') {
       dispatch(fetchPosts())
+    }
+  }, [postStatus, dispatch])
+
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchLikes())
     }
   }, [postStatus, dispatch])
 
