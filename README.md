@@ -1,4 +1,11 @@
-# Redux Essentials Tutorial Example
+# For Development:
+
+Primary button color #1CD454
+Secondary button color #3366ff
+Red button color #fa4646
+For Darker background colors #464655
+
+# Freeflow
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
