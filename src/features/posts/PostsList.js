@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -16,11 +16,25 @@ import {
   selectLikesByPostId,
   fetchLikes
 } from './likes/likesSlice'
+import Axios from 'axios'
 
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
   // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
+  const [likes, setLikes] = useState(0);
 
+  useEffect(() => {
+    Axios.get(`http://localhost:8000/api/likes/`)
+    .then((res) => {
+      // console.log("res in use effect likes: ", res.data);
+      setLikes(res.data)
+    })
+  })
+  let postLikes
+  if (likes) {
+    postLikes = likes.filter(like => like.posting_id === postId)
+  }
+  console.log("likes in state: ", postLikes);
   // const likesCount = likesList.length;
   // console.log(likesCount);
   return (
