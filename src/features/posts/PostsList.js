@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
-import { ReactionButtons } from './ReactionButtons'
+// import { ReactionButtons } from './ReactionButtons'
 import {
   selectAllPosts,
   fetchPosts,
@@ -47,13 +47,12 @@ let PostExcerpt = ({ postId }) => {
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
       {/* <ReactionButtons post={post} /> */}
-      <Link to={`/posts/${post.post_id}`} className="button muted-button">
+      <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
       </Link>
     </article>
   )
 }
-
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)

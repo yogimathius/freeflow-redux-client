@@ -19,6 +19,7 @@ const initialState = postsAdapter.getInitialState({
 
 export const fetchPosts = createAsyncThunk('postings/fetchPosts', async () => {
   const response = await axios.get('http://localhost:8000/api/postings');
+  console.log(response.data)
   return response.data
 })
 
@@ -31,8 +32,8 @@ export const addNewPost = createAsyncThunk(
     const { title, content, is_request, owner_id} = initialPost
     console.log("initial post in addnewpost: ", initialPost);
     const response = await axios.post(url, {posting: title, content, is_request, owner_id});
-    console.log("response in thunk: ", response);
-    return response.post
+    console.log("response in thunk: ", response.data);
+    return response.data
   }
 )
 
