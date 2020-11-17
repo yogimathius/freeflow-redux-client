@@ -25,7 +25,7 @@ export const AddPostForm = () => {
   const onSavePostClicked = async () => {
     if (canSave) {
       try {
-        console.log("userid in postclicked fun: ", userId);
+        // console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addNewPost({ title, content,  is_request: false, owner_id: userId })

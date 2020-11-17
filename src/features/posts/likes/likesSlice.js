@@ -19,6 +19,7 @@ const initialState = likesAdapter.getInitialState({
 
 export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
   const response = await axios.get('http://localhost:8000/api/likes');
+  console.log("fetched likes: ", response.data);
   return response.data
 })
 
@@ -77,9 +78,10 @@ export default likesSlice.reducer
 export const {
   selectAll: selectAlllikes,
   selectById: selectLikeById,
+  selectIds: selectLikeIds,
 } = likesAdapter.getSelectors((state) => state.likes)
 
 export const selectLikesByPostId = createSelector(
-  [selectAlllikes, (state, postOwnerId) => postOwnerId],
-  (likes, postOwnerId) => likes.filter((like) => like.posting_id == postOwnerId)
+  [selectAlllikes, (state, postId) => postId],
+  (likes, postId) => likes.filter((like) => like.posting_id == postId )
 )

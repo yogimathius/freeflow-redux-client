@@ -13,6 +13,7 @@ const initialState = usersAdapter.getInitialState();
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const response = await axios.get('http://localhost:8000/api/users');
+  console.log("fetchUsers from userSlice: ", response.data);
   return response.data;
 });
 
