@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -17,6 +17,7 @@ import {
   fetchLikes,
   selectAlllikes
 } from './likes/likesSlice'
+import Axios from 'axios'
 
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
@@ -25,6 +26,23 @@ let PostExcerpt = ({ postId }) => {
 
   console.log(likesList);
 
+  // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
+  const [likes, setLikes] = useState(0);
+
+  useEffect(() => {
+    Axios.get(`http://localhost:8000/api/likes/`)
+    .then((res) => {
+      // console.log("res in use effect likes: ", res.data);
+      setLikes(res.data)
+    })
+  })
+  let postLikes
+  if (likes) {
+    postLikes = likes.filter(like => like.posting_id === postId)
+  }
+  console.log("likes in state: ", postLikes);
+  // const likesCount = likesList.length;
+  // console.log(likesCount);
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
@@ -41,13 +59,12 @@ let PostExcerpt = ({ postId }) => {
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
       {/* <ReactionButtons post={post} /> */}
-      <Link to={`/posts/${post.post_id}`} className="button muted-button">
+      <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
       </Link>
     </article>
   )
 }
-
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
