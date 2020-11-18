@@ -35,7 +35,6 @@ export const addNewComment = createAsyncThunk(
       commenter_id,
       posting_id,
       content,
-      deleted
     } = initialComment
     // console.log('initial comment in addNewComment: ', initialComment)
     const response = await axios.post(`${url}/${posting_id}`, {

@@ -28,6 +28,7 @@ export const AddCommentForm = ({ postId }) => {
       try {
         // console.log('userid in postclicked fun: ', userId)
         setAddRequestStatus('pending')
+        console.log("userId: ",userId)
         const resultAction = await dispatch(
           addNewComment({
             commenter_id: userId,
