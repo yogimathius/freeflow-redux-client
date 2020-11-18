@@ -1,23 +1,25 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import store from '../../app/store';
+import store from '../../app/store'
 
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 // import { ReactionButtons } from './ReactionButtons'
 import { CommentsList } from '../comments/CommentsList'
 import { selectPostById } from './postsSlice'
-import { fetchComments } from '../comments/commentsSlice';
-import { AddCommentForm } from '../comments/AddCommentForm';
+import { fetchComments } from '../comments/commentsSlice'
+import { AddCommentForm } from '../comments/AddCommentForm'
 
-store.dispatch(fetchComments());
+import './SinglePostPage.scss'
+
+store.dispatch(fetchComments())
 
 export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
 
   const post = useSelector((state) => selectPostById(state, postId))
-  
+
   if (!post) {
     return (
       <section>
@@ -25,7 +27,7 @@ export const SinglePostPage = ({ match }) => {
       </section>
     )
   }
-  
+
   return (
     <section>
       <article className="post">
@@ -41,7 +43,7 @@ export const SinglePostPage = ({ match }) => {
         </Link>
       </article>
       <AddCommentForm />
-      <CommentsList postId={postId}/>
+      <CommentsList postId={postId} />
     </section>
   )
 }
