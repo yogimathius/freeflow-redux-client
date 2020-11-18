@@ -6,11 +6,6 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const initialState = commentsAdapter.getInitialState({
-//   status: 'idle',
-//   error: null,
-// });
-
 const url = `http://localhost:8000/api/comments`
 
 const commentsAdapter = createEntityAdapter({
@@ -19,7 +14,6 @@ const commentsAdapter = createEntityAdapter({
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
   const response = await axios.get(url);
-  console.log(response.data)
   return response.data;
 });
 
@@ -36,7 +30,7 @@ export const addNewComment = createAsyncThunk(
       posting_id,
       content,
     } = initialComment
-    // console.log('initial comment in addNewComment: ', initialComment)
+  
     const response = await axios.post(`${url}/${posting_id}`, {
       commenter_id,
       posting_id,

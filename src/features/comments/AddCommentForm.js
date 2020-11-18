@@ -6,16 +6,12 @@ import { addNewComment } from './commentsSlice'
 import { selectAllUsers } from '../users/usersSlice'
 
 export const AddCommentForm = ({ postId }) => {
-  // const [title, setTitle] = useState('')
-
   const [content, setContent] = useState('')
   const [userId, setUserId] = useState('')
-  // const [deleted, setDeleted] = useState('false')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
-  // console.log("users in addpostform: ", users);
 
   const onContentChanged = (e) => setContent(e.target.value)
   const onAuthorChanged = (e) => setUserId(e.target.value)
@@ -26,9 +22,7 @@ export const AddCommentForm = ({ postId }) => {
   const onSaveCommentClicked = async () => {
     if (canSave) {
       try {
-        console.log('userid in postclicked fun: ', userId)
         setAddRequestStatus('pending')
-        console.log("userId: ",userId)
         const resultAction = await dispatch(
           addNewComment({
             commenter_id: userId,
@@ -83,7 +77,7 @@ export const AddCommentForm = ({ postId }) => {
           onClick={onSaveCommentClicked}
           disabled={!canSave}
         >
-          Save COMMENT
+          Save Comment
         </button>
       </form>
     </section>
