@@ -40,8 +40,8 @@ export const SinglePostPage = ({ match }) => {
           Edit Post
         </Link>
       </article>
-      <AddCommentForm />
-      <CommentsList postId={postId}/>
+      <AddCommentForm postId={post.id} />
+      <CommentsList postId={post.id} />
     </section>
   )
 }

@@ -7,7 +7,7 @@ import { selectAllUsers } from '../users/usersSlice'
 
 import { selectAllComments } from './commentsSlice'
 
-export const CommentsList = () => {
+export const CommentsList = ({postId}) => {
   const dispatch = useDispatch()
   const comments = useSelector(selectAllComments)
   const users = useSelector(selectAllUsers)
@@ -30,8 +30,8 @@ export const CommentsList = () => {
     return (
       <div key={comment.id} className={commentClassname}>
         <div>
-          <b>{`${user.first_name} ${user.last_name}`}</b> 
-          <br/>
+          <b>{`${user.first_name} ${user.last_name}`}</b>
+          <br />
           {comment.content}
         </div>
         <div title={comment.created_at}>
