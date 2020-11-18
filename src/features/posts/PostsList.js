@@ -28,7 +28,7 @@ let PostExcerpt = ({ postId }) => {
 
   // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
   const [likes, setLikes] = useState(0);
-
+  
   useEffect(() => {
     Axios.get(`http://localhost:8000/api/likes/`)
     .then((res) => {
