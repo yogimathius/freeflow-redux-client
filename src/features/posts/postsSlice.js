@@ -27,7 +27,8 @@ export const addNewPost = createAsyncThunk(
   async (initialPost) => {
     const { title, content, is_request, owner_id} = initialPost
     const response = await axios.post(url, {posting: title, content, is_request, owner_id});
-    return response.post
+    console.log("response in thunk: ", response.data);
+    return response.data
   }
 )
 
