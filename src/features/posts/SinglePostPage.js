@@ -8,10 +8,8 @@ import { TimeAgo } from './TimeAgo'
 // import { ReactionButtons } from './ReactionButtons'
 import { CommentsList } from '../comments/CommentsList'
 import { selectPostById } from './postsSlice'
-import {
-  fetchComments,
-  selectCommentsByPostId,
-} from '../comments/commentsSlice'
+import { fetchComments } from '../comments/commentsSlice';
+import { AddCommentForm } from '../comments/AddCommentForm';
 
 store.dispatch(fetchComments());
 
@@ -19,12 +17,7 @@ export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
 
   const post = useSelector((state) => selectPostById(state, postId))
-  console.log()
-  const comments = useSelector((state) => selectCommentsByPostId(state, postId));
-
-  // console.log('comments: ', comments);
-
-  console.log(post)
+  
   if (!post) {
     return (
       <section>
@@ -47,7 +40,8 @@ export const SinglePostPage = ({ match }) => {
           Edit Post
         </Link>
       </article>
-      <CommentsList/>
+      <AddCommentForm />
+      <CommentsList postId={postId}/>
     </section>
   )
 }
