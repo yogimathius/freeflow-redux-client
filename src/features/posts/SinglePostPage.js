@@ -1,17 +1,30 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import store from '../../app/store';
 
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 // import { ReactionButtons } from './ReactionButtons'
+import { CommentsList } from '../comments/CommentsList'
 import { selectPostById } from './postsSlice'
+import {
+  fetchComments,
+  selectCommentsByPostId,
+} from '../comments/commentsSlice'
+
+store.dispatch(fetchComments());
 
 export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
 
   const post = useSelector((state) => selectPostById(state, postId))
+  console.log()
+  const comments = useSelector((state) => selectCommentsByPostId(state, postId));
 
+  // console.log('comments: ', comments);
+
+  console.log(post)
   if (!post) {
     return (
       <section>
@@ -19,7 +32,7 @@ export const SinglePostPage = ({ match }) => {
       </section>
     )
   }
-
+  
   return (
     <section>
       <article className="post">
@@ -34,6 +47,7 @@ export const SinglePostPage = ({ match }) => {
           Edit Post
         </Link>
       </article>
+      <CommentsList/>
     </section>
   )
 }
