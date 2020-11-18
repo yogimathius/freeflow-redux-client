@@ -26,7 +26,7 @@ export const AddCommentForm = ({ postId }) => {
   const onSaveCommentClicked = async () => {
     if (canSave) {
       try {
-        // console.log('userid in postclicked fun: ', userId)
+        console.log('userid in postclicked fun: ', userId)
         setAddRequestStatus('pending')
         console.log("userId: ",userId)
         const resultAction = await dispatch(

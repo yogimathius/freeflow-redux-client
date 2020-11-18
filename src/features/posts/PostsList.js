@@ -24,7 +24,7 @@ let PostExcerpt = ({ postId }) => {
 
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
-  console.log(likesList);
+  // console.log(likesList);
 
   // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
   const [likes, setLikes] = useState(0);
@@ -40,7 +40,7 @@ let PostExcerpt = ({ postId }) => {
   if (likes) {
     postLikes = likes.filter(like => like.posting_id === postId)
   }
-  console.log("likes in state: ", postLikes);
+  // console.log("likes in state: ", postLikes);
   // const likesCount = likesList.length;
   // console.log(likesCount);
   return (
