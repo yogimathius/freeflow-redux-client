@@ -19,7 +19,7 @@ export const CommentsList = () => {
   const renderedComments = comments.map((comment) => {
     const date = parseISO(comment.created_at)
     const timeAgo = formatDistanceToNow(date)
-    const user = users.find((user) => user.id === comment.owner_id) || {
+    const user = users.find((user) => user.id === comment.commenter_id) || {
       name: 'Unknown User',
     }
 
@@ -30,7 +30,9 @@ export const CommentsList = () => {
     return (
       <div key={comment.id} className={commentClassname}>
         <div>
-          <b>{user.first_name}</b> {comment.content}
+          <b>{`${user.first_name} ${user.last_name}`}</b> 
+          <br/>
+          {comment.content}
         </div>
         <div title={comment.created_at}>
           <i>{timeAgo} ago</i>

@@ -5,13 +5,14 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewComment } from './commentsSlice'
 import { selectAllUsers } from '../users/usersSlice'
 
-export const AddCommentForm = (prop) => {
+export const AddCommentForm = (props) => {
   // const [title, setTitle] = useState('')
-  const { postId } = prop;
+  const { postId } = props;
+  console.log(props)
  
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState('');
-  const [deleted, setDeleted] = useState('false')
+  const [deleted, setDeleted] = useState('false');
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ export const AddCommentForm = (prop) => {
             commenter_id: userId,
             posting_id: postId,
             content,
-            deleted,
+            deleted
           })
         )
         unwrapResult(resultAction)
@@ -56,7 +57,7 @@ export const AddCommentForm = (prop) => {
 
   return (
     <section>
-      <h2>Add a New Post</h2>
+      <h2>Leave a Comment</h2>
       <form>
         {/* <label htmlFor="postTitle">Post Title:</label>
         <input

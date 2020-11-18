@@ -14,7 +14,7 @@ import axios from 'axios';
 const url = `http://localhost:8000/api/comments`
 
 const commentsAdapter = createEntityAdapter({
-  // sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
+  sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
 })
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
@@ -35,16 +35,14 @@ export const addNewComment = createAsyncThunk(
       commenter_id,
       posting_id,
       content,
-      deleted,
-      created_at
+      deleted
     } = initialComment
     // console.log('initial comment in addNewComment: ', initialComment)
     const response = await axios.post(url, {
       commenter_id,
       posting_id,
       content,
-      deleted,
-      created_at
+      deleted
     })
     // console.log('response in thunk: ', response.data)
     return response.data
