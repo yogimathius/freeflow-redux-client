@@ -83,11 +83,12 @@ export default commentsSlice.reducer;
 
 export const {
   selectAll: selectAllComments,
-  selectByPostId: selectCommentsById,
+  selectById: selectCommentsById,
   selectIds: selectCommentIds,
 } = commentsAdapter.getSelectors((state) => state.comments)
 
 export const selectCommentsByPostId = createSelector(
-  [selectAllComments, (state, postingId) => postingId],
-  (comments, postingId) => comments.filter((comment) => comment.posting_id == postingId)
+  [selectAllComments, (state, postId) => postId],
+  (comments, postId) =>
+    comments.filter((comment) => comment.posting_id === postId)
 )

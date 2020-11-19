@@ -5,16 +5,13 @@ import classnames from 'classnames'
 
 import { selectAllUsers } from '../users/usersSlice'
 
-import { selectAllComments } from './commentsSlice'
+import { selectCommentsByPostId } from './commentsSlice'
 
 export const CommentsList = ({postId}) => {
-  const dispatch = useDispatch()
-  const comments = useSelector(selectAllComments)
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => selectCommentsByPostId(state, postId));
   const users = useSelector(selectAllUsers)
-
-  // useEffect(() => {
-  //   dispatch(allNotificationsRead())
-  // })
+  
 
   const renderedComments = comments.map((comment) => {
     const date = parseISO(comment.created_at)
@@ -42,9 +39,9 @@ export const CommentsList = ({postId}) => {
   })
 
   return (
-    <section className="commentsList">
+    <section className="commentsList"> 
       <h2>Comments</h2>
-      {renderedComments}
+      {renderedComments}  
     </section>
   )
 }
