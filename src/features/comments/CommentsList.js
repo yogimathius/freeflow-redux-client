@@ -30,12 +30,11 @@ export const CommentsList = () => {
     return (
       <div key={comment.id} className={commentClassname}>
         <div>
-          <b>{`${user.first_name} ${user.last_name}`}</b> 
-          <br/>
           {comment.content}
-        </div>
-        <div title={comment.created_at}>
-          <i>{timeAgo} ago</i>
+          <div title={comment.created_at} className="commentInfo">
+            By <b>{`${user.first_name} ${user.last_name}`}</b>
+            <i className="commentTime">{timeAgo} ago</i>
+          </div>
         </div>
       </div>
     )

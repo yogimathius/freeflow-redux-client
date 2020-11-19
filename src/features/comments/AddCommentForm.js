@@ -7,12 +7,12 @@ import { selectAllUsers } from '../users/usersSlice'
 
 export const AddCommentForm = (props) => {
   // const [title, setTitle] = useState('')
-  const { postId } = props;
+  const { postId } = props
   console.log(props)
- 
-  const [content, setContent] = useState('');
-  const [userId, setUserId] = useState('');
-  const [deleted, setDeleted] = useState('false');
+
+  const [content, setContent] = useState('')
+  const [userId, setUserId] = useState('')
+  const [deleted, setDeleted] = useState('false')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ export const AddCommentForm = (props) => {
   const onAuthorChanged = (e) => setUserId(e.target.value)
 
   const canSave =
-    [ content, userId].every(Boolean) && addRequestStatus === 'idle'
+    [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onSaveCommentClicked = async () => {
     if (canSave) {
@@ -35,7 +35,7 @@ export const AddCommentForm = (props) => {
             commenter_id: userId,
             posting_id: postId,
             content,
-            deleted
+            deleted,
           })
         )
         unwrapResult(resultAction)
@@ -56,7 +56,7 @@ export const AddCommentForm = (props) => {
   ))
 
   return (
-    <section>
+    <section className="commentForm">
       <h2>Leave a Comment</h2>
       <form>
         {/* <label htmlFor="postTitle">Post Title:</label>
