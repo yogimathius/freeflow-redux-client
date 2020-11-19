@@ -8,7 +8,7 @@ import { selectAllUsers } from '../users/usersSlice'
 export const AddCommentForm = (props) => {
   // const [title, setTitle] = useState('')
   const { postId } = props;
-  console.log(props)
+  // console.log(props)
  
   const [content, setContent] = useState('');
   const [userId, setUserId] = useState('');
