@@ -1,0 +1,87 @@
+.user-card {
+  background-color: #e2fae9;
+  border-radius: .5rem;
+  padding: .5rem;
+  margin: 2rem 0;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+  .avatar {
+    height: 5rem;
+    width: auto;
+  }
+
+  h4 {
+    color: #444;
+    margin: .5rem 0;
+  }
+
+  .description-container {
+    margin: 2rem 0;
+    p {
+      font-style: italic;
+    }
+  }
+
+  .activity-indicator {
+    display: flex;
+    align-items: center;
+    
+    .status {
+      display: inline;
+      margin-right: .25rem;
+      height: .6rem;
+      width: .6rem;
+      border-radius: 50%;
+      background: rgb(168, 255, 160);
+      background: radial-gradient(circle, rgba(23,255,0,1) 0%, rgba(151,238,131,1) 100%);
+    }
+
+    p {
+      display: inline;
+      margin: 0;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .location {
+      display: flex;
+      align-items: center;
+  
+      .marker {
+        font-size: 1rem;
+      }
+  
+      p {
+        margin: 0;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .joined {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    .clock {
+      margin-right: .25rem;
+      font-size: 1rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+
+}
+
+.user-card:hover {
+  transition: .5s ease-in-out;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
