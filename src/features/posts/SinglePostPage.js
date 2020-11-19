@@ -34,7 +34,7 @@ export const SinglePostPage = ({ match }) => {
         <div className="post_top">
           <div className="post_top_left">
             <PostAuthor userId={post.owner_id} />
-            <TimeAgo timestamp={post.create_at} />
+            <TimeAgo timestamp={post.created_at} />
           </div>
           <div className="post_top_right">
             <h2>{post.title}</h2>
