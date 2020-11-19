@@ -8,6 +8,11 @@ import { selectAllUsers } from '../users/usersSlice'
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
   const [userId, setUserId] = useState('')
+
+  // const [title, setTitle] = useState('')
+
+  // const [deleted, setDeleted] = useState('false')
+
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
@@ -27,7 +32,7 @@ export const AddCommentForm = ({ postId }) => {
           addNewComment({
             commenter_id: userId,
             posting_id: postId,
-            content
+            content,
           })
         )
         unwrapResult(resultAction)
@@ -48,7 +53,7 @@ export const AddCommentForm = ({ postId }) => {
   ))
 
   return (
-    <section>
+    <section className="commentForm">
       <h2>Leave a Comment</h2>
       <form>
         {/* <label htmlFor="postTitle">Post Title:</label>
@@ -60,18 +65,20 @@ export const AddCommentForm = ({ postId }) => {
           value={title}
           onChange={onTitleChanged}
         /> */}
-        <label htmlFor="commentAuthor">Author:</label>
-        <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
-          <option value=""></option>
-          {usersOptions}
-        </select>
-        <label htmlFor="commentContent">Content:</label>
-        <textarea
-          id="commentContent"
-          name="commentContent"
-          value={content}
-          onChange={onContentChanged}
-        />
+        <div className="commentFormInner">
+          <label htmlFor="commentAuthor">Author:</label>
+          <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
+            <option value=""></option>
+            {usersOptions}
+          </select>
+          <label htmlFor="commentContent">Content:</label>
+          <textarea
+            id="commentContent"
+            name="commentContent"
+            value={content}
+            onChange={onContentChanged}
+          />
+        </div>
         <button
           type="button"
           onClick={onSaveCommentClicked}

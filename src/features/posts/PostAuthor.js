@@ -8,9 +8,9 @@ export const PostAuthor = ({ userId }) => {
   const fullName = `${author.first_name} ${author.last_name}`
   const avatar = `${author.avatar}`
   return (
-    <span>
+    <span className="post_author">
       <img alt="avatar" src={avatar} />
-      {author ? fullName : 'Unknown author'}
+      <p className="post_author_name">{author ? fullName : 'Unknown author'}</p>
     </span>
   )
 }
