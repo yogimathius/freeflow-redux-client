@@ -4,7 +4,7 @@ import postsReducer from '../features/posts/postsSlice'
 import usersReducer from '../features/users/usersSlice'
 import likesReducer from '../features/posts/likes/likesSlice'
 import commentsReducer from '../features/comments/commentsSlice';
-import karmasReducer from '../features/posts/karmas/karmasSlice';
+import karmasReducer from '../features/karmas/karmasSlice';
 
 // import notificationsReducer from '../features/notifications/notificationsSlice'
 

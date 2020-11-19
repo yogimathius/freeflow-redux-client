@@ -4,33 +4,50 @@ import { Link } from 'react-router-dom'
 import { selectAllUsers } from './usersSlice'
 import store from '../../app/store';
 import { 
-  fetchKarmas, selectAllkarmas,  } from '../posts/karmas/karmasSlice';
-
+  fetchKarmas, 
+  selectAllkarmas,  
+} from '../karmas/karmasSlice';
+import './UsersList.scss';
+import UserCard from './UserCard';
+  
 store.dispatch(fetchKarmas());
-
 export const UsersList = () => {
   const dispatch = useDispatch()
   // console.log("karmas: ", store.getState().karmas)
   const users = useSelector(selectAllUsers)
-
+  const karmas = useSelector (selectAllkarmas)
+  // console.log("karmas in userlist: ", karmas);
+  const renderedUsers = users.map((user, id) => (
+    <UserCard 
+    key={id} 
+    id={user.id} 
+    avatar={user.avatar} 
+    firstName={user.first_name} 
+    lastName={user.last_name} 
+    description={user.description} 
+    active={user.active} 
+    location={user.location} 
+    created_at={user.created_at} 
+    karmas={karmas}
+    />
+  ))
 
   // const userIds = users.map(user => user.id)
   // console.log(userIds);
-  const karmas = useSelector (selectAllkarmas)
-  console.log("karmas in userlist: ", karmas);
+
 
   // karmas.map(karma => console.log("karmas: ", karma))
-  const renderedUsers = users.map((user) => {
-    // const userKarmas = karmas.filter(karma => karmas.receiver_id = user.id)
-    // console.log("count in users: ", userKarmas.length);
-    // const userKarmasCount = userKarmas.length
-    return (
-      <li key={user.id}>
-        <Link to={`/users/${user.id}`}>{user.first_name} {user.last_name}</Link>
-        {/* <p>{userKarmasCount}</p> */}
-      </li>
-    )
-  } )
+  // const renderedUsers = users.map((user) => {
+  //   // const userKarmas = karmas.filter(karma => karmas.receiver_id = user.id)
+  //   // console.log("count in users: ", userKarmas.length);
+  //   // const userKarmasCount = userKarmas.length
+  //   return (
+  //     <li key={user.id}>
+  //       <Link to={`/users/${user.id}`}>{user.first_name} {user.last_name}</Link>
+  //       {/* <p>{userKarmasCount}</p> */}
+  //     </li>
+  //   )
+  // } )
 
 
   const karmaStatus = useSelector((state) => state.karmas.status)
@@ -56,8 +73,7 @@ export const UsersList = () => {
   return (
     <section>
       <h2>Users</h2>
-
-      <ul>{renderedUsers}</ul>
+      {renderedUsers}
     </section>
   )
 }

@@ -83,10 +83,10 @@ export const {
 }
  )
 
-// export const selectKarmasByUserId = createSelector(
-//   [selectAllkarmas, (state, userId) => userId],
-//   (karmas, userId) => karmas.filter((karma) => {
-// 		// console.log(karma);
-// 		// karma.receiver_id == userId
-// 	}  )
-// )
+export const selectKarmasByUserId = createSelector(
+  [selectAllkarmas, (state, userId) => userId],
+  (karmas, userId) => karmas.filter((karma) => {
+		console.log(karma);
+		return karma.receiver_id == userId
+	}  )
+)
