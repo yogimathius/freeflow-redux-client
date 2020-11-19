@@ -58,7 +58,7 @@ export const AddCommentForm = (props) => {
   return (
     <section className="commentForm">
       <h2>Leave a Comment</h2>
-      <form>
+      <form className="commentFormInner">
         {/* <label htmlFor="postTitle">Post Title:</label>
         <input
           type="text"

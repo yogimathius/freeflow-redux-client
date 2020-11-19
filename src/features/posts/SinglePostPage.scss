@@ -10,8 +10,17 @@
     margin-left: auto;
     display: block;
     width: 11rem;
+    background-color: white;
+    color: #58b876;
+    border: transparent;
+    &:hover {
+      background-color: #58b876;
+      color: white;
+      border: transparent;
+    }
   }
-  .comment {
+  .comment,
+  .commentFormInner {
     margin: 1rem;
     padding: 0.5rem;
     border: white 1px solid;
