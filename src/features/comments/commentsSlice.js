@@ -6,11 +6,6 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// const initialState = commentsAdapter.getInitialState({
-//   status: 'idle',
-//   error: null,
-// });
-
 const url = `http://localhost:8000/api/comments`
 
 const commentsAdapter = createEntityAdapter({
@@ -19,7 +14,7 @@ const commentsAdapter = createEntityAdapter({
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
   const response = await axios.get(url);
-  // console.log(response.data)
+
   return response.data;
 });
 
@@ -35,16 +30,14 @@ export const addNewComment = createAsyncThunk(
       commenter_id,
       posting_id,
       content,
-      deleted
     } = initialComment
-    // console.log('initial comment in addNewComment: ', initialComment)
-    const response = await axios.post(url, {
+  
+    const response = await axios.post(`${url}/${posting_id}`, {
       commenter_id,
       posting_id,
       content,
-      deleted
     })
-    // console.log('response in thunk: ', response.data)
+    console.log('response in Comments thunk: ', response.data)
     return response.data
   }
 )
@@ -91,11 +84,12 @@ export default commentsSlice.reducer;
 
 export const {
   selectAll: selectAllComments,
-  selectByPostId: selectCommentsById,
+  selectById: selectCommentsById,
   selectIds: selectCommentIds,
 } = commentsAdapter.getSelectors((state) => state.comments)
 
 export const selectCommentsByPostId = createSelector(
-  [selectAllComments, (state, postingId) => postingId],
-  (comments, postingId) => comments.filter((comment) => comment.posting_id == postingId)
+  [selectAllComments, (state, postId) => postId],
+  (comments, postId) =>
+    comments.filter((comment) => comment.posting_id === postId)
 )

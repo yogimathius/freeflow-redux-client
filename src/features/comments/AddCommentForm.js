@@ -5,37 +5,38 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewComment } from './commentsSlice'
 import { selectAllUsers } from '../users/usersSlice'
 
-export const AddCommentForm = (props) => {
+export const AddCommentForm = ({ postId }) => {
+  const [content, setContent] = useState('')
+  const [userId, setUserId] = useState('')
+
   // const [title, setTitle] = useState('')
   const { postId } = props;
   // console.log(props)
  
-  const [content, setContent] = useState('');
-  const [userId, setUserId] = useState('');
   const [deleted, setDeleted] = useState('false');
+
+  // const [deleted, setDeleted] = useState('false')
+
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
-  // console.log("users in addpostform: ", users);
 
   const onContentChanged = (e) => setContent(e.target.value)
   const onAuthorChanged = (e) => setUserId(e.target.value)
 
   const canSave =
-    [ content, userId].every(Boolean) && addRequestStatus === 'idle'
+    [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onSaveCommentClicked = async () => {
     if (canSave) {
       try {
-        // console.log('userid in postclicked fun: ', userId)
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addNewComment({
             commenter_id: userId,
             posting_id: postId,
             content,
-            deleted
           })
         )
         unwrapResult(resultAction)
@@ -56,7 +57,7 @@ export const AddCommentForm = (props) => {
   ))
 
   return (
-    <section>
+    <section className="commentForm">
       <h2>Leave a Comment</h2>
       <form>
         {/* <label htmlFor="postTitle">Post Title:</label>
@@ -68,24 +69,26 @@ export const AddCommentForm = (props) => {
           value={title}
           onChange={onTitleChanged}
         /> */}
-        <label htmlFor="commentAuthor">Author:</label>
-        <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
-          <option value=""></option>
-          {usersOptions}
-        </select>
-        <label htmlFor="commentContent">Content:</label>
-        <textarea
-          id="commentContent"
-          name="commentContent"
-          value={content}
-          onChange={onContentChanged}
-        />
+        <div className="commentFormInner">
+          <label htmlFor="commentAuthor">Author:</label>
+          <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
+            <option value=""></option>
+            {usersOptions}
+          </select>
+          <label htmlFor="commentContent">Content:</label>
+          <textarea
+            id="commentContent"
+            name="commentContent"
+            value={content}
+            onChange={onContentChanged}
+          />
+        </div>
         <button
           type="button"
           onClick={onSaveCommentClicked}
           disabled={!canSave}
         >
-          Save COMMENT
+          Save Comment
         </button>
       </form>
     </section>
