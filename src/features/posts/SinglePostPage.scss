@@ -39,6 +39,25 @@
 
 .post {
   padding: 0 1rem;
+  .post_top {
+    display: flex;
+    .post_top_right,
+    .post_author {
+      display: flex;
+      flex-direction: column;
+      // align-content: center;
+      justify-content: center;
+      img {
+        width: 10rem;
+        padding: 1rem 2rem;
+        margin: 2rem;
+        // border: 1px red solid;
+      }
+      .post_author_name {
+        text-align: center;
+      }
+    }
+  }
   h2 {
     color: #58b876;
   }

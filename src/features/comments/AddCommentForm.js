@@ -58,7 +58,7 @@ export const AddCommentForm = (props) => {
   return (
     <section className="commentForm">
       <h2>Leave a Comment</h2>
-      <form className="commentFormInner">
+      <form>
         {/* <label htmlFor="postTitle">Post Title:</label>
         <input
           type="text"
@@ -68,18 +68,20 @@ export const AddCommentForm = (props) => {
           value={title}
           onChange={onTitleChanged}
         /> */}
-        <label htmlFor="commentAuthor">Author:</label>
-        <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
-          <option value=""></option>
-          {usersOptions}
-        </select>
-        <label htmlFor="commentContent">Content:</label>
-        <textarea
-          id="commentContent"
-          name="commentContent"
-          value={content}
-          onChange={onContentChanged}
-        />
+        <div className="commentFormInner">
+          <label htmlFor="commentAuthor">Author:</label>
+          <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
+            <option value=""></option>
+            {usersOptions}
+          </select>
+          <label htmlFor="commentContent">Content:</label>
+          <textarea
+            id="commentContent"
+            name="commentContent"
+            value={content}
+            onChange={onContentChanged}
+          />
+        </div>
         <button
           type="button"
           onClick={onSaveCommentClicked}

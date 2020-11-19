@@ -31,13 +31,17 @@ export const SinglePostPage = ({ match }) => {
   return (
     <section>
       <article className="post">
-        <h2>{post.title}</h2>
-        <div>
-          <PostAuthor userId={post.owner_id} />
-          <TimeAgo timestamp={post.create_at} />
+        <div className="post_top">
+          <div className="post_top_left">
+            <PostAuthor userId={post.owner_id} />
+            <TimeAgo timestamp={post.create_at} />
+          </div>
+          <div className="post_top_right">
+            <h2>{post.title}</h2>
+            <p className="post-content">{post.content}</p>
+            {/* <ReactionButtons post={post} /> */}
+          </div>
         </div>
-        <p className="post-content">{post.content}</p>
-        {/* <ReactionButtons post={post} /> */}
         <Link to={`/editPost/${post.id}`} className="button">
           Edit Post
         </Link>
