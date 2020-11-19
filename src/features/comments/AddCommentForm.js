@@ -10,7 +10,7 @@ export const AddCommentForm = ({ postId }) => {
   const [userId, setUserId] = useState('')
 
   // const [title, setTitle] = useState('')
-  const { postId } = props;
+  // const { postId } = props;
   // console.log(props)
  
   const [deleted, setDeleted] = useState('false');
