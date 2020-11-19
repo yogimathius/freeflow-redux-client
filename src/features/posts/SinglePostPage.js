@@ -34,10 +34,10 @@ export const SinglePostPage = ({ match }) => {
         <div className="post_top">
           <div className="post_top_left">
             <PostAuthor userId={post.owner_id} />
-            <TimeAgo timestamp={post.created_at} />
           </div>
           <div className="post_top_right">
-            <h2>{post.title}</h2>
+            <h2>{post.title} </h2>
+            <TimeAgo timestamp={post.created_at} />
             <p className="post-content">{post.content}</p>
             {/* <ReactionButtons post={post} /> */}
           </div>

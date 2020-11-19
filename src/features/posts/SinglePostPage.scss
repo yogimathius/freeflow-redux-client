@@ -53,6 +53,14 @@
         margin: 2rem;
         // border: 1px red solid;
       }
+      span {
+        display: flex;
+        width: 100%;
+        i {
+          display: block;
+          margin-left: auto;
+        }
+      }
       .post_author_name {
         text-align: center;
       }
