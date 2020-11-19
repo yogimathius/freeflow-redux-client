@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
-// import { ReactionButtons } from './ReactionButtons'
 import {
   // selectAllPosts,
   fetchPosts,
@@ -12,37 +11,33 @@ import {
   selectPostById,
 } from './postsSlice'
 
+import { selectCommentsByPostId } from '../comments/commentsSlice'
+
 import {
   selectLikesByPostId,
   fetchLikes,
   selectAlllikes
-} from './likes/likesSlice'
+} from '../likes/likesSlice'
 import Axios from 'axios'
 
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
 
+  const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
-  // console.log(likesList);
-
-  // const likesList = useSelector((state) => selectLikesByPostId(state, postId))
-  const [likes, setLikes] = useState(0);
-
-  useEffect(() => {
-    Axios.get(`http://localhost:8000/api/likes/`)
-    .then((res) => {
-      // console.log("res in use effect likes: ", res.data);
-      setLikes(res.data)
+  const CommentsExcerpt = () => {
+    postComments.map(comment => {
+      console.log("comment in map: ", comment.content);
+      return (
+        <div>
+          <p>{comment.content}</p>
+        </div>
+      )
     })
-  })
-  let postLikes
-  if (likes) {
-    postLikes = likes.filter(like => like.posting_id === postId)
+    return null;
   }
-  // console.log("likes in state: ", postLikes);
-  // const likesCount = likesList.length;
-  // console.log(likesCount);
+  
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
@@ -57,6 +52,7 @@ let PostExcerpt = ({ postId }) => {
         }
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
+      <CommentsExcerpt />
 
       {/* <ReactionButtons post={post} /> */}
       <Link to={`/posts/${post.id}`} className="button muted-button">
@@ -65,6 +61,7 @@ let PostExcerpt = ({ postId }) => {
     </article>
   )
 }
+
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
@@ -106,11 +103,11 @@ export const PostsList = () => {
     likesContent = <div className="loader">Loading...</div>
   } else if (likeStatus === 'succeeded') {
     likesContent = likes.length
-  } else if (postStatus === 'failed') {
+  } else if (likeStatus === 'failed') {
     likesContent = <div>{error}</div>
   }
   
-  console.log(likesContent);
+  // console.log(likesContent);
 
   return (
     <section className="posts-list">

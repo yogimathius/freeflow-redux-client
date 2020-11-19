@@ -14,6 +14,7 @@ const commentsAdapter = createEntityAdapter({
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
   const response = await axios.get(url);
+
   return response.data;
 });
 
