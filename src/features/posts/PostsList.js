@@ -17,7 +17,7 @@ import {
   selectLikesByPostId,
   fetchLikes,
   selectAlllikes
-} from './likes/likesSlice'
+} from '../likes/likesSlice'
 import Axios from 'axios'
 
 let PostExcerpt = ({ postId }) => {

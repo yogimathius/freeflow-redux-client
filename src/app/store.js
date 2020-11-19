@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import postsReducer from '../features/posts/postsSlice'
 import usersReducer from '../features/users/usersSlice'
-import likesReducer from '../features/posts/likes/likesSlice'
+import likesReducer from '../features/likes/likesSlice'
 import commentsReducer from '../features/comments/commentsSlice';
 import karmasReducer from '../features/karmas/karmasSlice';
 
