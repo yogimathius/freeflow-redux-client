@@ -14,8 +14,7 @@ import {
 
 import {
   selectLikesByPostId,
-  fetchLikes,
-  selectAlllikes
+  fetchLikes
 } from '../likes/likesSlice'
 
 let PostExcerpt = ({ postId }) => {
@@ -23,7 +22,7 @@ let PostExcerpt = ({ postId }) => {
 
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
-  console.log(likesList);
+  // console.log("likes list: ", likesList);
 
   return (
     <article className="post-excerpt" key={post.id}>
@@ -51,13 +50,11 @@ let PostExcerpt = ({ postId }) => {
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
-  const likes = useSelector(selectAlllikes)
 
   const postStatus = useSelector((state) => state.posts.status)
-  const error = useSelector((state) => state.posts.error)
+  const postError = useSelector((state) => state.posts.error)
 
   const likeStatus = useSelector((state) => state.likes.status)
-  const likeError = useSelector((state) => state.likes.error)
 
   useEffect(() => {
     if (postStatus === 'idle') {
@@ -74,7 +71,7 @@ export const PostsList = () => {
       <PostExcerpt key={postId} postId={postId} />
     ))
   } else if (postStatus === 'failed') {
-    content = <div>{likeError}</div>
+    content = <div>{postError}</div>
   }
 
   useEffect(() => {
@@ -82,18 +79,6 @@ export const PostsList = () => {
       dispatch(fetchLikes())
     }
   }, [likeStatus, dispatch])
-
-  let likesContent
-
-  if (likeStatus === 'loading') {
-    likesContent = <div className="loader">Loading...</div>
-  } else if (likeStatus === 'succeeded') {
-    likesContent = likes.length
-  } else if (postStatus === 'failed') {
-    likesContent = <div>{error}</div>
-  }
-  
-  console.log(likesContent);
 
   return (
     <section className="posts-list">

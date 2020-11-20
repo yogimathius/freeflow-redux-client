@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { selectAllUsers } from './usersSlice'
 import store from '../../app/store';
 import { 
@@ -69,7 +68,7 @@ export const UsersList = () => {
     karmasContent = <div>{karmaError}</div>
   }
   
-  // console.log("karma content: ", karmasContent);
+  console.log("karma content: ", karmasContent);
   return (
     <section>
       <h2>Users</h2>
