@@ -23,7 +23,7 @@ let PostExcerpt = ({ postId }) => {
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
   // console.log("likes list: ", likesList);
-
+  console.log("post id: ", post)
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
@@ -40,7 +40,7 @@ let PostExcerpt = ({ postId }) => {
       <p className="post-content">{post.content.substring(0, 100)}</p>
 
       {/* <ReactionButtons post={post} /> */}
-      <Link to={`/posts/${post.post_id}`} className="button muted-button">
+      <Link to={`/posts/${post.id}`} className="button muted-button">
         View Post
       </Link>
     </article>
