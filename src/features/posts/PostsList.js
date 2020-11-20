@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
+// import { ReactionButtons } from './ReactionButtons'
 import {
   // selectAllPosts,
   fetchPosts,
@@ -11,33 +12,18 @@ import {
   selectPostById,
 } from './postsSlice'
 
-import { selectCommentsByPostId } from '../comments/commentsSlice'
-
 import {
   selectLikesByPostId,
-  fetchLikes,
-  selectAlllikes
+  fetchLikes
 } from '../likes/likesSlice'
-import Axios from 'axios'
 
 let PostExcerpt = ({ postId }) => {
   const post = useSelector((state) => selectPostById(state, postId))
 
-  const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
-  const CommentsExcerpt = () => {
-    postComments.map(comment => {
-      console.log("comment in map: ", comment.content);
-      return (
-        <div>
-          <p>{comment.content}</p>
-        </div>
-      )
-    })
-    return null;
-  }
-  
+  // console.log("likes list: ", likesList);
+  console.log("post id: ", post)
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
@@ -52,7 +38,6 @@ let PostExcerpt = ({ postId }) => {
         }
       </div>
       <p className="post-content">{post.content.substring(0, 100)}</p>
-      <CommentsExcerpt />
 
       {/* <ReactionButtons post={post} /> */}
       <Link to={`/posts/${post.id}`} className="button muted-button">
@@ -65,13 +50,11 @@ let PostExcerpt = ({ postId }) => {
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
-  const likes = useSelector(selectAlllikes)
 
   const postStatus = useSelector((state) => state.posts.status)
-  const error = useSelector((state) => state.posts.error)
+  const postError = useSelector((state) => state.posts.error)
 
   const likeStatus = useSelector((state) => state.likes.status)
-  const likeError = useSelector((state) => state.likes.error)
 
   useEffect(() => {
     if (postStatus === 'idle') {
@@ -88,7 +71,7 @@ export const PostsList = () => {
       <PostExcerpt key={postId} postId={postId} />
     ))
   } else if (postStatus === 'failed') {
-    content = <div>{likeError}</div>
+    content = <div>{postError}</div>
   }
 
   useEffect(() => {
@@ -96,18 +79,6 @@ export const PostsList = () => {
       dispatch(fetchLikes())
     }
   }, [likeStatus, dispatch])
-
-  let likesContent
-
-  if (likeStatus === 'loading') {
-    likesContent = <div className="loader">Loading...</div>
-  } else if (likeStatus === 'succeeded') {
-    likesContent = likes.length
-  } else if (likeStatus === 'failed') {
-    likesContent = <div>{error}</div>
-  }
-  
-  // console.log(likesContent);
 
   return (
     <section className="posts-list">

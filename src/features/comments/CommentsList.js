@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import classnames from 'classnames'
 
@@ -8,7 +8,7 @@ import { selectAllUsers } from '../users/usersSlice'
 import { selectCommentsByPostId } from './commentsSlice'
 
 export const CommentsList = ({ postId }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const comments = useSelector((state) => selectCommentsByPostId(state, postId))
   const users = useSelector(selectAllUsers)
 

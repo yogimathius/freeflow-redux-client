@@ -5,8 +5,9 @@ import { selectUserById } from '../users/usersSlice'
 
 export const PostAuthor = ({ userId }) => {
   const author = useSelector((state) => selectUserById(state, userId))
-  const fullName = `${author.first_name} ${author.last_name}`
-  const avatar = `${author.avatar}`
+
+  const fullName = author ? `${author.first_name} ${author.last_name}` : "";
+  const avatar = author ? `${author.avatar}` : "";
   return (
     <span className="post_author">
       <img alt="avatar" src={avatar} />
