@@ -88,5 +88,5 @@ export const selectKarmasByUserId = createSelector(
   (karmas, userId) => karmas.filter((karma) => {
 		console.log(karma);
 		return karma.receiver_id == userId
-	}  )
+	})
 )
