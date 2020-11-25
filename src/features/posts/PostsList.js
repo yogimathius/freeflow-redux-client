@@ -30,10 +30,12 @@ let PostExcerpt = ({ postId }) => {
       <div>
         <PostAuthor userId={post.owner_id} />
         <TimeAgo timestamp={post.created_at} />
-        {likesList.length > 1 ?       <p>{likesList.length} likes</p> :
+        {likesList.length > 1 ?       
+        <p>{likesList.length} likes</p> :
         ""
         }
-        {likesList.length === 1 ?       <p>{likesList.length} like</p> :
+        {likesList.length === 1 ?       
+        <p>{likesList.length} like</p> :
         ""
         }
       </div>

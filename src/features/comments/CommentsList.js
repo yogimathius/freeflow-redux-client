@@ -37,7 +37,8 @@ export const CommentsList = ({ postId }) => {
           <div title={comment.created_at}   className="commentInfo">
             <img src={user.avatar} alt={`${user.first_name} ${user.last_name}`}/>
             <b>{`${user.first_name} ${user.last_name}`}</b>
-            <p>Gained {commentExperience} experience </p>
+            {commentExperience !== 0 ?             <p>Gained {commentExperience} experience </p>
+            : "" }
             <i className="commentTime">{timeAgo} ago</i>
           </div>
         </div>
