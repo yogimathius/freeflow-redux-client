@@ -57,12 +57,17 @@ export const AddPostForm = () => {
           type="text"
           id="postTitle"
           name="postTitle"
+          data-testid="postTitle"
           placeholder="What's on your mind?"
           value={title}
           onChange={onTitleChanged}
         />
         <label htmlFor="postAuthor">Author:</label>
-        <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
+        <select 
+          
+          id="postAuthor" 
+          value={userId} 
+          onChange={onAuthorChanged}>
           <option value=""></option>
           {usersOptions}
         </select>
@@ -71,9 +76,13 @@ export const AddPostForm = () => {
           id="postContent"
           name="postContent"
           value={content}
+          data-testid="postText"
           onChange={onContentChanged}
         />
-        <button type="button" onClick={onSavePostClicked} disabled={!canSave}>
+        <button 
+        type="button" 
+        data-testid="sendButton"
+        onClick={onSavePostClicked} disabled={!canSave}>
           Save Post
         </button>
       </form>
