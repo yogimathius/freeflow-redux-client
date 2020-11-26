@@ -17,7 +17,7 @@ export const UserPage = ({ match }) => {
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
   const karmasForUser = useSelector((state) => selectKarmasByUserId(state, userId))
-  console.log("user karmas in userpage: ", karmasForUser);
+  // console.log("user karmas in userpage: ", karmasForUser);
 
   const experience = (karmasForUser.length * 29)
   const postTitles = postsForUser.map((post) => (

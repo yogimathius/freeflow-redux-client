@@ -36,6 +36,7 @@ export const Navbar = () => {
             <Link to="/notifications">
               Notifications {unreadNotificationsBadge}
             </Link>
+            <Link to="/login">Login</Link>
           </div>
 {/* 
           <button className="button" onClick={fetchNewNotifications}>

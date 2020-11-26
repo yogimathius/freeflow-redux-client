@@ -19,7 +19,7 @@ const initialState = likesAdapter.getInitialState({
 
 export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
   const response = await axios.get('http://localhost:8000/api/likes');
-  console.log("fetched likes: ", response.data);
+  // console.log("fetched likes: ", response.data);
   return response.data
 })
 
@@ -27,9 +27,9 @@ export const addNewLike = createAsyncThunk(
   'likes/addNewLike',
   async (initialLikes) => {
     const { posting_id, liker_id} = initialLikes
-    console.log("initial Likes in addnewLikes: ", initialLikes);
+    // console.log("initial Likes in addnewLikes: ", initialLikes);
     const response = await axios.post(url, {like: posting_id, liker_id});
-    console.log("response in thunk: ", response);
+    // console.log("response in thunk: ", response);
     return response.post
   }
 )

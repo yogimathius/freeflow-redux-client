@@ -1,0 +1,173 @@
+.mainlogincontainer {
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	background: #222b45;
+	border-radius: 10px;
+	padding: 2rem;
+	height: 96%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.loginleftcontainer {
+	width: 50%;
+	height: 100%;
+	border: 1px solid #151a30;
+	border-radius: 10px;
+	margin-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	/* padding-bottom: 50px; */
+}
+
+.loginformheader {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 2.5rem;
+}
+
+#loginusernameinput,
+#loginpasswordinput {
+	margin-bottom: 0.35rem;
+	height: 36px;
+	width: 210px;
+	padding-left: 35px;
+}
+
+.loginusernamecontainer,
+.loginpasswordcontainer {
+	position: relative;
+}
+
+.usernameicon,
+.passwordicon {
+	position: absolute;
+	width: 20px;
+	left: 7px;
+	top: 7px;
+	color: white;
+}
+
+/* .login-btn {
+  border: 1px solid #3366ff;
+  color: #3366ff;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 0.3rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 210px;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  background: #3366ff;
+  color: white;
+} */
+
+.loginbtn {
+	margin-top: 0.5rem;
+	border: 1px solid #3366ff;
+	color: #3366ff;
+	font-weight: 900;
+	border-radius: 5px;
+	padding: 0.5rem 0.8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 210px;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+}
+
+.loginbtn:hover {
+	background: linear-gradient(to right, white, #3366ff 50%, white 50%);
+	overflow: hidden;
+	background-clip: text;
+	-webkit-background-clip: text;
+	background-size: 200% 100%;
+	background-position: 110%;
+	transition: background-position 275ms ease;
+	text-decoration: none;
+	color: #3366ff;
+	background-position: 100% 0;
+	transition: 0.2s;
+	cursor: pointer;
+	color: white;
+	background-position: 0 100%;
+	-webkit-text-fill-color: transparent;
+	box-shadow: 1px 1px 9px #fff0f5;
+}
+
+.noaccount {
+	margin-top: 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 100;
+}
+
+#registeraccountclick {
+	color: #3366ff;
+	text-decoration: underline;
+}
+
+#registeraccountclick:hover {
+	cursor: pointer;
+}
+
+.loginrightcontainer {
+	width: 50%;
+	height: 100%;
+	border: 1px solid #151a30;
+	margin-left: 1rem;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.loginusernamepassworderror {
+	color: #fa4646;
+	font-size: 0.9rem;
+}
+
+.logoutbtnnav {
+	color: white;
+	background: #151a30;
+	border: none;
+	padding: 0.4rem 0.7rem;
+	outline: none;
+}
+
+.logoutbtnnav:hover {
+	cursor: pointer;
+	outline: none;
+	border: none;
+}
+
+.login__form {
+	text-align: center;
+	padding: 2em;
+	margin-top: 2em;
+	h1 {
+		padding: 1em;
+	}
+	.loginFormItem {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+		font-size: 1em;
+		label {
+			padding: 0.5em;
+		}
+	}
+	button {
+		font-size: 1em;
+		padding: 0 1em;
+	}
+}

@@ -26,40 +26,13 @@ export const fetchUserPosts = createAsyncThunk('users/fetchUserPostings', async 
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {
-      loginSuccess: (state, action) => {
-        state.user = action.payload;
-      },
-      logoutSuccess: (state, action) =>  {
-        state.user = null;
-      },
-  },
+  reducers: {},
   extraReducers: {
     [fetchUsers.fulfilled]: usersAdapter.setAll,
   },
 })
 
 export default usersSlice.reducer
-
-const { loginSuccess, logoutSuccess } = usersSlice.actions
-
-export const login = ({ username, password }) => async dispatch => {
-  try {
-    // const res = await api.post('/api/auth/login/', { username, password })
-    dispatch(loginSuccess({username}));
-  } catch (e) {
-    return console.error(e.message);
-  }
-}
-
-export const logout = () => async dispatch => {
-  try {
-    // const res = await api.post('/api/auth/logout/')
-    return dispatch(logoutSuccess())
-  } catch (e) {
-    return console.error(e.message);
-  }
-}
 
 export const {
   selectAll: selectAllUsers,

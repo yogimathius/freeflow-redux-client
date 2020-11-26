@@ -23,7 +23,7 @@ let PostExcerpt = ({ postId }) => {
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
   // console.log("likes list: ", likesList);
-  console.log("post id: ", post)
+  // console.log("post id: ", post)
   return (
     <article className="post-excerpt" key={post.id}>
       <h3>{post.title}</h3>
