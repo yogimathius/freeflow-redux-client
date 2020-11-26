@@ -15,6 +15,8 @@ import { EditPostForm } from './features/posts/EditPostForm'
 import { SinglePostPage } from './features/posts/SinglePostPage'
 import { UsersList } from './features/users/UsersList'
 import { UserPage } from './features/users/UserPage'
+
+import { UserProfile } from './features/users/UserProfile'
 import { NotificationsList } from './features/notifications/NotificationsList'
 import Login from './features/loginContent/Login'
 
@@ -39,6 +41,7 @@ function App() {
             <Route exact path="/editPost/:postId" component={EditPostForm} />
             <Route exact path="/users" component={UsersList} />
             <Route exact path="/users/:userId" component={UserPage} />
+            <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/notifications" component={NotificationsList} />
             <Route exact path="/login" component={Login} />
 
