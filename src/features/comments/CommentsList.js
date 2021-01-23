@@ -20,14 +20,13 @@ export const CommentsList = ({ postId }) => {
     const user = users.find((user) => user.id === comment.commenter_id) || {
       name: 'Unknown User',
     }
-    // console.log("comment: ", comment);
 
     const commentClassname = classnames('comment', {
       new: comment.isNew,
     })
 
     const commentKarmas = karmas.filter(karma => karma.comment_id === comment.id)
-    console.log("comment karmas: ", commentKarmas);
+
     const commentExperience = (commentKarmas.length * 29);
 
     return (

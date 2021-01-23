@@ -7,10 +7,6 @@ import { Provider } from 'react-redux'
 import { fetchUsers } from './features/users/usersSlice'
 import { fetchPosts } from './features/posts/postsSlice'
 
-
-// import './api/server'
-
-
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
 

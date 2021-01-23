@@ -9,14 +9,18 @@ import { selectKarmasByUserId } from '../karmas/karmasSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 
-export const UserPage = ({ match }) => {
-  const { userId } = match.params
-  console.log(userId);
-  const user = useSelector((state) => selectUserById(state, userId))
+export const UserProfile = () => {
+  // const { userId } = match.params
+	const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
 
-  const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
+	const userId = loggedInUser.id
 
-  const karmasForUser = useSelector((state) => selectKarmasByUserId(state, userId))
+	const user = useSelector((state) => selectUserById(state, userId))
+	console.log(user);
+  const postsForUser = useSelector((state) => selectPostsByUser(state, loggedInUser.id))
+
+	console.log(postsForUser);
+  const karmasForUser = useSelector((state) => selectKarmasByUserId(state, loggedInUser.id))
   // console.log("user karmas in userpage: ", karmasForUser);
 
   const experience = (karmasForUser.length * 29)
@@ -33,19 +37,19 @@ export const UserPage = ({ match }) => {
   return (
     <section>
       <div className="user_profile">
-        <img alt="avatar" src={user.avatar} />
+        <img alt="avatar" src={loggedInUser.avatar} />
         <div className="user_info">
           <h2>
-            {user.first_name} {user.last_name}
+            {loggedInUser.first_name} {loggedInUser.last_name}
           </h2>
           <p>
-            Joined Freeflow <TimeAgo timestamp={user.created_at} />
+            Joined Freeflow <TimeAgo timestamp={loggedInUser.created_at} />
           </p>
           <p>
-            <span className="field_name">Location:</span> {user.location}
+            <span className="field_name">Location:</span> {loggedInUser.location}
           </p>
           <p>
-            <span className="field_name">About Me:</span> {user.description}
+            <span className="field_name">About Me:</span> {loggedInUser.description}
           </p>
           <ProgressBar experience={experience} />
         </div>

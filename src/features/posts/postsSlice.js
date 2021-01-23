@@ -6,10 +6,10 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8000/api/postings'
+const url = 'http://localhost:8080/api/posts'
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
+  sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -17,23 +17,23 @@ const initialState = postsAdapter.getInitialState({
   error: null,
 })
 
-export const fetchPosts = createAsyncThunk('postings/fetchPosts', async () => {
-  const response = await axios.get('http://localhost:8000/api/postings');
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await axios.get('http://localhost:8080/api/posts');
   return response.data
 })
 
 export const addNewPost = createAsyncThunk(
-  'postings/addNewPost',
+  'posts/addNewPost',
   async (initialPost) => {
     const { title, content, is_request, owner_id} = initialPost
     const response = await axios.post(url, {posting: title, content, is_request, owner_id});
-    console.log("response in thunk: ", response.data);
+    // console.log("response in thunk: ", response.data);
     return response.data
   }
 )
 
 const postsSlice = createSlice({
-  name: 'postings',
+  name: 'posts',
   initialState,
   reducers: {
     reactionAdded(state, action) {

@@ -6,10 +6,10 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8000/api/likes'
+const url = 'http://localhost:8080/api/likes'
 
 const likesAdapter = createEntityAdapter({
-  // sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
+	selectId: (like) => like.post_id,
 })
 
 const initialState = likesAdapter.getInitialState({
@@ -18,8 +18,8 @@ const initialState = likesAdapter.getInitialState({
 })
 
 export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
-  const response = await axios.get('http://localhost:8000/api/likes');
-  console.log("fetched likes: ", response.data);
+  const response = await axios.get('http://localhost:8080/api/likes');
+  // console.log("fetched likes: ", response.data);
   return response.data
 })
 
@@ -28,8 +28,20 @@ export const addNewLike = createAsyncThunk(
   async (initialLikes) => {
     const { posting_id, liker_id} = initialLikes
     console.log("initial Likes in addnewLikes: ", initialLikes);
-    const response = await axios.post(url, {like: posting_id, liker_id});
-    console.log("response in thunk: ", response);
+    const response = await axios.post(url, {posting_id: posting_id, liker_id});
+    // console.log("response in thunk: ", response);
+    return response.post
+  }
+)
+
+
+export const removeLike = createAsyncThunk(
+  'likes/addNewLike',
+  async (initialLikes) => {
+    const { posting_id, liker_id} = initialLikes
+    // console.log("initial Likes in addnewLikes: ", initialLikes);
+    const response = await axios.post(url, {posting_id: posting_id, liker_id});
+    // console.log("response in thunk: ", response);
     return response.post
   }
 )

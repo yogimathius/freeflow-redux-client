@@ -33,11 +33,13 @@ export const Navbar = () => {
           <div className="navLinks">
             <Link to="/">Posts</Link>
             <Link to="/users">Users</Link>
-            <Link to="/notifications">
+            {/* <Link to="/notifications">
               Notifications {unreadNotificationsBadge}
-            </Link>
+            </Link> */}
+            <Link to="/login">Login</Link>
+            <Link to="/profile">Profile</Link>
           </div>
-{/* 
+          {/* 
           <button className="button" onClick={fetchNewNotifications}>
             Refresh Notifications
           </button> */}

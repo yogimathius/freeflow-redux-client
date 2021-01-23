@@ -6,10 +6,10 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = `http://localhost:8000/api/comments`
+const url = `http://localhost:8080/api/comments`
 
 const commentsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.created_at.localeCompare(a.created_at),
+	selectId: (comment) => comment.post_id,
 })
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
@@ -37,7 +37,7 @@ export const addNewComment = createAsyncThunk(
       posting_id,
       content,
     })
-    console.log('response in Comments thunk: ', response.data)
+    // console.log('response in Comments thunk: ', response.data)
     return response.data
   }
 )

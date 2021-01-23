@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8000/api/karmas'
+const url = 'http://localhost:8080/api/karmas'
 
 const karmasAdapter = createEntityAdapter({
 	selectId: (karma) => karma.id,
@@ -18,13 +18,13 @@ const initialState = karmasAdapter.getInitialState({
 })
 
 export const fetchKarmas = createAsyncThunk('karmas/fetchKarmas', async () => {
-  const response = await axios.get('http://localhost:8000/api/karmas');
-  console.log("fetched karmas: ", response.data);
+  const response = await axios.get('http://localhost:8080/api/karmas');
+  // console.log("fetched karmas: ", response.data);
   return response.data
 })
 
 export const getKarmaCountByUser = createAsyncThunk('karmas/getKarmaCount', async () => {
-  const response = await axios.get('http://localhost:8000/api/karmas/user');
+  const response = await axios.get('http://localhost:8080/api/karmas/user');
   // console.log("fetched karmas: ", response.data);
   return response.data	
 })
@@ -34,7 +34,7 @@ export const addNewKarma = createAsyncThunk(
     const { comment_id, giver_id} = initialKarmas
     // console.log("initial Karmas in addnewKarmas: ", initialKarmas);
     const response = await axios.post(url, {karma: comment_id, giver_id});
-    console.log("response in thunk: ", response);
+    // console.log("response in thunk: ", response);
     return response.post
   }
 )
@@ -86,7 +86,7 @@ export const {
 export const selectKarmasByUserId = createSelector(
   [selectAllkarmas, (state, userId) => userId],
   (karmas, userId) => karmas.filter((karma) => {
-		console.log(karma);
+		// console.log(karma);
 		return karma.receiver_id == userId
 	})
 )
