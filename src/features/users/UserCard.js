@@ -7,11 +7,11 @@ import { TimeAgo } from '../posts/TimeAgo';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 
 export default function userCard(props) {
-  // console.log("karmas in usercard: ", props.karmas);
+  console.log("experiences in usercard: ", props.experiences);
 
-  const userKarmas = props.karmas.filter(karma => karma.receiver_id === props.id)
+  const userExperience = props.experiences.filter(experience => experience.helper_id === props.id)
 
-  const experience = (userKarmas.length *29);
+  const experience = (userExperience.length *29);
   return (
     <div className='user-card' key={props.id}>
       <Link to={`/users/${props.id}`}>

@@ -5,7 +5,7 @@ import { TimeAgo } from '../posts/TimeAgo'
 
 import { selectUserById } from '../users/usersSlice'
 import { selectPostsByUser } from '../posts/postsSlice'
-import { selectKarmasByUserId } from '../karmas/karmasSlice'
+import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 
@@ -20,10 +20,10 @@ export const UserProfile = () => {
   const postsForUser = useSelector((state) => selectPostsByUser(state, loggedInUser.id))
 
 	console.log(postsForUser);
-  const karmasForUser = useSelector((state) => selectKarmasByUserId(state, loggedInUser.id))
-  // console.log("user karmas in userpage: ", karmasForUser);
+  const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, loggedInUser.id))
+  console.log("user karmas in userpage: ", experiencesForUser);
 
-  const experience = (karmasForUser.length * 29)
+  const experience = (experiencesForUser.length * 29)
   const postTitles = postsForUser.map((post) => (
     <li key={post.id}>
       <Link to={`/posts/${post.id}`}>{post.title}</Link>

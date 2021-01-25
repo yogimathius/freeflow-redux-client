@@ -6,13 +6,13 @@ import classnames from 'classnames'
 import { selectAllUsers } from '../users/usersSlice'
 
 import { selectCommentsByPostId } from './commentsSlice'
-import { selectAllkarmas } from '../karmas/karmasSlice'
+import { selectAllExperiences } from '../experiences/experiencesSlice'
 
 export const CommentsList = ({ postId }) => {
   // const dispatch = useDispatch()
   const comments = useSelector((state) => selectCommentsByPostId(state, postId))
   const users = useSelector(selectAllUsers)
-  const karmas = useSelector(selectAllkarmas)
+  const karmas = useSelector(selectAllExperiences)
 
   const renderedComments = comments.map((comment) => {
     const date = parseISO(comment.created_at)

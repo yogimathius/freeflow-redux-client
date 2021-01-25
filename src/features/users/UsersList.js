@@ -3,19 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAllUsers } from './usersSlice'
 import store from '../../app/store';
 import { 
-  fetchKarmas, 
-  selectAllkarmas,  
-} from '../karmas/karmasSlice';
+  fetchExperiences, 
+  selectAllExperiences,  
+} from '../experiences/experiencesSlice';
 import './UsersList.scss';
 import UserCard from './UserCard';
   
-store.dispatch(fetchKarmas());
+store.dispatch(fetchExperiences());
 export const UsersList = () => {
   const dispatch = useDispatch()
-  // console.log("karmas: ", store.getState().karmas)
   const users = useSelector(selectAllUsers)
-  const karmas = useSelector (selectAllkarmas)
-  // console.log("karmas in userlist: ", karmas);
+  const experiences = useSelector (selectAllExperiences)
+  console.log("experiences in userlist: ", experiences);
   const renderedUsers = users.map((user, id) => (
     <UserCard 
     key={id} 
@@ -27,7 +26,7 @@ export const UsersList = () => {
     active={user.active} 
     location={user.location} 
     created_at={user.created_at} 
-    karmas={karmas}
+    experiences={experiences}
     />
   ))
 
@@ -35,9 +34,9 @@ export const UsersList = () => {
   // console.log(userIds);
 
 
-  // karmas.map(karma => console.log("karmas: ", karma))
+  // experiences.map(karma => console.log("experiences: ", karma))
   // const renderedUsers = users.map((user) => {
-  //   // const userKarmas = karmas.filter(karma => karmas.receiver_id = user.id)
+  //   // const userKarmas = experiences.filter(karma => experiences.receiver_id = user.id)
   //   // console.log("count in users: ", userKarmas.length);
   //   // const userKarmasCount = userKarmas.length
   //   return (
@@ -49,26 +48,26 @@ export const UsersList = () => {
   // } )
 
 
-  const karmaStatus = useSelector((state) => state.karmas.status)
-  const karmaError = useSelector((state) => state.karmas.error)
+  const experienceStatus = useSelector((state) => state.experiences.status)
+  const experienceError = useSelector((state) => state.experiences.error)
 
   useEffect(() => {
-    if (karmaStatus === 'idle') {
-      dispatch(fetchKarmas())
+    if (experienceStatus === 'idle') {
+      dispatch(fetchExperiences())
     }
-  }, [karmaStatus, dispatch])
+  }, [experienceStatus, dispatch])
 
-  let karmasContent
+  let experiencesContent
 
-  if (karmaStatus === 'loading') {
-    karmasContent = <div className="loader">Loading...</div>
-  } else if (karmaStatus === 'succeeded') {
-    karmasContent = karmas
-  } else if (karmaStatus === 'failed') {
-    karmasContent = <div>{karmaError}</div>
+  if (experienceStatus === 'loading') {
+    experiencesContent = <div className="loader">Loading...</div>
+  } else if (experienceStatus === 'succeeded') {
+    experiencesContent = experiences
+  } else if (experienceStatus === 'failed') {
+    experiencesContent = <div>{experienceError}</div>
   }
   
-  console.log("karma content: ", karmasContent);
+  console.log("karma content: ", experiencesContent);
   return (
     <section>
       <h2>Users</h2>
