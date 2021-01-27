@@ -1,38 +1,32 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { TimeAgo } from '../posts/TimeAgo'
-
-import { selectUserById } from '../users/usersSlice'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
+import { loadState } from '../../helpers/localStorage'
+import { PostExcerpt } from '../posts/PostsList';
 
-export const UserPage = ({ match }) => {
-  const { userId } = match.params
-  console.log(userId);
-  const user = useSelector((state) => selectUserById(state, userId))
+export const UserPage = () => {
+  const user = loadState()
 
-  const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
+  const postsForUser = useSelector((state) => selectPostsByUser(state, user.id))
+  console.log(postsForUser);
+  const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, user.id))
 
-  // const karmasForUser = useSelector((state) => selectExperiencesByUserId(state, userId))
-  // console.log("user karmas in userpage: ", karmasForUser);
+  const experience = (experiencesForUser.length * 29)
 
-  // const experience = (karmasForUser.length * 29)
-  const postTitles = postsForUser.map((post) => (
-    <li key={post.id}>
-      <Link to={`/posts/${post.id}`}>{post.title}</Link>
-      <p className="posts_timestamp">
-        <TimeAgo timestamp={post.created_at} />
-      </p>
-      <p>{post.content}</p>
-    </li>
-  ))
+  const renderedPosts = postsForUser.map((post, index) => 
+    <PostExcerpt key={index} postId={post.id} />
+    )
+
+  const fullName = user.firstName + ' ' + user.lastName;
 
   return (
     <section>
       <div className="user_profile">
+        <h1>{fullName}</h1>
         <img alt="avatar" src={user.avatar} />
         <div className="user_info">
           <h2>
@@ -47,11 +41,13 @@ export const UserPage = ({ match }) => {
           <p>
             <span className="field_name">About Me:</span> {user.description}
           </p>
-          {/* <ProgressBar experience={experience} /> */}
+          <ProgressBar experience={experience} />
         </div>
       </div>
       <p>Previous Postings</p>
-      <ul className="user_posting_history">{postTitles}</ul>
+      <section className="">  
+        {renderedPosts}
+      </section>
     </section>
   )
 }

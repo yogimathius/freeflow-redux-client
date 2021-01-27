@@ -14,7 +14,7 @@ export const UsersList = () => {
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
   const experiences = useSelector (selectAllExperiences)
-  console.log("experiences in userlist: ", experiences);
+  // console.log("experiences in userlist: ", experiences);
   const renderedUsers = users.map((user, id) => (
     <UserCard 
     key={id} 
@@ -67,7 +67,7 @@ export const UsersList = () => {
     experiencesContent = <div>{experienceError}</div>
   }
   
-  console.log("karma content: ", experiencesContent);
+  // console.log("experience content: ", experiencesContent);
   return (
     <section>
       <h2>Users</h2>

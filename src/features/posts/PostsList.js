@@ -25,7 +25,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
 
-let PostExcerpt = ({ postId }) => {
+export const PostExcerpt = ({ postId }) => {
   const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
 
   const post = useSelector((state) => selectPostById(state, postId))
@@ -74,7 +74,6 @@ let PostExcerpt = ({ postId }) => {
   const unLike = async () => {
     if (canSave) {
       try {
-        // console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           removeLike({   posting_id: post.id, owner_id: loggedInUser.id })
@@ -90,7 +89,7 @@ let PostExcerpt = ({ postId }) => {
   }
 
   return (
-    <article className="post-excerpt" key={post.id}>
+    <article className="" key={post.id}>
       <h3>{post.title}</h3>
       <div>
         <PostAuthor userId={post.owner_id} />
@@ -139,7 +138,7 @@ let PostExcerpt = ({ postId }) => {
 			</div>
 		</div>
       </div>
-      <p className="post-content">{post.text_body.substring(0, 100)}</p>
+      <p className="post-content">{post.text_body}</p>
 
       {/* <ReactionButtons post={post} /> */}
       <Link to={`/posts/${post.id}`} className="button muted-button">

@@ -5,16 +5,21 @@ import RoomIcon from '@material-ui/icons/Room';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import { TimeAgo } from '../posts/TimeAgo';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
+import { saveState } from '../../helpers/localStorage';
 
 export default function userCard(props) {
-  console.log("experiences in usercard: ", props.experiences);
+  // console.log("experiences in usercard: ", props.experiences);
 
   const userExperience = props.experiences.filter(experience => experience.helper_id === props.id)
 
   const experience = (userExperience.length *29);
+  const setCookie = () => {
+    saveState(props)
+  }
+
   return (
     <div className='user-card' key={props.id}>
-      <Link to={`/users/${props.id}`}>
+      <Link to={`/users/${props.id}`} onClick={() => setCookie()}>
         <img src={props.avatar} className='avatar' alt='avatar' />
         <h4>{props.firstName} {props.lastName}</h4>
       </Link>

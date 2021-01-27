@@ -27,7 +27,7 @@ export const addNewLike = createAsyncThunk(
   'likes/addNewLike',
   async (initialLikes) => {
     const { posting_id, liker_id} = initialLikes
-    console.log("initial Likes in addnewLikes: ", initialLikes);
+    // console.log("initial Likes in addnewLikes: ", initialLikes);
     const response = await axios.post(url, {posting_id: posting_id, liker_id});
     // console.log("response in thunk: ", response);
     return response.post

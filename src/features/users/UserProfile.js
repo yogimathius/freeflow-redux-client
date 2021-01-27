@@ -16,12 +16,11 @@ export const UserProfile = () => {
 	const userId = loggedInUser.id
 
 	const user = useSelector((state) => selectUserById(state, userId))
-	console.log(user);
   const postsForUser = useSelector((state) => selectPostsByUser(state, loggedInUser.id))
 
-	console.log(postsForUser);
+	// console.log(postsForUser);
   const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, loggedInUser.id))
-  console.log("user karmas in userpage: ", experiencesForUser);
+  console.log("user experiences in userpage: ", experiencesForUser);
 
   const experience = (experiencesForUser.length * 29)
   const postTitles = postsForUser.map((post) => (

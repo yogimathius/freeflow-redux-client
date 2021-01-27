@@ -76,7 +76,6 @@ export const {
   selectById: selectExperienceById,
   selectIds: selectExperienceIds,
 } = experiencesAdapter.getSelectors((state) => {
-	console.log("state in experiencesadapter selectors", state.experiences, experiencesAdapter)
 	return state.experiences
 
 }
@@ -85,7 +84,7 @@ export const {
 export const selectExperiencesByUserId = createSelector(
   [selectAllExperiences, (state, userId) => userId],
   (experiences, userId) => experiences.filter((experience) => {
-		// console.log(experience);
-		return experience.receiver_id == userId
+		// console.log(experience, userId);
+		return experience.helper_id == userId
 	})
 )

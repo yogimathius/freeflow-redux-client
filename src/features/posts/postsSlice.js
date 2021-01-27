@@ -81,5 +81,8 @@ export const {
 
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter((post) => post.owner_id == userId)
+  (posts, userId) => posts.filter((post) => { 
+    // console.log(post, userId);
+    return post.owner_id == userId
+  })
 )
