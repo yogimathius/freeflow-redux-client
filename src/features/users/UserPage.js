@@ -7,13 +7,20 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 import { loadState } from '../../helpers/localStorage'
 import { PostExcerpt } from '../posts/PostsList';
+import { selectUserById } from './usersSlice'
 
 export const UserPage = () => {
-  const user = loadState()
+  const userId = loadState()
 
-  const postsForUser = useSelector((state) => selectPostsByUser(state, user.id))
-  console.log(postsForUser);
-  const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, user.id))
+  const user = useSelector((state) => selectUserById(state, userId))
+
+  const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
+
+  const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, userId))
+
+  if (!user || !postsForUser || !experiencesForUser) {
+    return null;
+  }
 
   const experience = (experiencesForUser.length * 29)
 
@@ -21,12 +28,10 @@ export const UserPage = () => {
     <PostExcerpt key={index} postId={post.id} />
     )
 
-  const fullName = user.firstName + ' ' + user.lastName;
 
   return (
     <section>
       <div className="user_profile">
-        <h1>{fullName}</h1>
         <img alt="avatar" src={user.avatar} />
         <div className="user_info">
           <h2>

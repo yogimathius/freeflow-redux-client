@@ -14,7 +14,7 @@ export default function userCard(props) {
 
   const experience = (userExperience.length *29);
   const setCookie = () => {
-    saveState(props)
+    saveState(props.id)
   }
 
   return (

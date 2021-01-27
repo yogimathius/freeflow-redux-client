@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
+import { saveState } from '../../helpers/localStorage'
 
 export const PostExcerpt = ({ postId }) => {
   const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -88,11 +89,19 @@ export const PostExcerpt = ({ postId }) => {
     }
   }
 
+  const setCookie = (id) => {
+    saveState(id)
+  }
+
   return (
     <article className="" key={post.id}>
       <h3>{post.title}</h3>
       <div>
-        <PostAuthor userId={post.owner_id} />
+        <Link to={`/users/${post.owner_id}`}
+        onClick={() => setCookie(post.owner_id)}
+        >
+          <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
+        </Link>
         <TimeAgo timestamp={post.created_at} />
         {likesList.length > 1 ?       
         <p>{likesList.length} likes</p> :

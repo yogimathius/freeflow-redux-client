@@ -19,7 +19,7 @@ const initialState = experiencesAdapter.getInitialState({
 
 export const fetchExperiences = createAsyncThunk('experiences/fetchExperiences', async () => {
   const response = await axios.get(url);
-  console.log("fetched experiences: ", response.data);
+  // console.log("fetched experiences: ", response.data);
   return response.data
 })
 
