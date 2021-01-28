@@ -1,13 +1,36 @@
-# For Development:
-
-Primary button color #1CD454
-Secondary button color #3366ff
-Red button color #fa4646
-For Darker background colors #464655
-
 # Freeflow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+This app is still in development. The objective is to build a game-ified social network that connects users based on their skills and assets, wants and needs in life. As users fulfill others wants and needs with the skills or assets, they will gain points and become more eligible to be helped by others. Currently we are implementing more full CRUD operations using redux toolkit's slices, and have login auth through context and reducer. To see more details of what is being worked on, you can check the issues tab in the repo.
+
+## Dependencies
+
+	"@material-ui/core": "^4.11.0",
+	"@material-ui/icons": "^4.9.1",
+	"@reduxjs/toolkit": "^1.4.0",
+	"@testing-library/jest-dom": "^4.2.4",
+	"@testing-library/react": "^9.3.2",
+	"@testing-library/user-event": "^7.1.2",
+	"axios": "^0.21.0",
+	"classnames": "^2.2.6",
+	"date-fns": "^2.12.0",
+	"faker": "^4.1.0",
+	"miragejs": "^0.1.35",
+	"node-sass": "^4.14.1",
+	"react": "^16.13.1",
+	"react-dom": "^16.13.1",
+	"react-redux": "^7.2.0",
+	"react-router-dom": "^5.1.2",
+	"react-scripts": "3.4.1",
+	"seedrandom": "^3.0.5",
+	"txtgen": "^2.2.4"
+	"@fortawesome/fontawesome-svg-core": "^1.2.32",
+	"@fortawesome/free-regular-svg-icons": "^5.15.1",
+	"@fortawesome/free-solid-svg-icons": "^5.15.1",
+	"@fortawesome/react-fontawesome": "^0.1.13",
+	"cypress": "^6.0.0",
+	"formik": "^2.2.5",
+	"moment": "^2.29.1",
+	"prettier": "^2.0.2"
 
 ## Available Scripts
 
