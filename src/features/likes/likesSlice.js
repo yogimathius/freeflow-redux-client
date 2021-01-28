@@ -95,5 +95,5 @@ export const {
 
 export const selectLikesByPostId = createSelector(
   [selectAlllikes, (state, postId) => postId],
-  (likes, postId) => likes.filter((like) => like.posting_id == postId )
+  (likes, postId) => likes.filter((like) => like.posting_id === postId )
 )

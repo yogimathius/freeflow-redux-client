@@ -84,7 +84,7 @@ export const {
 export const selectExperiencesByUserId = createSelector(
   [selectAllExperiences, (state, userId) => userId],
   (experiences, userId) => experiences.filter((experience) => {
-		// console.log(experience, userId);
-		return experience.helper_id == userId
+		console.log("state: ", typeof experience.helper_id, "app: ", typeof userId);
+		return experience.helper_id === userId
 	})
 )
