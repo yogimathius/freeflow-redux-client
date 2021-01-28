@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PostExcerpt from './PostExcerpt';
+import AddPostForm from './AddPostForm';
 
 import {
   fetchPosts,
@@ -45,9 +46,12 @@ export const PostsList = () => {
   }, [likeStatus, dispatch])
 
   return (
-    <section className="posts-list">
-      <h2>Posts</h2>
-      {content}
-    </section>
+    <div>
+      <AddPostForm />
+      <section className="posts-list">
+        <h2>Posts</h2>
+        {content}
+      </section>
+    </div>
   )
 }

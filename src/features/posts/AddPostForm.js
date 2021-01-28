@@ -4,7 +4,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewPost } from './postsSlice'
 
-export const AddPostForm = () => {
+export default function AddPostForm() {
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 	const loggedInUser = JSON.parse(localStorage.getItem('user'))
