@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { TimeAgo } from '../posts/TimeAgo'
 import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from '../users/usersSlice'
@@ -22,15 +21,6 @@ export const UserProfile = () => {
     return null;
   }
   const experience = (experiencesForUser.length * 29)
-  const postTitles = postsForUser.map((post) => (
-    <li key={post.id}>
-      <Link to={`/posts/${post.id}`}>{post.title}</Link>
-      <p className="posts_timestamp">
-        <TimeAgo timestamp={post.created_at} />
-      </p>
-      <p>{post.content}</p>
-    </li>
-  ))
 
   const renderedPosts = postsForUser.map((post, index) => 
   <UserPagePostExcerpt key={index} postId={post.id} />

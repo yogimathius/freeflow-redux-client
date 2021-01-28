@@ -18,7 +18,6 @@ import { UserPage } from './features/users/UserPage'
 
 import { UserProfile } from './features/users/UserProfile'
 import LoginPage from './features/login/LoginPage'
-import Login from './features/loginContent/Login'
 
 function App() {
   return (
