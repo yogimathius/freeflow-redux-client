@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { TimeAgo } from '../posts/TimeAgo'
-
+import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from '../users/usersSlice'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
@@ -10,13 +10,9 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 
 export const UserProfile = () => {
-  // const { userId } = match.params
 	const loggedInUser = JSON.parse(localStorage.getItem('user'))
-  // console.log(loggedInUser);
 	const userId = loggedInUser.id
-  // console.log("user id: ", userId);
   const user = useSelector((state) => selectUserById(state, userId))
-  console.log("user: ", user);
   
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
@@ -35,6 +31,10 @@ export const UserProfile = () => {
       <p>{post.content}</p>
     </li>
   ))
+
+  const renderedPosts = postsForUser.map((post, index) => 
+  <UserPagePostExcerpt key={index} postId={post.id} />
+  )
 
   return (
     <section>
@@ -57,7 +57,7 @@ export const UserProfile = () => {
         </div>
       </div>
       <p>Previous Postings</p>
-      <ul className="user_posting_history">{postTitles}</ul>
+      <ul className="user_posting_history">{renderedPosts}</ul>
     </section>
   )
 }

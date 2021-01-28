@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { AuthProvider } from './Context';
 
-import { Navbar } from './app/Navbar'
+import { Navbar } from './components/Navbar'
 
 import { PostsList } from './features/posts/PostsList'
 import { AddPostForm } from './features/posts/AddPostForm'

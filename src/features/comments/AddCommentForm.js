@@ -69,11 +69,6 @@ export const AddCommentForm = ({ postId }) => {
           onChange={onTitleChanged}
         /> */}
         <div className="commentFormInner">
-          <label htmlFor="commentAuthor">Author:</label>
-          <select id="commentAuthor" value={userId} onChange={onAuthorChanged}>
-            <option value=""></option>
-            {usersOptions}
-          </select>
           <label htmlFor="commentContent">Content:</label>
           <textarea
             id="commentContent"

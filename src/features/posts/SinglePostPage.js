@@ -38,8 +38,7 @@ export const SinglePostPage = ({ match }) => {
           <div className="post_top_right">
             <h2>{post.title} </h2>
             <TimeAgo timestamp={post.created_at} />
-            <p className="post-content">{post.content}</p>
-            {/* <ReactionButtons post={post} /> */}
+            <p className="post-content">{post.text_body}</p>
           </div>
         </div>
         <Link to={`/editPost/${post.id}`} className="button">

@@ -6,7 +6,7 @@ import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 import { loadState } from '../../helpers/localStorage'
-import { PostExcerpt } from '../posts/PostsList';
+import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
 
 export const UserPage = () => {
@@ -25,7 +25,7 @@ export const UserPage = () => {
   const experience = (experiencesForUser.length * 29)
 
   const renderedPosts = postsForUser.map((post, index) => 
-    <PostExcerpt key={index} postId={post.id} />
+    <UserPagePostExcerpt key={index} postId={post.id} />
     )
 
 
