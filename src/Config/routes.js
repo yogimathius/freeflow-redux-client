@@ -5,7 +5,6 @@ import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';
 import { UserPage } from '../features/users/UserPage';
 import LoginPage from '../features/login/LoginPage';
-import { AddPostForm } from '../features/posts/AddPostForm';
 
 const routes = [
   {
