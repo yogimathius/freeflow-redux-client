@@ -33,7 +33,8 @@ export const login = ({ username, password }) => async dispatch => {
     const res = await axios.post(url, { username, password })
     console.log(res);
     if (res.status === 200) {
-      dispatch(loginSuccess({username}));
+      const userId = res.data[0]
+      dispatch(loginSuccess(userId));
     }
   } catch (e) {
     return console.error(e.message);

@@ -11,17 +11,20 @@ import './UserPage.scss'
 
 export const UserProfile = () => {
   // const { userId } = match.params
-	const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
-  console.log(loggedInUser);
+	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  // console.log(loggedInUser);
 	const userId = loggedInUser.id
-  console.log(userId);
-	const user = useSelector((state) => selectUserById(state, userId))
-  const postsForUser = useSelector((state) => selectPostsByUser(state, loggedInUser.id))
+  // console.log("user id: ", userId);
+  const user = useSelector((state) => selectUserById(state, userId))
+  console.log("user: ", user);
+  
+  const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
-	// console.log(postsForUser);
   const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, loggedInUser.id))
-  console.log("user experiences in userpage: ", experiencesForUser);
 
+  if (user === undefined) {
+    return null;
+  }
   const experience = (experiencesForUser.length * 29)
   const postTitles = postsForUser.map((post) => (
     <li key={post.id}>
@@ -39,16 +42,16 @@ export const UserProfile = () => {
         <img alt="avatar" src={loggedInUser.avatar} />
         <div className="user_info">
           <h2>
-            {loggedInUser.first_name} {loggedInUser.last_name}
+            {user.first_name} {user.last_name}
           </h2>
           <p>
-            Joined Freeflow <TimeAgo timestamp={loggedInUser.created_at} />
+            Joined Freeflow <TimeAgo timestamp={user.created_at} />
           </p>
           <p>
-            <span className="field_name">Location:</span> {loggedInUser.location}
+            <span className="field_name">Location:</span> {user.location}
           </p>
           <p>
-            <span className="field_name">About Me:</span> {loggedInUser.description}
+            <span className="field_name">About Me:</span> {user.description}
           </p>
           <ProgressBar experience={experience} />
         </div>

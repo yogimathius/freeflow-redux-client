@@ -27,7 +27,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 
 export const PostExcerpt = ({ postId }) => {
-  const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
+  const loggedInUser = JSON.parse(localStorage.getItem('user'))
 
   const post = useSelector((state) => selectPostById(state, postId))
 
