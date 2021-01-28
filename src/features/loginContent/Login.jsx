@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import styles from './NewLogin.scss';
 import { loginUser, useAuthState, useAuthDispatch } from '../../Context';
+import { saveState } from '../../helpers/localStorage';
 
 export default function Login(props) {
-	const [email, setEmail] = useState('');
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
 	const dispatch = useAuthDispatch();
 	const { loading, errorMessage } = useAuthState();
 
-	const handleLogin = () => {
-		let response = loginUser(dispatch, { email, password });
+	const handleLogin = (event) => {
+		event.preventDefault();
+		console.log(username, password);
+		let response = loginUser(dispatch, { username, password });
 		if (response.user) return;
+		saveState(response.user)
 		props.history.push('/dashboard');
 	};
 
@@ -24,12 +28,12 @@ export default function Login(props) {
 					<form>
 						<div className={styles.loginForm}>
 							<div className="loginFormItem">
-								<label htmlFor="email">Username</label>
+								<label htmlFor="username">Username</label>
 								<input
 									type="text"
-									id="email"
-									value={email}
-									onChange={e => setEmail(e.target.value)}
+									id="username"
+									value={username}
+									onChange={e => setUsername(e.target.value)}
 									disabled={loading}
 								/>
 							</div>

@@ -5,6 +5,7 @@ import usersReducer from '../features/users/usersSlice'
 import likesReducer from '../features/likes/likesSlice'
 import commentsReducer from '../features/comments/commentsSlice';
 import experiencesReducer from '../features/experiences/experiencesSlice';
+import userLoginReducer from '../features/userlogins/loginSlice';
 
 // import notificationsReducer from '../features/notifications/notificationsSlice'
 
@@ -13,7 +14,7 @@ export default configureStore({
     posts: postsReducer,
     users: usersReducer,
     likes: likesReducer,
-    // notifications: notificationsReducer,
+    user: userLoginReducer,
     comments: commentsReducer,
     experiences: experiencesReducer
 

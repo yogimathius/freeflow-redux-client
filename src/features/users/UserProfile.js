@@ -12,9 +12,9 @@ import './UserPage.scss'
 export const UserProfile = () => {
   // const { userId } = match.params
 	const loggedInUser = JSON.parse(localStorage.getItem('currentUser'))
-
+  console.log(loggedInUser);
 	const userId = loggedInUser.id
-
+  console.log(userId);
 	const user = useSelector((state) => selectUserById(state, userId))
   const postsForUser = useSelector((state) => selectPostsByUser(state, loggedInUser.id))
 

@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080/api/posts'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts'
 
 const postsAdapter = createEntityAdapter({
   sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
@@ -18,7 +18,7 @@ const initialState = postsAdapter.getInitialState({
 })
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('http://localhost:8080/api/posts');
+  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/posts');
   return response.data
 })
 

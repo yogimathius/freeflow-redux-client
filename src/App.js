@@ -17,7 +17,7 @@ import { UsersList } from './features/users/UsersList'
 import { UserPage } from './features/users/UserPage'
 
 import { UserProfile } from './features/users/UserProfile'
-import { NotificationsList } from './features/notifications/NotificationsList'
+import LoginPage from './features/login/LoginPage'
 import Login from './features/loginContent/Login'
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
             <Route exact path="/users/:userId" component={UserPage} />
             <Route exact path="/profile" component={UserProfile} />
             {/* <Route exact path="/notifications" component={NotificationsList} /> */}
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" component={LoginPage} />
 
             <Redirect to="/" />
           </Switch>

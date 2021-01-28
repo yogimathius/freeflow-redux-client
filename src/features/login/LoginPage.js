@@ -1,10 +1,21 @@
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {Field, Form, Formik} from 'formik'
-import {login, logout} from '../login/userLoginSlice'
-import React from 'react'
+import {login, logout} from './userLoginSlice'
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state.user)
+
+  if (user) {
+    return (
+      <div>
+        Hi, {user.username}!
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
+    )
+  }
+
   return (
     <div>
       <Formik
@@ -22,3 +33,4 @@ export const LoginPage = () => {
     </div>
   );
 }
+
