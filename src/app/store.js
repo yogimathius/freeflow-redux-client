@@ -5,9 +5,8 @@ import usersReducer from '../features/users/usersSlice'
 import likesReducer from '../features/likes/likesSlice'
 import commentsReducer from '../features/comments/commentsSlice';
 import experiencesReducer from '../features/experiences/experiencesSlice';
-import userLoginReducer from '../features/userlogins/loginSlice';
+import userLoginReducer from '../features/login/loginSlice';
 
-// import notificationsReducer from '../features/notifications/notificationsSlice'
 
 export default configureStore({
   reducer: {
