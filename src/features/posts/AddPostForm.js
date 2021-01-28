@@ -1,39 +1,37 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewPost } from './postsSlice'
-import { selectAllUsers } from '../users/usersSlice'
 
 export const AddPostForm = () => {
-  const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [userId, setUserId] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
+	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  const userId = loggedInUser.id;
   const dispatch = useDispatch()
-  const users = useSelector(selectAllUsers)
-  // console.log("users in addpostform: ", users);
-
-  const onTitleChanged = (e) => setTitle(e.target.value)
   const onContentChanged = (e) => setContent(e.target.value)
-  const onAuthorChanged = (e) => setUserId(e.target.value)
 
   const canSave =
-    [title, content, userId].every(Boolean) && addRequestStatus === 'idle'
+    [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onSavePostClicked = async () => {
     if (canSave) {
       try {
-        // console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewPost({ title, content,  is_request: false, owner_id: userId })
+          addNewPost({ 
+            owner_id: userId, 
+            text_body: content,
+            active: true, 
+            is_helper: false, 
+            is_helped: false, 
+            avatar: loggedInUser.avatar,
+            username: loggedInUser.username
+          })
         )
         unwrapResult(resultAction)
-        setTitle('')
         setContent('')
-        setUserId('')
       } catch (err) {
         console.error('Failed to save the post: ', err)
       } finally {
@@ -42,17 +40,11 @@ export const AddPostForm = () => {
     }
   }
 
-  const usersOptions = users.map((user) => (
-    <option key={user.id} value={user.id}>
-      {user.first_name} {user.last_name}
-    </option>
-  ))
-
   return (
     <section>
       <h2>Add a New Post</h2>
       <form>
-        <label htmlFor="postTitle">Post Title:</label>
+        {/* <label htmlFor="postTitle">Post Title:</label>
         <input
           type="text"
           id="postTitle"
@@ -61,7 +53,7 @@ export const AddPostForm = () => {
           placeholder="What's on your mind?"
           value={title}
           onChange={onTitleChanged}
-        />
+        /> */}
         {/* <label htmlFor="postAuthor">Author:</label> */}
         {/* <select 
           
