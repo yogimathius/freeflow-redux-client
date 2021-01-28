@@ -14,8 +14,7 @@ function App() {
       <Router>
         <Navbar />
         <div className="App">
-
-            <Switch>
+        <Switch>
 					{routes.map((route) => (
 						<AppRoute
 							key={route.path}

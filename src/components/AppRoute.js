@@ -3,13 +3,16 @@ import { Redirect, Route } from 'react-router-dom';
 
 
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
-	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+	let loggedInUser;
+	if (localStorage.getItem("user") !== null) {
+		loggedInUser = JSON.parse(localStorage.getItem('user'))
 
+	}
 	return (
 		<Route
 			path={path}
 			render={(props) =>
-				isPrivate && !Boolean(loggedInUser.username) ? (
+				isPrivate && !Boolean(loggedInUser) ? (
 					<Redirect to={{ pathname: '/login' }} />
 				) : (
 					<Component {...props} />
@@ -18,6 +21,7 @@ const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) =>
 			{...rest}
 		/>
 	);
+	
 };
 
 export default AppRoutes;
