@@ -1,0 +1,74 @@
+nav {
+  display: flex;
+  padding: 0;
+  background-image:
+  linear-gradient(
+    to bottom right, 
+    #4FC174, #6ee694
+  );
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.4);
+}
+
+nav section {
+  width: 100%;
+}
+
+nav section h1,
+nav section {
+  color: white;
+}
+
+nav a,
+nav a:active {
+  font-weight: 700;
+  padding: 0.25rem 1.5rem;
+  border-radius: 4px;
+  color: white !important;
+  background-color: #6ee694;
+}
+
+nav a:first-of-type {
+  margin-left: -1.5rem;
+}
+
+nav a:hover {
+  color: white;
+  background: #4FC174;
+}
+
+.navContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navLinks {
+  display: flex;
+}
+
+.navLinks a {
+  margin-left: 5px;
+}
+
+.navLinks a .badge {
+  margin-left: 5px;
+  position: relative;
+  top: -3px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: #212529;
+  background-color: #f8f9fa;
+}
+
+.navLinks :first-child {
+  margin-left: 0;
+}
