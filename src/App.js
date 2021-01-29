@@ -9,6 +9,7 @@ import { Navbar } from './components/Navbar'
 import AppRoute from './components/AppRoute';
 
 function App() {
+  console.log(routes);
   return (
     <AuthProvider>
       <Router>

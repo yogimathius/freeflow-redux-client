@@ -8,6 +8,11 @@ import LoginPage from '../features/login/LoginPage';
 
 const routes = [
   {
+    path: '/dashboard',
+    component: PostsList,
+    isPrivate: true,
+  },
+  {
     path: '/login',
     component: LoginPage,
     isPrivate: false,
@@ -23,11 +28,6 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/',
-    component: PostsList,
-    isPrivate: true,
-  },
-  {
     path: '/users',
     component: UsersList,
     isPrivate: true,
@@ -38,20 +38,10 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/profile',
+    path: '/users/:userId',
     component: UserPage,
     isPrivate: true,
-  },
-  // {
-  //   path: '/messages',
-  //   component: Messages,
-  //   isPrivate: true,
-  // },
-  // {
-  //   path: '/experiences',
-  //   component: Experiences,
-  //   isPrivate: true,
-  // },
+  }
 ];
 
 export default routes;

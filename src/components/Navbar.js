@@ -16,7 +16,7 @@ export const Navbar = () => {
 
         <div className="navContent">
           <div className="navLinks">
-            <Link to="/">Posts</Link>
+            <Link to="/dashboard">Posts</Link>
             <Link to="/users">Users</Link>
             <Link to="/login">Login</Link>
             <Link to="/profile">Profile</Link>

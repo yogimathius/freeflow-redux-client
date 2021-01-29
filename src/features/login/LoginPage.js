@@ -18,6 +18,7 @@ export default function LoginPage() {
 
   return (
     <div>
+      <h1>Please login to view content.</h1>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={(values) => { dispatch(login(values)) }}
@@ -30,6 +31,7 @@ export default function LoginPage() {
           </Form>
         )}
       </Formik>
+      <p>You can use these login details to test the app: username: dsleaford1 pw: 4lGhIyW </p>
     </div>
   );
 }
