@@ -89,7 +89,7 @@ export default function PostExcerpt({ postId }) {
   }
 
   return (
-    <article className="" key={post.id}>
+    <article className="border-solid border-2 border-black rounded-xl p-2 m-2" key={post.id}>
       <h3>{post.title}</h3>
       <div>
         <Link to={`/users/${post.owner_id}`}

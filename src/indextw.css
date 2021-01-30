@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities {
+	.btn
+    {
+        @apply px-6 font-bold tracking-widest rounded-3xl cursor-pointer flex items-center border-4 border-solid border-yellow-500 text-base no-underline;
+        text-shadow: none;
+    }
+
+	.btn i {
+		@apply text-blue-500;
+	}
+
+	.btn:focus
+    {
+		@apply outline-none shadow-none;
+    }
+
+	.btn:active
+    {
+		@apply bg-pink-500;
+	}
+
+	.btn[disabled],
+	.btn.disabled {
+		@apply border-none opacity-50 cursor-default;
+	}
+
+	.btn-primary,
+	.btn-primary:visited {
+		@apply bg-none bg-yellow-500 text-white;
+	}
+
+	.btn-primary:hover,
+	.btn-primary:visited:hover, {
+		@apply bg-none bg-yellow-500 border-4 border-pink-500 text-white;
+	}
+
+	.btn-secondary,
+	.btn-secondary:visited
+    {
+		@apply bg-none border-4 border-pink-500 text-blue-500;
+	}
+
+	.btn-secondary:hover,
+	.btn-secondary:visited:hover
+		 {
+		@apply bg-none bg-pink-500 text-white;
+	}
+
+    .btn-secondary:active
+    {
+		@apply text-white bg-yellow-500 opacity-70;
+	}
+
+	.btn-tertiary,
+	.btn-tertiary:visited
+    {
+		@apply border-4 border-yellow-500 text-blue-500;
+    }
+
+	.btn-tertiary:hover,
+	.btn-tertiary:visited:hover,
+	.btn-tertiary:focus,
+    {
+		@apply bg-yellow-500 text-white;
+    }
+}

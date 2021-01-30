@@ -14,9 +14,9 @@ export async function loginUser(dispatch, loginPayload) {
 	try {
 		dispatch({ type: 'REQUEST_LOGIN' });
 		let response = await fetch(`${proxyurl}${ROOT_URL}`, requestOptions);
-		console.log("response in actions: ", requestOptions);
+		// console.log("response in actions: ", requestOptions);
 		let data = await response.json();
-		console.log(data);
+		// console.log(data);
 		if (data.username) {
 			dispatch({ type: 'LOGIN_SUCCESS', payload: data });
 			localStorage.setItem('currentUser', JSON.stringify(data));

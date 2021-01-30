@@ -17,7 +17,7 @@ const userLoginSlice = createSlice({
     loginSuccess: (state, action) => {
 			state.user = action.payload;
       localStorage.setItem('user', JSON.stringify(action.payload))
-
+      
     },
     logoutSuccess: (state, action) =>  {
 			state.user = null;
@@ -28,10 +28,11 @@ const userLoginSlice = createSlice({
 export default userLoginSlice.reducer
 // Actions
 const { loginSuccess, logoutSuccess } = userLoginSlice.actions
+
 export const login = ({ username, password }) => async dispatch => {
   try {
     const res = await axios.post(url, { username, password })
-    console.log(res);
+    // console.log(res);
     if (res.status === 200) {
       const userId = res.data[0]
       dispatch(loginSuccess(userId));

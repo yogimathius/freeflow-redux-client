@@ -2,6 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {Field, Form, Formik} from 'formik'
 import {login, logout} from './userLoginSlice'
+import { Redirect } from 'react-router-dom';
 
 export default function LoginPage() {
   const dispatch = useDispatch()
@@ -9,11 +10,8 @@ export default function LoginPage() {
 
   if (user) {
     return (
-      <div>
-        Hi, {user.username}!
-        <button onClick={() => dispatch(logout())}>Logout</button>
-      </div>
-    )
+      <Redirect to={{ pathname: '/dashboard' }} />
+      )
   }
 
   return (

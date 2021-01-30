@@ -38,9 +38,9 @@ export const addNewPost = createAsyncThunk(
       username
     }
 
-    console.log(newPost);
+    // console.log(newPost);
     const response = await axios.post(url, newPost);
-    console.log("response in thunk: ", response.data);
+    // console.log("response in thunk: ", response.data);
     return response.data
   }
 )

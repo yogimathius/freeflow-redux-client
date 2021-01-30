@@ -3,14 +3,12 @@ import { Redirect, Route } from 'react-router-dom';
 
 
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
-	console.log("comp: ", Component, "path", path, "props: ", props);
 	let loggedInUser;
 	if (localStorage.getItem("user") !== null) {
 		loggedInUser = JSON.parse(localStorage.getItem('user'))
 
 	}
 
-	console.log(loggedInUser);
 	return (
 		<Route
 			path={path}
