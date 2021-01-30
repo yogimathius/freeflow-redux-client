@@ -42,28 +42,9 @@ export default function AddPostForm() {
 
   return (
     <section>
-      <h2>Add a New Post</h2>
-      <form>
-        {/* <label htmlFor="postTitle">Post Title:</label>
-        <input
-          type="text"
-          id="postTitle"
-          name="postTitle"
-          data-testid="postTitle"
-          placeholder="What's on your mind?"
-          value={title}
-          onChange={onTitleChanged}
-        /> */}
-        {/* <label htmlFor="postAuthor">Author:</label> */}
-        {/* <select 
-          
-          id="postAuthor" 
-          value={userId} 
-          onChange={onAuthorChanged}>
-          <option value=""></option>
-          {usersOptions}
-        </select> */}
-        <label htmlFor="postContent">Content:</label>
+      <h2 className="text-lg font-bold text-center text-yellow-500">Add a New Post</h2>
+      <form className="space-y-2">
+        <label htmlFor="postContent"></label>
         <textarea
           id="postContent"
           name="postContent"
@@ -71,12 +52,15 @@ export default function AddPostForm() {
           data-testid="postText"
           onChange={onContentChanged}
         />
-        <button 
-        type="button" 
-        data-testid="sendButton"
-        onClick={onSavePostClicked} disabled={!canSave}>
-          Save Post
-        </button>
+        <div className="flex justify-center">
+          <button 
+          className="btn btn-primary"
+          type="button" 
+          data-testid="sendButton"
+          onClick={onSavePostClicked} disabled={!canSave}>
+            Post
+          </button>
+        </div>
       </form>
     </section>
   )

@@ -6,7 +6,7 @@
 @layer utilities {
 	.btn
     {
-        @apply px-6 font-bold tracking-widest rounded-3xl cursor-pointer flex items-center border-4 border-solid border-yellow-500 text-base no-underline;
+        @apply px-6 font-bold tracking-widest rounded-3xl cursor-pointer flex items-center border-4 border-solid border-green-500 text-base no-underline;
         text-shadow: none;
     }
 

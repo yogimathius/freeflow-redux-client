@@ -39,17 +39,11 @@ export const PostsList = () => {
     content = <div>{postError}</div>
   }
 
-  useEffect(() => {
-    if (likeStatus === 'idle') {
-      dispatch(fetchLikes())
-    }
-  }, [likeStatus, dispatch])
-
   return (
     <div>
       <AddPostForm />
       <section className="posts-list">
-        <h2>Posts</h2>
+        <h2 className="mt-2">Posts</h2>
         {content}
       </section>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +7,10 @@ import { TimeAgo } from './TimeAgo'
 import {
   selectPostById,
 } from './postsSlice'
+
+import {
+  fetchLikes
+} from '../likes/likesSlice'
 
 import {
   selectLikesByPostId,
@@ -22,7 +26,9 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 
 export default function PostExcerpt({ postId }) {
-  const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  const dispatch = useDispatch()
+
+  const { user } = useSelector(state => state.user)
 
   const post = useSelector((state) => selectPostById(state, postId))
 
@@ -30,21 +36,28 @@ export default function PostExcerpt({ postId }) {
 
   const likes = useSelector(selectAlllikes)
 
+  const likeStatus = useSelector((state) => state.likes.status)
+
+  useEffect(() => {
+    if (likeStatus === 'idle') {
+      dispatch(fetchLikes())
+    }
+  }, [likeStatus, dispatch])
+
   const postLikes = likes.filter(
-    (like) => post.post_id === like.post_id
-  );
+    (like) => {
+      return post.id === like.post_id
+    });
 
   const likeSum = postLikes.length;
 
-  const myLikes = loggedInUser ? postLikes.filter(
-    (like) => loggedInUser.id === like.liker_id
+  const myLikes = user ? postLikes.filter(
+    (like) => user.id === like.liker_id
   ) : "";  
-  
+
   const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
-  const dispatch = useDispatch()
 
   const canSave =
    addRequestStatus === 'idle'
@@ -52,15 +65,14 @@ export default function PostExcerpt({ postId }) {
   const addLike = async () => {
     if (canSave) {
       try {
-        // console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewLike({   posting_id: post.id, liker_id: loggedInUser.id })
+          addNewLike({   post_id: postId, liker_id: user.id })
         )
         unwrapResult(resultAction)
 
       } catch (err) {
-        console.error('Failed to save the post: ', err)
+        console.error('Failed to add like to post: ', err)
       } finally {
         setAddRequestStatus('idle')
       }
@@ -72,12 +84,12 @@ export default function PostExcerpt({ postId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removeLike({   posting_id: post.id, owner_id: loggedInUser.id })
+          removeLike({   post_id: post.id, liker_id: user.id })
         )
         unwrapResult(resultAction)
 
       } catch (err) {
-        console.error('Failed to save the post: ', err)
+        console.error('Failed to remove like from post: ', err)
       } finally {
         setAddRequestStatus('idle')
       }
@@ -90,14 +102,14 @@ export default function PostExcerpt({ postId }) {
 
   return (
     <article className="border-solid border-2 border-black rounded-xl p-2 m-2" key={post.id}>
-      <h3>{post.title}</h3>
-      <div>
+      <h3 className="font-bold">Tags: {post.name}</h3>
+      <div className="flex">
         <Link to={`/users/${post.owner_id}`}
         onClick={() => setCookie(post.owner_id)}
         >
           <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
         </Link>
-        <TimeAgo timestamp={post.created_at} />
+        <TimeAgo timestamp={post.time_posted} />
         {likesList.length > 1 ?       
         <p>{likesList.length} likes</p> :
         ""
@@ -110,12 +122,12 @@ export default function PostExcerpt({ postId }) {
 			 <div>
 				{iAlreadyLikeThis ? (
 					<FontAwesomeIcon 
-					onClick={() => unLike(post.post_id, loggedInUser.id)}
-					className="unlove"
+					onClick={() => unLike(post.id, user.id)}
+					className=""
 					icon={fasHeart} size="1x" />
 				) : (                  
 					<FontAwesomeIcon 
-						onClick={() => addLike(post.post_id, loggedInUser.id)}
+						onClick={() => addLike(post.post_id, user.id)}
 						className="love"
 						icon={farHeart} size="1x" />
 				)}
@@ -124,19 +136,19 @@ export default function PostExcerpt({ postId }) {
 					{/* LIKE COUNT */}
 
 					{iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => unLike(post.post_id, loggedInUser.id)}>
+						<p onClick={() => unLike(post.post_id, user.id)}>
 						<b>You and {likeSum - 1} others</b></p> : ""}
 
 					{!iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => addLike(post.post_id, loggedInUser.id)}>
+						<p onClick={() => addLike(post.post_id, user.id)}>
 						<b>{likeSum}  likes</b></p> : ""}
 
 					{iAlreadyLikeThis && likeSum === 1 ? 
-						<p                       onClick={() => unLike(post.post_id, loggedInUser.id)}>
+						<p                       onClick={() => unLike(post.post_id, user.id)}>
 						<b>You like this</b></p> : ""}
 
 					{!iAlreadyLikeThis && likeSum === 1 ? 
-					<p onClick={() => addLike(post.post_id, loggedInUser.id)}><b>{likeSum} like</b></p> : ""}
+					<p onClick={() => addLike(post.post_id, user.id)}><b>{likeSum} like</b></p> : ""}
 					
 				</div>
 			</div>

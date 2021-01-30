@@ -9,7 +9,7 @@ import axios from 'axios';
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/likes'
 
 const likesAdapter = createEntityAdapter({
-	selectId: (like) => like.post_id,
+	selectId: (like) => like.post_id
 })
 
 const initialState = likesAdapter.getInitialState({
@@ -26,22 +26,30 @@ export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
 export const addNewLike = createAsyncThunk(
   'likes/addNewLike',
   async (initialLikes) => {
-    const { posting_id, liker_id} = initialLikes
-    // console.log("initial Likes in addnewLikes: ", initialLikes);
-    const response = await axios.post(url, {posting_id: posting_id, liker_id});
-    // console.log("response in thunk: ", response);
-    return response.post
+    const { post_id, liker_id} = initialLikes
+    console.log("initial Likes in addnewLikes: ", initialLikes);
+    const response = await axios.post(url, {post_id, liker_id});
+    console.log("response in like thunk: ", response.data);
+    return response.data
   }
 )
 
 
 export const removeLike = createAsyncThunk(
-  'likes/addNewLike',
+  'likes/removeLike',
   async (initialLikes) => {
-    const { posting_id, liker_id} = initialLikes
-    // console.log("initial Likes in addnewLikes: ", initialLikes);
-    const response = await axios.post(url, {posting_id: posting_id, liker_id});
-    // console.log("response in thunk: ", response);
+    const { post_id, liker_id} = initialLikes
+    console.log("initial Likes in remove like: ", initialLikes);
+    const removeLike = {
+      post_id: post_id,
+      liker_id: liker_id,
+    };
+    const response = await axios.delete(url, { 
+      params: { 
+        removeLike
+      }
+    });
+    console.log("response in remove hunk: ", response);
     return response.post
   }
 )
@@ -57,14 +65,6 @@ const likesSlice = createSlice({
         existingLike.reactions[reaction]++
       }
     },
-    // likeUpdated(state, action) {
-    //   const { id, title, content } = action.payload
-    //   const existingLike = state.entities[id]
-    //   if (existingLike) {
-    //     existingLike.title = title
-    //     existingLike.content = content
-    //   }
-    // },
   },
   extraReducers: {
     [fetchLikes.pending]: (state, action) => {
@@ -79,7 +79,12 @@ const likesSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addNewLike.fulfilled]: likesAdapter.addOne,
+    [addNewLike.fulfilled]: (state, action) => {
+      likesAdapter.upsertOne(state, action.payload)
+    },
+    [removeLike.fulfilled]: (state, action) => {
+      likesAdapter.removeOne(state, action.payload)
+    } 
   },
 })
 
