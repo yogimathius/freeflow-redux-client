@@ -8,18 +8,12 @@ import {
   selectPostIds,
 } from './postsSlice'
 
-import {
-  fetchLikes
-} from '../likes/likesSlice'
-
 export const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
 
   const postStatus = useSelector((state) => state.posts.status)
   const postError = useSelector((state) => state.posts.error)
-
-  const likeStatus = useSelector((state) => state.likes.status)
 
   useEffect(() => {
     if (postStatus === 'idle') {

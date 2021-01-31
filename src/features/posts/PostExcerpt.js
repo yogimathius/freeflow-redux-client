@@ -38,12 +38,6 @@ export default function PostExcerpt({ postId }) {
 
   const likeStatus = useSelector((state) => state.likes.status)
 
-  useEffect(() => {
-    if (likeStatus === 'idle') {
-      dispatch(fetchLikes())
-    }
-  }, [likeStatus, dispatch])
-
   const postLikes = likes.filter(
     (like) => {
       return post.id === like.post_id
@@ -100,11 +94,28 @@ export default function PostExcerpt({ postId }) {
     saveState(id)
   }
 
+  useEffect(() => {
+    if (likeStatus === 'idle') {
+      dispatch(fetchLikes())
+    }
+  }, [likeStatus, dispatch])
+  let fetchedLikes
+  if (likeStatus === 'loading') {
+    fetchedLikes = null
+  } else if (likeStatus === 'succeeded') {
+    fetchedLikes = likes
+  } else if (likeStatus === 'failed') {
+    fetchedLikes = null
+  }
+  if (fetchedLikes !== undefined && fetchedLikes !== null) {
+    console.log("fetched: ", fetchedLikes.length);
+  }
+
   return (
     <article className="border-solid border-2 border-black rounded-xl p-2 m-2" key={post.id}>
       <h3 className="font-bold">Tags: {post.name}</h3>
       <div className="flex">
-        <Link to={`/users/${post.owner_id}`}
+        <Link to={`/userprofile/${post.owner_id}`}
         onClick={() => setCookie(post.owner_id)}
         >
           <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
@@ -157,7 +168,7 @@ export default function PostExcerpt({ postId }) {
       <p className="post-content">{post.text_body}</p>
 
       {/* <ReactionButtons post={post} /> */}
-      <Link to={`/posts/${post.id}`} className="button muted-button">
+      <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
         View Post
       </Link>
     </article>

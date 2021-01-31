@@ -3,7 +3,7 @@ import { UserProfile } from '../features/users/UserProfile';
 import { UsersList } from '../features/users/UsersList';
 import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';
-import { UserPage } from '../features/users/UserPage';
+import UserPage from '../features/users/UserPage';
 import LoginPage from '../features/login/LoginPage';
 
 const routes = [
@@ -38,7 +38,7 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/users/:userId',
+    path: '/userprofile/:userId',
     component: UserPage,
     isPrivate: true,
   }

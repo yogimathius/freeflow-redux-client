@@ -9,7 +9,7 @@ import { loadState } from '../../helpers/localStorage'
 import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
 
-export const UserPage = () => {
+export default function UserPage() {
   const userId = loadState()
 
   const user = useSelector((state) => selectUserById(state, userId))

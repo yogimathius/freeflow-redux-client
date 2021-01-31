@@ -19,7 +19,7 @@ export default function userCard(props) {
 
   return (
     <div className='border-1 border-solid border-black' key={props.id}>
-      <Link to={`/users/${props.id}`} onClick={() => setCookie()}>
+      <Link to={`/userprofile/${props.id}`} onClick={() => setCookie()}>
         <img src={props.avatar} className='avatar' alt='avatar' />
         <h4>{props.firstName} {props.lastName}</h4>
       </Link>

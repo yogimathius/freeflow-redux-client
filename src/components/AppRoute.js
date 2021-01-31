@@ -6,7 +6,6 @@ const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) =>
 	let loggedInUser;
 	if (localStorage.getItem("user") !== null) {
 		loggedInUser = JSON.parse(localStorage.getItem('user'))
-
 	}
 
 	return (
