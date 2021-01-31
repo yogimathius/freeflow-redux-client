@@ -108,11 +108,11 @@ export default function PostExcerpt({ postId }) {
     fetchedLikes = null
   }
   if (fetchedLikes !== undefined && fetchedLikes !== null) {
-    console.log("fetched: ", fetchedLikes.length);
+    // console.log("fetched: ", fetchedLikes.length);
   }
 
   return (
-    <article className="border-solid border-2 border-black rounded-xl p-2 m-2" key={post.id}>
+    <article className="border-solid border-2 border-green-500 rounded-xl p-2 m-2" key={post.id}>
       <h3 className="font-bold">Tags: {post.name}</h3>
       <div className="flex">
         <Link to={`/userprofile/${post.owner_id}`}

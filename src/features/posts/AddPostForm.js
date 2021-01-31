@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewPost } from './postsSlice'
+import SkillSelector from '../dbSkills/SkillSelector'
 
 export default function AddPostForm() {
   const [content, setContent] = useState('')
@@ -42,24 +43,27 @@ export default function AddPostForm() {
 
   return (
     <section>
-      <h2 className="text-lg font-bold text-center text-yellow-500">Add a New Post</h2>
+      <h2 className="text-lg font-bold text-center text-green-500">Add a New Post</h2>
+      <SkillSelector />
       <form className="space-y-2">
         <label htmlFor="postContent"></label>
         <textarea
-          id="postContent"
+          className="w-full"
+          id="postContent rounded-xl"
           name="postContent"
           value={content}
           data-testid="postText"
+          rows="3"
           onChange={onContentChanged}
         />
         <div className="flex justify-center">
-          <button 
+          <div 
           className="btn btn-primary"
           type="button" 
           data-testid="sendButton"
           onClick={onSavePostClicked} disabled={!canSave}>
             Post
-          </button>
+          </div>
         </div>
       </form>
     </section>

@@ -6,7 +6,7 @@ import likesReducer from '../features/likes/likesSlice'
 import commentsReducer from '../features/comments/commentsSlice';
 import experiencesReducer from '../features/experiences/experiencesSlice';
 import userLoginReducer from '../features/login/userLoginSlice';
-
+import skillsReducer from '../features/dbSkills/dbSkillsSlice';
 
 export default configureStore({
   reducer: {
@@ -15,7 +15,8 @@ export default configureStore({
     likes: likesReducer,
     user: userLoginReducer,
     comments: commentsReducer,
-    experiences: experiencesReducer
+    experiences: experiencesReducer,
+    skills: skillsReducer
 
   },
 })
