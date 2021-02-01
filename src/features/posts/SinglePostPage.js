@@ -12,10 +12,16 @@ import { fetchComments } from '../comments/commentsSlice'
 import { AddCommentForm } from '../comments/AddCommentForm'
 
 import './SinglePostPage.scss'
+import { selectUserById } from '../users/usersSlice'
+import PostExcerpt from './PostExcerpt'
 
 store.dispatch(fetchComments())
 
 export const SinglePostPage = ({ match }) => {
+  const loggedInUser = JSON.parse(localStorage.getItem('user'));
+	const userId = loggedInUser.id;
+  const user = useSelector((state) => selectUserById(state, userId));
+
   const { postId } = match.params
 
   const post = useSelector((state) => selectPostById(state, postId))
@@ -27,24 +33,15 @@ export const SinglePostPage = ({ match }) => {
       </section>
     )
   }
-
+  console.log(user);
   return (
     <section>
-      <article className="post">
-        <div className="post_top">
-          <div className="post_top_left">
-            <UserNameAndLogo userId={post.owner_id} />
-          </div>
-          <div className="post_top_right">
-            <h2>{post.title} </h2>
-            <TimeAgo timestamp={post.created_at} />
-            <p className="post-content">{post.text_body}</p>
-          </div>
-        </div>
-        <Link to={`/editPost/${post.id}`} className="button">
-          Edit Post
-        </Link>
-      </article>
+      <PostExcerpt postId={postId} />
+      {user && user.id === post.owner_id ? 
+          <Link to={`/editPost/${post.id}`} className="button">
+            Edit Post
+          </Link> : ""  
+        }
       <AddCommentForm postId={postId} />
       <CommentsList postId={Number(postId)} />
     </section>
