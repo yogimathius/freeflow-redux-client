@@ -23,7 +23,7 @@ import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 
-export default function PostExcerpt({ postId }) {
+export default function PostExcerpt({ postId, onPost }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
@@ -129,7 +129,6 @@ export default function PostExcerpt({ postId }) {
   const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
     <p><b>{likeSum} like</b></p> : "";
 
-
   return (
     <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3 " key={post.id}>
 
@@ -166,9 +165,20 @@ export default function PostExcerpt({ postId }) {
 			</div>
 
       {/* VIEW POST */}
-      <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
-        View Post
-      </Link>
+      { onPost !== true ?
+        <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
+          View Post
+        </Link> : ""
+      }
+
+      { onPost === true && user && user.id === post.owner_id ? 
+      <div className="flex justify-center">
+          <Link to={`/editPost/${post.id}`} className="btn btn-primary">
+            Edit Post
+          </Link>
+        </div>
+                    : ""  
+      }
     </article>
   )
 }

@@ -20,7 +20,6 @@ const initialState = userSkillsAdapter.getInitialState({
 
 export const fetchUserSkills = createAsyncThunk('skills/fetchUserSkills', async () => {
 	const response = await axios.get(url);
-	console.log("response in user skills thunk: ", response.data);
   return response.data
 })
 

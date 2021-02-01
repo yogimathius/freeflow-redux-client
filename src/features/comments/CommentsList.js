@@ -9,14 +9,18 @@ import { selectCommentsByPostId } from './commentsSlice'
 import { selectAllExperiences } from '../experiences/experiencesSlice'
 
 export const CommentsList = ({ postId }) => {
-  // const dispatch = useDispatch()
   const comments = useSelector((state) => selectCommentsByPostId(state, postId))
+  
+  console.log(comments, postId);
   const users = useSelector(selectAllUsers)
   const karmas = useSelector(selectAllExperiences)
 
+  console.log("comments in commentlist: ", comments);
+  
   const renderedComments = comments.map((comment) => {
-    const date = parseISO(comment.created_at)
+    const date = parseISO(comment.time_posted)
     const timeAgo = formatDistanceToNow(date)
+
     const user = users.find((user) => user.id === comment.commenter_id) || {
       name: 'Unknown User',
     }

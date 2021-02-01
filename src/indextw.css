@@ -29,10 +29,10 @@
 		@apply bg-green-500;
 	}
 
-	.btn[disabled],
+	/* .btn[disabled],
 	.btn.disabled {
-		@apply border-none opacity-50 cursor-default;
-	}
+		@apply opacity-50 cursor-default;
+	} */
 
 	.btn-primary,
 	.btn-primary:visited {

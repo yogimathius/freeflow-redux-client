@@ -2,10 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store from '../../app/store'
-
-import { UserNameAndLogo } from './UserNameAndLogo'
-import { TimeAgo } from './TimeAgo'
-// import { ReactionButtons } from './ReactionButtons'
 import { CommentsList } from '../comments/CommentsList'
 import { selectPostById } from './postsSlice'
 import { fetchComments } from '../comments/commentsSlice'
@@ -33,17 +29,12 @@ export const SinglePostPage = ({ match }) => {
       </section>
     )
   }
-  console.log(user);
+
   return (
     <section>
-      <PostExcerpt postId={postId} />
-      {user && user.id === post.owner_id ? 
-          <Link to={`/editPost/${post.id}`} className="button">
-            Edit Post
-          </Link> : ""  
-        }
+      <PostExcerpt onPost={true} postId={postId} />
+      <CommentsList postId={postId} />
       <AddCommentForm postId={postId} />
-      <CommentsList postId={Number(postId)} />
     </section>
   )
 }
