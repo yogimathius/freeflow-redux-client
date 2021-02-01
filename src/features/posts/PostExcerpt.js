@@ -43,12 +43,14 @@ export default function PostExcerpt({ postId }) {
       return post.id === like.post_id
     });
 
+    console.log("post likes: ", likesList.length);
   const likeSum = postLikes.length;
 
   const myLikes = user ? postLikes.filter(
     (like) => user.id === like.liker_id
   ) : "";  
 
+  // console.log(myLikes, likeSum);
   const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -111,63 +113,64 @@ export default function PostExcerpt({ postId }) {
     // console.log("fetched: ", fetchedLikes.length);
   }
 
+  const LikeUnlikeIcons = iAlreadyLikeThis ? (
+    <FontAwesomeIcon 
+    onClick={() => unLike(post.id, user.id)}
+    className=""
+    icon={fasHeart} size="1x" />
+  ) : (                  
+    <FontAwesomeIcon 
+      onClick={() => addLike(post.post_id, user.id)}
+      className="love"
+      icon={farHeart} size="1x" />
+  )
+
+  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
+    <p ><b>You and {likeSum - 1} others</b></p> : "";
+
+  const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1 ? 
+    <p><b>{likeSum}  likes</b></p> : "";
+
+  const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1 ? 
+    <p ><b>You like this</b></p> : "";
+
+  const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
+    <p><b>{likeSum} like</b></p> : "";
+
   return (
-    <article className="border-solid border-2 border-green-500 rounded-xl p-2 m-2" key={post.id}>
-      <h3 className="font-bold">Tags: {post.name}</h3>
-      <div className="flex">
-        <Link to={`/userprofile/${post.owner_id}`}
-        onClick={() => setCookie(post.owner_id)}
-        >
-          <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
-        </Link>
+    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3" key={post.id}>
+
+      {/* TAGS, TIMEAGO */}
+      <div className="flex justify-between">
+        <h3 className="font-bold">Tags: {post.name}</h3>
         <TimeAgo timestamp={post.time_posted} />
-        {likesList.length > 1 ?       
-        <p>{likesList.length} likes</p> :
-        ""
-        }
-        {likesList.length === 1 ?       
-        <p>{likesList.length} like</p> :
-        ""
-        }
-        <div>
-			 <div>
-				{iAlreadyLikeThis ? (
-					<FontAwesomeIcon 
-					onClick={() => unLike(post.id, user.id)}
-					className=""
-					icon={fasHeart} size="1x" />
-				) : (                  
-					<FontAwesomeIcon 
-						onClick={() => addLike(post.post_id, user.id)}
-						className="love"
-						icon={farHeart} size="1x" />
-				)}
-
-				<div >
-					{/* LIKE COUNT */}
-
-					{iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => unLike(post.post_id, user.id)}>
-						<b>You and {likeSum - 1} others</b></p> : ""}
-
-					{!iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => addLike(post.post_id, user.id)}>
-						<b>{likeSum}  likes</b></p> : ""}
-
-					{iAlreadyLikeThis && likeSum === 1 ? 
-						<p                       onClick={() => unLike(post.post_id, user.id)}>
-						<b>You like this</b></p> : ""}
-
-					{!iAlreadyLikeThis && likeSum === 1 ? 
-					<p onClick={() => addLike(post.post_id, user.id)}><b>{likeSum} like</b></p> : ""}
-					
-				</div>
-			</div>
-		</div>
       </div>
+
+      {/* POST AUTHOR */}
+      <Link to={`/userprofile/${post.owner_id}`}
+      onClick={() => setCookie(post.owner_id)}
+      >
+        <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
+      </Link>
+      
+      {/* TEXT BODY */}
       <p className="post-content">{post.text_body}</p>
 
-      {/* <ReactionButtons post={post} /> */}
+      {/* LIKES */}
+      <div className="flex items-start justify-end">
+        
+        {/* conditionally renders like or unlike icon */}
+        {LikeUnlikeIcons}
+
+        {/* LIKES COUNT - conditionally renders one of these like count templates */}
+        {IPlusOneLikesThis}
+        {PlusOneLikesThis}
+        {OnlyILikeThis}
+        {OnlyOneLikesThis}
+
+			</div>
+
+      {/* VIEW POST */}
       <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
         View Post
       </Link>
