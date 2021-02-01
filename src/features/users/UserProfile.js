@@ -7,7 +7,6 @@ import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 import { UserNameAndLogo } from '../posts/UserNameAndLogo';
-import { selectUserSkillsByPostId } from '../userSkills/userSkillsSlice';
 import UserSkills from './UserSkills';
 
 export const UserProfile = () => {
@@ -36,15 +35,16 @@ export const UserProfile = () => {
           <p>
             <span className="field_name">Location:</span> {user.location}
           </p>
-          {/* <p>
-            <span className="field_name">About Me:</span> {user.description}
-          </p> */}
           <ProgressBar experience={experience} />
         </div>
         <UserSkills userId={user.id} />
       </div>
-      <p>Previous Postings</p>
-      <ul className="user_posting_history">{renderedPosts}</ul>
+      <div>
+        <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white">Timeline: </h2>
+      </div>
+      <section>
+        {renderedPosts}
+      </section>
     </section>
   )
 }

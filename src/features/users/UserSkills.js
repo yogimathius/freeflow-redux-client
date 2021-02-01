@@ -4,7 +4,7 @@ import { selectUserSkillsByPostId } from '../userSkills/userSkillsSlice';
 
 const UserSkills = (props) => {
 	const skillsForUser = useSelector(state => selectUserSkillsByPostId(state, props.userId))
-	console.log(skillsForUser[0], props.userId);
+
 	const renderedSkills = skillsForUser ? skillsForUser.map((skill, index) => {
 		return(
 			<span key={index}>{skill.name}</span>
