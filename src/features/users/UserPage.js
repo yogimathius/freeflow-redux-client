@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
-import './UserPage.scss'
 import { loadState } from '../../helpers/localStorage'
 import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'

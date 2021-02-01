@@ -5,7 +5,6 @@ import { selectUserById } from '../users/usersSlice'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
-import './UserPage.scss'
 import { UserNameAndLogo } from '../posts/UserNameAndLogo';
 import UserSkills from './UserSkills';
 

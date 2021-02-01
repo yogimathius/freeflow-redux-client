@@ -6,7 +6,6 @@ import {
   fetchExperiences, 
   selectAllExperiences,  
 } from '../experiences/experiencesSlice';
-import './UsersList.scss';
 import UserCard from './UserCard';
   
 store.dispatch(fetchExperiences());

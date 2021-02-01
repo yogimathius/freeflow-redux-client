@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './UserCard.scss';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../helpers/localStorage';
 import { useSelector } from 'react-redux';
