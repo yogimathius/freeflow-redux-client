@@ -17,6 +17,7 @@ export const Navbar = () => {
     dispatch(logout())
     history.push("/login")
   }
+
   return (
     <nav className="pt-3 pb-1 mb-4 bg-green-500">
       <section className="grid grid-cols-4 grid-rows-2 ">
@@ -32,7 +33,7 @@ export const Navbar = () => {
           {!user  ?
             <Link to="/login">Login</Link>
             :
-            <button onClick={() => handleLogout()}>Logout</button>
+            <button className="font-bold" onClick={() => handleLogout()}>Logout</button>
           }
 
           </div>

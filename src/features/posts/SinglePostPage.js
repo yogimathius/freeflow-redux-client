@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import store from '../../app/store'
 
-import { PostAuthor } from './PostAuthor'
+import { UserNameAndLogo } from './UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 // import { ReactionButtons } from './ReactionButtons'
 import { CommentsList } from '../comments/CommentsList'
@@ -33,7 +33,7 @@ export const SinglePostPage = ({ match }) => {
       <article className="post">
         <div className="post_top">
           <div className="post_top_left">
-            <PostAuthor userId={post.owner_id} />
+            <UserNameAndLogo userId={post.owner_id} />
           </div>
           <div className="post_top_right">
             <h2>{post.title} </h2>

@@ -18,7 +18,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
-import { PostAuthor } from '../posts/PostAuthor'
+import { UserNameAndLogo } from '../posts/UserNameAndLogo'
 
 export default function UserPagePostExcerpt({ postId }) {
   const loggedInUser = JSON.parse(localStorage.getItem('user'))
@@ -26,12 +26,6 @@ export default function UserPagePostExcerpt({ postId }) {
   const post = useSelector((state) => selectPostById(state, postId))
 
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
-  console.log(likesList);
-  // const likes = useSelector(selectAlllikes)
-
-  // const likesList = likes.filter(
-  //   (like) => post.post_id === like.post_id
-  // );
 
   const likeSum = likesList.length;
 
@@ -111,7 +105,7 @@ const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ?
   <p><b>{likeSum} like</b></p> : "";
 
   return (
-    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3 " key={post.id}>
+    <article className="border-solid border-2 border-black rounded-xl p-4 md:mx-1 my-3 " key={post.id}>
 
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
@@ -122,7 +116,7 @@ const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ?
       <Link to={`/userprofile/${post.owner_id}`}
       onClick={() => setCookie(post.owner_id)}
       >
-        <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
+        <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>
 
       {/* TEXT BODY */}

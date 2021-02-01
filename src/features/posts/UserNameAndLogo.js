@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { selectUserById } from '../users/usersSlice'
 
-export const PostAuthor = ({ userId }) => {
+export const UserNameAndLogo = ({ userId }) => {
   const author = useSelector((state) => selectUserById(state, userId))
   function getRandomInt() {
     return Math.floor(Math.random() * (10000 - 5)) + 4;

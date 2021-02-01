@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { PostAuthor } from './PostAuthor'
+import { UserNameAndLogo } from './UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
   selectPostById,
@@ -143,7 +143,7 @@ export default function PostExcerpt({ postId }) {
       <Link to={`/userprofile/${post.owner_id}`}
       onClick={() => setCookie(post.owner_id)}
       >
-        <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
+        <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>
       
       {/* TEXT BODY */}

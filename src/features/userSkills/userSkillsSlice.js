@@ -3,6 +3,7 @@ import {
   createSlice,
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
@@ -86,3 +87,8 @@ export const {
   selectById: selectUserSkillById,
   selectIds: selectUserSkillIds,
 } = userSkillsAdapter.getSelectors((state) => state.userSkills)
+
+export const selectUserSkillsByPostId = createSelector(
+  [selectAllUserSkills, (state, userId) => userId],
+  (userSkills, userId) => userSkills.filter((userSkill) => userSkill.user_id === userId )
+)

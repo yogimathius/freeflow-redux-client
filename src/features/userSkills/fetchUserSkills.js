@@ -22,7 +22,7 @@ export default function UserSkillsList() {
     content = userSkills
   } else if (userSkillsStatus === 'rejected') {
     content = <div>{error}</div>
-	}
-	console.log("content: ", content);
+  }
+  console.log(userSkills);
   return <div>{content}</div>
 }

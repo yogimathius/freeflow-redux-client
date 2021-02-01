@@ -6,7 +6,9 @@ import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
-import { PostAuthor } from '../posts/PostAuthor';
+import { UserNameAndLogo } from '../posts/UserNameAndLogo';
+import { selectUserSkillsByPostId } from '../userSkills/userSkillsSlice';
+import UserSkills from './UserSkills';
 
 export const UserProfile = () => {
 	const loggedInUser = JSON.parse(localStorage.getItem('user'))
@@ -30,7 +32,7 @@ export const UserProfile = () => {
     <section>
       <div className="">
         <div className="user_info">
-          <PostAuthor userId={user.id} />
+          <UserNameAndLogo userId={user.id} />
           <p>
             <span className="field_name">Location:</span> {user.location}
           </p>
@@ -39,6 +41,7 @@ export const UserProfile = () => {
           </p> */}
           <ProgressBar experience={experience} />
         </div>
+        <UserSkills userId={user.id} />
       </div>
       <p>Previous Postings</p>
       <ul className="user_posting_history">{renderedPosts}</ul>

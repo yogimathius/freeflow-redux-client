@@ -8,6 +8,7 @@ import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
 import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
+import UserSkills from './UserSkills'
 
 export default function UserPage() {
   const userId = loadState()
@@ -36,6 +37,8 @@ export default function UserPage() {
             <span className="field_name">Location:</span> {user.location}
           </p>
         </div>
+        <UserSkills userId={user.id} />
+
       </div>
       <div>
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white">Timeline: </h2>
