@@ -9,7 +9,6 @@ import {
 
 import {
   selectLikesByPostId,
-  selectAlllikes,
   addNewLike,
   removeLike
 } from '../likes/likesSlice'
@@ -19,6 +18,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
+import { PostAuthor } from '../posts/PostAuthor'
 
 export default function UserPagePostExcerpt({ postId }) {
   const loggedInUser = JSON.parse(localStorage.getItem('user'))
@@ -26,16 +26,16 @@ export default function UserPagePostExcerpt({ postId }) {
   const post = useSelector((state) => selectPostById(state, postId))
 
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
+  console.log(likesList);
+  // const likes = useSelector(selectAlllikes)
 
-  const likes = useSelector(selectAlllikes)
+  // const likesList = likes.filter(
+  //   (like) => post.post_id === like.post_id
+  // );
 
-  const postLikes = likes.filter(
-    (like) => post.post_id === like.post_id
-  );
+  const likeSum = likesList.length;
 
-  const likeSum = postLikes.length;
-
-  const myLikes = loggedInUser ? postLikes.filter(
+  const myLikes = loggedInUser ? likesList.filter(
     (like) => loggedInUser.id === like.liker_id
   ) : "";  
   
@@ -86,63 +86,67 @@ export default function UserPagePostExcerpt({ postId }) {
     saveState(id)
   }
 
+  const LikeUnlikeIcons = iAlreadyLikeThis ? (
+    <FontAwesomeIcon 
+    onClick={() => unLike(post.id, loggedInUser.id)}
+    className=""
+    icon={fasHeart} size="1x" />
+  ) : (                  
+    <FontAwesomeIcon 
+      onClick={() => addLike(post.post_id, loggedInUser.id)}
+      className="love"
+      icon={farHeart} size="1x" />
+  )
+  
+  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
+  <p ><b>You and {likeSum - 1} others</b></p> : "";
+
+const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1 ? 
+  <p><b>{likeSum}  likes</b></p> : "";
+
+const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1 ? 
+  <p ><b>You like this</b></p> : "";
+
+const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
+  <p><b>{likeSum} like</b></p> : "";
+
   return (
-    <article className="" key={post.id}>
-      <h3>{post.title}</h3>
-      <div>
-        <Link to={`/users/${post.owner_id}`}
-        onClick={() => setCookie(post.owner_id)}
-        >
-        </Link>
-        <TimeAgo timestamp={post.created_at} />
-        {likesList.length > 1 ?       
-        <p>{likesList.length} likes</p> :
-        ""
-        }
-        {likesList.length === 1 ?       
-        <p>{likesList.length} like</p> :
-        ""
-        }
-        <div>
-			 <div>
-				{iAlreadyLikeThis ? (
-					<FontAwesomeIcon 
-					onClick={() => unLike(post.post_id, loggedInUser.id)}
-					className="unlove"
-					icon={fasHeart} size="1x" />
-				) : (                  
-					<FontAwesomeIcon 
-						onClick={() => addLike(post.post_id, loggedInUser.id)}
-						className="love"
-						icon={farHeart} size="1x" />
-				)}
+    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3 " key={post.id}>
 
-				<div >
-					{/* LIKE COUNT */}
-
-					{iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => unLike(post.post_id, loggedInUser.id)}>
-						<b>You and {likeSum - 1} others</b></p> : ""}
-
-					{!iAlreadyLikeThis && likeSum > 1 ? 
-						<p onClick={() => addLike(post.post_id, loggedInUser.id)}>
-						<b>{likeSum}  likes</b></p> : ""}
-
-					{iAlreadyLikeThis && likeSum === 1 ? 
-						<p                       onClick={() => unLike(post.post_id, loggedInUser.id)}>
-						<b>You like this</b></p> : ""}
-
-					{!iAlreadyLikeThis && likeSum === 1 ? 
-					<p onClick={() => addLike(post.post_id, loggedInUser.id)}><b>{likeSum} like</b></p> : ""}
-					
-				</div>
-			</div>
-		</div>
+      {/* TAGS, TIMEAGO */}
+      <div className="flex justify-between my-3">
+        <h3 className="font-bold">Tags: {post.name}</h3>
+        <TimeAgo timestamp={post.time_posted} />
       </div>
+      {/* POST AUTHOR */}
+      <Link to={`/userprofile/${post.owner_id}`}
+      onClick={() => setCookie(post.owner_id)}
+      >
+        <PostAuthor onClick={saveState(post.owner_id)} userId={post.owner_id} />
+      </Link>
+
+      {/* TEXT BODY */}
       <p className="post-content">{post.text_body}</p>
 
-      {/* <ReactionButtons post={post} /> */}
-      <Link to={`/posts/${post.id}`} className="button muted-button">
+      {/* LIKES */}
+      <div className="flex items-start justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
+        
+        {/* conditionally renders like or unlike icon */}
+        {LikeUnlikeIcons}
+
+        {/* LIKES COUNT - conditionally renders one of these like count templates */}
+        <div className="-mt-0.5">
+          {IPlusOneLikesThis}
+          {PlusOneLikesThis}
+          {OnlyILikeThis}
+          {OnlyOneLikesThis}
+        </div>
+
+					
+      </div>
+
+      {/* VIEW POST */}
+      <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
         View Post
       </Link>
     </article>

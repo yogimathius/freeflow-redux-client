@@ -4,16 +4,13 @@ import './UserCard.scss';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../helpers/localStorage';
 import { useSelector } from 'react-redux';
-import { selectAllExperiences } from '../experiences/experiencesSlice';
+import { selectExperiencesByUserId } from '../experiences/experiencesSlice';
 import { PostAuthor } from '../posts/PostAuthor';
-// import { selectUserById } from './usersSlice';
 
 export default function UserCard(props) {
-  const experiences = useSelector(selectAllExperiences)
-  // const user = useSelector((state) => selectUserById(state, props.id))
-  const userExperience = experiences ? experiences.filter(experience => experience.helper_id === props.id) : ""
+  const userExperiences = useSelector((state) => selectExperiencesByUserId(state, props.id))
 
-  const experience = (userExperience.length *29);
+  const experience = (userExperiences.length *29);
   const setCookie = () => {
     saveState(props.id)
   }

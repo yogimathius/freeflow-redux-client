@@ -9,11 +9,10 @@ import {
 } from './postsSlice'
 
 import {
-  fetchLikes
+  fetchLikes, selectLikesByPostId
 } from '../likes/likesSlice'
 
 import {
-  selectAlllikes,
   addNewLike,
   removeLike
 } from '../likes/likesSlice'
@@ -31,8 +30,7 @@ export default function PostExcerpt({ postId }) {
 
   const post = useSelector((state) => selectPostById(state, postId))
 
-  const likes = useSelector(selectAlllikes)
-
+  const likes = useSelector((state) => selectLikesByPostId(state, postId))
   const likeStatus = useSelector((state) => state.likes.status)
 
   const postLikes = likes.filter(

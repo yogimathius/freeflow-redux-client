@@ -5,8 +5,6 @@ import { fetchUserSkills, selectAllUserSkills } from './userSkillsSlice';
 export default function UserSkillsList() {
   const dispatch = useDispatch()
   const userSkills = useSelector(selectAllUserSkills)
-
-  console.log(userSkills);
   let content
 
   const userSkillsStatus = useSelector((state) => state.userSkills.status)

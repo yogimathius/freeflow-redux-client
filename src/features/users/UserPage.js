@@ -26,11 +26,6 @@ export default function UserPage() {
     <UserPagePostExcerpt key={index} postId={post.id} />
     )
 
-  // function getRandomInt() {
-  //   return Math.floor(Math.random() * (10000 - 5)) + 4;
-  // }
-  // const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
-
   return (
     <section className="space-y-3">
       <UserSkillsList />
@@ -43,7 +38,7 @@ export default function UserPage() {
         </div>
       </div>
       <div>
-        <p>Previous Posts</p>
+        <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white">Timeline: </h2>
       </div>
       <section className="">  
         {renderedPosts}
