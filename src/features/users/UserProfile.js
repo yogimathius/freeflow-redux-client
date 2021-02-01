@@ -7,6 +7,7 @@ import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
+import { PostAuthor } from '../posts/PostAuthor';
 
 export const UserProfile = () => {
 	const loggedInUser = JSON.parse(localStorage.getItem('user'))
@@ -26,11 +27,17 @@ export const UserProfile = () => {
   <UserPagePostExcerpt key={index} postId={post.id} />
   )
 
+  function getRandomInt() {
+    return Math.floor(Math.random() * (10000 - 5)) + 4;
+  }
+  const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
+
   return (
     <section>
       <div className="user_profile">
-        <img alt="avatar" src={loggedInUser.avatar} />
+        <img alt="avatar" src={imgUrl} />
         <div className="user_info">
+          <PostAuthor userId={user.id} />
           <h2>
             {user.first_name} {user.last_name}
           </h2>

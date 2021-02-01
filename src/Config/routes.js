@@ -41,6 +41,11 @@ const routes = [
     path: '/userprofile/:userId',
     component: UserPage,
     isPrivate: true,
+  },
+  {
+    path: '/',
+    component: LoginPage,
+    isPrivate: false
   }
 ];
 

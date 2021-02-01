@@ -35,22 +35,21 @@ export const UsersList = () => {
   }
   const renderedUsers = users.map((user, id) => (
     <UserCard 
-    key={id} 
-    id={user.id} 
-    avatar={user.avatar} 
-    firstName={user.first_name} 
-    lastName={user.last_name} 
-    description={user.description} 
-    active={user.active} 
-    location={user.location} 
-    created_at={user.created_at} 
-    experiences={experiencesContent}
+      key={id} 
+      id={user.id} 
+      avatar={user.avatar} 
+      firstName={user.first_name} 
+      lastName={user.last_name} 
+      description={user.description} 
+      active={user.active} 
+      location={user.location} 
+      created_at={user.created_at} 
     />
   ))
 
     return (
-    <section>
-      <h2>Users</h2>
+    <section className="space-y-3">
+      <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
       {renderedUsers}
     </section>
   )

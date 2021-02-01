@@ -8,6 +8,7 @@ import './UserPage.scss'
 import { loadState } from '../../helpers/localStorage'
 import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
+import { PostAuthor } from '../posts/PostAuthor'
 
 export default function UserPage() {
   const userId = loadState()
@@ -28,23 +29,18 @@ export default function UserPage() {
     <UserPagePostExcerpt key={index} postId={post.id} />
     )
 
+  function getRandomInt() {
+    return Math.floor(Math.random() * (10000 - 5)) + 4;
+  }
+  const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
 
   return (
     <section>
-      <div className="user_profile">
-        <img alt="avatar" src={user.avatar} />
+      <div className="">
         <div className="user_info">
-          <h2>
-            {user.first_name} {user.last_name}
-          </h2>
-          <p>
-            Joined Freeflow <TimeAgo timestamp={user.created_at} />
-          </p>
+          <PostAuthor userId={user.id} />
           <p>
             <span className="field_name">Location:</span> {user.location}
-          </p>
-          <p>
-            <span className="field_name">About Me:</span> {user.description}
           </p>
           <ProgressBar experience={experience} />
         </div>
