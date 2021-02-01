@@ -14,7 +14,6 @@ const commentsAdapter = createEntityAdapter({
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
   const response = await axios.get(url);
-
   return response.data;
 });
 
@@ -24,18 +23,18 @@ const initialState = commentsAdapter.getInitialState({
 })
 
 export const addNewComment = createAsyncThunk(
-  'postings/addNewPost',
+  'comments/addNewComment',
   async (initialComment) => {
     const {
       commenter_id,
-      posting_id,
+      post_id,
       content,
     } = initialComment
-  
-    const response = await axios.post(`${url}/${posting_id}`, {
+    console.log(initialComment);
+    const response = await axios.post(`${url}`, {
       commenter_id,
-      posting_id,
-      content,
+      post_id,
+      text_body: content,
     })
     return response.data
   }
@@ -45,13 +44,6 @@ const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    // reactionAdded(state, action) {
-    //   const { postId, reaction } = action.payload
-    //   const existingPost = state.entities[postId]
-    //   if (existingPost) {
-    //     existingPost.reactions[reaction]++
-    //   }
-    // },
     commentUpdated(state, action) {
       const { id, content } = action.payload
       const existingPost = state.entities[id]

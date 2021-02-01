@@ -24,7 +24,7 @@ export const AddCommentForm = ({ postId }) => {
         const resultAction = await dispatch(
           addNewComment({
             commenter_id: userId,
-            posting_id: postId,
+            post_id: postId,
             content,
           })
         )
