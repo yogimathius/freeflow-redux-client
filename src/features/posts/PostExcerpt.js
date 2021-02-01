@@ -13,7 +13,6 @@ import {
 } from '../likes/likesSlice'
 
 import {
-  selectLikesByPostId,
   selectAlllikes,
   addNewLike,
   removeLike
@@ -106,7 +105,6 @@ export default function PostExcerpt({ postId }) {
     fetchedLikes = null
   }
   if (fetchedLikes !== undefined && fetchedLikes !== null) {
-    // console.log("fetched: ", fetchedLikes.length);
   }
 
   const LikeUnlikeIcons = iAlreadyLikeThis ? (

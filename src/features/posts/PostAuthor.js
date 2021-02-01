@@ -10,11 +10,7 @@ export const PostAuthor = ({ userId }) => {
   }
   const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
 
-  console.log(imgUrl);
-  // const renderedImage = 
-  // console.log(author);
   const fullName = author ? `${author.first_name} ${author.last_name}` : "";
-  // const avatar = author ? `${author.avatar}` : "";
   const isActive = author && author.active ? <p className="text-green-400 text-sm font-semibold">Online</p> : <p className="text-gray-500 text-sm font-semibold">Offline</p>
 
   return (

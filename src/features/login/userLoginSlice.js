@@ -31,7 +31,6 @@ const { loginSuccess, logoutSuccess } = userLoginSlice.actions
 export const login = ({ username, password }) => async dispatch => {
   try {
     const res = await axios.post(url, { username, password })
-    // console.log(res);
     if (res.status === 200) {
       const userId = res.data[0]
       dispatch(loginSuccess(userId));

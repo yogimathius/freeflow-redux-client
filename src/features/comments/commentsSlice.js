@@ -37,7 +37,6 @@ export const addNewComment = createAsyncThunk(
       posting_id,
       content,
     })
-    // console.log('response in Comments thunk: ', response.data)
     return response.data
   }
 )

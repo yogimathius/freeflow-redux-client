@@ -13,7 +13,6 @@ export const Navbar = () => {
   const dispatch = useDispatch()
   const history = useHistory();
   
-  console.log("user: ", user);
   const handleLogout = () => {
     dispatch(logout())
     history.push("/login")

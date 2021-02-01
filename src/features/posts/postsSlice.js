@@ -38,9 +38,7 @@ export const addNewPost = createAsyncThunk(
       username
     }
 
-    // console.log(newPost);
     const response = await axios.post(url, newPost);
-    // console.log("response in thunk: ", response.data);
     return response.data
   }
 )
@@ -95,7 +93,6 @@ export const {
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
   (posts, userId) => posts.filter((post) => { 
-    // console.log(post, userId);
     return post.owner_id === userId
   })
 )

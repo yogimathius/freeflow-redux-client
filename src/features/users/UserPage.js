@@ -1,14 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { TimeAgo } from '../posts/TimeAgo'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
-import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import './UserPage.scss'
 import { loadState } from '../../helpers/localStorage'
 import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
-import { PostAuthor } from '../posts/PostAuthor'
+import UserCard from './UserCard'
+import UserSkillsList from '../userSkills/fetchUserSkills'
 
 export default function UserPage() {
   const userId = loadState()
@@ -23,29 +22,29 @@ export default function UserPage() {
     return null;
   }
 
-  const experience = (experiencesForUser.length * 29)
-
   const renderedPosts = postsForUser.map((post, index) => 
     <UserPagePostExcerpt key={index} postId={post.id} />
     )
 
-  function getRandomInt() {
-    return Math.floor(Math.random() * (10000 - 5)) + 4;
-  }
-  const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
+  // function getRandomInt() {
+  //   return Math.floor(Math.random() * (10000 - 5)) + 4;
+  // }
+  // const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
 
   return (
-    <section>
+    <section className="space-y-3">
+      <UserSkillsList />
       <div className="">
         <div className="user_info">
-          <PostAuthor userId={user.id} />
+          <UserCard id={user.id} />
           <p>
             <span className="field_name">Location:</span> {user.location}
           </p>
-          <ProgressBar experience={experience} />
         </div>
       </div>
-      <p>Previous Postings</p>
+      <div>
+        <p>Previous Posts</p>
+      </div>
       <section className="">  
         {renderedPosts}
       </section>

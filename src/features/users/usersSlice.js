@@ -13,13 +13,11 @@ const initialState = usersAdapter.getInitialState();
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/users');
-  // console.log("fetchUsers from userSlice: ", response.data);
   return response.data;
 });
 
 export const fetchUserPosts = createAsyncThunk('users/fetchUserPostings', async () => {
   const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/users/:id/postings');
-  // console.log('fetchPosts from postsSlice: ', response.data)
   return response.data
 })
 

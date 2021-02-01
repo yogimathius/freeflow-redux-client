@@ -19,22 +19,18 @@ const initialState = experiencesAdapter.getInitialState({
 
 export const fetchExperiences = createAsyncThunk('experiences/fetchExperiences', async () => {
   const response = await axios.get(url);
-  // console.log("fetched experiences: ", response.data);
   return response.data
 })
 
 export const getExperienceCountByUser = createAsyncThunk('experiences/getExperienceCount', async () => {
   const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/experiences/user');
-  // console.log("fetched experiences: ", response.data);
   return response.data	
 })
 export const addNewExperience = createAsyncThunk(
   'experiences/addNewExperience',
   async (initialExperiences) => {
     const { comment_id, giver_id} = initialExperiences
-    // console.log("initial Experiences in addnewExperiences: ", initialExperiences);
     const response = await axios.post(url, {experience: comment_id, giver_id});
-    // console.log("response in thunk: ", response);
     return response.post
   }
 )
@@ -84,7 +80,6 @@ export const {
 export const selectExperiencesByUserId = createSelector(
   [selectAllExperiences, (state, userId) => userId],
   (experiences, userId) => experiences.filter((experience) => {
-		// console.log("state: ", typeof experience.helper_id, "app: ", typeof userId);
 		return experience.helper_id === userId
 	})
 )

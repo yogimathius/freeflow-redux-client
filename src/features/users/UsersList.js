@@ -31,8 +31,10 @@ export const UsersList = () => {
   } else if (experienceStatus === 'succeeded') {
     experiencesContent = experiences
   } else if (experienceStatus === 'failed') {
+    // eslint-disable-next-line no-unused-vars
     experiencesContent = <div>{experienceError}</div>
   }
+  
   const renderedUsers = users.map((user, id) => (
     <UserCard 
       key={id} 

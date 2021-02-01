@@ -23,7 +23,6 @@ const SkillSelector = () => {
 		console.error(skillStatus)
 	}
 	
-	// console.log("skills in selector: ", fetchedSkills);
 	const SkillSelector = fetchedSkills ? fetchedSkills.map((skill, index) => {
 		return (
   		<option key={index} value={skill.name}>{skill.name}</option>
@@ -33,7 +32,7 @@ const SkillSelector = () => {
 	const handleChange = (event) => {
     let value = event.target.value;
     this.setState({
-        disabled: value == '2'
+        disabled: value === '2'
     });
 	}
 	return (

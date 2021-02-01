@@ -1,18 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './UserCard.scss';
-import RoomIcon from '@material-ui/icons/Room';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../helpers/localStorage';
 import { useSelector } from 'react-redux';
 import { selectAllExperiences } from '../experiences/experiencesSlice';
 import { PostAuthor } from '../posts/PostAuthor';
-import { selectUserById } from './usersSlice';
+// import { selectUserById } from './usersSlice';
 
 export default function UserCard(props) {
   const experiences = useSelector(selectAllExperiences)
-  const user = useSelector((state) => selectUserById(state, props.id))
-  console.log(user);
+  // const user = useSelector((state) => selectUserById(state, props.id))
   const userExperience = experiences ? experiences.filter(experience => experience.helper_id === props.id) : ""
 
   const experience = (userExperience.length *29);

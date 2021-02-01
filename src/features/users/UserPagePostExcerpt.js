@@ -51,7 +51,6 @@ export default function UserPagePostExcerpt({ postId }) {
   const addLike = async () => {
     if (canSave) {
       try {
-        // console.log("userid in postclicked fun: ", userId);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addNewLike({   posting_id: post.id, liker_id: loggedInUser.id })
