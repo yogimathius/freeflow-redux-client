@@ -17,10 +17,15 @@ export default function userCard(props) {
     saveState(props.id)
   }
 
+  function getRandomInt() {
+    return Math.floor(Math.random() * (10000 - 5)) + 4;
+  }
+  const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
+
   return (
     <div className='border-1 border-solid border-black' key={props.id}>
       <Link to={`/userprofile/${props.id}`} onClick={() => setCookie()}>
-        <img src={props.avatar} className='avatar' alt='avatar' />
+        <img src={imgUrl} className='avatar' alt='avatar' />
         <h4>{props.firstName} {props.lastName}</h4>
       </Link>
 

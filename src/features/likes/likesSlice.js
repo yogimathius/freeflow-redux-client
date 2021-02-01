@@ -27,9 +27,9 @@ export const addNewLike = createAsyncThunk(
   'likes/addNewLike',
   async (initialLikes) => {
     const { post_id, liker_id} = initialLikes
-    console.log("initial Likes in addnewLikes: ", initialLikes);
+    // console.log("initial Likes in addnewLikes: ", initialLikes);
     const response = await axios.post(url, {post_id, liker_id});
-    console.log("response in like thunk: ", response.data);
+    // console.log("response in like thunk: ", response.data);
     return response.data
   }
 )
@@ -39,7 +39,7 @@ export const removeLike = createAsyncThunk(
   'likes/removeLike',
   async (initialLikes) => {
     const { post_id, liker_id} = initialLikes
-    console.log("initial Likes in remove like: ", initialLikes);
+    // console.log("initial Likes in remove like: ", initialLikes);
     const removeLike = {
       post_id: post_id,
       liker_id: liker_id,
@@ -49,7 +49,7 @@ export const removeLike = createAsyncThunk(
         removeLike
       }
     });
-    console.log("response in remove hunk: ", response);
+    // console.log("response in remove hunk: ", response);
     return response.post
   }
 )

@@ -32,8 +32,6 @@ export default function PostExcerpt({ postId }) {
 
   const post = useSelector((state) => selectPostById(state, postId))
 
-  const likesList = useSelector((state) => selectLikesByPostId(state, postId))
-
   const likes = useSelector(selectAlllikes)
 
   const likeStatus = useSelector((state) => state.likes.status)
@@ -43,14 +41,12 @@ export default function PostExcerpt({ postId }) {
       return post.id === like.post_id
     });
 
-    console.log("post likes: ", likesList.length);
   const likeSum = postLikes.length;
 
   const myLikes = user ? postLikes.filter(
     (like) => user.id === like.liker_id
   ) : "";  
 
-  // console.log(myLikes, likeSum);
   const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -137,11 +133,12 @@ export default function PostExcerpt({ postId }) {
   const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
     <p><b>{likeSum} like</b></p> : "";
 
+
   return (
-    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3" key={post.id}>
+    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3 " key={post.id}>
 
       {/* TAGS, TIMEAGO */}
-      <div className="flex justify-between">
+      <div className="flex justify-between my-3">
         <h3 className="font-bold">Tags: {post.name}</h3>
         <TimeAgo timestamp={post.time_posted} />
       </div>
@@ -157,16 +154,18 @@ export default function PostExcerpt({ postId }) {
       <p className="post-content">{post.text_body}</p>
 
       {/* LIKES */}
-      <div className="flex items-start justify-end">
+      <div className="flex items-start justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
         
         {/* conditionally renders like or unlike icon */}
         {LikeUnlikeIcons}
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
-        {IPlusOneLikesThis}
-        {PlusOneLikesThis}
-        {OnlyILikeThis}
-        {OnlyOneLikesThis}
+        <div className="-mt-0.5">
+          {IPlusOneLikesThis}
+          {PlusOneLikesThis}
+          {OnlyILikeThis}
+          {OnlyOneLikesThis}
+        </div>
 
 			</div>
 
