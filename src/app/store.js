@@ -19,6 +19,5 @@ export default configureStore({
     experiences: experiencesReducer,
     skills: skillsReducer,
     userSkills: userSkillsReducer
-
   },
 })

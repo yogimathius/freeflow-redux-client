@@ -35,10 +35,11 @@ export const addNewLike = createAsyncThunk(
 export const removeLike = createAsyncThunk(
   'likes/removeLike',
   async (initialLikes) => {
-    const { post_id, liker_id} = initialLikes
+    const { post_id, liker_id, id} = initialLikes
     const removeLike = {
-      post_id: post_id,
-      liker_id: liker_id,
+      post_id,
+      liker_id,
+      id
     };
     const response = await axios.delete(url, { 
       params: { 

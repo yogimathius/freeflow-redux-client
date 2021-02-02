@@ -1,3 +1,4 @@
+
 .bgcolor {
 	background: linear-gradient(to right, #1cd454, #14a841);
 	display: flex;
@@ -7,7 +8,6 @@
 
 .labelstyles {
 	padding: 5;
-	// color: white;
 	font-weight: bold;
 	text-align: center;
 	margin-left: 50px;

@@ -215,13 +215,12 @@ export default function PostExcerpt({ postId, onPost }) {
           {OnlyILikeThis}
           {OnlyOneLikesThis}
         </div>
-
 			</div>
 
       {/* VIEW POST */}
       { onPost !== true ?
         <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
-          View Post
+          View Comments
         </Link> : ""
       }
 

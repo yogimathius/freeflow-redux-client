@@ -61,13 +61,13 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    reactionAdded(state, action) {
-      const { postId, reaction } = action.payload
-      const existingPost = state.entities[postId]
-      if (existingPost) {
-        existingPost.reactions[reaction]++
-      }
-    },
+    // reactionAdded(state, action) {
+    //   const { postId, reaction } = action.payload
+    //   const existingPost = state.entities[postId]
+    //   if (existingPost) {
+    //     existingPost.reactions[reaction]++
+    //   }
+    // },
     postUpdated(state, action) {
       const { id, title, content } = action.payload
       const existingPost = state.entities[id]
@@ -92,7 +92,8 @@ const postsSlice = createSlice({
     },
     [addNewPost.fulfilled]: postsAdapter.addOne,
     [removePost.fulfilled]: (state, action) => {
-      postsAdapter.removeOne(state, action.payload)
+      console.log(action);
+      postsAdapter.removeOne(state, action.meta.arg.post_id)
     } 
   },
 })
