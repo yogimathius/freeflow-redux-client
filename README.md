@@ -8,33 +8,39 @@ This app is still in development. The objective is to build a game-ified social 
 
 ## Dependencies
 
-	"@material-ui/core": "^4.11.0",
-	"@material-ui/icons": "^4.9.1",
-	"@reduxjs/toolkit": "^1.4.0",
-	"@testing-library/jest-dom": "^4.2.4",
-	"@testing-library/react": "^9.3.2",
-	"@testing-library/user-event": "^7.1.2",
-	"axios": "^0.21.0",
-	"classnames": "^2.2.6",
-	"date-fns": "^2.12.0",
-	"faker": "^4.1.0",
-	"miragejs": "^0.1.35",
-	"node-sass": "^4.14.1",
-	"react": "^16.13.1",
-	"react-dom": "^16.13.1",
-	"react-redux": "^7.2.0",
-	"react-router-dom": "^5.1.2",
-	"react-scripts": "3.4.1",
-	"seedrandom": "^3.0.5",
-	"txtgen": "^2.2.4"
-	"@fortawesome/fontawesome-svg-core": "^1.2.32",
-	"@fortawesome/free-regular-svg-icons": "^5.15.1",
-	"@fortawesome/free-solid-svg-icons": "^5.15.1",
-	"@fortawesome/react-fontawesome": "^0.1.13",
-	"cypress": "^6.0.0",
-	"formik": "^2.2.5",
-	"moment": "^2.29.1",
-	"prettier": "^2.0.2"
+    "@craco/craco": "^6.1.0",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@reduxjs/toolkit": "^1.4.0",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "autoprefixer": "^9.8.6",
+    "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.12.0",
+    "faker": "^4.1.0",
+    "postcss": "^7.0.35",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "4.0.1",
+    "seedrandom": "^3.0.5",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "txtgen": "^2.2.4"
+
+## Dev Dependencies
+
+		"@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "cypress": "^6.0.0",
+    "formik": "^2.2.5",
+    "moment": "^2.29.1",
+    "prettier": "^2.0.2"
 
 ## Available Scripts
 
