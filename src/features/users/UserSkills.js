@@ -7,14 +7,14 @@ const UserSkills = (props) => {
 
 	const renderedSkills = skillsForUser ? skillsForUser.map((skill, index) => {
 		return(
-			<span key={index}>{skill.name}</span>
+			<span key={index}>{skill.name},</span>
 		)
 	}) : "";
 
 	return (
-		<div>
-			<div className="italic">Skills: {renderedSkills}</div>
-			
+		<div className="space-x-1 flex">
+			<div className="italic">Skills: </div>
+			{renderedSkills}
 		</div>
 	);
 };

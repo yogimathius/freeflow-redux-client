@@ -10,7 +10,7 @@ import axios from 'axios';
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/user_skills'
 
 const userSkillsAdapter = createEntityAdapter({
-	selectId: (userSkill) => userSkill.user_id
+	selectId: (userSkill) => userSkill.id
 })
 
 const initialState = userSkillsAdapter.getInitialState({

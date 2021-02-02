@@ -9,6 +9,7 @@ import UserSkillsList from '../userSkills/fetchUserSkills'
 import UserSkills from './UserSkills'
 import PostExcerpt from '../posts/PostExcerpt';
 import AddPostForm from '../posts/AddPostForm';
+
 export default function UserPage() {
   const userId = loadState()
   const loggedInUser = useSelector(state => state.user)

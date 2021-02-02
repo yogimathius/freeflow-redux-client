@@ -116,14 +116,15 @@ export default function PostExcerpt({ postId, onPost, index }) {
         <div className="collapsible-content">
         <CommentsList key={index} postId={postId} />
         
-        <AddCommentForm postId={postId} />
         <div>
 
           {/* <section className="validation">{error}</section> */}
         </div>
 
       </div>
+        <AddCommentForm postId={postId} />
       </div>
+      
       { onPost === true && user && user.id === post.owner_id ? 
       <div className="flex justify-center">
           <Link to={`/editPost/${post.id}`} className="btn btn-primary">
