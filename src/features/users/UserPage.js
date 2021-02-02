@@ -8,6 +8,7 @@ import { selectUserById } from './usersSlice'
 import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
 import UserSkills from './UserSkills'
+import PostExcerpt from '../posts/PostExcerpt'
 
 export default function UserPage() {
   const userId = loadState()
@@ -23,7 +24,7 @@ export default function UserPage() {
   }
 
   const renderedPosts = postsForUser.map((post, index) => 
-    <UserPagePostExcerpt key={index} postId={post.id} />
+    <PostExcerpt key={index} postId={post.id} />
     )
 
   return (

@@ -12,7 +12,7 @@ export default function UserCard(props) {
   const experience = (userExperiences.length *29);
 
   return (
-    <div className='border-2 border-solid rounded-xl p-3 border-black space-y-2' key={props.id}>
+    <div className='bg-white rounded-xl m-1 hover:shadow-lg  space-y-3 p-3' key={props.id}>
       <Link to={`/userprofile/${props.id}`} onClick={() => saveState()}>
         <UserNameAndLogo userId={props.id} />
       </Link>
