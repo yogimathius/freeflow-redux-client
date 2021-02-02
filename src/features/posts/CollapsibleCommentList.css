@@ -5,11 +5,9 @@
     padding: 1rem;
     width: 60%;
     margin: 0 auto;
-
     cursor: pointer;
-
     border-radius: 7px;
-    transition: all 0.25s ease-out;
+    transition: all 0.45s ease-out;
   }
 
   .lbl-toggle::before {

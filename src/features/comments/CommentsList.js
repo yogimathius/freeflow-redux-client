@@ -83,7 +83,7 @@ export const CommentsList = ({ postId }) => {
     }
   }
     return (
-      <div key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 rounded">
+      <div key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 rounded my-2 rounded-xl">
         <div className="p-3">
             <div className="flex justify-between">
               <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>

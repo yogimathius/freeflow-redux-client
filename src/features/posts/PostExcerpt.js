@@ -101,7 +101,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       <div className="wrap-collapsible">
 
         <input 
-          id={"collapsible" + index} className="toggle"  
+          id={"collapsible" + index} className="toggle hidden"  
           type="checkbox">
         </input>
 
