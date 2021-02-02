@@ -20,7 +20,7 @@ export const SinglePostPage = ({ match }) => {
   }
 
   return (
-    <section>
+    <section className="my-12">
       <PostExcerpt onPost={true} postId={postId} />
       <CommentsList postId={postId} />
       <AddCommentForm postId={postId} />

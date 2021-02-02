@@ -25,7 +25,6 @@ function App() {
 						/>
 					))}
 				</Switch>
-        <Footer />
         </div>
       </Router>
     </AuthProvider>

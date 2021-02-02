@@ -31,7 +31,7 @@ export const addNewComment = createAsyncThunk(
       content,
     } = initialComment
     console.log(initialComment);
-    const response = await axios.post(`${url}`, {
+    const response = await axios.post(`http://localhost:8080/api/comments`, {
       commenter_id,
       post_id,
       text_body: content,
