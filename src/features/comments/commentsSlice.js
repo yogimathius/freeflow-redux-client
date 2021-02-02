@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = `/api/comments`
+const url = `https://freeflow-two-point-o.herokuapp.com/api/comments`
 
 const commentsAdapter = createEntityAdapter({
 	selectId: (comment) => comment.id,
@@ -31,12 +31,30 @@ export const addNewComment = createAsyncThunk(
       content,
     } = initialComment
     console.log(initialComment);
-    const response = await axios.post(`http://localhost:8080/api/comments`, {
+    const response = await axios.post(`${url}`, {
       commenter_id,
       post_id,
       text_body: content,
     })
     return response.data
+  }
+)
+
+export const removeComment = createAsyncThunk(
+  'comments/removeComment',
+  async (initialComments) => {
+    const { post_id, commenter_id} = initialComments
+    const removeComment = {
+      post_id: post_id,
+      commenter_id: commenter_id,
+    };
+    const response = await axios.delete(url, { 
+      params: { 
+        removeComment
+      }
+    });
+    console.log("response in remove comment thunk: ", response.post);
+    return response.post
   }
 )
 
@@ -66,6 +84,9 @@ const commentsSlice = createSlice({
       state.error = action.error.message
     },
     [addNewComment.fulfilled]: commentsAdapter.addOne,
+    [removeComment.fulfilled]: (state, action) => {
+      commentsAdapter.removeOne(state, action.payload)
+    } 
   },
 });
 
