@@ -1,6 +1,11 @@
 # Freeflow
 
-This app is still in development. The objective is to build a game-ified social network that connects users based on their skills and assets, wants and needs in life. As users fulfill others wants and needs with the skills or assets, they will gain points and become more eligible to be helped by others. Currently we are implementing more full CRUD operations using redux toolkit's slices, and have login auth through context and reducer. To see more details of what is being worked on, you can check the issues tab in the repo.
+The site is live! You can check it out at:
+
+
+
+
+This app is still in development. The objective is to build a game-ified social network that connects users based on their skills and assets, wants and needs in life. As users fulfill others wants and needs with the skills or assets, they will gain points and become more eligible to be helped by others. Currently we are implementing more full CRUD operations using redux toolkit's slices and have a basic non authenticated login setup with localstorage and redux state. To see more details of what is being worked on, you can check the issues tab in the repo.
 
 ## Dependencies
 
