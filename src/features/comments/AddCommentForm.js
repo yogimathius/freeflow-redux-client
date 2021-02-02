@@ -17,7 +17,9 @@ export const AddCommentForm = ({ postId }) => {
   const canSave =
     [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
-  const onSaveCommentClicked = async () => {
+  const onSaveCommentClicked = async (e) => {
+    if(e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
     if (canSave) {
       try {
         setAddRequestStatus('pending')
@@ -37,6 +39,7 @@ export const AddCommentForm = ({ postId }) => {
       }
     }
   }
+  }
 
   return (
     <section className="">
@@ -50,15 +53,8 @@ export const AddCommentForm = ({ postId }) => {
             name="commentContent"
             value={content}
             onChange={onContentChanged}
+            onKeyDown={onSaveCommentClicked}
           />
-        </div>
-        <div
-          className="btn btn-secondary flex justify-center"
-          type="button"
-          onClick={onSaveCommentClicked}
-          disabled={!canSave}
-        >
-          Save Comment
         </div>
       </form>
     </section>
