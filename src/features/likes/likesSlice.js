@@ -79,7 +79,6 @@ const likesSlice = createSlice({
       likesAdapter.upsertOne(state, action.payload)
     },
     [removeLike.fulfilled]: (state, action) => {
-      console.log("payload: ", action.meta.arg);
       likesAdapter.removeOne(state, action.meta.arg.id)
     } 
   },

@@ -11,9 +11,7 @@ import PostExcerpt from '../posts/PostExcerpt';
 import AddPostForm from '../posts/AddPostForm';
 export default function UserPage() {
   const userId = loadState()
-  console.log("id in userpage: ", userId);
   const loggedInUser = useSelector(state => state.user)
-  console.log("localstate id: ", loggedInUser);
   const user = useSelector((state) => selectUserById(state, userId))
 
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
@@ -27,7 +25,7 @@ export default function UserPage() {
   const renderedPosts = postsForUser.map((post, index) => 
     <PostExcerpt key={index} postId={post.id} />
     )
-  console.log("types: ", typeof loggedInUser.user.id, typeof user.id);
+    
   return (
     <section className="space-y-3">
       <UserSkillsList />

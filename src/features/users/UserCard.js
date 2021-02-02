@@ -10,7 +10,6 @@ export default function UserCard(props) {
   const userExperiences = useSelector((state) => selectExperiencesByUserId(state, props.id))
 
   const experience = (userExperiences.length *29);
-  console.log(props);
   return (
     <div className='bg-white rounded-xl m-1 hover:shadow-lg  space-y-3 p-3' key={props.id}>
       <Link to={`/userprofile/${props.id}`} onClick={() => saveState(props.id)}>

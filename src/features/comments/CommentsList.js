@@ -12,7 +12,6 @@ export const CommentsList = ({ postId }) => {
   const comments = useSelector((state) => selectCommentsByPostId(state, parseInt(postId)))
 	const loggedInUser = JSON.parse(localStorage.getItem('user'))
   const userId = loggedInUser.id;
-  console.log(userId);
   const dispatch = useDispatch()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
@@ -46,13 +45,14 @@ export const CommentsList = ({ postId }) => {
   const canEditOrDelete = [userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onDeleteCommentClicked = async () => {
-    console.log("button clicked to remove!");
     if (canEditOrDelete) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           removeComment({
-            id: comment.id
+            id: comment.id,
+            post_id: postId,
+            commenter_id: comment.commenter_id
           })
         )
         unwrapResult(resultAction)
@@ -65,7 +65,6 @@ export const CommentsList = ({ postId }) => {
   }
 
   const onEditCommentClicked = async () => {
-    console.log("button clicked to remove!");
     if (canEditOrDelete) {
       try {
         setAddRequestStatus('pending')

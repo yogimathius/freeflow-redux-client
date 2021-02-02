@@ -11,6 +11,8 @@ import {
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 import Likes from '../likes/likes';
+import { CommentsList } from '../comments/CommentsList';
+import { AddCommentForm } from '../comments/AddCommentForm';
 
 export default function PostExcerpt({ postId, onPost, index }) {
   const dispatch = useDispatch()
@@ -83,6 +85,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
         <button onClick={() => onEditPostClicked()} className="text-red-600 cursor-pointer text-sm">Edit</button>
         : ""
       }
+
       { userId === post.owner_id ?
         <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
         : ""
@@ -109,36 +112,17 @@ export default function PostExcerpt({ postId, onPost, index }) {
         {commentsLength === 1 ? <span>{commentsLength} comment</span> : ""} */}
 
         </label>
-        <div className="collapsible-content">{}
-        {/* FOR COMMENTING */}
-        <div className="center-textarea">
-          {/* <textarea 
-            className="comment-textarea"
-            value={value}
-            onChange={(event) => {
-              setValue(event.target.value) 
-              setError("")
-            }}
-            rows="2" placeholder="Leave a comment here.."
-          ></textarea> */}
-        </div>
-
-        <div className="comment-like-button-flex">
-          {/* <div className="comment-button button-transition"onClick={() => onValidateComment()}>Comment</div> */}
-        </div>
+        <div className="collapsible-content">
+        <CommentsList key={index} postId={postId} />
+        
+        <AddCommentForm postId={postId} />
         <div>
+
           {/* <section className="validation">{error}</section> */}
         </div>
 
       </div>
       </div>
-      {/* VIEW POST */}
-      { onPost !== true ?
-        <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
-          View Comments
-        </Link> : ""
-      }
-
       { onPost === true && user && user.id === post.owner_id ? 
       <div className="flex justify-center">
           <Link to={`/editPost/${post.id}`} className="btn btn-primary">

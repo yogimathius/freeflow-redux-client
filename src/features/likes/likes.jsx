@@ -2,7 +2,8 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  fetchLikes, selectLikesByPostId, selectLikesByUserId,
+	fetchLikes, 
+	selectLikesByPostId, 
   addNewLike,
   removeLike
 } from './likesSlice';

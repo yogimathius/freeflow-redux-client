@@ -92,7 +92,6 @@ const postsSlice = createSlice({
     },
     [addNewPost.fulfilled]: postsAdapter.addOne,
     [removePost.fulfilled]: (state, action) => {
-      console.log(action);
       postsAdapter.removeOne(state, action.meta.arg.post_id)
     } 
   },

@@ -45,11 +45,11 @@ export const AddCommentForm = ({ postId }) => {
     <section className="">
       <form>
         <div className="m-1 flex">
-          <label htmlFor="commentContent"></label>
+          <label 
+          htmlFor="commentContent"></label>
           <textarea 
             placeholder="Leave a comment..."
             className="w-full rounded-xl border-1 border-solid border-gray-300"
-            id="commentContent"
             name="commentContent"
             value={content}
             onChange={onContentChanged}
