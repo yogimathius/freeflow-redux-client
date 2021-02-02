@@ -15,8 +15,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="text-center space-y-3">
-      <h1>Please login to view content.</h1>
+    <div className="text-center space-y-3 bg-white flex flex-col justify-center items-center h-96">
+      <h1 className="text-2xl">Please login to view content.</h1>
       <Formik
         className="flex justify-center"
         initialValues={{ username: '', password: '' }}
@@ -24,8 +24,8 @@ export default function LoginPage() {
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col w-2/3 md:w-1/4 mx-auto space-y-3">
-            <Field className="rounded-xl py-1 border-1 border-gray-400" placeholder="Username" type="text" name="username" />
-            <Field className="rounded-xl py-1 border-1 border-gray-400" placeholder="Password" type="password" name="password" />
+            <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Username" type="text" name="username" />
+            <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Password" type="password" name="password" />
             <div className="flex justify-center">
               <button className="btn btn-primary" type="submit" disabled={isSubmitting}>Login</button>
             </div>

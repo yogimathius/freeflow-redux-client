@@ -7,13 +7,14 @@ import { AuthProvider } from './Context';
 import routes from './Config/routes.js';
 import { Navbar } from './components/Navbar'
 import AppRoute from './components/AppRoute';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Navbar />
-        <div className="App bg-gray-100">
+        <div className="App bg-gray-100 lg:w-11/12 mx-auto xl:w-2/3">
         <Switch>
 					{routes.map((route) => (
 						<AppRoute
@@ -24,6 +25,7 @@ function App() {
 						/>
 					))}
 				</Switch>
+        <Footer />
         </div>
       </Router>
     </AuthProvider>
