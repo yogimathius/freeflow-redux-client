@@ -34,10 +34,10 @@ export const PostsList = () => {
   }
 
   return (
-    <div>
+    <div className="pt-2">
       <AddPostForm />
       <section className="posts-list">
-        <h2 className="mt-2">Posts</h2>
+        <h2 className="mt-2 text-2xl font-bold text-center">Posts</h2>
         {content}
       </section>
     </div>

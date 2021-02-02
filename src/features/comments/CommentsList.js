@@ -43,11 +43,31 @@ export const CommentsList = ({ postId }) => {
       name: 'Unknown User',
     }
 
-  const canDelete = [userId].every(Boolean) && addRequestStatus === 'idle'
+  const canEditOrDelete = [userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onDeleteCommentClicked = async () => {
     console.log("button clicked to remove!");
-    if (canDelete) {
+    if (canEditOrDelete) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          removeComment({
+            commenter_id: userId,
+            post_id: postId,
+          })
+        )
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to save the comment: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+      }
+    }
+  }
+
+  const onEditCommentClicked = async () => {
+    console.log("button clicked to remove!");
+    if (canEditOrDelete) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
@@ -74,10 +94,17 @@ export const CommentsList = ({ postId }) => {
                 <span className="font-semibold text-blue-500">{`${user.first_name} ${user.last_name}`}</span>
               </div>
               </Link>
+              <div className="flex flex-col space-y-2">
+              { userId === comment.commenter_id ?
+                <button onClick={() => onEditCommentClicked()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+                : ""
+              }
               { userId === comment.commenter_id ?
                 <button onClick={() => onDeleteCommentClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
                 : ""
               }
+              </div>
+
             </div>
           {comment.text_body}
         </div>

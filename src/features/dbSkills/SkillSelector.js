@@ -36,8 +36,8 @@ const SkillSelector = () => {
     });
 	}
 	return (
-		<div>
-			<label htmlFor="skills">Choose a skill:</label>
+		<div className="text-center">
+			<label htmlFor="skills">Choose a skill: </label>
 			<select id="skills" name="skills" onChange={(e) => handleChange(e)}>
 				{SkillSelector}
 			</select>
