@@ -1,4 +1,4 @@
-import PostsList from '../features/posts/PostsList';
+import { VisiblePostsList } from '../features/posts/VisiblePostsList';
 import { UsersList } from '../features/users/UsersList';
 import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';
@@ -8,7 +8,7 @@ import LoginPage from '../features/login/LoginPage';
 const routes = [
   {
     path: '/dashboard',
-    component: PostsList,
+    component: VisiblePostsList,
     isPrivate: true,
   },
   {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, connect } from 'react-redux'
 import PostExcerpt from './PostExcerpt';
 import AddPostForm from './AddPostForm';
 
@@ -45,4 +45,4 @@ const PostsList = () => {
   )
 }
 
-export default PostsList;
+export default connect(null) (PostsList);
