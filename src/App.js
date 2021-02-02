@@ -7,7 +7,6 @@ import { AuthProvider } from './Context';
 import routes from './Config/routes.js';
 import { Navbar } from './components/Navbar'
 import AppRoute from './components/AppRoute';
-import Footer from './components/Footer';
 
 function App() {
   return (
