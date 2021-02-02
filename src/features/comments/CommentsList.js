@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import classnames from 'classnames'
 
 import { selectAllUsers } from '../users/usersSlice'
-
+import UserImage from '../users/UserImage'
 import { fetchComments, selectCommentsByPostId } from './commentsSlice'
 import { selectAllExperiences } from '../experiences/experiencesSlice'
 
@@ -34,8 +34,6 @@ export const CommentsList = ({ postId }) => {
   console.log(content, postId);
   const users = useSelector(selectAllUsers)
   const karmas = useSelector(selectAllExperiences)
-
-  console.log("comments in commentlist: ", comments);
   
   const renderedComments = comments.map((comment) => {
     // const date = parseISO(comment.time_posted)
@@ -54,16 +52,13 @@ export const CommentsList = ({ postId }) => {
     const commentExperience = (commentKarmas.length * 29);
 
     return (
-      <div key={comment.id} className={commentClassname}>
-        <div>
-          {comment.text_body}
-          <div title={comment.created_at}   className="commentInfo">
-            <img src={user.avatar} alt={`${user.first_name} ${user.last_name}`}/>
-            <b>{`${user.first_name} ${user.last_name}`}</b>
-            {commentExperience !== 0 ?             <p>Gained {commentExperience} experience </p>
-            : "" }
-            {/* <i className="commentTime">{timeAgo} ago</i> */}
+      <div key={comment.id} className="flex">
+        <div className="bg-gray-200 rounded-xl p-3">
+          <div className="flex items-center space-x-2">
+          <UserImage />
+            <p className="font-semibold">{`${user.first_name} ${user.last_name}`}</p>
           </div>
+          {comment.text_body}
         </div>
       </div>
     )
@@ -71,7 +66,6 @@ export const CommentsList = ({ postId }) => {
 
   return (
     <section className="commentsList">
-      <h2>Comments</h2>
       {renderedComments}
     </section>
   )
