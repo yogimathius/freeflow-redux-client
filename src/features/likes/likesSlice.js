@@ -9,7 +9,7 @@ import axios from 'axios';
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/likes'
 
 const likesAdapter = createEntityAdapter({
-	selectId: (like) => like.post_id
+	selectId: (like) => like.id
 })
 
 const initialState = likesAdapter.getInitialState({
@@ -78,7 +78,8 @@ const likesSlice = createSlice({
       likesAdapter.upsertOne(state, action.payload)
     },
     [removeLike.fulfilled]: (state, action) => {
-      likesAdapter.removeOne(state, action.payload)
+      console.log("payload: ", action.meta.arg);
+      likesAdapter.removeOne(state, action.meta.arg.id)
     } 
   },
 })

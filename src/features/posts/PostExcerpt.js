@@ -46,7 +46,7 @@ export default function PostExcerpt({ postId, onPost }) {
   const myLikes = user ? postLikes.filter(
     (like) => user.id === like.liker_id
   ) : "";  
-
+  // console.log("my likes: ",myLikes, "post: ", post);
   const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -54,6 +54,7 @@ export default function PostExcerpt({ postId, onPost }) {
   const canSave =
    addRequestStatus === 'idle'
 
+  //  ADDLIKE FUNCTION
   const addLike = async () => {
     if (canSave) {
       try {
@@ -71,12 +72,14 @@ export default function PostExcerpt({ postId, onPost }) {
     }
   }
 
+  // UNLIKE FUNCTION
   const unLike = async () => {
+    
     if (canSave) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removeLike({   post_id: post.id, liker_id: user.id })
+          removeLike({   id: myLikes[0].id, post_id: postId, liker_id: userId })
         )
         unwrapResult(resultAction)
 
@@ -91,6 +94,7 @@ export default function PostExcerpt({ postId, onPost }) {
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
 
+  // EDIT POST DISPATCH
   const onEditPostClicked = async () => {
     if (canEditOrRemove) {
       try {
@@ -108,6 +112,7 @@ export default function PostExcerpt({ postId, onPost }) {
     }
   }
 
+  // DELETE POST DISPATCH
   const onDeletePostClicked = async () => {
     if (canEditOrRemove) {
       try {
@@ -124,7 +129,8 @@ export default function PostExcerpt({ postId, onPost }) {
       }
     }
   }
-
+  
+  // FETCH LIKES USEEFFECT
   useEffect(() => {
     if (likeStatus === 'idle') {
       dispatch(fetchLikes())
@@ -141,6 +147,7 @@ export default function PostExcerpt({ postId, onPost }) {
   if (fetchedLikes !== undefined && fetchedLikes !== null) {
   }
 
+  // LIKE UNLIKE FUNCTION
   const LikeUnlikeIcons = iAlreadyLikeThis ? (
     <FontAwesomeIcon 
     onClick={() => unLike(post.id, user.id)}
@@ -153,6 +160,8 @@ export default function PostExcerpt({ postId, onPost }) {
       icon={farHeart} size="1x" />
   )
 
+
+  // LIKES COUNT
   const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
     <p ><b>You and {likeSum - 1} others</b></p> : "";
 

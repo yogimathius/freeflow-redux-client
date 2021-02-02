@@ -52,8 +52,7 @@ export const CommentsList = ({ postId }) => {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           removeComment({
-            commenter_id: userId,
-            post_id: postId,
+            id: comment.id
           })
         )
         unwrapResult(resultAction)

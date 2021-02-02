@@ -4,11 +4,6 @@ import { Link, useHistory } from 'react-router-dom'
 import {logout} from '../features/login/userLoginSlice'
 import { saveState } from '../helpers/localStorage'
 
-// import {
-//   fetchNotifications,
-//   selectAllNotifications,
-// } from '../features/notifications/notificationsSlice'
-
 export const Navbar = () => {
   const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()

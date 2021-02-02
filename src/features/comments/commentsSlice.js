@@ -85,7 +85,8 @@ const commentsSlice = createSlice({
     },
     [addNewComment.fulfilled]: commentsAdapter.addOne,
     [removeComment.fulfilled]: (state, action) => {
-      commentsAdapter.removeOne(state, action.payload)
+      console.log("action id: ", action.meta.arg.id);
+      commentsAdapter.removeOne(state, action.meta.arg.id)
     } 
   },
 });
