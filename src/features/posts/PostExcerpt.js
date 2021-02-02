@@ -85,10 +85,6 @@ export default function PostExcerpt({ postId, onPost }) {
     }
   }
 
-  const setCookie = (id) => {
-    saveState(id)
-  }
-
   useEffect(() => {
     if (likeStatus === 'idle') {
       dispatch(fetchLikes())
@@ -130,7 +126,7 @@ export default function PostExcerpt({ postId, onPost }) {
     <p><b>{likeSum} like</b></p> : "";
 
   return (
-    <article className="border-solid border-2 border-black rounded-xl p-2 mx-1 my-3 " key={post.id}>
+    <article className="rounded p-2 mx-1 my-3 bg-white" key={post.id}>
 
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
@@ -140,7 +136,7 @@ export default function PostExcerpt({ postId, onPost }) {
 
       {/* POST AUTHOR */}
       <Link to={`/userprofile/${post.owner_id}`}
-      onClick={() => setCookie(post.owner_id)}
+      onClick={() => saveState(post.owner_id)}
       >
         <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>

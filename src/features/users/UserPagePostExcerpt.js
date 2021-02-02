@@ -76,10 +76,6 @@ export default function UserPagePostExcerpt({ postId }) {
     }
   }
 
-  const setCookie = (id) => {
-    saveState(id)
-  }
-
   const LikeUnlikeIcons = iAlreadyLikeThis ? (
     <FontAwesomeIcon 
     onClick={() => unLike(post.id, loggedInUser.id)}
@@ -114,7 +110,7 @@ const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ?
       </div>
       {/* POST AUTHOR */}
       <Link to={`/userprofile/${post.owner_id}`}
-      onClick={() => setCookie(post.owner_id)}
+      onClick={() => saveState(post.owner_id)}
       >
         <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>

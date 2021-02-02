@@ -39,14 +39,13 @@ export const AddCommentForm = ({ postId }) => {
   }
 
   return (
-    <section className="space-y-2">
-      <h2 className="text-center text-lg font-semibold">Leave a Comment</h2>
+    <section className="">
       <form>
-
-        <div className="">
+        <div className="m-1 flex">
           <label htmlFor="commentContent"></label>
-          <textarea
-            className="w-full"
+          <textarea 
+            placeholder="Leave a comment..."
+            className="w-full rounded-xl border-1 border-solid border-gray-300"
             id="commentContent"
             name="commentContent"
             value={content}
@@ -54,7 +53,7 @@ export const AddCommentForm = ({ postId }) => {
           />
         </div>
         <div
-        className="btn btn-secondary flex justify-center"
+          className="btn btn-secondary flex justify-center"
           type="button"
           onClick={onSaveCommentClicked}
           disabled={!canSave}

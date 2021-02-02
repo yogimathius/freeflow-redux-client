@@ -13,7 +13,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <div className="App">
+        <div className="App bg-gray-100">
         <Switch>
 					{routes.map((route) => (
 						<AppRoute

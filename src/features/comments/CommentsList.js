@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectAllUsers } from '../users/usersSlice'
 import UserImage from '../users/UserImage'
 import { fetchComments, selectCommentsByPostId } from './commentsSlice'
+import { Link } from 'react-router-dom'
+import { saveState } from '../../helpers/localStorage'
 
 export const CommentsList = ({ postId }) => {
   const comments = useSelector((state) => selectCommentsByPostId(state, parseInt(postId)))
@@ -37,12 +39,15 @@ export const CommentsList = ({ postId }) => {
     }
 
     return (
-      <div key={comment.id} className="flex">
-        <div className="bg-gray-200 rounded-xl p-3">
-          <div className="flex items-center space-x-2">
-          <UserImage />
-            <p className="font-semibold">{`${user.first_name} ${user.last_name}`}</p>
-          </div>
+      <div key={comment.id} className="bg-white flex mx-1 border-2 border-solid border-green-500 border-opacity-25 rounded">
+        <div className="p-3">
+
+          <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
+            <div className="flex items-center space-x-2">
+              <UserImage />
+              <p className="font-semibold text-blue-500">{`${user.first_name} ${user.last_name}`}</p>
+            </div>
+          </Link>
           {comment.text_body}
         </div>
       </div>
