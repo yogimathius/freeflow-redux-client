@@ -30,7 +30,7 @@ export const CommentsList = ({ postId }) => {
   if (commentsStatus === 'pending') {
     content = <div className="loader">Loading...</div>
   } else if (commentsStatus === 'fulfilled') {
-    content = comments
+
   } else if (commentsStatus === 'rejected') {
     content = <div>{error}</div>
   }
@@ -114,6 +114,7 @@ export const CommentsList = ({ postId }) => {
 
   return (
     <section className="commentsList">
+      {content}
       {renderedComments}
     </section>
   )
