@@ -1,0 +1,133 @@
+
+  .comment-list {
+    border-radius: 5px;
+    overflow: scroll;
+    background-color: white;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comment-avatar {
+    display: flex;
+  }
+
+  .comment-username {
+    font-size: 1.1em;
+  }
+
+  .comments {
+    list-style-type: none;
+    background-color: #2b3858;
+    color: white;
+    display: inline-block;
+    width: 70%;
+    border-radius: 5px;
+    margin-left: 60px;
+    padding: 10px;
+    margin-top: -40px;
+  }
+  .comments li {
+    color: black;
+  }
+
+  /* -------------- BUTTONS ---------------*/
+
+
+
+  .lbl-toggle {
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+
+    padding: 1rem;
+
+    color: white;
+    background: #1cd454;
+    width: 60%;
+    margin: 0 auto;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+    transition: all 0.25s ease-out;
+  }
+
+  .lbl-toggle::before {
+    content: " ";
+    display: inline-block;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+
+    vertical-align: middle;
+    margin-right: 0.7rem;
+    transform: translateY(-2px);
+
+    transition: transform 0.2s ease-out;
+  }
+
+  .collapsible-content .content-inner {
+    background-color: #222b45;
+    margin-left: 270px;
+    padding: 0.5rem 1rem;
+  }
+
+  .collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.25s ease-in-out;
+  }
+
+  .toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: 100vh;
+  }
+
+  .toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+  }
+
+  .center-textarea {
+    display: flex;
+    justify-content: center;
+  }
+  .comment-textarea {
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 60%;
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    background-color: #192038;
+    color: white;
+    border: 1px solid #222b45;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .validation {
+    color: red;
+  }
+
+  ::placeholder {
+    opacity: .9;
+  }
+
+  .comment-textarea:focus,
+  .comment-textarea:hover
+   {
+    outline: none;
+    border: 1px solid #3366ff;
+  }
+
+  .comment-like-button-flex {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 55px;
+  }
+
+  .tutor-filter-btns {
+    display: flex;
+    font-weight: 600;
+  }
+

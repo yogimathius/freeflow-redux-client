@@ -26,8 +26,8 @@ export const PostsList = () => {
   if (postStatus === 'loading') {
     content = <div className="loader">Loading...</div>
   } else if (postStatus === 'succeeded') {
-    content = orderedPostIds.map((postId) => (
-      <PostExcerpt key={postId} postId={postId} />
+    content = orderedPostIds.map((postId, index) => (
+      <PostExcerpt key={index} postId={postId} index={index} />
     ))
   } else if (postStatus === 'failed') {
     content = <div>{postError}</div>

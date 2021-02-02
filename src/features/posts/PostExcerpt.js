@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import './CollapsibleCommentList.css';
 import { UserNameAndLogo } from '../users/UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
   removePost,
   selectPostById,
 } from './postsSlice'
-
-import {
-  fetchLikes, selectLikesByPostId
-} from '../likes/likesSlice'
-
-import {
-  addNewLike,
-  removeLike
-} from '../likes/likesSlice'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
+import Likes from '../likes/likes';
 
-export default function PostExcerpt({ postId, onPost }) {
+export default function PostExcerpt({ postId, onPost, index }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
@@ -33,63 +21,8 @@ export default function PostExcerpt({ postId, onPost }) {
 
   const post = useSelector((state) => selectPostById(state, postId))
 
-  const likes = useSelector((state) => selectLikesByPostId(state, postId))
-  const likeStatus = useSelector((state) => state.likes.status)
-
-  const postLikes = likes.filter(
-    (like) => {
-      return post.id === like.post_id
-    });
-
-  const likeSum = postLikes.length;
-
-  const myLikes = user ? postLikes.filter(
-    (like) => user.id === like.liker_id
-  ) : "";  
-
-  const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
-
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const canSave =
-   addRequestStatus === 'idle'
-
-  //  ADDLIKE FUNCTION
-  const addLike = async () => {
-    if (canSave) {
-      try {
-        setAddRequestStatus('pending')
-        const resultAction = await dispatch(
-          addNewLike({   post_id: postId, liker_id: user.id })
-        )
-        unwrapResult(resultAction)
-
-      } catch (err) {
-        console.error('Failed to add like to post: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-      }
-    }
-  }
-
-  // UNLIKE FUNCTION
-  const unLike = async () => {
-    
-    if (canSave) {
-      try {
-        setAddRequestStatus('pending')
-        const resultAction = await dispatch(
-          removeLike({   id: myLikes[0].id, post_id: postId, liker_id: userId })
-        )
-        unwrapResult(resultAction)
-
-      } catch (err) {
-        console.error('Failed to remove like from post: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-      }
-    }
-  }
 
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
@@ -129,50 +62,6 @@ export default function PostExcerpt({ postId, onPost }) {
       }
     }
   }
-  
-  // FETCH LIKES USEEFFECT
-  useEffect(() => {
-    if (likeStatus === 'idle') {
-      dispatch(fetchLikes())
-    }
-  }, [likeStatus, dispatch])
-  let fetchedLikes
-  if (likeStatus === 'loading') {
-    fetchedLikes = null
-  } else if (likeStatus === 'succeeded') {
-    fetchedLikes = likes
-  } else if (likeStatus === 'failed') {
-    fetchedLikes = null
-  }
-  if (fetchedLikes !== undefined && fetchedLikes !== null) {
-  }
-
-  // LIKE UNLIKE FUNCTION
-  const LikeUnlikeIcons = iAlreadyLikeThis ? (
-    <FontAwesomeIcon 
-    onClick={() => unLike(post.id, user.id)}
-    className=""
-    icon={fasHeart} size="1x" />
-  ) : (                  
-    <FontAwesomeIcon 
-      onClick={() => addLike(post.post_id, user.id)}
-      className="love"
-      icon={farHeart} size="1x" />
-  )
-
-
-  // LIKES COUNT
-  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
-    <p ><b>You and {likeSum - 1} others</b></p> : "";
-
-  const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1 ? 
-    <p><b>{likeSum}  likes</b></p> : "";
-
-  const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1 ? 
-    <p ><b>You like this</b></p> : "";
-
-  const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
-    <p><b>{likeSum} like</b></p> : "";
 
   return (
     <article className="rounded p-2 mx-1 my-3 bg-white" key={post.id}>
@@ -203,20 +92,46 @@ export default function PostExcerpt({ postId, onPost }) {
       <p className="post-content">{post.text_body}</p>
 
       {/* LIKES */}
-      <div className="flex items-start justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
-        
-        {/* conditionally renders like or unlike icon */}
-        {LikeUnlikeIcons}
+      <Likes postId={postId} userId={userId} />
 
-        {/* LIKES COUNT - conditionally renders one of these like count templates */}
-        <div className="-mt-0.5">
-          {IPlusOneLikesThis}
-          {PlusOneLikesThis}
-          {OnlyILikeThis}
-          {OnlyOneLikesThis}
+      <div className="wrap-collapsible">
+
+        <input 
+          id={"collapsible" + index} className="toggle"  
+          type="checkbox">
+        </input>
+
+        <label htmlFor={"collapsible" + index} className="lbl-toggle">
+        {/* COMMENTS LIST FOR POST */}
+
+        {/* {commentsLength > 1 ? <span>{commentsLength} comments</span> : ""}
+
+        {commentsLength === 1 ? <span>{commentsLength} comment</span> : ""} */}
+
+        </label>
+        <div className="collapsible-content">{}
+        {/* FOR COMMENTING */}
+        <div className="center-textarea">
+          {/* <textarea 
+            className="comment-textarea"
+            value={value}
+            onChange={(event) => {
+              setValue(event.target.value) 
+              setError("")
+            }}
+            rows="2" placeholder="Leave a comment here.."
+          ></textarea> */}
         </div>
-			</div>
 
+        <div className="comment-like-button-flex">
+          {/* <div className="comment-button button-transition"onClick={() => onValidateComment()}>Comment</div> */}
+        </div>
+        <div>
+          {/* <section className="validation">{error}</section> */}
+        </div>
+
+      </div>
+      </div>
       {/* VIEW POST */}
       { onPost !== true ?
         <Link to={`/posts/${post.id}`} className="btn btn-secondary my-2 flex justify-center">
