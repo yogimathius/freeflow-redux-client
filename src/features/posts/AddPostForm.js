@@ -43,12 +43,12 @@ export default function AddPostForm() {
 
   return (
     <section>
-      <h2 className="text-lg font-bold text-center text-green-500">Add a New Post</h2>
       <SkillSelector />
-      <form className="space-y-2">
+      <form className="space-y-2 mx-2">
         <label htmlFor="postContent"></label>
         <textarea
-          className="w-full"
+          placeholder="Add a new post..."
+          className="w-full  border-1 border-solid border-gray-400 rounded-xl" 
           id="postContent rounded-xl"
           name="postContent"
           value={content}
