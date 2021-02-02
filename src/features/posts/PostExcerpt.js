@@ -46,7 +46,7 @@ export default function PostExcerpt({ postId, onPost }) {
   const myLikes = user ? postLikes.filter(
     (like) => user.id === like.liker_id
   ) : "";  
-  // console.log("my likes: ",myLikes, "post: ", post);
+
   const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
