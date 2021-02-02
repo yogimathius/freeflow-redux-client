@@ -43,6 +43,20 @@ export const addNewPost = createAsyncThunk(
   }
 )
 
+export const removePost = createAsyncThunk(
+  'posts/removePost',
+  async (initialPost) => {
+    const { post_id } = initialPost
+
+    const response = await axios.delete(url, {
+      params: {
+        post_id
+      }
+    });
+    return response.data
+  }
+)
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
@@ -77,6 +91,9 @@ const postsSlice = createSlice({
       state.error = action.error.message
     },
     [addNewPost.fulfilled]: postsAdapter.addOne,
+    [removePost.fulfilled]: (state, action) => {
+      postsAdapter.removeOne(state, action.payload)
+    } 
   },
 })
 

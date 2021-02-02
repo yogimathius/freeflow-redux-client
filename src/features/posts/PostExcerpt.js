@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { UserNameAndLogo } from '../users/UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
+  removePost,
   selectPostById,
 } from './postsSlice'
 
@@ -27,6 +28,8 @@ export default function PostExcerpt({ postId, onPost }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
+	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  const userId = loggedInUser.id;
 
   const post = useSelector((state) => selectPostById(state, postId))
 
@@ -74,6 +77,43 @@ export default function PostExcerpt({ postId, onPost }) {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           removeLike({   post_id: post.id, liker_id: user.id })
+        )
+        unwrapResult(resultAction)
+
+      } catch (err) {
+        console.error('Failed to remove like from post: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+      }
+    }
+  }
+
+  const canEditOrRemove =
+  [userId].every(Boolean) && addRequestStatus === 'idle'
+
+  const onEditPostClicked = async () => {
+    if (canEditOrRemove) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          removePost({   post_id: post.id })
+        )
+        unwrapResult(resultAction)
+
+      } catch (err) {
+        console.error('Failed to remove like from post: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+      }
+    }
+  }
+
+  const onDeletePostClicked = async () => {
+    if (canEditOrRemove) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          removePost({   post_id: post.id })
         )
         unwrapResult(resultAction)
 
@@ -140,6 +180,15 @@ export default function PostExcerpt({ postId, onPost }) {
       >
         <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>
+
+      { userId === post.owner_id ?
+        <button onClick={() => onEditPostClicked()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+        : ""
+      }
+      { userId === post.owner_id ?
+        <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+        : ""
+      }
       
       {/* TEXT BODY */}
       <p className="post-content">{post.text_body}</p>
