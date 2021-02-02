@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { selectPostsByUser } from '../posts/postsSlice'
 import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
 import { loadState } from '../../helpers/localStorage'
-import UserPagePostExcerpt from './UserPagePostExcerpt';
 import { selectUserById } from './usersSlice'
 import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'

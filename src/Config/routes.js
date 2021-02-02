@@ -1,5 +1,4 @@
 import { PostsList } from '../features/posts/PostsList';
-import { UserProfile } from '../features/users/UserProfile';
 import { UsersList } from '../features/users/UsersList';
 import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';
