@@ -7,8 +7,9 @@ import {
   fetchPosts,
   selectPostIds,
 } from './postsSlice'
+import Filter from '../filters/Filter';
 
-export const PostsList = () => {
+const PostsList = () => {
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
 
@@ -34,11 +35,14 @@ export const PostsList = () => {
   }
 
   return (
-    <div className="pt-3">
+    <div className="pt-3 mx-2">
       <AddPostForm />
+      <Filter />
       <section className="posts-list">
         {content}
       </section>
     </div>
   )
 }
+
+export default PostsList;

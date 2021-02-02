@@ -8,6 +8,7 @@ import experiencesReducer from '../features/experiences/experiencesSlice';
 import userLoginReducer from '../features/login/userLoginSlice';
 import skillsReducer from '../features/dbSkills/dbSkillsSlice';
 import userSkillsReducer from '../features/userSkills/userSkillsSlice';
+import filtersReducer from '../features/filters/filtersSlice';
 
 export default configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export default configureStore({
     comments: commentsReducer,
     experiences: experiencesReducer,
     skills: skillsReducer,
-    userSkills: userSkillsReducer
+    userSkills: userSkillsReducer,
+    visibilityFilters: filtersReducer
   },
 })

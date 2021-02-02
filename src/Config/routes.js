@@ -1,4 +1,4 @@
-import { PostsList } from '../features/posts/PostsList';
+import PostsList from '../features/posts/PostsList';
 import { UsersList } from '../features/users/UsersList';
 import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';

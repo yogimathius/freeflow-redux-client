@@ -20,6 +20,7 @@ export const AddCommentForm = ({ postId }) => {
   const onSaveCommentClicked = async (e) => {
     if(e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
+
     if (canSave) {
       try {
         setAddRequestStatus('pending')
