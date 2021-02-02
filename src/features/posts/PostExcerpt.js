@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { UserNameAndLogo } from './UserNameAndLogo'
+import { UserNameAndLogo } from '../users/UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
   selectPostById,

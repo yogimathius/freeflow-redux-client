@@ -11,7 +11,9 @@ import PostExcerpt from '../posts/PostExcerpt'
 
 export default function UserPage() {
   const userId = loadState()
-
+  console.log("id in userpage: ", userId);
+  const loggedInUser = useSelector(state => state.user)
+  console.log(loggedInUser);
   const user = useSelector((state) => selectUserById(state, userId))
 
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { selectUserById } from '../users/usersSlice'
+import { selectUserById } from './usersSlice'
 
 export const UserNameAndLogo = ({ userId }) => {
   const author = useSelector((state) => selectUserById(state, userId))

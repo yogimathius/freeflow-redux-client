@@ -1,12 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
-	let loggedInUser;
-	if (localStorage.getItem("user") !== null) {
-		loggedInUser = JSON.parse(localStorage.getItem('user'))
-	}
+  const loggedInUser = useSelector(state => state.user)
+
 
 	return (
 		<Route

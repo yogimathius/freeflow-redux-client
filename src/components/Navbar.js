@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import {logout} from '../features/login/userLoginSlice'
+import { saveState } from '../helpers/localStorage'
 
 // import {
 //   fetchNotifications,
@@ -28,7 +29,7 @@ export const Navbar = () => {
         <div className="row-start-2 col-span-4 grid grid-cols-4 my-2 space-x-2 font-bold items-end">
           <Link className="text-white col-start-1 flex justify-center" to="/dashboard">Posts</Link>
           <Link className="text-white col-start-2 flex justify-center" to="/users">Users</Link>
-          <Link className="text-white col-start-3 flex justify-center" to={`/userprofile/${user?.id}`}>Profile</Link>
+          <Link className="text-white col-start-3 flex justify-center" to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>Profile</Link>
           <div className="text-white col-start-4 flex justify-center">
           {!user  ?
             <Link to="/login">Login</Link>
