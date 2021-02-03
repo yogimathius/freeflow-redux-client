@@ -17,15 +17,16 @@ export default function AddPostForm() {
   const dispatch = useDispatch()
   const onContentChanged = (e) => setContent(e.target.value)
 
-
   const canSave =
-    [selectedSkill, content, userId].every(Boolean) && addRequestStatus === 'idle'
+    [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   let id = 37;
   const onSavePostClicked = async () => {
-    setTriggerPostSkillAxios(true);
+    console.log("post button clicked!");
+    // setTriggerPostSkillAxios(true);
     // addPostSkills(canSave)
     if (canSave) {
+      console.log("can save");
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(

@@ -9,7 +9,6 @@ import {
 import Filter from '../filters/Filter';
 
 const PostsList = ({posts}) => {
-  console.log("posts in props: ", posts);
   const dispatch = useDispatch()
 
   const postStatus = useSelector((state) => state.posts.status)

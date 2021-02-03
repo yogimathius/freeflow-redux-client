@@ -4,11 +4,8 @@ import ReactTags from "react-tag-autocomplete";
 import { selectAllskills } from "./dbSkillsSlice";
 
 function Tags(props) {
-	// console.log("skills", props.suggested);
 	const skills = useSelector(selectAllskills)
-	// console.log("skills in skill tags: ", skills);
 	const [skillsSet, setTags] = useState(skills);
-	// console.log('skillset: ', skillsSet);
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
@@ -26,7 +23,6 @@ function Tags(props) {
 
   const onAddition = (skill) => {
     setTags([...skillsSet, skill]);
-    // console.log("skills", skills);
   };
 
   return (

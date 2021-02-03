@@ -7,6 +7,7 @@ import { TimeAgo } from './TimeAgo'
 import {
   removePost,
   selectPostById,
+  updatePost,
 } from './postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
@@ -14,18 +15,42 @@ import Likes from '../likes/likes';
 import { CommentsList } from '../comments/CommentsList';
 import { AddCommentForm } from '../comments/AddCommentForm';
 import { selectCommentsByPostId } from '../comments/commentsSlice';
+import useVisualMode from "../../hooks/useVisualMode";
+import { EditPostForm } from './EditPostForm';
+
+const SHOW = "SHOW";
+const CONFIRM = "CONFIRM";
+const SAVING = "SAVING";
+const EDITING = "EDITING";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function PostExcerpt({ postId, onPost, index }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
-	const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
+
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : "";
+  
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
+
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
+
   const commentsLength = postComments.length
+
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
+  const { mode, transition, back } = useVisualMode(SHOW);
+
+
+  function onEdit() {
+    transition(EDITING);
+  }
+
+  function onSaveEdit() {
+    transition(SHOW);
+  }
 
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
@@ -36,7 +61,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removePost({   post_id: post.id })
+          updatePost({   post_id: post.id })
         )
         unwrapResult(resultAction)
 
@@ -83,18 +108,25 @@ export default function PostExcerpt({ postId, onPost, index }) {
       </Link>
 
       { userId === post.owner_id ?
-        <button onClick={() => onEditPostClicked()} className="text-red-600 cursor-pointer text-sm">Edit</button>
-        : ""
-      }
-
-      { userId === post.owner_id ?
+      <div className="space-x-1">
+        <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
         <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+      </div>
         : ""
       }
       
       {/* TEXT BODY */}
-      <p className="post-content">{post.text_body}</p>
+      {mode === SHOW && (
 
+      <p className="post-content">{post.text_body}</p>
+      )}
+
+      {mode === EDITING && (
+      <EditPostForm 
+        postId={postId}
+        onSaveEdit={onSaveEdit}
+      />
+      )}
       {/* LIKES */}
       <Likes postId={postId} userId={userId} />
 

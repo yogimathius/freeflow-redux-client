@@ -15,19 +15,14 @@ const selectVisiblePosts = createSelector(
     postKeys.forEach(key => {
       postArr.push(state.entities[key])
     })
-    console.log("post arr: ", postArr);
 
     for (const skill in VisibilityFilters) {
       const filteredSkill = VisibilityFilters[skill]
-      console.log("skill: ", filteredSkill, filter);
       if (filter === 'All') {
-        console.log("filter is all ", postArr);
         return postArr
       }
       if (filter === filteredSkill) {
-        console.log(filter, ' = ', filteredSkill);
         return postArr.filter((post) => {
-          console.log(post);
           return post.name === filteredSkill })
       }
     }

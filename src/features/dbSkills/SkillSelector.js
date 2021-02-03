@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectAllskills } from './dbSkillsSlice';
-import Autocomplete from "../../helpers/Autocomplete";
+// import Autocomplete from "../../helpers/Autocomplete";
 
 const SkillSelector = (props) => {
 	const dispatch = useDispatch();
 
 	const skills = useSelector(selectAllskills)
 
-	const skillNames = skills.map(skill => skill.name)
+	// const skillNames = skills.map(skill => skill.name)
 
 	const skillStatus = useSelector((state) => state.skills.status)
 
@@ -16,7 +16,8 @@ const SkillSelector = (props) => {
     if (skillStatus === 'idle') {
       dispatch(fetchSkills())
     }
-  }, [skillStatus, dispatch])
+	}, [skillStatus, dispatch])
+	
   let fetchedSkills
   if (skillStatus === 'loading') {
     fetchedSkills = null
@@ -34,7 +35,6 @@ const SkillSelector = (props) => {
 
 	const handleChange = (event) => {
 		let value = event.target.value;
-		console.log(value);
     localStorage.setItem('selected_skill', value)
 	}
 

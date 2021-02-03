@@ -9,7 +9,7 @@ import axios from 'axios';
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts'
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
+	selectId: (post) => post.id
 })
 
 const initialState = postsAdapter.getInitialState({
@@ -27,6 +27,7 @@ export const addNewPost = createAsyncThunk(
   async (initialPost) => {
     const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id} = initialPost
 
+    console.log("post in thunk: ", initialPost);
     const newPost = { 
       text_body, 
       is_helper, 
@@ -58,17 +59,20 @@ export const removePost = createAsyncThunk(
   }
 )
 
+export const updatePost = createAsyncThunk(
+  'posts/updatePost',
+  async (initialPost) => {
+    const { text_body, post_id } = initialPost
+
+    const response = await axios.put(url, { text_body,
+    post_id });
+    return response.data
+  }
+)
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    // reactionAdded(state, action) {
-    //   const { postId, reaction } = action.payload
-    //   const existingPost = state.entities[postId]
-    //   if (existingPost) {
-    //     existingPost.reactions[reaction]++
-    //   }
-    // },
     postUpdated(state, action) {
       const { id, title, content } = action.payload
       const existingPost = state.entities[id]
@@ -94,7 +98,10 @@ const postsSlice = createSlice({
     [addNewPost.fulfilled]: postsAdapter.addOne,
     [removePost.fulfilled]: (state, action) => {
       postsAdapter.removeOne(state, action.meta.arg.post_id)
-    } 
+    },
+    // [updatePost.fulfilled]:(state, action) => {
+    //   postsAdapter.updateOne(state, action.meta.arg.post_id)
+    // }
   },
 })
 
