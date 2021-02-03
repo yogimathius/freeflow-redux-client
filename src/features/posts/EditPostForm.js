@@ -18,7 +18,6 @@ export const EditPostForm = ({ postId, onSaveEdit }) => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const onSavePostClicked  = async () => {
-    console.log("edit button clicked!");
     if (content) {
 
       try {

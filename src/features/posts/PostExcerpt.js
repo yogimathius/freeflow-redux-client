@@ -18,6 +18,7 @@ import useVisualMode from "../../hooks/useVisualMode";
 import { EditPostForm } from './EditPostForm';
 import { selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
 import PostSkillsList from '../postSkills/fetchPostSkills';
+import PostExcerptSkills from './PostExcerptSkills';
 
 const SHOW = "SHOW";
 // const CONFIRM = "CONFIRM";
@@ -35,8 +36,8 @@ export default function PostExcerpt({ postId, onPost, index }) {
   
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
-  // const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
-  // console.log(postSkills);
+  const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
+  console.log("post excerpt skills: ", postSkills);
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
 
   const commentsLength = postComments.length
@@ -80,7 +81,8 @@ export default function PostExcerpt({ postId, onPost, index }) {
       {/* <PostSkillsList /> */}
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
-        <h3 className="font-bold">Tags: {post.name}</h3>
+        <PostExcerptSkills postId={postId} />
+        {/* <h3 className="font-bold">Tags: {post.name}</h3> */}
         <TimeAgo timestamp={post.time_posted} />
       </div>
 

@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   skills: skillsReducer,
   userSkills: userSkillsReducer,
   visibilityFilters: filtersReducer,
-  postSkills: postSkillsReducer
+  postSkills: postSkillsReducer,
 })
 
 

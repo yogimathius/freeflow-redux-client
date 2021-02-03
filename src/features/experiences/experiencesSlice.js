@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080.com/api/experiences'
+const url = 'http://localhost:8080/api/experiences'
 
 const experiencesAdapter = createEntityAdapter({
 	selectId: (experience) => experience.id,

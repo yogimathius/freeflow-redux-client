@@ -10,7 +10,7 @@ import axios from 'axios';
 const url = 'http://localhost:8080/api/posts_skills'
 
 const postsSkillsAdapter = createEntityAdapter({
-	selectId: (postsSkill) => postsSkill.id
+	selectId: (postSkill) => postSkill.id
 })
 
 const initialState = postsSkillsAdapter.getInitialState({
@@ -18,9 +18,9 @@ const initialState = postsSkillsAdapter.getInitialState({
   error: null,
 })
 
-export const fetchPostSkills = createAsyncThunk('posts/fetchPostSkills', async () => {
+export const fetchPostSkills = createAsyncThunk('postSkills/fetchPostSkills', async () => {
   const response = await axios.get(url);
-  console.log("response in post skill thunk: ", response.data);
+  // console.log("response in post skill thunk: ", response.data);
   return response.data
 })
 
@@ -44,7 +44,7 @@ export const addPostSkills = createAsyncThunk(
 
 
 export const removePostSkill = createAsyncThunk(
-  'postsSkills/removePostSkill',
+  'postSkills/removePostSkill',
   async (initialPostSkills) => {
     const { post_id, skill_id} = initialPostSkills
     const removePostSkill = {
@@ -61,7 +61,7 @@ export const removePostSkill = createAsyncThunk(
 )
 
 const postsSkillsSlice = createSlice({
-  name: 'postsSkills',
+  name: 'postSkills',
   initialState,
   reducers: {
   },
@@ -71,7 +71,7 @@ const postsSkillsSlice = createSlice({
     },
     [fetchPostSkills.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-			// Add any fetched posts to the array
+      // Add any fetched posts to the array
       postsSkillsAdapter.upsertMany(state, action.payload)
     },
     [fetchPostSkills.rejected]: (state, action) => {
@@ -95,7 +95,7 @@ export const {
   selectAll: selectAllPostSkills,
   selectById: selectPostSkillById,
   selectIds: selectPostSkillIds,
-} = postsSkillsAdapter.getSelectors((state) => state.postsSkills)
+} = postsSkillsAdapter.getSelectors((state) => state.postSkills)
 
 export const selectPostSkillsByPostId = createSelector(
   [selectAllPostSkills, (state, postsId) => postsId],

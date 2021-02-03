@@ -28,7 +28,6 @@ export const addNewPost = createAsyncThunk(
   async (initialPost) => {
     const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id} = initialPost
 
-    console.log("post in thunk: ", initialPost);
     const newPost = { 
       text_body, 
       is_helper, 

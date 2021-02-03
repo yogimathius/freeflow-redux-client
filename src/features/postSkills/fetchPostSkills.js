@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPostSkills, selectAllPostSkills } from './postSkillsSlice';
 
 export default function PostSkillsList() {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
   const postSkills = useSelector(selectAllPostSkills)
+
   let content
 
-	console.log("this is firing!");
   const postSkillsStatus = useSelector((state) => state.postSkills.status)
   const error = useSelector((state) => state.postSkills.error)
 
@@ -20,9 +20,12 @@ export default function PostSkillsList() {
   if (postSkillsStatus === 'pending') {
     content = <div className="loader">Loading...</div>
   } else if (postSkillsStatus === 'fulfilled') {
-    content = postSkills
+    content = postSkills !== undefined ? postSkills.map((post, index) => {
+      return <span key={index}>{post}</span>
+    }) : ""
   } else if (postSkillsStatus === 'rejected') {
     content = <div>{error}</div>
-	}
+  }
+  // console.log("content in fetch post skills: ", content);
   return <div>{content}</div>
 }

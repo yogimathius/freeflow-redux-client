@@ -22,11 +22,9 @@ export default function AddPostForm() {
 
   let id = 37;
   const onSavePostClicked = async () => {
-    console.log("post button clicked!");
     // setTriggerPostSkillAxios(true);
     // addPostSkills(canSave)
     if (canSave) {
-      console.log("can save");
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { fetchUsers } from './features/users/usersSlice'
 import { fetchPosts } from './features/posts/postsSlice'
 import Footer from './components/Footer'
-import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
+// import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
