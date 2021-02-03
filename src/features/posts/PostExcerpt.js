@@ -106,19 +106,11 @@ export default function PostExcerpt({ postId, onPost, index }) {
       >
         <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>
-
-      { userId === post.owner_id ?
-      <div className="space-x-1">
-        <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
-        <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
-      </div>
-        : ""
-      }
       
       {/* TEXT BODY */}
       {mode === SHOW && (
 
-      <p className="post-content">{post.text_body}</p>
+      <p className="flex justify-center px-12 py-5">{post.text_body}</p>
       )}
 
       {mode === EDITING && (
@@ -127,6 +119,14 @@ export default function PostExcerpt({ postId, onPost, index }) {
         onSaveEdit={onSaveEdit}
       />
       )}
+
+{ userId === post.owner_id ?
+      <div className="space-x-1 flex justify-end mr-2">
+        <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+        <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+      </div>
+        : ""
+      }
       {/* LIKES */}
       <Likes postId={postId} userId={userId} />
 
