@@ -6,7 +6,7 @@ import { addNewComment } from './commentsSlice'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
-	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+	const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   const userId = loggedInUser.id;
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 

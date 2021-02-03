@@ -42,7 +42,7 @@ const PostsList = ({posts}) => {
           {content}
         </section>
       : 
-      <div className="flex justify-center my-2">Sorry! None found.</div>
+      <div className="flex justify-center">Sorry! None found.</div>
     }
     </div>
   )

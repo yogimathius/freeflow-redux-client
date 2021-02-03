@@ -22,6 +22,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "4.0.1",
+    "react-tag-autocomplete": "^6.1.0",
     "seedrandom": "^3.0.5",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "txtgen": "^2.2.4"

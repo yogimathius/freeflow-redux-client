@@ -10,7 +10,7 @@ import { saveState } from '../../helpers/localStorage'
 
 export const CommentsList = ({ postId }) => {
   const comments = useSelector((state) => selectCommentsByPostId(state, parseInt(postId)))
-	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+	const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   const userId = loggedInUser.id;
   const dispatch = useDispatch()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')

@@ -8,34 +8,45 @@ import SkillSelector from '../dbSkills/SkillSelector'
 export default function AddPostForm() {
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  const [triggerPostSkillAxios, setTriggerPostSkillAxios] = useState(false)
+
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
+  const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
+
   const userId = loggedInUser.id;
   const dispatch = useDispatch()
   const onContentChanged = (e) => setContent(e.target.value)
 
-  const canSave =
-    [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
+  const canSave =
+    [selectedSkill, content, userId].every(Boolean) && addRequestStatus === 'idle'
+
+  let id = 37;
   const onSavePostClicked = async () => {
+    setTriggerPostSkillAxios(true);
+    // addPostSkills(canSave)
     if (canSave) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addNewPost({ 
+            id: id,
             owner_id: userId, 
             text_body: content,
             active: true, 
             is_helper: false, 
             is_helped: false, 
             avatar: loggedInUser.avatar,
-            username: loggedInUser.username
+            username: loggedInUser.username,
           })
         )
         unwrapResult(resultAction)
         setContent('')
+        id++
       } catch (err) {
         console.error('Failed to save the post: ', err)
       } finally {
+
         setAddRequestStatus('idle')
       }
     }
@@ -43,7 +54,10 @@ export default function AddPostForm() {
 
   return (
     <section>
-      <SkillSelector />
+      <SkillSelector 
+        id={id}
+        canTriggerAxios={triggerPostSkillAxios}
+        loggedInUser={loggedInUser} />
       <form className="space-y-2 mx-2">
         <label htmlFor="postContent"></label>
         <textarea

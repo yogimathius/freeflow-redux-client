@@ -19,7 +19,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
-	const loggedInUser = JSON.parse(localStorage.getItem('user'))
+	const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))

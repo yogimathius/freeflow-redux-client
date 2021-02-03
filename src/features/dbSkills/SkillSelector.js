@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectAllskills } from './dbSkillsSlice';
+import Autocomplete from "../../helpers/Autocomplete";
 
-const SkillSelector = () => {
+const SkillSelector = (props) => {
 	const dispatch = useDispatch();
 
 	const skills = useSelector(selectAllskills)
+
+	const skillNames = skills.map(skill => skill.name)
 
 	const skillStatus = useSelector((state) => state.skills.status)
 
@@ -30,13 +33,14 @@ const SkillSelector = () => {
 	}) : "";
 
 	const handleChange = (event) => {
-    let value = event.target.value;
-    this.setState({
-        disabled: value === '2'
-    });
+		let value = event.target.value;
+		console.log(value);
+    localStorage.setItem('selected_skill', value)
 	}
+
 	return (
 		<div className="text-center">
+			{/* <Autocomplete options={skillNames} /> */}
 			<label htmlFor="skills">Choose a skill: </label>
 			<select id="skills" name="skills" onChange={(e) => handleChange(e)}>
 				{SkillSelector}

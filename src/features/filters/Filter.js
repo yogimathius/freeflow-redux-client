@@ -20,13 +20,13 @@ const Filter = () => {
 
 
   const filterKeys = Object.keys(VisibilityFilters)
-  const renderedFilters = filterKeys.map((filter, index) => {
+  const renderedFilters = filterKeys.length > 0 ? filterKeys.map((filter, index) => {
     return (
       <FilterLink key={index} filter={VisibilityFilters[filter]}>
         {filter}
       </FilterLink>
     )
-  })
+  }) : "";
 
   return (
     <div className="flex mt-3 items-center justify-center space-x-8">
