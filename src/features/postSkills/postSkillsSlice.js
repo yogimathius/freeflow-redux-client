@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts_skills'
+const url = 'http://localhost:8080/api/posts_skills'
 
 const postsSkillsAdapter = createEntityAdapter({
 	selectId: (postsSkill) => postsSkill.id
@@ -19,7 +19,8 @@ const initialState = postsSkillsAdapter.getInitialState({
 })
 
 export const fetchPostSkills = createAsyncThunk('posts/fetchPostSkills', async () => {
-	const response = await axios.get(url);
+  const response = await axios.get(url);
+  console.log("response in post skill thunk: ", response.data);
   return response.data
 })
 
@@ -98,5 +99,5 @@ export const {
 
 export const selectPostSkillsByPostId = createSelector(
   [selectAllPostSkills, (state, postsId) => postsId],
-  (postsSkills, postsId) => postsSkills.filter((postsSkill) => postsSkill.posts_id === postsId )
+  (postsSkills, postId) => postsSkills.filter((postsSkill) => postsSkill.post_id === postId )
 )

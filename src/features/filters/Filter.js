@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { VisibilityFilters, addVisibilityFilter } from './filtersSlice';
 import FilterLink from './FilterLink.js'
 import React, { useEffect } from 'react';
-import { selectAllskills } from '../dbSkills/dbSkillsSlice';
 
 const Filter = () => {
   const dispatch = useDispatch()
