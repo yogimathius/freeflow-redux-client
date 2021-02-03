@@ -9,18 +9,19 @@ const Filter = () => {
 
   const skills = useSelector(selectAllskills)
 
+  useEffect (() => {
     for (const skill in skills) {
     if (Object.hasOwnProperty.call(skills, skill)) {
       const skillElement = skills[skill];
       dispatch(addVisibilityFilter(skillElement))
       }
     }
+  })
 
 
   const filterKeys = Object.keys(VisibilityFilters)
-  console.log(VisibilityFilters);
   const renderedFilters = filterKeys.map((filter, index) => {
-    // console.log("filter: ", filter);
+    // console.log(filter);
     return (
       <FilterLink key={index} filter={VisibilityFilters[filter]}>
         {filter}

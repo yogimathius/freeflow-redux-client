@@ -4,24 +4,27 @@ import PostsList from './PostsList'
 import { VisibilityFilters } from '../filters/filtersSlice'
 
 const selectPosts = (state) => state.posts
-const selectFilter = (state) => state.visibilityFilter
+const selectFilter = (state) => state.visibilityFilters
 
 const selectVisiblePosts = createSelector(
   [selectPosts, selectFilter],
   (state, filter) => {
-    console.log("posts: ", state);
     if (state.posts === undefined || state.posts === null) {
       return null;
     }
+
     const postKeys = Object.keys(state.posts.entities)
+    console.log("keys: ", postKeys);
     const postArr = []
     postKeys.forEach(key => {
       postArr.push(state.posts.entities[key])
     })
+    console.log(postArr);
 
     for (const language in VisibilityFilters) {
+      console.log(VisibilityFilters);
       const filteredLang = VisibilityFilters[language]
-      console.log(filteredLang);
+      console.log("filtered language: ", filteredLang);
       if (filter === 'SHOW_ALL') {
         return postArr
       }

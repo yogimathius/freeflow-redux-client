@@ -3,21 +3,20 @@ import {
 } from '@reduxjs/toolkit'
 
 export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL'
+  All: 'Show All'
 }
 
 const filtersSlice = createSlice({
   name: 'visibilityFilters',
-  initialState: VisibilityFilters.SHOW_ALL,
+  initialState: VisibilityFilters.All,
   reducers: {
     setVisibilityFilter(state, action) {
+      console.log("set visibility to: ", action.payload);
       return action.payload
     },
     addVisibilityFilter(state, action) {
-      const type = action.payload.name.toUpperCase()
+      const type = action.payload.name
       const filter = action.payload.name
-      console.log(filter);
-
 
       VisibilityFilters[type] = filter
       return state

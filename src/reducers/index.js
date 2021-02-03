@@ -7,6 +7,7 @@ import experiencesReducer from '../features/experiences/experiencesSlice';
 import userLoginReducer from '../features/login/userLoginSlice';
 import skillsReducer from '../features/dbSkills/dbSkillsSlice';
 import userSkillsReducer from '../features/userSkills/userSkillsSlice';
+import filtersReducer from '../features/filters/filtersSlice';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -17,6 +18,10 @@ const rootReducer = combineReducers({
   experiences: experiencesReducer,
   skills: skillsReducer,
   userSkills: userSkillsReducer,
+  visibilityFilters: filtersReducer
 })
 
+
 export default rootReducer
+
+

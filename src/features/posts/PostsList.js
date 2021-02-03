@@ -9,7 +9,8 @@ import {
 } from './postsSlice'
 import Filter from '../filters/Filter';
 
-const PostsList = () => {
+const PostsList = ({posts}) => {
+  console.log("posts in props: ", posts);
   const dispatch = useDispatch()
   const orderedPostIds = useSelector(selectPostIds)
 

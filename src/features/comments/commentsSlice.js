@@ -30,7 +30,6 @@ export const addNewComment = createAsyncThunk(
       post_id,
       content,
     } = initialComment
-    console.log(initialComment);
     const response = await axios.post(`${url}`, {
       commenter_id,
       post_id,
@@ -49,13 +48,11 @@ export const removeComment = createAsyncThunk(
       post_id: post_id,
       commenter_id: commenter_id
     };
-    console.log("remove comment object: ", removeComment);
     const response = await axios.delete(url, { 
       params: { 
         removeComment
       }
     });
-    console.log("response in remove comment thunk: ", response.post);
     return response.post
   }
 )
@@ -87,7 +84,6 @@ const commentsSlice = createSlice({
     },
     [addNewComment.fulfilled]: commentsAdapter.addOne,
     [removeComment.fulfilled]: (state, action) => {
-      console.log("action: ", action);
       commentsAdapter.removeOne(state, action.meta.arg.id)
     } 
   },
