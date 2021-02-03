@@ -28,8 +28,8 @@ const PostsList = ({posts}) => {
   if (postStatus === 'loading') {
     content = <div className="loader">Loading...</div>
   } else if (postStatus === 'succeeded') {
-    content = orderedPostIds.map((postId, index) => (
-      <PostExcerpt key={index} postId={postId} index={index} />
+    content = posts.map((post, index) => (
+      <PostExcerpt key={index} postId={post.id} index={index} />
     ))
   } else if (postStatus === 'failed') {
     content = <div>{postError}</div>
@@ -39,9 +39,13 @@ const PostsList = ({posts}) => {
     <div className="pt-3 mx-2">
       <AddPostForm />
       <Filter />
-      <section className="posts-list">
-        {content}
-      </section>
+      {posts.length !== 0 ? 
+        <section className="posts-list">
+          {content}
+        </section>
+      : 
+      <div className="flex justify-center">None found.</div>
+    }
     </div>
   )
 }

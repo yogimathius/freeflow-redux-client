@@ -9,27 +9,26 @@ const selectFilter = (state) => state.visibilityFilters
 const selectVisiblePosts = createSelector(
   [selectPosts, selectFilter],
   (state, filter) => {
-    if (state.posts === undefined || state.posts === null) {
-      return null;
-    }
+    const postKeys = Object.keys(state.entities)
 
-    const postKeys = Object.keys(state.posts.entities)
-    console.log("keys: ", postKeys);
     const postArr = []
     postKeys.forEach(key => {
-      postArr.push(state.posts.entities[key])
+      postArr.push(state.entities[key])
     })
-    console.log(postArr);
+    console.log("post arr: ", postArr);
 
-    for (const language in VisibilityFilters) {
-      console.log(VisibilityFilters);
-      const filteredLang = VisibilityFilters[language]
-      console.log("filtered language: ", filteredLang);
+    for (const skill in VisibilityFilters) {
+      // console.log("visibility filters: ", VisibilityFilters);
+      const filteredSkill = VisibilityFilters[skill]
+      // console.log("skill: ", filteredSkill, filter);
       if (filter === 'SHOW_ALL') {
         return postArr
       }
-      if (filter === filteredLang) {
-        return postArr.filter((post) => post.language === filteredLang)
+      if (filter === filteredSkill) {
+        console.log(filter, ' = ', filteredSkill);
+        return postArr.filter((post) => {
+          console.log(post);
+          return post.name === filteredSkill })
       }
     }
     throw new Error('Unknown filter: ' + filter)
