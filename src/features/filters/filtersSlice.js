@@ -3,7 +3,7 @@ import {
 } from '@reduxjs/toolkit'
 
 export const VisibilityFilters = {
-  All: 'Show All'
+  All: 'All'
 }
 
 const filtersSlice = createSlice({

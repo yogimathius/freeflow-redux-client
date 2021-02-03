@@ -20,8 +20,9 @@ const selectVisiblePosts = createSelector(
     for (const skill in VisibilityFilters) {
       // console.log("visibility filters: ", VisibilityFilters);
       const filteredSkill = VisibilityFilters[skill]
-      // console.log("skill: ", filteredSkill, filter);
-      if (filter === 'SHOW_ALL') {
+      console.log("skill: ", filteredSkill, filter);
+      if (filter === 'All') {
+        console.log("filter is all ", postArr);
         return postArr
       }
       if (filter === filteredSkill) {
