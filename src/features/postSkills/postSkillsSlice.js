@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080/api/posts_skills'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts_skills'
 
 const postsSkillsAdapter = createEntityAdapter({
 	selectId: (postsSkill) => postsSkill.id

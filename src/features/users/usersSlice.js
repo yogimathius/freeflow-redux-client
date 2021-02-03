@@ -11,13 +11,15 @@ const usersAdapter = createEntityAdapter();
 
 const initialState = usersAdapter.getInitialState();
 
-const url = 'http://localhost:8080/api/users'
-
-
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get(url);
+  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/users');
   return response.data;
 });
+
+export const fetchUserPosts = createAsyncThunk('users/fetchUserPostings', async () => {
+  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/users/:id/postings');
+  return response.data
+})
 
 const usersSlice = createSlice({
   name: 'users',

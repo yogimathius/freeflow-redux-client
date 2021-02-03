@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 // Slice
-const url = 'http://localhost:8080/api/login-real'
+const url = 'http://freeflow-two-point-o.herokuapp.com/api/login-real'
 
 
 const initialUser = localStorage.getItem('user')

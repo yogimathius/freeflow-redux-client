@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080/api/likes'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/likes'
 
 const likesAdapter = createEntityAdapter({
 	selectId: (like) => like.id
@@ -18,7 +18,7 @@ const initialState = likesAdapter.getInitialState({
 })
 
 export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
-  const response = await axios.get(url);
+  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/likes');
   return response.data
 })
 

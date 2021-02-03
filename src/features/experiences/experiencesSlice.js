@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080/api/experiences'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/experiences'
 
 const experiencesAdapter = createEntityAdapter({
 	selectId: (experience) => experience.id,
