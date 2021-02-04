@@ -5,7 +5,7 @@ import { fetchPostSkills, selectPostSkillsByPostId } from '../postSkills/postSki
 const PostExcerptSkills = ({ postId }) => {
 	const dispatch = useDispatch()
 
-	console.log("post id in excerpt skill: ", postId);
+	// console.log("post id in excerpt skill: ", postId);
 	const postSkillsStatus = useSelector((state) => state.postSkills.status)
 
 
@@ -21,7 +21,7 @@ const PostExcerptSkills = ({ postId }) => {
 			<span className="italic ">{postSkill.name}</span>
 		)
 	})
-	console.log("post skills in excerpt skills: ", postSkills);
+	// console.log("post skills in excerpt skills: ", postSkills);
 	return (
 		<div className="text-sm space-x-1">
 			<span className="font-bold">Skills:</span> 

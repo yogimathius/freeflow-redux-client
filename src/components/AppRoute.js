@@ -6,7 +6,7 @@ import { Redirect, Route } from 'react-router-dom';
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
   const loggedInUser = useSelector(state => state.user)
 
-
+	console.log(loggedInUser);
 	return (
 		<Route
 			path={path}
