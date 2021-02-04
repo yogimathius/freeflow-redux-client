@@ -8,10 +8,10 @@ import SkillSelector from '../dbSkills/SkillSelector'
 export default function AddPostForm() {
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  const [triggerPostSkillAxios, setTriggerPostSkillAxios] = useState(false)
+  // const [triggerPostSkillAxios, setTriggerPostSkillAxios] = useState(false)
 
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
-  const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
+  // const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
 
   const userId = loggedInUser.id;
   const dispatch = useDispatch()
@@ -22,11 +22,9 @@ export default function AddPostForm() {
 
   let id = 37;
   const onSavePostClicked = async () => {
-    console.log("post button clicked!");
     // setTriggerPostSkillAxios(true);
     // addPostSkills(canSave)
     if (canSave) {
-      console.log("can save");
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
@@ -57,7 +55,7 @@ export default function AddPostForm() {
     <section>
       <SkillSelector 
         id={id}
-        canTriggerAxios={triggerPostSkillAxios}
+        // canTriggerAxios={triggerPostSkillAxios}
         loggedInUser={loggedInUser} />
       <form className="space-y-2 mx-2">
         <label htmlFor="postContent"></label>

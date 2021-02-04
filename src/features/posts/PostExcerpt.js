@@ -7,7 +7,6 @@ import { TimeAgo } from './TimeAgo'
 import {
   removePost,
   selectPostById,
-  updatePost,
 } from './postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
@@ -17,13 +16,16 @@ import { AddCommentForm } from '../comments/AddCommentForm';
 import { selectCommentsByPostId } from '../comments/commentsSlice';
 import useVisualMode from "../../hooks/useVisualMode";
 import { EditPostForm } from './EditPostForm';
+import { selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
+import PostSkillsList from '../postSkills/fetchPostSkills';
+import PostExcerptSkills from './PostExcerptSkills';
 
 const SHOW = "SHOW";
-const CONFIRM = "CONFIRM";
-const SAVING = "SAVING";
+// const CONFIRM = "CONFIRM";
+// const SAVING = "SAVING";
 const EDITING = "EDITING";
-const ERROR_SAVE = "ERROR_SAVE";
-const ERROR_DELETE = "ERROR_DELETE";
+// const ERROR_SAVE = "ERROR_SAVE";
+// const ERROR_DELETE = "ERROR_DELETE";
 
 export default function PostExcerpt({ postId, onPost, index }) {
   const dispatch = useDispatch()
@@ -34,14 +36,15 @@ export default function PostExcerpt({ postId, onPost, index }) {
   
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
-
+  const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
+  console.log("post excerpt skills: ", postSkills);
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
 
   const commentsLength = postComments.length
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const { mode, transition, back } = useVisualMode(SHOW);
+  const { mode, transition } = useVisualMode(SHOW);
 
 
   function onEdit() {
@@ -54,24 +57,6 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
-
-  // EDIT POST DISPATCH
-  const onEditPostClicked = async () => {
-    if (canEditOrRemove) {
-      try {
-        setAddRequestStatus('pending')
-        const resultAction = await dispatch(
-          updatePost({   post_id: post.id })
-        )
-        unwrapResult(resultAction)
-
-      } catch (err) {
-        console.error('Failed to remove like from post: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-      }
-    }
-  }
 
   // DELETE POST DISPATCH
   const onDeletePostClicked = async () => {
@@ -93,10 +78,11 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   return (
     <article className="rounded p-2 mx-1 my-3 bg-white" key={post.id}>
-
+      {/* <PostSkillsList /> */}
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
-        <h3 className="font-bold">Tags: {post.name}</h3>
+        <PostExcerptSkills postId={postId} />
+        {/* <h3 className="font-bold">Tags: {post.name}</h3> */}
         <TimeAgo timestamp={post.time_posted} />
       </div>
 

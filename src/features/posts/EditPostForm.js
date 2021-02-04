@@ -1,9 +1,8 @@
 import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 
-import { postUpdated, selectPostById, updatePost } from './postsSlice'
+import { selectPostById, updatePost } from './postsSlice'
 
 export const EditPostForm = ({ postId, onSaveEdit }) => {
 
@@ -15,10 +14,10 @@ export const EditPostForm = ({ postId, onSaveEdit }) => {
 
   
   const onContentChanged = (e) => setContent(e.target.value)
+  // eslint-disable-next-line no-unused-vars
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const onSavePostClicked  = async () => {
-    console.log("edit button clicked!");
     if (content) {
 
       try {
