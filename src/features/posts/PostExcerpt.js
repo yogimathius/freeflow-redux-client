@@ -16,8 +16,6 @@ import { AddCommentForm } from '../comments/AddCommentForm';
 import { selectCommentsByPostId } from '../comments/commentsSlice';
 import useVisualMode from "../../hooks/useVisualMode";
 import { EditPostForm } from './EditPostForm';
-import { selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
-import PostSkillsList from '../postSkills/fetchPostSkills';
 import PostExcerptSkills from './PostExcerptSkills';
 
 const SHOW = "SHOW";
@@ -36,8 +34,6 @@ export default function PostExcerpt({ postId, onPost, index }) {
   
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
-  const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
-  console.log("post excerpt skills: ", postSkills);
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
 
   const commentsLength = postComments.length

@@ -7,10 +7,10 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
-const url = 'http://localhost:8080/api/posts_skills'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts_skills'
 
 const postsSkillsAdapter = createEntityAdapter({
-	selectId: (postSkill) => postSkill.id
+	selectId: (postsSkill) => postsSkill.id
 })
 
 const initialState = postsSkillsAdapter.getInitialState({
@@ -18,9 +18,8 @@ const initialState = postsSkillsAdapter.getInitialState({
   error: null,
 })
 
-export const fetchPostSkills = createAsyncThunk('postSkills/fetchPostSkills', async () => {
-  const response = await axios.get(url);
-  // console.log("response in post skill thunk: ", response.data);
+export const fetchPostSkills = createAsyncThunk('posts/fetchPostSkills', async () => {
+	const response = await axios.get(url);
   return response.data
 })
 
@@ -44,7 +43,7 @@ export const addPostSkills = createAsyncThunk(
 
 
 export const removePostSkill = createAsyncThunk(
-  'postSkills/removePostSkill',
+  'postsSkills/removePostSkill',
   async (initialPostSkills) => {
     const { post_id, skill_id} = initialPostSkills
     const removePostSkill = {
@@ -61,7 +60,7 @@ export const removePostSkill = createAsyncThunk(
 )
 
 const postsSkillsSlice = createSlice({
-  name: 'postSkills',
+  name: 'postsSkills',
   initialState,
   reducers: {
   },
@@ -71,7 +70,7 @@ const postsSkillsSlice = createSlice({
     },
     [fetchPostSkills.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      // Add any fetched posts to the array
+			// Add any fetched posts to the array
       postsSkillsAdapter.upsertMany(state, action.payload)
     },
     [fetchPostSkills.rejected]: (state, action) => {
@@ -98,6 +97,7 @@ export const {
 } = postsSkillsAdapter.getSelectors((state) => state.postSkills)
 
 export const selectPostSkillsByPostId = createSelector(
-  [selectAllPostSkills, (state, postsId) => postsId],
-  (postsSkills, postId) => postsSkills.filter((postsSkill) => postsSkill.post_id === postId )
+  [selectAllPostSkills, (state, postId) => postId],
+  (postSkills, postId) => postSkills.filter((postsSkill) => {
+    return postsSkill.post_id === postId })
 )
