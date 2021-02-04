@@ -43,7 +43,7 @@ const selectVisiblePosts = createSelector(
       if (filter === filteredSkill) {
         
         return postArr.filter((post) => {
-          return post.name === filteredSkill })
+          return post.skills.includes(filteredSkill) })
       }
     }
     throw new Error('Unknown filter: ' + filter)
