@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostSkills, selectAllPostSkills, selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
+import { fetchPostSkills, selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
 
 const PostExcerptSkills = ({ postId }) => {
 	const dispatch = useDispatch()
@@ -15,8 +15,6 @@ const PostExcerptSkills = ({ postId }) => {
     }
 	}, [postSkillsStatus, dispatch])
 	
-	const postSkillsAll = useSelector((state) => selectAllPostSkills(state))
-	// console.log("all post skills: ", postSkillsAll);
 	const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
 	const renderedPostSkills = postSkills.map((postSkill, index) => {
 		return (
