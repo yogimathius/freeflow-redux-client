@@ -8,10 +8,16 @@ import { fetchUsers } from './features/users/usersSlice'
 import { fetchPosts } from './features/posts/postsSlice'
 import Footer from './components/Footer'
 // import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
+import axios from "axios";
 
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
 // store.dispatch(fetchSkills())
+
+if (process.env.REACT_APP_API_BASE_URL) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} className="bg-gray-400">
