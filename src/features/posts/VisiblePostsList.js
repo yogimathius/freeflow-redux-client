@@ -10,28 +10,38 @@ const selectFilter = (state) => state.visibilityFilters
 const selectVisiblePosts = createSelector(
   [selectPosts, selectPostSkills, selectFilter],
   (posts, postsSkills, filter) => {
-    console.log("posts in visible: ", posts);
+    // console.log("posts in visible: ", posts);
     const postKeys = Object.keys(posts.entities)
-    let postSkills = postsSkills.entities
-    // console.log("post skills: ", postSkills);
+    let postSkillsKeys = Object.keys(postsSkills.entities)
+    // console.log("post skills: ", postSkills, posts.entities, postKeys);
+    
+    let postSkillsArr = []
+    // const postSkills = post
 
-    for (const postSkillKey in postSkills) {
-      if (Object.hasOwnProperty.call(postSkills, postSkillKey)) {
-        const element = postSkills[postSkillKey];
-        console.log("post skill: ", element);
-      }
-    }
     const postArr = []
-    postKeys.forEach(key => {
-      postArr.push(posts.entities[key])
+    postKeys.forEach(postKey => {
+      const singlePosts = JSON.parse(JSON.stringify(posts.entities[postKey]))
+
+      
+      singlePosts.skills = []
+      postSkillsKeys.forEach(skillKey => {
+        postSkillsArr.push(postsSkills.entities[skillKey])
+        // console.log(postsSkills.entities[skillKey].post_id);
+        if (singlePosts.id === postsSkills.entities[skillKey].post_id) {
+          // console.log("match: ", postKey, postsSkills.entities[skillKey])
+          singlePosts.skills.push(postsSkills.entities[skillKey].name)
+        }})
+      postArr.push(singlePosts)
     })
 
+    console.log(postArr);
     for (const skill in VisibilityFilters) {
       const filteredSkill = VisibilityFilters[skill]
       if (filter === 'All') {
         return postArr
       }
       if (filter === filteredSkill) {
+        
         return postArr.filter((post) => {
           return post.name === filteredSkill })
       }
