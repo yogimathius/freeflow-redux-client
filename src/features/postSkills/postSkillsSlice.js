@@ -78,7 +78,8 @@ const postsSkillsSlice = createSlice({
       state.error = action.error.message
     },
     [addPostSkills.fulfilled]: (state, action) => {
-      postsSkillsAdapter.upsertOne(state, action.payload)
+      console.log("action in addpost fulfilled: ", action);
+      postsSkillsAdapter.upsertOne(state, action.meta.arg)
     },
     [removePostSkill.fulfilled]: (state, action) => {
       postsSkillsAdapter.removeOne(state, action.payload)

@@ -10,6 +10,8 @@ export default function AddPostForm() {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
   const posts = useSelector(state => state.posts.entities)
 
+  const postSkills = useSelector(state => state.postSkills.entities)
+
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   // const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
 
@@ -22,30 +24,17 @@ export default function AddPostForm() {
 
   let id;
 
-  let postLength = 0;
-  if (posts) {
-    for (const postKey in posts) {
-      if (Object.hasOwnProperty.call(posts, postKey)) {
-        postLength++
-      }
-    }
-  }
-  // console.log(postLength);
+  let postLength = Object.keys(posts).length;
+
+  let postSkillsId = Object.keys(postSkills).length
 
   const OnSavePostClicked = async () => {
     const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
 
     if (canSave) {
-      // postsArr.forEach(post => {
-      //   id = generateUID()
-      //   if (id === post.id)  {
-      //     generateUID()
-      //   }
-      // }) 
+
       id = postLength + 1;
-      console.log("succesful id generation: ", id);
       if (id !== null && id !== undefined) {
-        console.log("random id: ", id);
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
@@ -68,11 +57,14 @@ export default function AddPostForm() {
         setAddRequestStatus('idle')
       }
       try {
+        console.log("dispatch addpostskills is firing");
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addPostSkills({ 
             post_id: id,
             db_skills_id: selectedSkill.id, 
+            id: postSkillsId,
+            name: selectedSkill.name
           })
         )
         unwrapResult(resultAction)

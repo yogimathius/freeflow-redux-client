@@ -29,8 +29,6 @@ const selectVisiblePosts = createSelector(
       postArr.push(singlePosts)
     })
     const sortedArr = [...postArr].sort((a, b) => new Date(b.time_posted) - new Date (a.time_posted))
-    // postArr = postArr.sort((a, b) => b.time_posted - a.time_posted)
-    console.log("sorted arr: ", sortedArr);
     for (const skill in VisibilityFilters) {
       const filteredSkill = VisibilityFilters[skill]
       if (filter === 'All') {
