@@ -15,7 +15,7 @@ const selectVisiblePosts = createSelector(
     
     let postSkillsArr = []
 
-    const postArr = []
+    let postArr = []
     postKeys.forEach(postKey => {
       const singlePosts = JSON.parse(JSON.stringify(posts.entities[postKey]))
 
@@ -28,15 +28,17 @@ const selectVisiblePosts = createSelector(
         }})
       postArr.push(singlePosts)
     })
-
+    const sortedArr = [...postArr].sort((a, b) => new Date(b.time_posted) - new Date (a.time_posted))
+    // postArr = postArr.sort((a, b) => b.time_posted - a.time_posted)
+    console.log("sorted arr: ", sortedArr);
     for (const skill in VisibilityFilters) {
       const filteredSkill = VisibilityFilters[skill]
       if (filter === 'All') {
-        return postArr
+        return sortedArr
       }
       if (filter === filteredSkill) {
         
-        return postArr.filter((post) => {
+        return sortedArr.filter((post) => {
           return post.skills.includes(filteredSkill) })
       }
     }

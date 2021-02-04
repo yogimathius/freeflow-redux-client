@@ -9,6 +9,7 @@ import skillsReducer from '../features/dbSkills/dbSkillsSlice';
 import userSkillsReducer from '../features/userSkills/userSkillsSlice';
 import filtersReducer from '../features/filters/filtersSlice';
 import postSkillsReducer from '../features/postSkills/postSkillsSlice';
+import postCounterReducer from '../features/posts/postCounter/postCounterSlice';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   userSkills: userSkillsReducer,
   visibilityFilters: filtersReducer,
   postSkills: postSkillsReducer,
+  postCounter: postCounterReducer,
 })
 
 

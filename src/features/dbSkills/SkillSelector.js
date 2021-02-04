@@ -51,6 +51,7 @@ const SkillSelector = (props) => {
 			{/* <Autocomplete options={skillNames} /> */}
 			<label htmlFor="skills">Choose a skill: </label>
 			<select id="skills" name="skills" onChange={(e) => handleChange(e)}>
+				<option value="Select Skill">Select Skill</option>
 				{SkillSelector}
 			</select>
 		</div>

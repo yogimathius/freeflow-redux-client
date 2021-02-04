@@ -9,7 +9,7 @@ import axios from 'axios';
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts'
 
 const postsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.time_posted.localeCompare(a.time_posted),
+  sortComparer: (a, b) => a.time_posted.localeCompare(b.time_posted)
 })
 
 const initialState = postsAdapter.getInitialState({

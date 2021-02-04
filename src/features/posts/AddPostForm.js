@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { addNewPost, selectAllPosts } from './postsSlice'
+import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import { addPostSkills } from '../postSkills/postSkillsSlice'
-import generateUID from '../../helpers/generateRandomId';
 
 export default function AddPostForm() {
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  const posts = useSelector((state) => selectAllPosts)
+  const posts = useSelector(state => state.posts.entities)
+
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   // const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
 
@@ -22,30 +22,30 @@ export default function AddPostForm() {
 
   let id;
 
-  const postsArr = [];
-  for (const postKey in posts) {
-    if (Object.hasOwnProperty.call(posts, postKey)) {
-      const post = posts[postKey];
-      postsArr.push(post)
+  let postLength = 0;
+  if (posts) {
+    for (const postKey in posts) {
+      if (Object.hasOwnProperty.call(posts, postKey)) {
+        postLength++
+      }
     }
   }
+  // console.log(postLength);
 
   const OnSavePostClicked = async () => {
     const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
 
-    // setTriggerPostSkillAxios(true);
-    // addPostSkills(canSave)
-    postsArr.forEach(post => {
-      console.log("post: ", post);
-    })
     if (canSave) {
-      id = postsArr.forEach(post => {
-        console.log("post: ", post);
-      })
-        // post.id !== generateUID() ? generateUID : "");
-        // console.log(id);
-      // if (id !== null && id !== undefined) {
-        // console.log("random id: ", id);
+      // postsArr.forEach(post => {
+      //   id = generateUID()
+      //   if (id === post.id)  {
+      //     generateUID()
+      //   }
+      // }) 
+      id = postLength + 1;
+      console.log("succesful id generation: ", id);
+      if (id !== null && id !== undefined) {
+        console.log("random id: ", id);
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
@@ -81,7 +81,7 @@ export default function AddPostForm() {
       } finally {
         setAddRequestStatus('idle')
       }
-    // }
+    }
 
     }
   }
