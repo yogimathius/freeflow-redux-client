@@ -13,11 +13,9 @@ export class Autocomplete extends Component {
   };
 
   onChange = (e) => {
-    console.log('onChanges');
 
     const { options } = this.props;
     const userInput = e.currentTarget.value;
-    console.log("input: ", userInput);
 
     const filteredOptions = options.filter(
       (optionName) =>
@@ -56,7 +54,6 @@ export class Autocomplete extends Component {
       this.setState({ activeOption: activeOption - 1 });
     } else if (e.keyCode === 40) {
       if (activeOption === filteredOptions.length - 1) {
-        console.log(activeOption);
         return;
       }
       this.setState({ activeOption: activeOption + 1 });

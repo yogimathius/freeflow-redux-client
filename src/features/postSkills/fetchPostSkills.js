@@ -26,6 +26,5 @@ export default function PostSkillsList() {
   } else if (postSkillsStatus === 'rejected') {
     content = <div>{error}</div>
   }
-  // console.log("content in fetch post skills: ", content);
   return <div>{content}</div>
 }

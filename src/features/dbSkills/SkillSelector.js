@@ -8,6 +8,14 @@ const SkillSelector = (props) => {
 
 	const skills = useSelector(selectAllskills)
 
+	const skillsArr = [];
+
+	for (const skillKey in skills) {
+		if (Object.hasOwnProperty.call(skills, skillKey)) {
+			const skill = skills[skillKey];
+			skillsArr.push(skill);
+		}
+	}
 	// const skillNames = skills.map(skill => skill.name)
 
 	const skillStatus = useSelector((state) => state.skills.status)
@@ -26,7 +34,6 @@ const SkillSelector = (props) => {
   } else if (skillStatus === 'failed') {
 		console.error(skillStatus)
 	}
-	
 	const SkillSelector = fetchedSkills ? fetchedSkills.map((skill, index) => {
 		return (
   		<option key={index} value={skill.name}>{skill.name}</option>
@@ -35,7 +42,8 @@ const SkillSelector = (props) => {
 
 	const handleChange = (event) => {
 		let value = event.target.value;
-    localStorage.setItem('selected_skill', value)
+		const selectedSkill = skillsArr.find(skill => skill.name === value)
+    localStorage.setItem('selected_skill', JSON.stringify(selectedSkill))
 	}
 
 	return (

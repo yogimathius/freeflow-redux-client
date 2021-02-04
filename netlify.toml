@@ -10,6 +10,7 @@
 
   # Default build command.
   command = "npm run build"
+  functions = "functions"
 
 [build.environment]
   REACT_APP_API_BASE_URL = "https://freeflow-two-point-o.herokuapp.com/"

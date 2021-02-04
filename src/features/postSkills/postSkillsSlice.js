@@ -19,7 +19,7 @@ const initialState = postsSkillsAdapter.getInitialState({
 })
 
 export const fetchPostSkills = createAsyncThunk('posts/fetchPostSkills', async () => {
-	const response = await axios.get(url);
+	const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/posts_skills');
   return response.data
 })
 

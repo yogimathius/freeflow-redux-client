@@ -10,13 +10,13 @@ const UserSkills = (props) => {
 
 	const renderedSkills = skillsForUser ? skillsForUser.map((skill, index) => {
 
-		const redirectToFilteredPosts = (filter) => {
+		const setPostFilter = (filter) => {
 			dispatch(setVisibilityFilter(filter))
 		}
 		
 		return(
 			
-			<Link to="/dashboard" onClick={() => redirectToFilteredPosts(skill.name)} className="italic text-blue-500" key={index}>{skill.name}.</Link>
+			<Link to="/dashboard" onClick={() => setPostFilter(skill.name)} className="italic text-blue-500" key={index}>{skill.name}.</Link>
 		)
 	}) : "";
 
