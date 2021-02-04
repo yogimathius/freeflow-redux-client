@@ -4,16 +4,26 @@ import PostsList from './PostsList'
 import { VisibilityFilters } from '../filters/filtersSlice'
 
 const selectPosts = (state) => state.posts
+const selectPostSkills = (state) => state.postSkills
 const selectFilter = (state) => state.visibilityFilters
 
 const selectVisiblePosts = createSelector(
-  [selectPosts, selectFilter],
-  (state, filter) => {
-    const postKeys = Object.keys(state.entities)
+  [selectPosts, selectPostSkills, selectFilter],
+  (posts, postsSkills, filter) => {
+    console.log("posts in visible: ", posts);
+    const postKeys = Object.keys(posts.entities)
+    let postSkills = postsSkills.entities
+    // console.log("post skills: ", postSkills);
 
+    for (const postSkillKey in postSkills) {
+      if (Object.hasOwnProperty.call(postSkills, postSkillKey)) {
+        const element = postSkills[postSkillKey];
+        console.log("post skill: ", element);
+      }
+    }
     const postArr = []
     postKeys.forEach(key => {
-      postArr.push(state.entities[key])
+      postArr.push(posts.entities[key])
     })
 
     for (const skill in VisibilityFilters) {
