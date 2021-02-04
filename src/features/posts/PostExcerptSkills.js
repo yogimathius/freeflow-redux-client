@@ -18,7 +18,7 @@ const PostExcerptSkills = ({ postId }) => {
 	const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
 	const renderedPostSkills = postSkills.map((postSkill, index) => {
 		return (
-			<span className="italic ">{postSkill.name}</span>
+			<span key={index} className="italic ">{postSkill.name}</span>
 		)
 	})
 	// console.log("post skills in excerpt skills: ", postSkills);
