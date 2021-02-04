@@ -94,9 +94,10 @@ export const {
   selectAll: selectAllPostSkills,
   selectById: selectPostSkillById,
   selectIds: selectPostSkillIds,
-} = postsSkillsAdapter.getSelectors((state) => state.postsSkills)
+} = postsSkillsAdapter.getSelectors((state) => state.postSkills)
 
 export const selectPostSkillsByPostId = createSelector(
-  [selectAllPostSkills, (state, postsId) => postsId],
-  (postsSkills, postsId) => postsSkills.filter((postsSkill) => postsSkill.posts_id === postsId )
+  [selectAllPostSkills, (state, postId) => postId],
+  (postSkills, postId) => postSkills.filter((postsSkill) => {
+    return postsSkill.post_id === postId })
 )
