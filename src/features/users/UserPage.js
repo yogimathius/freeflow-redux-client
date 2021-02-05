@@ -23,7 +23,10 @@ export default function UserPage() {
     return null;
   }
 
-  const renderedPosts = postsForUser.map((post, index) => 
+  const sortedArr = [...postsForUser].sort((a, b) => new Date(b.time_posted) - new Date (a.time_posted))
+
+  
+  const renderedPosts = sortedArr.map((post, index) => 
     <PostExcerpt key={index} postId={post.id} />
     )
     
