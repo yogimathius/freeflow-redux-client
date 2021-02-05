@@ -2,7 +2,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { postUpdated, selectPostById, updatePost } from './postsSlice'
+import {  selectPostById, updatePost } from './postsSlice'
 
 export const EditPostForm = ({ postId, onSaveEdit, value }) => {
   const post = useSelector((state) => selectPostById(state, postId))
@@ -18,7 +18,6 @@ export const EditPostForm = ({ postId, onSaveEdit, value }) => {
 
   const onSavePostClicked  = async () => {
     if (content) {
-      const id = post.id
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
