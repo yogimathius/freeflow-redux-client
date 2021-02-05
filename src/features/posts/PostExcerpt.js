@@ -99,6 +99,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       <EditPostForm 
         postId={postId}
         onSaveEdit={onSaveEdit}
+        value={post.text_body}
       />
       )}
 

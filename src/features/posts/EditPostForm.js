@@ -2,13 +2,12 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectPostById, updatePost } from './postsSlice'
+import { postUpdated, selectPostById, updatePost } from './postsSlice'
 
-export const EditPostForm = ({ postId, onSaveEdit }) => {
-
+export const EditPostForm = ({ postId, onSaveEdit, value }) => {
   const post = useSelector((state) => selectPostById(state, postId))
-
-  const [content, setContent] = useState(post.content)
+  
+  const [content, setContent] = useState(value)
 
   const dispatch = useDispatch()
 
@@ -19,16 +18,16 @@ export const EditPostForm = ({ postId, onSaveEdit }) => {
 
   const onSavePostClicked  = async () => {
     if (content) {
-
+      const id = post.id
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          updatePost({ text_body: content,  post_id: post.id })
+          updatePost({ text_body: content,  post_id: post.id, changes: { text_body: content} })
         )
         unwrapResult(resultAction)
 
       } catch (err) {
-        console.error('Failed to remove like from post: ', err)
+        console.error('Failed to update post: ', err)
       } finally {
         setAddRequestStatus('idle')
         onSaveEdit()
@@ -41,7 +40,7 @@ export const EditPostForm = ({ postId, onSaveEdit }) => {
       <form className="">
         <label htmlFor="postContent"></label>
         <textarea
-          className="bg-gray-200 w-full border-1 border-solid border-gray-300 rounded-xl"
+          className="bg-gray-200 w-full border-1 border-solid border-gray-300 rounded-xl p-3"
           id="postContent"
           name="postContent"
           value={content}

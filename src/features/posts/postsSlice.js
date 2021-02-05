@@ -62,7 +62,6 @@ export const updatePost = createAsyncThunk(
   'posts/updatePost',
   async (initialPost) => {
     const { text_body, post_id } = initialPost
-
     const response = await axios.put(url, { text_body,
     post_id });
     return response.data
@@ -73,11 +72,11 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     postUpdated(state, action) {
-      const { id, title, content } = action.payload
+      const { id, content } = action.payload
       const existingPost = state.entities[id]
+      console.log("post: ", state);
       if (existingPost) {
-        existingPost.title = title
-        existingPost.content = content
+        existingPost.text_body = content
       }
     },
   },
@@ -98,9 +97,10 @@ const postsSlice = createSlice({
     [removePost.fulfilled]: (state, action) => {
       postsAdapter.removeOne(state, action.meta.arg.post_id)
     },
-    // [updatePost.fulfilled]:(state, action) => {
-    //   postsAdapter.updateOne(state, action.meta.arg.post_id)
-    // }
+    [updatePost.fulfilled]:(state, { payload }) => {
+      const { id, ...changes } = payload;
+      postsAdapter.updateOne(state, {id, changes})
+    }
   },
 })
 
