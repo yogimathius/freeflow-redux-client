@@ -6,6 +6,7 @@ import SkillSelector from '../dbSkills/SkillSelector'
 import { addPostSkills } from '../postSkills/postSkillsSlice'
 
 export default function AddPostForm() {
+  const [error, setError] = useState("");
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
   const posts = useSelector(state => state.posts.entities)
@@ -26,12 +27,21 @@ export default function AddPostForm() {
 
   let postLength = Object.keys(posts).length;
 
-  let postSkillsId = Object.keys(postSkills).length
+  let postSkillsId = Object.keys(postSkills).length + 1
 
+  let wasSubmitted = false;
   const OnSavePostClicked = async () => {
     const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
+    console.log("skill from storage: ", selectedSkill);
 
-    if (canSave) {
+    if (content === "") {
+      setError("Post cannot be blank");
+      return
+    }
+    if (selectedSkill === null) {
+      setError("Please select a skill"); 
+      return
+    } else if (canSave) {
 
       id = postLength + 1;
       if (id !== null && id !== undefined) {
@@ -67,23 +77,26 @@ export default function AddPostForm() {
             name: selectedSkill.name
           })
         )
+
         unwrapResult(resultAction)
       } catch (err) {
-        console.error('Failed to save the post: ', err)
+        console.error('Failed to save the post skill: ', err)
       } finally {
         setAddRequestStatus('idle')
+        localStorage.setItem('selected_skill', null);
+        setError("")
+        wasSubmitted = true;
       }
-    }
-
+    } 
     }
   }
-
   return (
     <section>
       <SkillSelector 
         id={id}
         // canTriggerAxios={triggerPostSkillAxios}
-        loggedInUser={loggedInUser} />
+        loggedInUser={loggedInUser}
+        wasSubmitted={wasSubmitted} />
       <form className="space-y-2 mx-2">
         <label htmlFor="postContent"></label>
         <textarea
@@ -96,7 +109,10 @@ export default function AddPostForm() {
           rows="3"
           onChange={onContentChanged}
         />
+        <section className="flex justify-center validation">{error}</section>
+
         <div className="flex justify-center">
+
           <div 
           className="btn btn-primary"
           type="button" 

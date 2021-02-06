@@ -71,14 +71,6 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postUpdated(state, action) {
-      const { id, content } = action.payload
-      const existingPost = state.entities[id]
-      console.log("post: ", state);
-      if (existingPost) {
-        existingPost.text_body = content
-      }
-    },
   },
   extraReducers: {
     [fetchPosts.pending]: (state, action) => {

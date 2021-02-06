@@ -16,6 +16,7 @@ const postsSkillsAdapter = createEntityAdapter({
 const initialState = postsSkillsAdapter.getInitialState({
   status: 'idle',
   error: null,
+  addPostSkill: false
 })
 
 export const fetchPostSkills = createAsyncThunk('posts/fetchPostSkills', async () => {
@@ -77,17 +78,15 @@ const postsSkillsSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addPostSkills.fulfilled]: (state, action) => {
-      console.log("action in addpost fulfilled: ", action);
-      postsSkillsAdapter.upsertOne(state, action.meta.arg)
-    },
+    [addPostSkills.fulfilled]:
+      postsSkillsAdapter.addOne,
     [removePostSkill.fulfilled]: (state, action) => {
       postsSkillsAdapter.removeOne(state, action.payload)
     } 
   },
 })
 
-export const { postsSkillAdded } = postsSkillsSlice.actions
+export const { postsSkillAdded, addingPostSkill } = postsSkillsSlice.actions
 
 export default postsSkillsSlice.reducer
 
