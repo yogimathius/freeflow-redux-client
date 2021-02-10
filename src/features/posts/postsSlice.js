@@ -87,6 +87,7 @@ const postsSlice = createSlice({
     },
     [addNewPost.fulfilled]: postsAdapter.addOne,
     [removePost.fulfilled]: (state, action) => {
+      console.log("state in remove post: ", state);
       postsAdapter.removeOne(state, action.meta.arg.post_id)
     },
     [updatePost.fulfilled]:(state, { payload }) => {

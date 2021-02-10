@@ -67,7 +67,7 @@ export default function AddPostForm() {
         setAddRequestStatus('idle')
       }
       try {
-        console.log("dispatch addpostskills is firing");
+        console.log("dispatch addpostskills is firing", id);
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
           addPostSkills({ 

@@ -37,6 +37,7 @@ export const addPostSkills = createAsyncThunk(
   'postSkills/addPostSkills',
   async (initialPostSkills) => {
     const {post_id, db_skills_id} = initialPostSkills
+    console.log("initial post skills: ", initialPostSkills);
     const response = await axios.post(url, {post_id, db_skills_id});
     return response.data
   }
