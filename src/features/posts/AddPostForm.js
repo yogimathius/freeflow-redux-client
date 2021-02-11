@@ -4,6 +4,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import { addPostSkills } from '../postSkills/postSkillsSlice'
+import generateUID from '../../helpers/generateRandomId'
 
 export default function AddPostForm() {
   const [error, setError] = useState("");
@@ -14,6 +15,7 @@ export default function AddPostForm() {
   const postSkills = useSelector(state => state.postSkills.entities)
 
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
+  
   // const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
 
   const userId = loggedInUser.id;
@@ -27,12 +29,17 @@ export default function AddPostForm() {
 
   let postLength = Object.keys(posts).length;
 
-  let postSkillsId = Object.keys(postSkills).length + 1
+  const postSkillKeys = Object.keys(postSkills)
+  let postSkillsId = postSkillKeys.length + 1
 
   let wasSubmitted = false;
   const OnSavePostClicked = async () => {
+    let uniquePostSkillId = generateUID()
+    postSkillKeys.forEach(skillId => 
+      skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
+    console.log("unique post skill id: ", uniquePostSkillId);
+
     const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
-    console.log("skill from storage: ", selectedSkill);
 
     if (content === "") {
       setError("Post cannot be blank");
@@ -47,7 +54,7 @@ export default function AddPostForm() {
       if (id !== null && id !== undefined) {
       try {
         setAddRequestStatus('pending')
-        const resultAction = await dispatch(
+        const postResultAction = await dispatch(
           addNewPost({ 
             id: id,
             owner_id: userId, 
@@ -59,35 +66,28 @@ export default function AddPostForm() {
             username: loggedInUser.username,
           })
         )
-        unwrapResult(resultAction)
+        unwrapResult(postResultAction)
         setContent('')
-      } catch (err) {
-        console.error('Failed to save the post: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-      }
-      try {
-        console.log("dispatch addpostskills is firing", id);
         setAddRequestStatus('pending')
-        const resultAction = await dispatch(
+        const postSkillResultAction = await dispatch(
           addPostSkills({ 
+            id: uniquePostSkillId,
             post_id: id,
             db_skills_id: selectedSkill.id, 
-            id: postSkillsId,
             name: selectedSkill.name
           })
         )
 
-        unwrapResult(resultAction)
-      } catch (err) {
-        console.error('Failed to save the post skill: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-        localStorage.setItem('selected_skill', null);
-        setError("")
-        wasSubmitted = true;
-      }
-    } 
+          unwrapResult(postSkillResultAction)
+        } catch (err) {
+          console.error('Failed to save the post skill: ', err)
+        } finally {
+          setAddRequestStatus('idle')
+          localStorage.setItem('selected_skill', null);
+          setError("")
+          wasSubmitted = true;
+        }
+      } 
     }
   }
   return (

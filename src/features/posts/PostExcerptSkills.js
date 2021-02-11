@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchSkills, selectSkillsByIds } from '../dbSkills/dbSkillsSlice';
 import { fetchPostSkills, selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
 
-const PostExcerptSkills = ({ postId }) => {
+const PostExcerptSkills = ({ postSkillIds }) => {
 	const dispatch = useDispatch()
 
-	const postSkillsStatus = useSelector((state) => state.postSkills.status)
+	const postSkillsStatus = useSelector((state) => state.skills.status)
 
 
 	useEffect(() => {
     if (postSkillsStatus === 'idle') {
-      dispatch(fetchPostSkills())
+      dispatch(fetchSkills())
     }
 	}, [postSkillsStatus, dispatch])
 	
-	const postSkills = useSelector((state) => selectPostSkillsByPostId(state, postId))
+	const postSkills = useSelector((state) => selectSkillsByIds(state, postSkillIds))
 	const renderedPostSkills = postSkills.map((postSkill, index) => {
+		console.log("skill in post excerpt: ", postSkill);
 		return (
-			<span key={index} className="italic ">{postSkill.name}</span>
+			<span key={index} className="italic ">{postSkill}</span>
 		)
 	})
 	return (

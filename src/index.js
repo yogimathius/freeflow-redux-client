@@ -6,10 +6,12 @@ import store from './app/store'
 import { Provider } from 'react-redux'
 import { fetchUsers } from './features/users/usersSlice'
 import { fetchPosts } from './features/posts/postsSlice'
+import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 import Footer from './components/Footer'
 // import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 import axios from "axios";
 
+store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
 // store.dispatch(fetchSkills())

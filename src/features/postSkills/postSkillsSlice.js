@@ -9,9 +9,7 @@ import axios from 'axios';
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts_skills'
 
-const postsSkillsAdapter = createEntityAdapter({
-	selectId: (postsSkill) => postsSkill.id
-})
+const postsSkillsAdapter = createEntityAdapter()
 
 const initialState = postsSkillsAdapter.getInitialState({
   status: 'idle',
@@ -39,6 +37,7 @@ export const addPostSkills = createAsyncThunk(
     const {post_id, db_skills_id} = initialPostSkills
     console.log("initial post skills: ", initialPostSkills);
     const response = await axios.post(url, {post_id, db_skills_id});
+    console.log("response in posts skills thunk: ", response);
     return response.data
   }
 )
@@ -65,6 +64,10 @@ const postsSkillsSlice = createSlice({
   name: 'postsSkills',
   initialState,
   reducers: {
+    postSkillAdded(state, action) {
+      // console.log(state, action.payload);
+      state.push(action.payload)
+    }  
   },
   extraReducers: {
     [fetchPostSkills.pending]: (state) => {
@@ -73,16 +76,19 @@ const postsSkillsSlice = createSlice({
     [fetchPostSkills.fulfilled]: (state, action) => {
       state.status = 'succeeded'
 			// Add any fetched posts to the array
-      postsSkillsAdapter.upsertMany(state, action.payload)
+      postsSkillsAdapter.addOne(state, action.payload)
     },
     [fetchPostSkills.rejected]: (state, action) => {
+
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addPostSkills.fulfilled]:
-      postsSkillsAdapter.addOne,
+    [addPostSkills.fulfilled]: (state, action) => {
+      // We can directly add the new post object to our posts array
+      postsSkillsAdapter.upsertOne(action.payload)
+    },
     [removePostSkill.fulfilled]: (state, action) => {
-      postsSkillsAdapter.removeOne(state, action.payload)
+      postsSkillsAdapter.removeOne(state, action.meta.arg)
     } 
   },
 })

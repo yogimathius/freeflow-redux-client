@@ -25,7 +25,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
   async (initialPost) => {
-    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id} = initialPost
+    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id, skills} = initialPost
 
     const newPost = { 
       text_body, 
@@ -36,7 +36,8 @@ export const addNewPost = createAsyncThunk(
       avatar,
       owner_id,
       username,
-      id
+      id,
+      skills
     }
 
     const response = await axios.post(url, newPost);
@@ -79,6 +80,7 @@ const postsSlice = createSlice({
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       // Add any fetched posts to the array
+      // console.log("State in fetch posts fulfilled: ", state);
       postsAdapter.upsertMany(state, action.payload)
     },
     [fetchPosts.rejected]: (state, action) => {
@@ -87,7 +89,6 @@ const postsSlice = createSlice({
     },
     [addNewPost.fulfilled]: postsAdapter.addOne,
     [removePost.fulfilled]: (state, action) => {
-      console.log("state in remove post: ", state);
       postsAdapter.removeOne(state, action.meta.arg.post_id)
     },
     [updatePost.fulfilled]:(state, { payload }) => {

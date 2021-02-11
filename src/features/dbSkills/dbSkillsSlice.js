@@ -3,6 +3,7 @@ import {
   createSlice,
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
 } from '@reduxjs/toolkit'
 import axios from 'axios';
 
@@ -92,3 +93,21 @@ export const {
   selectById: selectSkillById,
   selectIds: selectSkillIds,
 } = skillsAdapater.getSelectors((state) => state.skills)
+
+export const selectSkillsByIds = createSelector(
+  [selectAllskills, (state, skillIds) => skillIds],
+  (skills, skillIds) => {
+    
+    let filteredSkills = []
+    skills.filter((skill) => { 
+    skillIds.forEach(skillId => {
+      if (skill.id === skillId) {
+        filteredSkills.push(skill.name)
+      }
+      // console.log(filteredSkills);
+    });
+  })
+  // console.log(filteredSkills);
+  return filteredSkills;
+}
+)

@@ -17,6 +17,7 @@ import { selectCommentsByPostId } from '../comments/commentsSlice';
 import useVisualMode from "../../hooks/useVisualMode";
 import { EditPostForm } from './EditPostForm';
 import PostExcerptSkills from './PostExcerptSkills';
+import { selectAllskills, selectSkillById, selectSkillsByIds } from '../dbSkills/dbSkillsSlice';
 
 const SHOW = "SHOW";
 // const CONFIRM = "CONFIRM";
@@ -34,6 +35,8 @@ export default function PostExcerpt({ postId, onPost, index }) {
   
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
+  const skills = useSelector(selectAllskills)
+
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
 
   const commentsLength = postComments.length
@@ -53,8 +56,8 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
-
   // DELETE POST DISPATCH
+
   const onDeletePostClicked = async () => {
     if (canEditOrRemove) {
       try {
@@ -77,7 +80,8 @@ export default function PostExcerpt({ postId, onPost, index }) {
       {/* <PostSkillsList /> */}
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
-        <PostExcerptSkills postId={postId} />
+        {/* <div>Skills: {postSkillNames}</div> */}
+        <PostExcerptSkills postSkillIds={post.skill_ids} />
         {/* <h3 className="font-bold">Tags: {post.name}</h3> */}
         <TimeAgo timestamp={post.time_posted} />
       </div>
