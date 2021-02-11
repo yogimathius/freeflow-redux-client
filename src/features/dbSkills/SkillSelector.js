@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectAllskills } from './dbSkillsSlice';
 // import Autocomplete from "../../helpers/Autocomplete";
 import Select from 'react-select';
 
 const SkillSelector = ({ wasSubmitted }) => {
-	const [selected, setSelected] = useState('')
 	const dispatch = useDispatch();
 
 	const skills = useSelector(selectAllskills)
@@ -37,6 +36,7 @@ const SkillSelector = ({ wasSubmitted }) => {
 		console.error(skillStatus)
 	}
 	let skillOptions = []
+	// eslint-disable-next-line no-unused-vars
 	const SkillSelector = fetchedSkills ? fetchedSkills.forEach((skill) => {
 		let skillObj = { value: skill.name, label: skill.name}
 		skillOptions.push(skillObj)
@@ -44,11 +44,10 @@ const SkillSelector = ({ wasSubmitted }) => {
 
 	const handleChange = (options) => {
 		console.log("options in handle change: ", options);
-		let value = options;
-		setSelected(value)
 		const selectedSkills = []
 		options.forEach(option => {
 			console.log("each option: ", option);
+			// eslint-disable-next-line array-callback-return
 			skillsArr.filter(skill => {
 				if (skill.name === option.value) {
 					console.log(skill.name);
@@ -60,13 +59,11 @@ const SkillSelector = ({ wasSubmitted }) => {
     	localStorage.setItem('selected_skills', JSON.stringify(selectedSkills))
 	}
 	// console.log("submitted props in selector: ", wasSubmitted);
-	if (wasSubmitted === true) {
-		setSelected('')
-	}
+
 	return (
 		<div className="md:grid grid-cols-3">
 			<label 
-			className="mr-2 md:flex justify-end items-center"
+			className="mr-2 flex justify-center md:justify-end items-center"
 			htmlFor="skills">Select skill(s): </label>
 			<Select
 			onChange={(e) => handleChange(e)}
