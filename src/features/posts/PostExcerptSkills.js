@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectSkillsByIds } from '../dbSkills/dbSkillsSlice';
-import { fetchPostSkills, selectPostSkillsByPostId } from '../postSkills/postSkillsSlice';
 
 const PostExcerptSkills = ({ postSkillIds }) => {
 	const dispatch = useDispatch()
@@ -17,7 +16,6 @@ const PostExcerptSkills = ({ postSkillIds }) => {
 	
 	const postSkills = useSelector((state) => selectSkillsByIds(state, postSkillIds))
 	const renderedPostSkills = postSkills.map((postSkill, index) => {
-		console.log("skill in post excerpt: ", postSkill);
 		return (
 			<span key={index} className="italic ">{postSkill}</span>
 		)

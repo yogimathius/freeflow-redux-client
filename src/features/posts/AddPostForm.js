@@ -16,7 +16,6 @@ export default function AddPostForm() {
 
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   
-  // const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'))
 
   const userId = loggedInUser.id;
   const dispatch = useDispatch()
@@ -30,15 +29,13 @@ export default function AddPostForm() {
   let postLength = Object.keys(posts).length;
 
   const postSkillKeys = Object.keys(postSkills)
-  let postSkillsId = postSkillKeys.length + 1
 
   let wasSubmitted = false;
   const OnSavePostClicked = async () => {
     let uniquePostSkillId = generateUID()
     postSkillKeys.forEach(skillId => 
       skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
-    console.log("unique post skill id: ", uniquePostSkillId);
-
+    
     const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
 
     if (content === "") {
@@ -49,14 +46,14 @@ export default function AddPostForm() {
       setError("Please select a skill"); 
       return
     } else if (canSave) {
-
+      let skillsArr = [selectedSkill.id]
       id = postLength + 1;
       if (id !== null && id !== undefined) {
       try {
         setAddRequestStatus('pending')
         const postResultAction = await dispatch(
           addNewPost({ 
-            id: id,
+            // id: id,
             owner_id: userId, 
             text_body: content,
             active: true, 
@@ -64,21 +61,22 @@ export default function AddPostForm() {
             is_helped: false, 
             avatar: loggedInUser.avatar,
             username: loggedInUser.username,
+            skill_ids: skillsArr
           })
         )
         unwrapResult(postResultAction)
         setContent('')
         setAddRequestStatus('pending')
-        const postSkillResultAction = await dispatch(
-          addPostSkills({ 
-            id: uniquePostSkillId,
-            post_id: id,
-            db_skills_id: selectedSkill.id, 
-            name: selectedSkill.name
-          })
-        )
+        // const postSkillResultAction = await dispatch(
+        //   addPostSkills({ 
+        //     id: uniquePostSkillId,
+        //     post_id: id,
+        //     db_skills_id: selectedSkill.id, 
+        //     name: selectedSkill.name
+        //   })
+        // )
 
-          unwrapResult(postSkillResultAction)
+          // unwrapResult(postSkillResultAction)
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
         } finally {

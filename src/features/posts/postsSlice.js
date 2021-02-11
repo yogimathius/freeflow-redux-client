@@ -25,7 +25,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
   async (initialPost) => {
-    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id, skills} = initialPost
+    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id, skill_ids} = initialPost
 
     const newPost = { 
       text_body, 
@@ -37,7 +37,7 @@ export const addNewPost = createAsyncThunk(
       owner_id,
       username,
       id,
-      skills
+      skill_ids
     }
 
     const response = await axios.post(url, newPost);
