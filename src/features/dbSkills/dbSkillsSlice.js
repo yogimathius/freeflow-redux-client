@@ -105,10 +105,8 @@ export const selectSkillsByIds = createSelector(
       if (skill.id === skillId) {
         filteredSkills.push(skill.name)
       }
-      // console.log(filteredSkills);
     });
   })
-  // console.log(filteredSkills);
   return filteredSkills;
 }
 )

@@ -4,6 +4,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import generateUID from '../../helpers/generateRandomId'
+import { setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice';
 
 export default function AddPostForm() {
   const [error, setError] = useState("");
@@ -28,8 +29,10 @@ export default function AddPostForm() {
   let postLength = Object.keys(posts).length;
 
   const postSkillKeys = Object.keys(postSkills)
+	const clearValue = (callback) => {
+		callback()
+	}
 
-  let wasSubmitted = false;
   const OnSavePostClicked = async () => {
     let uniquePostSkillId = generateUID()
     postSkillKeys.forEach(skillId => 
@@ -64,6 +67,7 @@ export default function AddPostForm() {
         )
         unwrapResult(postResultAction)
         setContent('')
+        dispatch(setSelectedSkills([]))
         setAddRequestStatus('pending')
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
@@ -71,19 +75,21 @@ export default function AddPostForm() {
           setAddRequestStatus('idle')
           localStorage.setItem('selected_skill', null);
           setError("")
-          wasSubmitted = true;
+
         }
       } 
     }
   }
+  const initialFormState = { mySelectKey: null };
+
   return (
     <section>
-      <SkillSelector 
-        id={id}
-        // canTriggerAxios={triggerPostSkillAxios}
-        loggedInUser={loggedInUser}
-        wasSubmitted={wasSubmitted} />
       <form className="space-y-2 mx-2">
+        <SkillSelector 
+          id={id}
+          initialFormState={initialFormState}
+          // clearValue={clearValue}
+        />
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."
