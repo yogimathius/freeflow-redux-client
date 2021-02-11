@@ -35,17 +35,16 @@ export default function AddPostForm() {
     postSkillKeys.forEach(skillId => 
       skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
     
-    const selectedSkill = JSON.parse(localStorage.getItem('selected_skill'));
+    const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
 
     if (content === "") {
       setError("Post cannot be blank");
       return
     }
-    if (selectedSkill === null) {
+    if (selectedSkills === null) {
       setError("Please select a skill"); 
       return
     } else if (canSave) {
-      let skillsArr = [selectedSkill.id]
       id = postLength + 1;
       if (id !== null && id !== undefined) {
       try {
@@ -60,22 +59,12 @@ export default function AddPostForm() {
             is_helped: false, 
             avatar: loggedInUser.avatar,
             username: loggedInUser.username,
-            skill_ids: skillsArr
+            skill_ids: selectedSkills
           })
         )
         unwrapResult(postResultAction)
         setContent('')
         setAddRequestStatus('pending')
-        // const postSkillResultAction = await dispatch(
-        //   addPostSkills({ 
-        //     id: uniquePostSkillId,
-        //     post_id: id,
-        //     db_skills_id: selectedSkill.id, 
-        //     name: selectedSkill.name
-        //   })
-        // )
-
-          // unwrapResult(postSkillResultAction)
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
         } finally {

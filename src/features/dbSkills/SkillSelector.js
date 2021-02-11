@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectAllskills } from './dbSkillsSlice';
 // import Autocomplete from "../../helpers/Autocomplete";
+import Select from 'react-select';
 
 const SkillSelector = ({ wasSubmitted }) => {
 	const [selected, setSelected] = useState('')
@@ -35,34 +36,47 @@ const SkillSelector = ({ wasSubmitted }) => {
   } else if (skillStatus === 'failed') {
 		console.error(skillStatus)
 	}
-	const SkillSelector = fetchedSkills ? fetchedSkills.map((skill, index) => {
-		return (
-  		<option key={index} value={skill.name}>{skill.name}</option>
-		)
+	let skillOptions = []
+	const SkillSelector = fetchedSkills ? fetchedSkills.forEach((skill) => {
+		let skillObj = { value: skill.name, label: skill.name}
+		skillOptions.push(skillObj)
 	}) : "";
 
-	const handleChange = (event) => {
-		let value = event.target.value;
+	const handleChange = (options) => {
+		console.log("options in handle change: ", options);
+		let value = options;
 		setSelected(value)
-		const selectedSkill = skillsArr.find(skill => skill.name === value)
-    localStorage.setItem('selected_skill', JSON.stringify(selectedSkill))
+		const selectedSkills = []
+		options.forEach(option => {
+			console.log("each option: ", option);
+			skillsArr.filter(skill => {
+				if (skill.name === option.value) {
+					console.log(skill.name);
+					selectedSkills.push(skill.id)
+				}
+			})
+		})
+		console.log("skills arr: ", selectedSkills);
+    	localStorage.setItem('selected_skills', JSON.stringify(selectedSkills))
 	}
 	// console.log("submitted props in selector: ", wasSubmitted);
 	if (wasSubmitted === true) {
 		setSelected('')
 	}
 	return (
-		<div className="text-center">
-			{/* <Autocomplete options={skillNames} /> */}
-			<label htmlFor="skills">Choose a skill: </label>
-			<select 
-				id="skills" 
-				name="skills" 
-				value={selected}
-				onChange={(e) => handleChange(e)}>
-				<option value="Select Skill">Select Skill</option>
-				{SkillSelector}
-			</select>
+		<div className="md:grid grid-cols-3">
+			<label 
+			className="mr-2 md:flex justify-end items-center"
+			htmlFor="skills">Select skill(s): </label>
+			<Select
+			onChange={(e) => handleChange(e)}
+			defaultValue="Select a Skill"
+			isMulti
+			name="skills"
+			options={skillOptions}
+			className="basic-multi-select"
+			classNamePrefix="select"
+		/>
 		</div>
 	);
 };
