@@ -17,7 +17,6 @@ import { selectCommentsByPostId } from '../comments/commentsSlice';
 import useVisualMode from "../../hooks/useVisualMode";
 import { EditPostForm } from './EditPostForm';
 import PostExcerptSkills from './PostExcerptSkills';
-import { selectAllskills, selectSkillById, selectSkillsByIds } from '../dbSkills/dbSkillsSlice';
 
 const SHOW = "SHOW";
 // const CONFIRM = "CONFIRM";
@@ -35,7 +34,6 @@ export default function PostExcerpt({ postId, onPost, index }) {
   
   const userId = loggedInUser.id;
   const post = useSelector((state) => selectPostById(state, postId))
-  const skills = useSelector(selectAllskills)
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
 

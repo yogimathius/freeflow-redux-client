@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
-import { addPostSkills } from '../postSkills/postSkillsSlice'
 import generateUID from '../../helpers/generateRandomId'
 
 export default function AddPostForm() {

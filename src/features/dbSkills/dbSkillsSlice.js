@@ -99,6 +99,7 @@ export const selectSkillsByIds = createSelector(
   (skills, skillIds) => {
     
     let filteredSkills = []
+    // eslint-disable-next-line array-callback-return
     skills.filter((skill) => { 
     skillIds.forEach(skillId => {
       if (skill.id === skillId) {
