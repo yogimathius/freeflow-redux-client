@@ -23,7 +23,7 @@ const UserSkills = (props) => {
 
 	return (
 		<div className="space-x-1 flex">
-			<div className="italic">Skills: </div>
+			<div className=" font-bold">My Skills: </div>
 			{renderedSkills}
 		</div>
 	);

@@ -21,11 +21,12 @@ export const Navbar = () => {
           <h1 className="text-white text-2xl font-extrabold">Freeflow Social Network</h1>
         </div>
 
-        <div className="row-start-2 col-span-4 grid grid-cols-4 my-2 space-x-2 font-bold items-end">
+        <div className="row-start-2 col-span-4 grid grid-cols-5 my-2 space-x-2 font-bold items-end">
           <Link className="text-white col-start-1 flex justify-center" to="/dashboard">Posts</Link>
           <Link className="text-white col-start-2 flex justify-center" to="/users">Users</Link>
           <Link className="text-white col-start-3 flex justify-center" to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>Profile</Link>
-          <div className="text-white col-start-4 flex justify-center">
+          <Link className="text-white col-start-4 flex justify-center" to={`/${user?.id}/experiences`} onClick={() => saveState(user?.id)}>Experiences</Link>
+          <div className="text-white col-start-5 flex justify-center">
           {!user  ?
             <Link to="/login">Login</Link>
             :

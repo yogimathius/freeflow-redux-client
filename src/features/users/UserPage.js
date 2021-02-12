@@ -35,21 +35,16 @@ export default function UserPage() {
     <section className="space-y-3">
       <UserSkillsList />
 
-      <div className="">
-        <div className="user_info">
+      <div className="grid grid-cols-4 ">
           <UserCard id={user.id} />
-          <p>
-            <span className="field_name">Location:</span> {user.location}
+          <p className="m-2">
+            <span className="font-bold">Location:</span> {user.location}
           </p>
-        </div>
-        <UserSkills userId={user.id} />
-
       </div>
-      {loggedInUser.user.id === user.id ?
-      <div>
-        <Link to={`/${loggedInUser.user.id}/experiences`}>Experiences</Link>
-        <AddPostForm />
-      </div>  : ""}
+      <div  className="flex justify-center">
+
+          <UserSkills userId={user.id} />
+      </div>
       <div className="">
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>
       </div>
