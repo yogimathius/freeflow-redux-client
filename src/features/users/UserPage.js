@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectPostsByUser } from '../posts/postsSlice'
-import { selectExperiencesByUserId } from '../experiences/experiencesSlice'
+import { selectHelperExperiencesByUserId } from '../experiences/experiencesSlice'
 import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from './usersSlice'
 import UserCard from './UserCard'
@@ -9,7 +9,7 @@ import UserSkillsList from '../userSkills/fetchUserSkills'
 import UserSkills from './UserSkills'
 import PostExcerpt from '../posts/PostExcerpt';
 import AddPostForm from '../posts/AddPostForm';
-import Link from '../filters/Link'
+import {Link} from 'react-router-dom'
 
 export default function UserPage() {
   const userId = loadState()
@@ -18,7 +18,7 @@ export default function UserPage() {
 
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
-  const experiencesForUser = useSelector((state) => selectExperiencesByUserId(state, userId))
+  const experiencesForUser = useSelector((state) => selectHelperExperiencesByUserId(state, userId))
 
   if (!user || !postsForUser || !experiencesForUser) {
     return null;
@@ -34,6 +34,7 @@ export default function UserPage() {
   return (
     <section className="space-y-3">
       <UserSkillsList />
+
       <div className="">
         <div className="user_info">
           <UserCard id={user.id} />

@@ -77,9 +77,9 @@ export const {
 }
  )
 
-export const selectExperiencesByUserId = createSelector(
+export const selectHelperExperiencesByUserId = createSelector(
   [selectAllExperiences, (state, userId) => userId],
   (experiences, userId) => experiences.filter((experience) => {
-		return experience.helper_id === userId
+		return experience.helper_id === parseInt(userId)
 	})
 )

@@ -2,10 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setVisibilityFilter } from '../filters/filtersSlice';
-import { selectUserSkillsByPostId } from '../userSkills/userSkillsSlice';
+import { selectUserSkillsByUserId } from '../userSkills/userSkillsSlice';
 
 const UserSkills = (props) => {
-	const skillsForUser = useSelector(state => selectUserSkillsByPostId(state, props.userId))
+	const skillsForUser = useSelector(state => selectUserSkillsByUserId(state, props.userId))
+	console.log("props in userskills: ", skillsForUser, props.userId);
 	const dispatch = useDispatch()
 
 	const renderedSkills = skillsForUser ? skillsForUser.map((skill, index) => {

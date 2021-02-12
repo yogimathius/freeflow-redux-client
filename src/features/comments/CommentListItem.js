@@ -46,7 +46,6 @@ const CommentListItem = ({comment, postId}) => {
 
   const onDeleteCommentClicked = async () => {
     if (canEditOrDelete) {
-      console.log(comment);
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(

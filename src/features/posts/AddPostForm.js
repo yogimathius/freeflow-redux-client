@@ -71,25 +71,26 @@ export default function AddPostForm() {
             skill_ids: selectedSkills
           })
         )
-        unwrapResult(postResultAction)
-        setContent('')
-        setAddRequestStatus('pending')
+          unwrapResult(postResultAction)
+          setContent('')
+          setAddRequestStatus('pending')
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
         } finally {
           setAddRequestStatus('idle')
           localStorage.setItem('selected_skill', null);
           setError("")
-
         }
-      } 
+      }
     }
   }
   const initialFormState = { mySelectKey: null };
 
   return (
     <section>
-      <form className="space-y-2 mx-2">
+      <form 
+      // onSubmit={}
+        className="space-y-2 mx-2">
         <SkillSelector 
           id={id}
           initialFormState={initialFormState}

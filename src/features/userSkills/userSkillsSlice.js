@@ -1,4 +1,3 @@
-
 import {
   createSlice,
   createAsyncThunk,
@@ -87,7 +86,8 @@ export const {
   selectIds: selectUserSkillIds,
 } = userSkillsAdapter.getSelectors((state) => state.userSkills)
 
-export const selectUserSkillsByPostId = createSelector(
+export const selectUserSkillsByUserId = createSelector(
   [selectAllUserSkills, (state, userId) => userId],
-  (userSkills, userId) => userSkills.filter((userSkill) => userSkill.user_id === userId )
+  (userSkills, userId) => userSkills.filter((userSkill) => userSkill.user_id === parseInt(userId)
+  )
 )

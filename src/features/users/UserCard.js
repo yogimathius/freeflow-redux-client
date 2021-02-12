@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../helpers/localStorage';
 import { useSelector } from 'react-redux';
-import { selectExperiencesByUserId } from '../experiences/experiencesSlice';
+import { selectHelperExperiencesByUserId } from '../experiences/experiencesSlice';
 import { UserNameAndLogo } from './UserNameAndLogo';
 
 export default function UserCard(props) {
-  const userExperiences = useSelector((state) => selectExperiencesByUserId(state, props.id))
+  const userExperiences = useSelector((state) => selectHelperExperiencesByUserId(state, props.id))
 
   const experience = (userExperiences.length *29);
   return (
