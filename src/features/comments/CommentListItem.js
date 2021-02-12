@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAllUsers } from '../users/usersSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
@@ -46,6 +46,7 @@ const CommentListItem = ({comment, postId}) => {
 
   const onDeleteCommentClicked = async () => {
     if (canEditOrDelete) {
+      console.log(comment);
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(

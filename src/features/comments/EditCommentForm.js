@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {  selectCommentsById, updateComment } from './commentsSlice'
 
-export const EditCommentForm = ({ CommentId, onSaveEdit, value }) => {
-  const comment = useSelector((state) => selectCommentsById(state, CommentId))
+export const EditCommentForm = ({ commentId, onSaveEdit, value, postId }) => {
+  const comment = useSelector((state) => selectCommentsById(state, commentId))
   
   const [content, setContent] = useState(value)
 
@@ -21,7 +21,7 @@ export const EditCommentForm = ({ CommentId, onSaveEdit, value }) => {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          updateComment({ text_body: content,  comment_id: comment.id, changes: { text_body: content} })
+          updateComment({ id: commentId, text_body: content,  commenter_id: comment.commenter_id, post_id: postId, changes: { text_body: content} })
         )
         unwrapResult(resultAction)
 

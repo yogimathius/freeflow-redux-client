@@ -26,10 +26,10 @@ export const CommentsList = ({ postId }) => {
     content = <div>{error}</div>
   }
     
-  const renderedComments = comments.map((comment) => {
+  const renderedComments = comments.map((comment, index) => {
 
     return (
-      <CommentListItem comment={comment} postId={postId} />
+      <CommentListItem key={index} comment={comment} postId={postId} />
       )
     })
 

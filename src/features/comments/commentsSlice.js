@@ -9,7 +9,7 @@ import axios from 'axios';
 const url = `https://freeflow-two-point-o.herokuapp.com/api/comments`
 
 const commentsAdapter = createEntityAdapter({
-	selectId: (comment) => comment.id,
+  sortComparer: (a, b) => a.time_posted.localeCompare(b.time_posted),
 })
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
@@ -62,6 +62,7 @@ export const updateComment = createAsyncThunk(
   'comments/updatePost',
   async (initialPost) => {
     const { text_body, post_id, commenter_id } = initialPost
+    console.log("in thunk: ", post_id, commenter_id );
     const response = await axios.put(url, { text_body,
     post_id, commenter_id });
     return response.data

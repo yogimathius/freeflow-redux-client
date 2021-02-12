@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
@@ -29,9 +29,9 @@ export default function AddPostForm() {
   let postLength = Object.keys(posts).length;
 
   const postSkillKeys = Object.keys(postSkills)
-	const clearValue = (callback) => {
-		callback()
-	}
+	// const clearValue = (callback) => {
+	// 	callback()
+	// }
 
   
   // useEffect(() => {
