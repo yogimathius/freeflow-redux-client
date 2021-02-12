@@ -48,10 +48,16 @@ export default function AddPostForm() {
 
     if (content === "") {
       setError("Post cannot be blank");
+      setTimeout(() => {
+        setError('');
+      }, 2000);
       return
     }
     if (selectedSkills.length === 0) {
       setError("Please select a skill"); 
+      setTimeout(() => {
+        setError('');
+      }, 2000);
       return
     } else if (canSave) {
       id = postLength + 1;

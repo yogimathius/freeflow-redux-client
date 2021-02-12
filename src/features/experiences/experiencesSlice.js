@@ -26,6 +26,7 @@ export const getExperienceCountByUser = createAsyncThunk('experiences/getExperie
   const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/experiences/user');
   return response.data	
 })
+
 export const addNewExperience = createAsyncThunk(
   'experiences/addNewExperience',
   async (initialExperiences) => {

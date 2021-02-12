@@ -36,10 +36,14 @@ const SkillSelector = ({ initialFormState }) => {
 	}
 	let skillOptions = []
 	// eslint-disable-next-line no-unused-vars
-	const SkillSelector = fetchedSkills ? fetchedSkills.forEach((skill) => {
+	if (!fetchedSkills) {
+		return null;
+	}
+	
+	fetchedSkills.forEach((skill) => {
 		let skillObj = { value: skill.name, label: skill.name }
 		skillOptions.push(skillObj)
-	}) : "";
+	})
 
 	const HandleChange = (options) => {
 		dispatch(setSelectedSkills({options}))
