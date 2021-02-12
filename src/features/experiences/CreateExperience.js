@@ -53,10 +53,7 @@ const CreateExperience = () => {
   }
 
   if (canSave) {
-    console.log("ids: ", selectedUser.value, userId);
     try {
-      console.log('this is working');
-      console.log("can save before pending: ", canSave);
 
       setAddRequestStatus('pending')
       const resultAction = await dispatch(

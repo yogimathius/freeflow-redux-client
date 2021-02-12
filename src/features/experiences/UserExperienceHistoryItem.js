@@ -1,14 +1,22 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
 
+import { selectUserById } from '../users/usersSlice';
+
 const UserExperienceHistoryItem = ({experience}) => {
+
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
   const completed = experience.date_completed !== null ? true : false;
 
+  const users = useSelector((state) => state.users)
+
+  const helpedUserName = users.entities[experience.helped_id];
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 mx-2">
-      <div>{experience.helped}</div>
+      <div>{helpedUserName.first_name + " " + helpedUserName.last_name}</div>
 
       <div className="md:text-center">
         <TimeAgo timestamp={experience.date_initiated}/>
