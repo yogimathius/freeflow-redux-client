@@ -6,10 +6,6 @@ import React, { useEffect } from 'react';
 const Filter = () => {
   const dispatch = useDispatch()
   const stateSkills = useSelector(state => state.skills.entities)
-  // console.log("state skills: ", stateSkills);
-
-  // const skills = useSelector(selectAllskills)
-  // console.log("skills: ", skills);
   useEffect (() => {
     for (const skill in stateSkills) {
     if (Object.hasOwnProperty.call(stateSkills, skill)) {
@@ -19,9 +15,7 @@ const Filter = () => {
     }
   })
 
-  // console.log("filter objects: ", VisibilityFilters);
   const filterKeys = Object.keys(VisibilityFilters)
-  // console.log("keys: ", filterKeys);
 
   const renderedFilters = filterKeys ? filterKeys.map((filter, index) => {
     return (

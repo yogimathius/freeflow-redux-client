@@ -35,9 +35,7 @@ export const addPostSkills = createAsyncThunk(
   'postSkills/addPostSkills',
   async (initialPostSkills) => {
     const {post_id, db_skills_id} = initialPostSkills
-    console.log("initial post skills: ", initialPostSkills);
     const response = await axios.post(url, {post_id, db_skills_id});
-    console.log("response in posts skills thunk: ", response);
     return response.data
   }
 )
@@ -65,7 +63,6 @@ const postsSkillsSlice = createSlice({
   initialState,
   reducers: {
     postSkillAdded(state, action) {
-      // console.log(state, action.payload);
       state.push(action.payload)
     }  
   },

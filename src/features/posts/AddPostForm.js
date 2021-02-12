@@ -46,7 +46,6 @@ export default function AddPostForm() {
       skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
       dispatch(setSelectedSkills([]))
 
-      console.log("selectedSkills: ", selectedSkills);
     if (content === "") {
       setError("Post cannot be blank");
       return

@@ -28,7 +28,6 @@ export const CommentsList = ({ postId }) => {
     
   const renderedComments = comments.map((comment) => {
 
-    console.log(comment);
     return (
       <CommentListItem comment={comment} postId={postId} />
       )

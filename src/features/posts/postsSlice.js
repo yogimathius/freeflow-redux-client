@@ -81,7 +81,6 @@ const postsSlice = createSlice({
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       // Add any fetched posts to the array
-      // console.log("State in fetch posts fulfilled: ", state);
       postsAdapter.upsertMany(state, action.payload)
     },
     [fetchPosts.rejected]: (state, action) => {

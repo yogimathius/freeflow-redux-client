@@ -42,7 +42,6 @@ const SkillSelector = ({ initialFormState }) => {
 	}) : "";
 
 	const HandleChange = (options) => {
-		console.log("options in handle change: ", options);
 		dispatch(setSelectedSkills({options}))
 		const selectedSkills = []
 		options.forEach(option => {
@@ -56,7 +55,6 @@ const SkillSelector = ({ initialFormState }) => {
 		localStorage.setItem('selected_skills', JSON.stringify(selectedSkills))
 	}
 
-	console.log("selected skills: ", selectedSkills);
 	// const clearValue = () => {
 	// 	setSelectedOptions([])
 	// }

@@ -12,12 +12,10 @@ const selectedSkillsSlice = createSlice({
   initialState: initialState,
   reducers: {
     setSelectedSkills(state, action) {
-      console.log("action: ", action.payload);
       selectedSkills = action.payload.options
       return action.payload
     },
     addSelectedSkill(state, action) {
-      console.log("action: ", action);
       selectedSkills.push()
       return state
     }
