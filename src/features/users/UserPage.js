@@ -9,6 +9,7 @@ import UserSkillsList from '../userSkills/fetchUserSkills'
 import UserSkills from './UserSkills'
 import PostExcerpt from '../posts/PostExcerpt';
 import AddPostForm from '../posts/AddPostForm';
+import Link from '../filters/Link'
 
 export default function UserPage() {
   const userId = loadState()
@@ -43,7 +44,11 @@ export default function UserPage() {
         <UserSkills userId={user.id} />
 
       </div>
-      {loggedInUser.user.id === user.id ? <AddPostForm /> : ""}
+      {loggedInUser.user.id === user.id ?
+      <div>
+        <Link to={`/${loggedInUser.user.id}/experiences`}>Experiences</Link>
+        <AddPostForm />
+      </div>  : ""}
       <div className="">
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>
       </div>

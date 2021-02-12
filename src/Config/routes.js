@@ -4,6 +4,7 @@ import { SinglePostPage } from '../features/posts/SinglePostPage'
 import { EditPostForm } from '../features/posts/EditPostForm';
 import UserPage from '../features/users/UserPage';
 import LoginPage from '../features/login/LoginPage';
+import UserExperiences from '../features/users/UserExperiences'
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
   {
     path: '/users',
     component: UsersList,
+    isPrivate: true,
+  },
+  {
+    path: '/:userId/experiences',
+    component: UserExperiences,
     isPrivate: true,
   },
   {

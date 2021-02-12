@@ -4,27 +4,28 @@ import PostsList from './PostsList'
 import { VisibilityFilters } from '../filters/filtersSlice'
 
 const selectPosts = (state) => state.posts
-const selectPostSkills = (state) => state.postSkills
+const selectSkills = (state) => state.skills
 const selectFilter = (state) => state.visibilityFilters
 
 const selectVisiblePosts = createSelector(
-  [selectPosts, selectPostSkills, selectFilter],
-  (posts, postsSkills, filter) => {
+  [selectPosts, selectSkills, selectFilter],
+  (posts, skills, filter) => {
     const postKeys = Object.keys(posts.entities)
-    let postSkillsKeys = Object.keys(postsSkills.entities)
+    let skillKeys = Object.keys(skills.entities)
     
     let postSkillsArr = []
 
     let postArr = []
     postKeys.forEach(postKey => {
       const singlePosts = JSON.parse(JSON.stringify(posts.entities[postKey]))
-
+      console.log(singlePosts);
       
       singlePosts.skills = []
-      postSkillsKeys.forEach(skillKey => {
-        postSkillsArr.push(postsSkills.entities[skillKey])
-        if (singlePosts.id === postsSkills.entities[skillKey].post_id) {
-          singlePosts.skills.push(postsSkills.entities[skillKey].name)
+      skillKeys.forEach(skillKey => {
+        postSkillsArr.push(skills.entities[skillKey])
+        if (singlePosts.skill_ids.includes(skills.entities[skillKey].id)) {
+          console.log("skill name: ", skills.entities[skillKey].name);
+          singlePosts.skills.push(skills.entities[skillKey].name)
         }})
       postArr.push(singlePosts)
     })
