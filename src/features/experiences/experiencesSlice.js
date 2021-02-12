@@ -19,6 +19,7 @@ const initialState = experiencesAdapter.getInitialState({
 
 export const fetchExperiences = createAsyncThunk('experiences/fetchExperiences', async () => {
   const response = await axios.get(url);
+  console.log(response);
   return response.data
 })
 
@@ -30,9 +31,11 @@ export const getExperienceCountByUser = createAsyncThunk('experiences/getExperie
 export const addNewExperience = createAsyncThunk(
   'experiences/addNewExperience',
   async (initialExperiences) => {
-    const { comment_id, giver_id} = initialExperiences
-    const response = await axios.post(url, {experience: comment_id, giver_id});
-    return response.post
+    const { helper_id, helped_id, creator_id} = initialExperiences
+
+    const response = await axios.post(`${url}/new`, {helper_id, helped_id, creator_id});
+    console.log("response: ", response);
+    return response.data
   }
 )
 

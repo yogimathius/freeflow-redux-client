@@ -29,16 +29,6 @@ export default function AddPostForm() {
   let postLength = Object.keys(posts).length;
 
   const postSkillKeys = Object.keys(postSkills)
-	// const clearValue = (callback) => {
-	// 	callback()
-	// }
-
-  
-  // useEffect(() => {
-    //   if (selectedSkills !== null) {
-      //     setError("")
-      //   } 
-      // })
     const OnSavePostClicked = async () => {
       const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
       let uniquePostSkillId = generateUID()
@@ -79,7 +69,6 @@ export default function AddPostForm() {
         )
           unwrapResult(postResultAction)
           setContent('')
-          setAddRequestStatus('pending')
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
         } finally {
@@ -113,7 +102,7 @@ export default function AddPostForm() {
           rows="3"
           onChange={onContentChanged}
         />
-        <section className="flex justify-center validation">{error}</section>
+        <section className="flex justify-center">{error}</section>
 
         <div className="flex justify-center">
 

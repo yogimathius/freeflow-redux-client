@@ -5,7 +5,6 @@ import UserExperienceHistoryItem from './UserExperienceHistoryItem';
 
 const UserExperienceHistory = ({userId}) => {
   const experiences = useSelector((state) => selectHelperExperiencesByUserId(state, userId))
-  console.log("experiences in history: ", experiences);
 
   let renderedExperiences;
   if (experiences) {

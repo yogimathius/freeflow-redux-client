@@ -2,7 +2,6 @@ import React from 'react';
 import { TimeAgo } from '../posts/TimeAgo'
 
 const UserExperienceHistoryItem = ({experience}) => {
-  console.log("experience in item: ", experience.date_accepted);
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
   const completed = experience.date_completed !== null ? true : false;

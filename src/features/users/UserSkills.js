@@ -6,7 +6,6 @@ import { selectUserSkillsByUserId } from '../userSkills/userSkillsSlice';
 
 const UserSkills = (props) => {
 	const skillsForUser = useSelector(state => selectUserSkillsByUserId(state, props.userId))
-	console.log("props in userskills: ", skillsForUser, props.userId);
 	const dispatch = useDispatch()
 
 	const renderedSkills = skillsForUser ? skillsForUser.map((skill, index) => {
