@@ -75,12 +75,9 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   return (
     <article className="rounded p-2 mx-1 my-3 bg-white" key={post.id}>
-      {/* <PostSkillsList /> */}
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
-        {/* <div>Skills: {postSkillNames}</div> */}
         <PostExcerptSkills postSkillIds={post.skill_ids} />
-        {/* <h3 className="font-bold">Tags: {post.name}</h3> */}
         <TimeAgo timestamp={post.time_posted} />
       </div>
 

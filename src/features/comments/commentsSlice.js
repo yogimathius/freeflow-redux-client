@@ -34,6 +34,7 @@ export const addNewComment = createAsyncThunk(
       commenter_id,
       post_id,
       text_body: content,
+      time_posted: new Date().toISOString(),
     })
     return response.data
   }
@@ -54,6 +55,16 @@ export const removeComment = createAsyncThunk(
       }
     });
     return response.post
+  }
+)
+
+export const updateComment = createAsyncThunk(
+  'comments/updatePost',
+  async (initialPost) => {
+    const { text_body, post_id, commenter_id } = initialPost
+    const response = await axios.put(url, { text_body,
+    post_id, commenter_id });
+    return response.data
   }
 )
 
@@ -85,7 +96,11 @@ const commentsSlice = createSlice({
     [addNewComment.fulfilled]: commentsAdapter.addOne,
     [removeComment.fulfilled]: (state, action) => {
       commentsAdapter.removeOne(state, action.meta.arg.id)
-    } 
+    },
+    [updateComment.fulfilled]:(state, { payload }) => {
+      const { id, ...changes } = payload;
+      commentsAdapter.updateOne(state, {id, changes})
+    }
   },
 });
 

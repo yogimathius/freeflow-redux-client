@@ -68,6 +68,7 @@ export const updatePost = createAsyncThunk(
     return response.data
   }
 )
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState,

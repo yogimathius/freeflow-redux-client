@@ -46,16 +46,13 @@ const SkillSelector = ({ initialFormState }) => {
 		dispatch(setSelectedSkills({options}))
 		const selectedSkills = []
 		options.forEach(option => {
-			// console.log("each option: ", option);
 			// eslint-disable-next-line array-callback-return
 			skillsArr.filter(skill => {
 				if (skill.name === option.value) {
-					// console.log(skill.name);
 					selectedSkills.push(skill.id)
 				}
 			})
 		})
-		// console.log("skills arr: ", selectedSkills);
 		localStorage.setItem('selected_skills', JSON.stringify(selectedSkills))
 	}
 

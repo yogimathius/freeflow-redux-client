@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
@@ -33,18 +33,25 @@ export default function AddPostForm() {
 		callback()
 	}
 
-  const OnSavePostClicked = async () => {
-    let uniquePostSkillId = generateUID()
-    postSkillKeys.forEach(skillId => 
+  
+  // useEffect(() => {
+    //   if (selectedSkills !== null) {
+      //     setError("")
+      //   } 
+      // })
+    const OnSavePostClicked = async () => {
+      const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
+      let uniquePostSkillId = generateUID()
+      postSkillKeys.forEach(skillId => 
       skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
-    
-    const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
+      dispatch(setSelectedSkills([]))
 
+      console.log("selectedSkills: ", selectedSkills);
     if (content === "") {
       setError("Post cannot be blank");
       return
     }
-    if (selectedSkills === null) {
+    if (selectedSkills.length === 0) {
       setError("Please select a skill"); 
       return
     } else if (canSave) {
@@ -67,7 +74,6 @@ export default function AddPostForm() {
         )
         unwrapResult(postResultAction)
         setContent('')
-        dispatch(setSelectedSkills([]))
         setAddRequestStatus('pending')
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
