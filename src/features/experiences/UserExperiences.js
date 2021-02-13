@@ -7,7 +7,7 @@ const UserExperiences = ({match}) => {
   
   return (
     <div>
-      <CreateExperience />
+      <CreateExperience userId={userId} />
       <UserExperienceHistory 
         userId={userId} 
       />

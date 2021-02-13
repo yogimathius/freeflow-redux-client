@@ -38,6 +38,21 @@ export const addNewExperience = createAsyncThunk(
   }
 )
 
+export const removeExperience = createAsyncThunk(
+  'experiences/removeExperience',
+  async (initialExperiences) => {
+    const { id } = initialExperiences
+
+    const experienceId = id;
+    console.log("id in thunk delete: ", id);
+    const response = await axios.delete(`${url}/delete`, { params: { experienceId 
+    }
+    });
+    console.log("response: ", response);
+    return response.data
+  }
+)
+
 const experiencesSlice = createSlice({
   name: 'experiences',
   initialState,
@@ -63,6 +78,7 @@ const experiencesSlice = createSlice({
       state.error = action.error.message
     },
     [addNewExperience.fulfilled]: experiencesAdapter.addOne,
+    [removeExperience.fulfilled]: experiencesAdapter.removeOne,
   },
 })
 

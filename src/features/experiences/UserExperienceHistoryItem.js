@@ -1,10 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
+import { removeExperience } from './experiencesSlice';
+import { unwrapResult } from '@reduxjs/toolkit'
 
-import { selectUserById } from '../users/usersSlice';
+const UserExperienceHistoryItem = ({ experience, userId }) => {
+  const dispatch = useDispatch();
+  const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-const UserExperienceHistoryItem = ({experience}) => {
+  const [error, setError] = useState("");
 
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
@@ -13,6 +17,35 @@ const UserExperienceHistoryItem = ({experience}) => {
   const users = useSelector((state) => state.users)
 
   const helpedUserName = users.entities[experience.helped_id];
+
+  if (!helpedUserName) {
+    return null;
+  }
+  const canRemove =
+  userId && addRequestStatus === 'idle'
+
+  const removeExperienceClicked = async () => {
+    console.log("cancel clicked!");
+
+  if (canRemove) {
+    try {
+
+      setAddRequestStatus('pending')
+      const resultAction = await dispatch(
+        removeExperience({ 
+          id: experience.id, 
+        })
+      )
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to create new session: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+        localStorage.setItem('selected_user', null);
+        setError("")
+      }
+    }
+  }
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 mx-2">
@@ -33,7 +66,7 @@ const UserExperienceHistoryItem = ({experience}) => {
       </div>
 
       <div className="md:text-center">
-        {pending ? <button className="text-red-500 text-sm">Cancel</button>
+        {pending ? <button className="text-red-500 text-sm" onClick={() => removeExperienceClicked()}>Cancel</button>
         : 
         accepted ? <button className="text-blue-500">Cancel</button> : 
         completed ? <button className="text-green-500">View</button> : ""}

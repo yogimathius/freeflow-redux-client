@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { addNewExperience } from './experiencesSlice';
 import { unwrapResult } from '@reduxjs/toolkit'
 
-const CreateExperience = () => {
+const CreateExperience = ( { userId }) => {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
 
@@ -13,7 +13,6 @@ const CreateExperience = () => {
 
   const user = useSelector(state => state.user.user)
 
-  const userId = user.id
   const users = useSelector((state) => state.users.entities)
 
   let userOptions = [];

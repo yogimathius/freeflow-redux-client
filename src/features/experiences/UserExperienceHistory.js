@@ -12,6 +12,7 @@ const UserExperienceHistory = ({userId}) => {
       return <UserExperienceHistoryItem 
         key={index}
         experience={experience}
+        userId={userId}
       />
     })
   }

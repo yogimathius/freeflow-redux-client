@@ -9,11 +9,11 @@ import axios from 'axios';
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/db_skills'
 
-const skillsAdapater = createEntityAdapter({
+const skillsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 })
 
-const initialState = skillsAdapater.getInitialState({
+const initialState = skillsAdapter.getInitialState({
   status: 'idle',
   error: null,
 })
@@ -69,17 +69,17 @@ const skillsSlice = createSlice({
     [fetchSkills.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       // Add any fetched skills to the array
-      skillsAdapater.upsertMany(state, action.payload)
+      skillsAdapter.upsertMany(state, action.payload)
     },
     [fetchSkills.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
     },
     [addNewSkill.fulfilled]: (state, action) => {
-      skillsAdapater.upsertOne(state, action.payload)
+      skillsAdapter.upsertOne(state, action.payload)
     },
     [removeSkill.fulfilled]: (state, action) => {
-      skillsAdapater.removeOne(state, action.payload)
+      skillsAdapter.removeOne(state, action.payload)
     } 
   },
 })
@@ -92,7 +92,7 @@ export const {
   selectAll: selectAllskills,
   selectById: selectSkillById,
   selectIds: selectSkillIds,
-} = skillsAdapater.getSelectors((state) => state.skills)
+} = skillsAdapter.getSelectors((state) => state.skills)
 
 export const selectSkillsByIds = createSelector(
   [selectAllskills, (state, skillIds) => skillIds],
