@@ -8,7 +8,7 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   const dispatch = useDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
@@ -42,7 +42,7 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
       } finally {
         setAddRequestStatus('idle')
         localStorage.setItem('selected_user', null);
-        setError("")
+        // setError("")
       }
     }
   }

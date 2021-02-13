@@ -8,12 +8,12 @@ import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
 import UserSkills from './UserSkills'
 import PostExcerpt from '../posts/PostExcerpt';
-import AddPostForm from '../posts/AddPostForm';
-import {Link} from 'react-router-dom'
+// import AddPostForm from '../posts/AddPostForm';
+// import {Link} from 'react-router-dom'
 
 export default function UserPage() {
   const userId = loadState()
-  const loggedInUser = useSelector(state => state.user)
+  // const loggedInUser = useSelector(state => state.user)
   const user = useSelector((state) => selectUserById(state, userId))
 
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
