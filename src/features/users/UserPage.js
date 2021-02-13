@@ -35,13 +35,16 @@ export default function UserPage() {
     <section className="space-y-3">
       <UserSkillsList />
 
-      <div className="grid grid-cols-4 ">
+      <div className="md:grid md:grid-cols-4 ">
+        <div className="col-span-2">
           <UserCard id={user.id} />
+        </div>
+          
           <p className="m-2">
             <span className="font-bold">Location:</span> {user.location}
           </p>
       </div>
-      <div  className="flex justify-center">
+      <div className="flex justify-center flex-wrap md:nowrap">
 
           <UserSkills userId={user.id} />
       </div>

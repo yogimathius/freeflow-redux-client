@@ -21,7 +21,7 @@ const UserSkills = (props) => {
 	}) : "";
 
 	return (
-		<div className="space-x-1 flex">
+		<div className="space-x-1 flex flex-wrap md:nowrap">
 			<div className=" font-bold">My Skills: </div>
 			{renderedSkills}
 		</div>
