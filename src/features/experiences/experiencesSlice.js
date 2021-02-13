@@ -78,8 +78,10 @@ const experiencesSlice = createSlice({
       state.error = action.error.message
     },
     [addNewExperience.fulfilled]: experiencesAdapter.addOne,
-    [removeExperience.fulfilled]: experiencesAdapter.removeOne,
-  },
+    [removeExperience.fulfilled]: (state, action) => {
+      console.log("action in remove fulfilled: ", action);
+      experiencesAdapter.removeOne(state, action.meta.arg.id)
+    },  },
 })
 
 export const { experienceAdded } = experiencesSlice.actions
