@@ -19,7 +19,8 @@ import { EditPostForm } from './EditPostForm';
 import PostExcerptSkills from './PostExcerptSkills';
 
 const SHOW = "SHOW";
-// const CONFIRM = "CONFIRM";
+const CONFIRM = "CONFIRM";
+const CANDELETE = "CANDELETE";
 // const SAVING = "SAVING";
 const EDITING = "EDITING";
 // const ERROR_SAVE = "ERROR_SAVE";
@@ -50,6 +51,14 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   function onSaveEdit() {
     transition(SHOW);
+  }
+
+  function onConfirmDelete() {
+    transition(CONFIRM)
+  }
+
+  function onCancelDelete() {
+    transition(SHOW)
   }
 
   const canEditOrRemove =
@@ -102,10 +111,28 @@ export default function PostExcerpt({ postId, onPost, index }) {
       />
       )}
 
-{ userId === post.owner_id ?
+      {mode === CONFIRM && (
+        <div className="flex justify-center">
+          <div className="text-center border-2 border-red-500 px-12 py-3 w-min rounded-lg space-y-2">
+            <div className="text-red-500 font-bold">Delete this post?</div>
+            <div className="flex justify-center space-x-2">
+              <button onClick={() => onCancelDelete()} className="btn btn-warning">Cancel</button>
+              <button onClick={() => onDeletePostClicked()} className="btn btn-primary">Confirm</button>
+            </div>
+          </div>
+        </div>
+        )}
+
+    { userId === post.owner_id ?
       <div className="space-x-1 flex justify-end mr-2">
-        <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
-        <button onClick={() => onDeletePostClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+
+        {mode === SHOW && (
+        <div className="space-x-1 flex justify-end mr-2">
+          <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+          <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+        </div>
+        
+        )}
       </div>
         : ""
       }

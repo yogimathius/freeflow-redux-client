@@ -18,7 +18,7 @@ const UserExperienceHistory = ({userId}) => {
   }
   return (
     <div className="my-3 pb-2">
-      <h3 className="font-bold text-center md:text-xl bg-green-500 rounded my-2 text-white">Help Others</h3>
+      <h3 className="font-bold text-center md:text-xl bg-green-500 rounded my-2 text-white">Users you have offered to help</h3>
       {renderedExperiences}
     </div>
   );
