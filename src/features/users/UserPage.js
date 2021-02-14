@@ -6,7 +6,6 @@ import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from './usersSlice'
 import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
-import UserSkills from './UserSkills'
 import PostExcerpt from '../posts/PostExcerpt';
 // import AddPostForm from '../posts/AddPostForm';
 // import {Link} from 'react-router-dom'

@@ -20,7 +20,6 @@ import PostExcerptSkills from './PostExcerptSkills';
 
 const SHOW = "SHOW";
 const CONFIRM = "CONFIRM";
-const CANDELETE = "CANDELETE";
 // const SAVING = "SAVING";
 const EDITING = "EDITING";
 // const ERROR_SAVE = "ERROR_SAVE";

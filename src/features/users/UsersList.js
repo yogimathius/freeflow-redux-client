@@ -7,9 +7,7 @@ import {
   selectAllExperiences,  
 } from '../experiences/experiencesSlice';
 import UserCard from './UserCard';
-import UserInfo from './UserInfo';
 import UserSkillsList from '../userSkills/fetchUserSkills';
-import UserSkills from './UserSkills';
   
 store.dispatch(fetchExperiences());
 export const UsersList = () => {
