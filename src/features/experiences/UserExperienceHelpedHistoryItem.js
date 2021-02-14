@@ -48,7 +48,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 mx-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 mx-2 space-y-1">
       <div>{helperUserName.first_name + " " + helperUserName.last_name}</div>
 
       <div className="md:text-center">
@@ -68,17 +68,17 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
       <div className="md:text-center">
         {pending ? 
         <div className="space-x-2">
-          <button className="text-red-500 text-sm" onClick={() => removeExperienceClicked()}>Decline</button>
-          <button className="text-green-500">Accept</button> 
+          <button className="text-red-500 text-sm btn btn-warning" onClick={() => removeExperienceClicked()}>Decline</button>
+          <button className="text-green-500 btn btn-tertiary">Accept</button> 
         </div>
         : 
         accepted ? 
         <div className="space-x-2">
-          <button className="text-red-500 text-sm">Cancel</button> 
-          <button className="text-green-500">Complete</button> 
+          <button className="text-red-500 text-sm btn btn-warning">Cancel</button> 
+          <button className="text-green-500 btn btn-secondary">Complete</button> 
         </div>
         : 
-        completed ? <button className="text-green-500">View</button> : ""}
+        completed ? <button className="text-green-500 btn btn-secondary">View Details</button> : ""}
       </div>
     </div>
   );

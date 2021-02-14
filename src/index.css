@@ -26,7 +26,7 @@
 @layer utilities {
 	.btn
     {
-			@apply px-4 font-bold tracking-widest rounded-3xl cursor-pointer text-base text-center no-underline object-contain;
+			@apply px-2 font-bold tracking-widest rounded border-2 cursor-pointer text-center no-underline object-contain text-xs;
     }
 
 	/* .btn i {
@@ -50,51 +50,51 @@
 
 	.btn-primary,
 	.btn-primary:visited {
-		@apply bg-green-500 text-white border-3 border-green-500;
+		@apply bg-green-500 text-white border-green-500;
 	}
 
 	.btn-primary:hover,
 	.btn-primary:visited:hover {
-		@apply bg-white border-3 border-green-500 text-green-500;
+		@apply bg-white border-green-500 text-green-600;
 	}
 
 	.btn-secondary,
 	.btn-secondary:visited
     {
-		@apply bg-none border-3 border-green-500 text-green-500;
+		@apply bg-none border-green-600 text-green-600;
 	}
 
 	.btn-secondary:hover,
 	.btn-secondary:visited:hover
 		 {
-		@apply bg-none bg-green-500 text-white;
+		@apply bg-none bg-green-200;
 	}
 
     .btn-secondary:active
     {
-		@apply text-white bg-green-500 opacity-70;
+		@apply bg-green-500 opacity-70;
 	}
 
 	.btn-tertiary,
 	.btn-tertiary:visited
     {
-		@apply border-3 border-blue-500 text-blue-500;
+		@apply border-blue-500 text-blue-500;
     }
 
 	.btn-tertiary:hover,
 	.btn-tertiary:visited:hover,
 	.btn-tertiary:focus
     {
-		@apply bg-blue-500 text-white;
+		@apply bg-blue-200;
     }
 	.btn-warning,
 	.btn-warning:visited {
-		@apply border-3 border-red-500 text-red-500;
+		@apply border-red-500 text-red-500;
 	}
 	.btn-warning:hover,
 	.btn-warning:visited:hover,
 	.btn-warning:focus
     {
-		@apply bg-red-500 text-white;
+		@apply bg-red-200;
     }
 }
