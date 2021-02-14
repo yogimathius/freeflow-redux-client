@@ -35,18 +35,23 @@ export default function UserPage() {
     <section className="space-y-3">
       <UserSkillsList />
 
-      <div className="md:grid md:grid-cols-4 ">
+      <div className="">
         <div className="col-span-2">
-          <UserCard id={user.id} />
+          <UserCard 
+          id={user.id} 
+          firstName={user.first_name} 
+          lastName={user.last_name} 
+          active={user.active} 
+          location={user.location} 
+          created_at={user.created_at} 
+          profession={user.profession}
+          tagline={user.tagline}
+          />
         </div>
-          
-          <p className="m-2">
-            <span className="font-bold">Location:</span> {user.location}
-          </p>
-      </div>
-      <div className="flex justify-center flex-wrap md:nowrap">
-
-          <UserSkills userId={user.id} />
+        
+        <p className="m-2">
+          <span className="font-bold">Location:</span> {user.location}
+        </p>
       </div>
       <div className="">
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>

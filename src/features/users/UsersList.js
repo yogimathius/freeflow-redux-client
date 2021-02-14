@@ -7,6 +7,9 @@ import {
   selectAllExperiences,  
 } from '../experiences/experiencesSlice';
 import UserCard from './UserCard';
+import UserInfo from './UserInfo';
+import UserSkillsList from '../userSkills/fetchUserSkills';
+import UserSkills from './UserSkills';
   
 store.dispatch(fetchExperiences());
 export const UsersList = () => {
@@ -34,19 +37,33 @@ export const UsersList = () => {
     experiencesContent = <div>{experienceError}</div>
   }
   
-  const renderedUsers = users.map((user, id) => (
-    <UserCard 
-      key={id} 
-      id={user.id} 
-      avatar={user.avatar} 
-      firstName={user.first_name} 
-      lastName={user.last_name} 
-      description={user.description} 
-      active={user.active} 
-      location={user.location} 
-      created_at={user.created_at} 
-    />
-  ))
+  const renderedUsers = users.map((user, id) => {return (
+    <div className="">
+      <UserSkillsList />
+      <div className="">
+        <UserCard 
+          key={id} 
+          id={user.id} 
+          firstName={user.first_name} 
+          lastName={user.last_name} 
+          active={user.active} 
+          location={user.location} 
+          created_at={user.created_at} 
+          profession={user.profession}
+          tagline={user.tagline}
+        />
+      </div>
+      <div>
+        {/* <div className="">
+          <UserSkills 
+            key={id}
+            userId={user.id}
+          />
+        </div> */}
+
+      </div>
+    </div>
+  )})
 
     return (
     <section className="space-y-3">

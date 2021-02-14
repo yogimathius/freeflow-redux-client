@@ -8,12 +8,14 @@ import {
   removeLike
 } from './likesSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp as farThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function Likes({ postId, userId }) {
 	const dispatch = useDispatch()
 	const likes = useSelector((state) => selectLikesByPostId(state, postId))
+    console.log("likes in likes: ", likes);
+
   const likeStatus = useSelector((state) => state.likes.status)
   const myLikes = userId ? likes.filter(
     (like) => userId === like.liker_id
@@ -85,15 +87,23 @@ export default function Likes({ postId, userId }) {
 
   // LIKE UNLIKE FUNCTION
   const LikeUnlikeIcons = iAlreadyLikeThis ? (
-    <FontAwesomeIcon 
-    onClick={() => unLike(postId, userId)}
-    className=""
-    icon={fasHeart} size="1x" />
-  ) : (                  
-    <FontAwesomeIcon 
-      onClick={() => addLike(postId, userId)}
-      className="love"
-      icon={farHeart} size="1x" />
+    <div onClick={() => unLike(postId, userId)}
+    className="flex space-x-2 items-center  cursor-pointer font-bold">
+      <FontAwesomeIcon 
+      className=""
+      icon={fasThumbsUp} size="1x" />
+      <div     onClick={() => unLike(postId, userId)}
+      >Like</div>
+    </div>
+  ) : (     
+    <div onClick={() => addLike(postId, userId)}
+    className="flex space-x-2 items-center  cursor-pointer text-black font-bold">
+      <FontAwesomeIcon 
+        className="love"
+        icon={farThumbsUp} size="1x" />
+        <div>Like</div>
+    </div>             
+
   )
 
 
@@ -111,10 +121,7 @@ export default function Likes({ postId, userId }) {
 		<p><b>{likeSum} like</b></p> : "";
 		
 	return (
-    <div className="flex items-start justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
-        
-        {/* conditionally renders like or unlike icon */}
-        {LikeUnlikeIcons}
+    <div className="flex flex-col items-end justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
         <div className="-mt-0.5">
@@ -123,6 +130,9 @@ export default function Likes({ postId, userId }) {
           {OnlyILikeThis}
           {OnlyOneLikesThis}
         </div>
+        
+        {/* conditionally renders like or unlike icon */}
+        {LikeUnlikeIcons}
 			</div>
 	);
 };
