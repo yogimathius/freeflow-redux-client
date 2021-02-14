@@ -14,7 +14,6 @@ import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons';
 export default function Likes({ postId, userId }) {
 	const dispatch = useDispatch()
 	const likes = useSelector((state) => selectLikesByPostId(state, postId))
-    console.log("likes in likes: ", likes);
 
   const likeStatus = useSelector((state) => state.likes.status)
   const myLikes = userId ? likes.filter(

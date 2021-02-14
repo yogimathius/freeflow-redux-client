@@ -6,11 +6,9 @@ import UserExperienceHelpedHistoryItem from './UserExperienceHelpedHistoryItem';
 const UserExperienceHelpedHistory = ({userId}) => {
   const experiences = useSelector((state) => selectHelpedExperiencesByUserId(state, userId))
 
-  console.log("experiences in helped: ", experiences);
 
   let renderedExperiences;
   if (experiences) {
-    // console.log("this works");
     renderedExperiences = experiences.map((experience, index) => {
       return <UserExperienceHelpedHistoryItem 
         key={index}

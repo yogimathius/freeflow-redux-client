@@ -33,6 +33,20 @@ export const addNewExperience = createAsyncThunk(
     const { helper_id, helped_id, creator_id} = initialExperiences
 
     const response = await axios.post(`${url}/new`, {helper_id, helped_id, creator_id});
+    // console.log("response: ", response);
+    return response.data
+  }
+)
+
+export const acceptExperience = createAsyncThunk(
+  'experiences/acceptExperience',
+  async (initialExperiences) => {
+    const { id } = initialExperiences
+
+    const experienceId = id;
+    console.log("id in thunk accept: ", id);
+    const response = await axios.put(`${url}/accept`, { experienceId 
+    });
     console.log("response: ", response);
     return response.data
   }
@@ -81,7 +95,12 @@ const experiencesSlice = createSlice({
     [removeExperience.fulfilled]: (state, action) => {
       console.log("action in remove fulfilled: ", action);
       experiencesAdapter.removeOne(state, action.meta.arg.id)
-    },  },
+    },  
+    [acceptExperience.fulfilled]: (state, action) => {
+      console.log("action in accept fulfilled: ", action);
+      experiencesAdapter.upsertOne(state, action.payload)
+    },
+  },
 })
 
 export const { experienceAdded } = experiencesSlice.actions

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
-import { removeExperience } from './experiencesSlice';
+import { acceptExperience, removeExperience } from './experiencesSlice';
 import { unwrapResult } from '@reduxjs/toolkit'
 
 const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   const dispatch = useDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  console.log("this works in item");
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
   const completed = experience.date_completed !== null ? true : false;
@@ -16,16 +15,36 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   const users = useSelector((state) => state.users)
 
   const helperUserName = users.entities[experience.helper_id];
-  console.log(users.entities, experience.helper_id);
   if (!helperUserName) {
     return null;
   }
-  console.log("helped: ", helperUserName);
   const canRemove =
   userId && addRequestStatus === 'idle'
 
+  const acceptExperienceClicked = async () => {
+    console.log("accept clicked!");
+
+  if (canRemove) {
+    try {
+
+      setAddRequestStatus('pending')
+      const resultAction = await dispatch(
+        acceptExperience({ 
+          id: experience.id, 
+        })
+      )
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to accept session: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+        localStorage.setItem('selected_user', null);
+        // setError("")
+      }
+    }
+  }
+
   const removeExperienceClicked = async () => {
-    console.log("cancel clicked!");
 
   if (canRemove) {
     try {
@@ -38,7 +57,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
       )
         unwrapResult(resultAction)
       } catch (err) {
-        console.error('Failed to create new session: ', err)
+        console.error('Failed to cancel session: ', err)
       } finally {
         setAddRequestStatus('idle')
         localStorage.setItem('selected_user', null);
@@ -69,7 +88,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
         {pending ? 
         <div className="space-x-2">
           <button className="text-red-500 text-sm btn btn-warning" onClick={() => removeExperienceClicked()}>Decline</button>
-          <button className="text-green-500 btn btn-tertiary">Accept</button> 
+          <button className="text-green-500 btn btn-tertiary" onClick={() => acceptExperienceClicked()}>Accept</button> 
         </div>
         : 
         accepted ? 

@@ -5,7 +5,6 @@ import { setVisibilityFilter } from '../filters/filtersSlice';
 import { selectUserSkillsByUserId } from '../userSkills/userSkillsSlice';
 
 const UserSkills = (props) => {
-	console.log(props.userId);
 	const skillsForUser = useSelector(state => selectUserSkillsByUserId(state, props.userId))
 	const dispatch = useDispatch()
 
