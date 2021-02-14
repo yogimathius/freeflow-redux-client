@@ -106,7 +106,6 @@ export default function Likes({ postId, userId }) {
 
   )
 
-
   // LIKES COUNT
   const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
     <p ><b>You and {likeSum - 1} others</b></p> : "";
