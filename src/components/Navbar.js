@@ -15,7 +15,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="pt-3 pb-1 mb-4 bg-green-500">
+    <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-50">
       <section className="grid grid-cols-4 grid-rows-2 ">
         <div className="col-span-4 flex justify-center ">
           <h1 className="text-white text-2xl font-extrabold">Freeflow Social Network</h1>

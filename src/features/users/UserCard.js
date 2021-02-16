@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../helpers/localStorage';
 import { useSelector } from 'react-redux';
-import { selectHelperExperiencesByUserId } from '../experiences/experiencesSlice';
+import { selectCompletedExperiencesByHelperId } from '../experiences/experiencesSlice';
 import { UserNameAndLogo } from './UserNameAndLogo';
 import UserInfo from './UserInfo';
 import UserSkills from './UserSkills';
 
 export default function UserCard(props) {
-  const userExperiences = useSelector((state) => selectHelperExperiencesByUserId(state, props.id))
+  const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, props.id))
 
-  const experience = (userExperiences.length *29);
+  const experience = (userExperiences.length * 12);
   return (
     <div className='bg-white rounded-xl m-1 hover:shadow-lg space-y-3 p-3 grid grid-cols-1 md:grid-cols-3' key={props.id}>
       {/* <div className=""> */}

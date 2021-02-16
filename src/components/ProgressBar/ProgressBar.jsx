@@ -68,15 +68,16 @@ const ProgressBar = (props) => {
   };
 
   return (
-    <div className="progressbars">
-      <div className="containerstyles">
+    <div className="progressbars grid grid-cols-6">
+      <div className="text-center font-bold">Lv. {level}</div>
+
+      <div className="containerstyles col-span-5">
         <div style={fillerStyles}className="bgcolor">
           <span
             className="labelstyles"
           >{`${experiencePoints}/${fullExperience}`}</span>
         </div>
       </div>
-      <span>Level {level}</span>
     </div>
   );
 };

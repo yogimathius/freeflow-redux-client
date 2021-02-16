@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
-import { acceptExperience, completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
+import { completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
 
 import { unwrapResult } from '@reduxjs/toolkit'
 
@@ -26,31 +26,8 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   const canRemove =
   userId && addRequestStatus === 'idle'
 
-  const acceptExperienceClicked = async () => {
-    console.log("accept clicked!");
-
-  if (canRemove) {
-    try {
-
-      setAddRequestStatus('pending')
-      const resultAction = await dispatch(
-        acceptExperience({ 
-          id: experience.id, 
-        })
-      )
-        unwrapResult(resultAction)
-      } catch (err) {
-        console.error('Failed to accept session: ', err)
-      } finally {
-        setAddRequestStatus('idle')
-        localStorage.setItem('selected_user', null);
-        // setError("")
-      }
-    }
-  }
-
   const completeExperienceClicked = async () => {
-    console.log("accept clicked!");
+    console.log("complete clicked!");
 
   if (canRemove) {
 
@@ -61,7 +38,8 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
           completeExperience({ 
             id: experience.id, 
             ishelper: true,
-            comments: ""
+            comments: "",
+            submit_completion: true
           })
         )
           unwrapResult(resultAction)          

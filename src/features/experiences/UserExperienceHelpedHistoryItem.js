@@ -6,19 +6,19 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import useVisualMode from '../../hooks/useVisualMode'
 
 const SHOW = "SHOW";
-const CONFIRMCANCEL = "CONFIRMCANCEL";
+// const CONFIRMCANCEL = "CONFIRMCANCEL";
 const CONFIRMDECLINE = "CONFIRMDECLINE";
 const CONFIRMACCEPT = "CONFIRMACCEPT";
-const CONFIRMCOMPLETE = "CONFIRMCOMPLETE";
+// const CONFIRMCOMPLETE = "CONFIRMCOMPLETE";
 
 const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   const dispatch = useDispatch();
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
   const { mode, transition } = useVisualMode(SHOW);
 
-  function onConfirmCancel() {
-    transition(CONFIRMCANCEL)
-  }
+  // function onConfirmCancel() {
+  //   transition(CONFIRMCANCEL)
+  // }
 
   function onConfirmDecline() {
     transition(CONFIRMDECLINE)
@@ -26,9 +26,9 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   function onConfirmAccept() {
     transition(CONFIRMACCEPT)
   }
-  function onConfirmComplete() {
-    transition(CONFIRMCOMPLETE)
-  }
+  // function onConfirmComplete() {
+  //   transition(CONFIRMCOMPLETE)
+  // }
   function onCancel() {
     transition(SHOW)
   }
@@ -84,7 +84,8 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
           completeExperience({ 
             id: experience.id, 
             ishelper: false,
-            comments: ""
+            comments: "",
+            submit_completion: true
           })
         )
           unwrapResult(resultAction)          
@@ -133,7 +134,6 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
     }
   }
 
-  console.log("experience in helped history item: ", experience, completedByHelped);
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 mx-2 space-y-1">
       <div>{helperUserName.first_name + " " + helperUserName.last_name}</div>

@@ -53,13 +53,13 @@ export const acceptExperience = createAsyncThunk(
 )
 
 export const completeExperience = createAsyncThunk(
-  'experiences/acceptExperience',
+  'experiences/completeExperience',
   async (initialExperiences) => {
-    const { id, ishelper, comments } = initialExperiences
+    const { id, ishelper, comments, submit_completion } = initialExperiences
 
     const experienceId = id;
     console.log("id in thunk complete: ", id);
-    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments 
+    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments, submit_completion
     });
     console.log("complete response: ", response);
     return response.data
@@ -67,13 +67,13 @@ export const completeExperience = createAsyncThunk(
 )
 
 export const completeOtherExperience = createAsyncThunk(
-  'experiences/acceptExperience',
+  'experiences/completeOtherExperience',
   async (initialExperiences) => {
     const { id, ishelper, comments } = initialExperiences
 
     const experienceId = id;
     console.log("id in thunk complete other: ", id);
-    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments 
+    const response = await axios.put(`${url}/complete-other`, { experienceId, ishelper, comments 
     });
     console.log("complete response: ", response);
     return response.data
@@ -128,6 +128,10 @@ const experiencesSlice = createSlice({
       console.log("action in accept fulfilled: ", action);
       experiencesAdapter.upsertOne(state, action.payload)
     },
+    [completeOtherExperience.fulfilled]: (state, action) => {
+      console.log("action in accept fulfilled: ", action);
+      experiencesAdapter.upsertOne(state, action.payload)
+    },
     [removeExperience.fulfilled]: (state, action) => {
       console.log("action in remove fulfilled: ", action);
       experiencesAdapter.removeOne(state, action.meta.arg.id)
@@ -160,5 +164,12 @@ export const selectHelpedExperiencesByUserId = createSelector(
   [selectAllExperiences, (state, userId) => userId],
   (experiences, userId) => experiences.filter((experience) => {
 		return experience.helped_id === parseInt(userId)
+	})
+)
+
+export const selectCompletedExperiencesByHelperId = createSelector(
+  [selectAllExperiences, (state, userId) => userId],
+  (experiences, userId) => experiences.filter((experience) => {
+		return experience.helper_id === parseInt(userId) && experience.status === "completed"
 	})
 )
