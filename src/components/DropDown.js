@@ -8,6 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const StyledMenu = withStyles({
   paper: {
@@ -32,7 +35,7 @@ const StyledMenu = withStyles({
 const StyledMenuItem = withStyles((theme) => ({
   root: {
     '&:focus': {
-      // backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main,
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
         color: theme.palette.common.white,
       },
@@ -40,7 +43,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function DropDown() {
+export default function DropDown({ user, saveState, handleLogout }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -57,10 +60,10 @@ export default function DropDown() {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
+        color=""
         onClick={handleClick}
       >
-        Open Menu
+        <FontAwesomeIcon className="text-white fa-2x" icon={faBars} /> 
       </Button>
       <StyledMenu
         id="customized-menu"
@@ -69,24 +72,44 @@ export default function DropDown() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
+        <Link to="/dashboard">
+          <StyledMenuItem>
+            <ListItemIcon>
+              <SendIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Posts" />
+          </StyledMenuItem>
+        </Link>
+        <Link to="/users">
+          <StyledMenuItem>
+            <ListItemIcon>
+              <DraftsIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Users" />
+          </StyledMenuItem>
+        </Link>
+        <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <InboxIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </StyledMenuItem>
+        </Link>
+        <Link to={`/${user?.id}/experiences`} onClick={() => saveState(user?.id)}>
+          <StyledMenuItem>
+            <ListItemIcon>
+              <InboxIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Experiences" />
+          </StyledMenuItem>
+        </Link>
+          <StyledMenuItem onClick={() => handleLogout()}>
+            <ListItemIcon>
+              <InboxIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </StyledMenuItem>
       </StyledMenu>
     </div>
   );
