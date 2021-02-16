@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
-import { removeExperience } from './experiencesSlice';
+import { acceptExperience, completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
+
 import { unwrapResult } from '@reduxjs/toolkit'
 
 const UserExperienceHistoryItem = ({ experience, userId }) => {
@@ -13,6 +14,7 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   const pending = experience.date_accepted === null ? true : false;
   const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
   const completed = experience.date_completed !== null ? true : false;
+  const completedByHelper = experience.helper_comments !== null ? true : false;
 
   const users = useSelector((state) => state.users)
 
@@ -23,6 +25,67 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   }
   const canRemove =
   userId && addRequestStatus === 'idle'
+
+  const acceptExperienceClicked = async () => {
+    console.log("accept clicked!");
+
+  if (canRemove) {
+    try {
+
+      setAddRequestStatus('pending')
+      const resultAction = await dispatch(
+        acceptExperience({ 
+          id: experience.id, 
+        })
+      )
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to accept session: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+        localStorage.setItem('selected_user', null);
+        // setError("")
+      }
+    }
+  }
+
+  const completeExperienceClicked = async () => {
+    console.log("accept clicked!");
+
+  if (canRemove) {
+
+    try {
+      if (experience.submit_completion === false) {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          completeExperience({ 
+            id: experience.id, 
+            ishelper: true,
+            comments: ""
+          })
+        )
+          unwrapResult(resultAction)          
+      } else {
+          setAddRequestStatus('pending')
+          const resultAction = await dispatch(
+            completeOtherExperience({ 
+              id: experience.id, 
+              ishelper: true,
+              comments: ""
+            })
+          )
+            unwrapResult(resultAction)  
+      }
+      
+      } catch (err) {
+        console.error('Failed to accept session: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+        localStorage.setItem('selected_user', null);
+        // setError("")
+      }
+    }
+  }
 
   const removeExperienceClicked = async () => {
     console.log("cancel clicked!");
@@ -68,8 +131,13 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
       <div className="md:text-center">
         {pending ? <button className="text-red-500 text-sm btn btn-warning" onClick={() => removeExperienceClicked()}>Cancel</button>
         : 
-        accepted ? <button className="text-blue-500 btn btn-warning">Cancel</button> : 
-        completed ? <button className="text-green-500 btn btn-secondary">View Details</button> : ""}
+        accepted && completedByHelper !== true ? 
+        <div className="space-x-2">
+        <button className="text-red-500 text-sm btn btn-warning">Cancel</button> 
+        <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button> 
+      </div>
+        : 
+        completed || completedByHelper ? <button className="text-green-500 btn btn-secondary">View Details</button> : ""}
       </div>
     </div>
   );

@@ -52,6 +52,34 @@ export const acceptExperience = createAsyncThunk(
   }
 )
 
+export const completeExperience = createAsyncThunk(
+  'experiences/acceptExperience',
+  async (initialExperiences) => {
+    const { id, ishelper, comments } = initialExperiences
+
+    const experienceId = id;
+    console.log("id in thunk complete: ", id);
+    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments 
+    });
+    console.log("complete response: ", response);
+    return response.data
+  }
+)
+
+export const completeOtherExperience = createAsyncThunk(
+  'experiences/acceptExperience',
+  async (initialExperiences) => {
+    const { id, ishelper, comments } = initialExperiences
+
+    const experienceId = id;
+    console.log("id in thunk complete other: ", id);
+    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments 
+    });
+    console.log("complete response: ", response);
+    return response.data
+  }
+)
+
 export const removeExperience = createAsyncThunk(
   'experiences/removeExperience',
   async (initialExperiences) => {
@@ -92,14 +120,18 @@ const experiencesSlice = createSlice({
       state.error = action.error.message
     },
     [addNewExperience.fulfilled]: experiencesAdapter.addOne,
-    [removeExperience.fulfilled]: (state, action) => {
-      console.log("action in remove fulfilled: ", action);
-      experiencesAdapter.removeOne(state, action.meta.arg.id)
-    },  
     [acceptExperience.fulfilled]: (state, action) => {
       console.log("action in accept fulfilled: ", action);
       experiencesAdapter.upsertOne(state, action.payload)
     },
+    [completeExperience.fulfilled]: (state, action) => {
+      console.log("action in accept fulfilled: ", action);
+      experiencesAdapter.upsertOne(state, action.payload)
+    },
+    [removeExperience.fulfilled]: (state, action) => {
+      console.log("action in remove fulfilled: ", action);
+      experiencesAdapter.removeOne(state, action.meta.arg.id)
+    },  
   },
 })
 

@@ -6,6 +6,8 @@ import {
 import { AuthProvider } from './Context';
 import routes from './Config/routes.js';
 import { Navbar } from './components/Navbar'
+import SideBar from './components/SideBar'
+
 import AppRoute from './components/AppRoute';
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
+        {/* <SideBar /> */}
         <div className="App bg-gray-100 lg:w-11/12 mx-auto xl:w-2/3">
         <Switch>
 					{routes.map((route) => (
