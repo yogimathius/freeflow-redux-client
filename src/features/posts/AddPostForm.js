@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
-import generateUID from '../../helpers/generateRandomId'
 import { setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice';
 
 export default function AddPostForm() {
   const [error, setError] = useState("");
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  const posts = useSelector(state => state.posts.entities)
+  const postsState = useSelector(state => state.posts)
+  const posts = postsState ? postsState.entities : "";
 
-  const postSkills = useSelector(state => state.postSkills.entities)
 
   const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
   
@@ -28,12 +27,9 @@ export default function AddPostForm() {
 
   let postLength = Object.keys(posts).length;
 
-  const postSkillKeys = Object.keys(postSkills)
     const OnSavePostClicked = async () => {
       const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
-      let uniquePostSkillId = generateUID()
-      postSkillKeys.forEach(skillId => 
-      skillId === uniquePostSkillId ? uniquePostSkillId = generateUID() : "")
+
       dispatch(setSelectedSkills([]))
 
     if (content === "") {
@@ -82,7 +78,7 @@ export default function AddPostForm() {
   const initialFormState = { mySelectKey: null };
 
   return (
-    <section>
+    <section className="mt-2">
       <form 
       // onSubmit={}
         className="space-y-2 mx-2">

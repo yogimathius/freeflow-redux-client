@@ -37,7 +37,7 @@ const PostsList = ({posts}) => {
       <AddPostForm />
       <Filter />
       {posts.length !== 0 ? 
-        <section className="posts-list">
+        <section className="">
           {content}
         </section>
       : 

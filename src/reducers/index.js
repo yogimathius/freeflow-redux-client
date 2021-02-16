@@ -8,7 +8,6 @@ import userLoginReducer from '../features/login/userLoginSlice';
 import skillsReducer from '../features/dbSkills/dbSkillsSlice';
 import userSkillsReducer from '../features/userSkills/userSkillsSlice';
 import filtersReducer from '../features/filters/filtersSlice';
-import postSkillsReducer from '../features/postSkills/postSkillsSlice';
 import selectedSkillsReducer from '../features/dbSkills/selectedSkills/selectedSkillsSlice';
 
 const rootReducer = combineReducers({
@@ -21,7 +20,6 @@ const rootReducer = combineReducers({
   skills: skillsReducer,
   userSkills: userSkillsReducer,
   visibilityFilters: filtersReducer,
-  postSkills: postSkillsReducer,
   selectedSkills: selectedSkillsReducer
 })
 

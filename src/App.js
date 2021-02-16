@@ -27,7 +27,8 @@ function App() {
           <div className="hidden md:col-span-2 md:flex justify-center">
             {user.user ? <UserSideBar /> : ""}
           </div>
-          <div className="bg-gray-100 col-start-3 col-span-3 mt-24">
+          <div className="h-16"></div>
+          <div className="bg-gray-100 col-start-4 col-span-3 md:mt-24">
             <Switch>
               {routes.map((route) => (
                 <AppRoute
