@@ -6,7 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';import PersonIcon from '@material-ui/icons/Person';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
 import SendIcon from '@material-ui/icons/Send';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
@@ -60,7 +62,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color=""
+        color="primary"
         onClick={handleClick}
       >
         <FontAwesomeIcon className="text-white fa-2x" icon={faBars} /> 
@@ -83,7 +85,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
         <Link to="/users">
           <StyledMenuItem>
             <ListItemIcon>
-              <DraftsIcon fontSize="small" />
+              <PeopleIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Users" />
           </StyledMenuItem>
@@ -91,7 +93,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
         <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
           <StyledMenuItem>
             <ListItemIcon>
-              <InboxIcon fontSize="small" />
+              <PersonIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </StyledMenuItem>
@@ -99,14 +101,14 @@ export default function DropDown({ user, saveState, handleLogout }) {
         <Link to={`/${user?.id}/experiences`} onClick={() => saveState(user?.id)}>
           <StyledMenuItem>
             <ListItemIcon>
-              <InboxIcon fontSize="small" />
+              <BarChartIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Experiences" />
           </StyledMenuItem>
         </Link>
           <StyledMenuItem onClick={() => handleLogout()}>
             <ListItemIcon>
-              <InboxIcon fontSize="small" />
+              <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </StyledMenuItem>

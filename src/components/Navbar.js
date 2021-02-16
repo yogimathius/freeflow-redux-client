@@ -19,12 +19,14 @@ export const Navbar = () => {
   return (
     <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40">
       <section className="grid grid-cols-4 ">
-        <div className="flex md:ml-12">
-          <img width="75px" className="" src={logo}  alt="freeflow logo"></img>
+        <div className="flex ml-6 my-1 md:ml-12">
+          <Link to="/dashboard">
+            <img width="75px" className="" src={logo}  alt="freeflow logo"></img>
+          </Link>
         </div>
 
-        <div className="col-start-4 mr-4 md:hidden z-50">
-          <DropDown user={user} saveState={saveState} logout={logout} />
+        <div className="col-start-4 mr-4 md:hidden z-50 flex items-center">
+          <DropDown user={user} saveState={saveState} handleLogout={handleLogout} />
         </div>
         <div className="col-span-3 hidden md:flex justify-evenly my-2 space-x-2 font-bold items-end ">
           <Link className="text-white col-start-1 flex justify-center" to="/dashboard">Posts</Link>
