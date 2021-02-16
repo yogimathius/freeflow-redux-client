@@ -20,13 +20,14 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
         {/* <SideBar /> */}
+        <Navbar />
+
         <div className="App md:grid grid-cols-8">
-          <div className="col-span-2 flex  justify-center">
-            {user.user ? <UserSideBar /> : ""} 
+          <div className="hidden md:col-span-2 md:flex justify-center">
+            {user.user ? <UserSideBar /> : ""}
           </div>
-          <div className="bg-gray-100 col-start-3 col-span-5 mt-32">
+          <div className="bg-gray-100 col-start-3 col-span-3 mt-32">
             <Switch>
               {routes.map((route) => (
                 <AppRoute
