@@ -16,7 +16,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['active', 'focus'],
+      borderColor: ['active'],
+    },
   },
   plugins: [],
 }

@@ -1,13 +1,25 @@
 import React from 'react'
 
 const Link = ({ active, children, setVisibilityFilter, filter }) => {
+  console.log("children in Link: ", children, active);
   return (
-    <div
-      className=""
-      onClick={() => setVisibilityFilter(filter)}
-      disabled={active}
-    >
-      {children}
+    <div>
+      {active === true ? 
+        <div
+        className="bg-green-500 text-white   btn btn-disabled mr-1 mt-1"
+        onClick={() => setVisibilityFilter(filter)}
+        disabled={active}
+      >
+        {children}
+      </div> :       
+      <div
+      className="btn btn-secondary mr-1 mt-1"
+        onClick={() => setVisibilityFilter(filter)}
+        disabled={active}
+      >
+        {children}
+      </div>
+      }
     </div>
   )
 }

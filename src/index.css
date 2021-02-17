@@ -43,10 +43,10 @@
 		@apply bg-green-500;
 	}
 
-	/* .btn[disabled],
+	.btn[disabled],
 	.btn.disabled {
 		@apply opacity-50 cursor-default;
-	} */
+	}
 
 	.btn-primary,
 	.btn-primary:visited {
