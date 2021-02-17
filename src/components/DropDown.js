@@ -6,10 +6,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from '@material-ui/icons/Person';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import SendIcon from '@material-ui/icons/Send';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -77,7 +78,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
         <Link to="/dashboard">
           <StyledMenuItem>
             <ListItemIcon>
-              <SendIcon fontSize="small" />
+              <PostAddIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Posts" />
           </StyledMenuItem>
