@@ -31,7 +31,7 @@ export default function UserPage() {
     )
     
   return (
-    <section className="space-y-3 mt-2">
+    <section className="space-y-3 pt-2 mt-2">
       <UserSkillsList />
 
       <div className="">

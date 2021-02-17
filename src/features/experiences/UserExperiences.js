@@ -8,7 +8,7 @@ const UserExperiences = ({match}) => {
   const userId = match.params.userId;
   
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 mt-2 pt-1">
       <CreateExperience userId={userId} />
       <UserExperienceHistory 
         userId={userId} 

@@ -36,9 +36,8 @@ export const UsersList = () => {
   }
   
   const renderedUsers = users.map((user, id) => {return (
-    <div className="">
+    <div key={id} className="">
       <UserSkillsList />
-      <div className="">
         <UserCard 
           key={id} 
           id={user.id} 
@@ -50,16 +49,6 @@ export const UsersList = () => {
           profession={user.profession}
           tagline={user.tagline}
         />
-      </div>
-      <div>
-        {/* <div className="">
-          <UserSkills 
-            key={id}
-            userId={user.id}
-          />
-        </div> */}
-
-      </div>
     </div>
   )})
 

@@ -12,7 +12,7 @@ const UserSideBar = () => {
   const experience = userExperiences.length * 12;
   const fullname = user ? user.first_name + " " + user.last_name : ""
   return (
-    <div className="border-2 border-green-500 rounded-lg m-2 col-span-2 h-content py-3 fixed w-72 md:mt-24">
+    <div className="border-2 border-green-500 rounded-lg m-2 h-content py-3 fixed md:mt-24">
       <div className="text-lg font-bold text-center">{fullname}</div>
       <ProgressBar experience={experience} />
     </div>

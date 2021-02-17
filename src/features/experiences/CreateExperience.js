@@ -77,22 +77,23 @@ const CreateExperience = ( { userId }) => {
 
 
   return (
-    <div className="grid grid-cols-4 space-x-2 pt-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 space-x-2 pt-2">
+      <div className="col-start-1 md:col-span-2 ml-2">
         <label
-				className="mr-2 flex justify-center md:justify-end items-center"
-				htmlFor="new session"> </label>
-			<Select
-				onChange={(e) => HandleChange(e)}
-				placeholder="Select a User"
-				// value={selectedSkills}
-				defaultValue="Select a User"
-				name="users"
-				options={userOptions}
-				className="basic-multi-select"
-				classNamePrefix="select"
-			/>
+        htmlFor="new session"> </label>
+        <Select
+          onChange={(e) => HandleChange(e)}
+          placeholder="Select a User"
+          // value={selectedSkills}
+          defaultValue="Select a User"
+          name="users"
+          options={userOptions}
+          className="basic-multi-select"
+          classNamePrefix="select"
+        />
+      </div>
 
-      <div className="flex justify-center">
+      <div className="col-start-2 md:col-start-3 md:col-span-2 flex justify-center">
         <button onClick={() => CreateExperience()} className="btn btn-secondary">Create Session</button>
       </div>
       <section className="flex justify-center items-center text-red-500">{error}</section>
