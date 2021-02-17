@@ -5,7 +5,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 import PeopleIcon from '@material-ui/icons/People';
@@ -47,7 +46,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function DropDown({ user, saveState, handleLogout }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,7 +75,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
         onClose={handleClose}
       >
         <Link to="/dashboard">
-          <StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
             <ListItemIcon>
               <PostAddIcon fontSize="small" />
             </ListItemIcon>
@@ -84,7 +83,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
           </StyledMenuItem>
         </Link>
         <Link to="/users">
-          <StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
             <ListItemIcon>
               <PeopleIcon fontSize="small" />
             </ListItemIcon>
@@ -92,7 +91,7 @@ export default function DropDown({ user, saveState, handleLogout }) {
           </StyledMenuItem>
         </Link>
         <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
-          <StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
@@ -100,18 +99,18 @@ export default function DropDown({ user, saveState, handleLogout }) {
           </StyledMenuItem>
         </Link>
         <Link to={`/${user?.id}/experiences`} onClick={() => saveState(user?.id)}>
-          <StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
             <ListItemIcon>
               <BarChartIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Experiences" />
           </StyledMenuItem>
         </Link>
-          <StyledMenuItem onClick={() => handleLogout()}>
-            <ListItemIcon>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon onClick={() => handleLogout()} >
               <ExitToAppIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="Logout" />
+            <ListItemText onClick={() => handleLogout()}  primary="Logout" />
           </StyledMenuItem>
       </StyledMenu>
     </div>
