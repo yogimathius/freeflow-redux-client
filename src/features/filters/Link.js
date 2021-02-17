@@ -3,7 +3,7 @@ import React from 'react'
 const Link = ({ active, children, setVisibilityFilter, filter }) => {
   return (
     <div
-      className="text-blue-500 cursor-pointer "
+      className=""
       onClick={() => setVisibilityFilter(filter)}
       disabled={active}
     >

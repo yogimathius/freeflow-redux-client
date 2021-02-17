@@ -19,16 +19,19 @@ const Filter = () => {
 
   const renderedFilters = filterKeys ? filterKeys.map((filter, index) => {
     return (
+      <div  className="btn btn-secondary mr-1 mt-1">
+
       <FilterLink key={index} filter={VisibilityFilters[filter]}>
         {filter}
       </FilterLink>
+      </div>
     )
   }) : "";
 
   return (
-    <div className="flex mt-3 items-center justify-center space-x-8">
-      <span className="font-extrabold">Show: </span>
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-x-5 text-xs">
+    <div className="flex flex-col justify-center">
+      <div className="text-xs font-extrabold mr-2 text-center">Filter by: </div>
+      <div className="flex justify-center flex-wrap">
         {renderedFilters}
       </div>
     </div>

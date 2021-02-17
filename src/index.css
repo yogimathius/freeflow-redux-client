@@ -26,7 +26,7 @@
 @layer utilities {
 	.btn
     {
-			@apply px-2 font-bold tracking-widest rounded-lg border-2 cursor-pointer text-center no-underline object-contain text-xs;
+			@apply px-2 font-bold tracking-widest rounded-lg border-2 cursor-pointer text-center no-underline object-contain;
     }
 
 	/* .btn i {
@@ -64,13 +64,14 @@
 		@apply bg-none border-green-600 text-green-600;
 	}
 
+
 	.btn-secondary:hover,
 	.btn-secondary:visited:hover
 		 {
 		@apply bg-none bg-green-300;
 	}
 
-    .btn-secondary:active
+	.btn-secondary:active
     {
 		@apply bg-green-500 opacity-70;
 	}
