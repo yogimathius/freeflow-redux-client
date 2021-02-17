@@ -65,7 +65,7 @@ const CommentListItem = ({comment, postId}) => {
   }
 
   return (
-    <div key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 rounded my-2 rounded-xl">
+    <div key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl">
       <div className="p-3">
         <div className="flex justify-between">
           <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
@@ -74,14 +74,15 @@ const CommentListItem = ({comment, postId}) => {
                 <span className="font-semibold text-blue-500">{`${user.first_name} ${user.last_name}`}</span>
             </div>
           </Link>
-          <div className="flex space-x-2">
+          <div className="">
             <TimeAgo timestamp={comment.time_posted} />
             { userId === comment.commenter_id ?
+              <div className="space-x-1 flex justify-end mr-2">
+
               <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
-                : ""
-            }
-            { userId === comment.commenter_id ?
               <button onClick={() => onDeleteCommentClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+              </div>
+
               : ""
             }
           </div>

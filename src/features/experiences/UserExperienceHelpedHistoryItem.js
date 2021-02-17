@@ -31,9 +31,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   // function onConfirmComplete() {
   //   transition(CONFIRMCOMPLETE)
   // }
-  function onCancel() {
-    transition(SHOW)
-  }
+
 
 
   const pending = experience.date_accepted === null ? true : false;
@@ -136,6 +134,10 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
     }
   }
 
+  function onCancel() {
+    transition(SHOW)
+  }
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 mx-2 space-y-1">
       <Link className="text-blue-500" to={`/userprofile/${helperUserName.id}`} onClick={() => saveState(helperUserName.id)}>
@@ -172,7 +174,6 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
           { mode === CONFIRMDECLINE && (
             <div className="flex justify-center">
             <div className="text-center border-2 border-red-500 px-6 py-1 w-min rounded-lg space-y-1">
-              <div className="text-red-500 font-bold text-xs">Decline this offer?</div>
               <div className="flex justify-center space-x-2">
                 <button onClick={() => onCancel()} className="btn btn-warning">Cancel</button>
                 <button onClick={() => removeExperienceClicked()} className="btn btn-primary">Confirm</button>
@@ -183,7 +184,6 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
           { mode === CONFIRMACCEPT && (
             <div className="flex justify-center">
             <div className="text-center border-2 border-green-500 px-6 py-1 w-min rounded-lg space-y-1">
-              <div className="text-green-500 font-bold text-xs">Accept this offer?</div>
               <div className="flex justify-center space-x-2">
                 <button onClick={() => onCancel()} className="btn btn-warning">Cancel</button>
                 <button onClick={() => acceptExperienceClicked()} className="btn btn-primary">Confirm</button>
@@ -200,14 +200,13 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
         <div className="space-x-2">
           { mode === SHOW && (
           <div className="space-x-2 text-xs md:text-sm ">
-            <button className="text-red-500 btn btn-warning">Cancel</button> 
+            <button className="text-red-500 btn btn-warning" onClick={() => onConfirmDecline()}>Decline</button>
             <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button> 
             </div>
           )}
           { mode === CONFIRMACCEPT && (
             <div className="flex justify-center">
             <div className="text-center border-2 border-green-500 px-6 py-1 w-min rounded-lg space-y-1">
-              <div className="text-green-500 font-bold text-xs">Accept this offer?</div>
               <div className="flex justify-center space-x-2">
                 <button onClick={() => onCancel()} className="btn btn-warning">Cancel</button>
                 <button onClick={() => acceptExperienceClicked()} className="btn btn-primary">Confirm</button>
