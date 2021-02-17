@@ -77,6 +77,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
         console.error('Failed to remove like from post: ', err)
       } finally {
         setAddRequestStatus('idle')
+        transition(SHOW)
       }
     }
   }

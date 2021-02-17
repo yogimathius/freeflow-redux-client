@@ -74,7 +74,7 @@ const CommentListItem = ({comment, postId}) => {
                 <span className="font-semibold text-blue-500">{`${user.first_name} ${user.last_name}`}</span>
             </div>
           </Link>
-          <div className="flex flex-col space-y-2">
+          <div className="flex space-x-2">
             <TimeAgo timestamp={comment.time_posted} />
             { userId === comment.commenter_id ?
               <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
