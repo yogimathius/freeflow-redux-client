@@ -64,9 +64,8 @@ const SkillSelector = ({ initialFormState }) => {
 	// }
 
 	return (
-		<div className="md:grid grid-cols-3">
+		<div className="w-full">
 			<label
-				className="mr-2 flex justify-center md:justify-end items-center"
 				htmlFor="skills"> </label>
 			<Select
 				onChange={(e) => HandleChange(e)}

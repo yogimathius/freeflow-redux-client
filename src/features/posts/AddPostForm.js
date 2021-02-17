@@ -80,36 +80,34 @@ export default function AddPostForm() {
   return (
     <section className="mt-2">
       <form 
-      // onSubmit={}
         className="space-y-2 mx-2">
-        <SkillSelector 
-          id={id}
-          initialFormState={initialFormState}
-          // clearValue={clearValue}
-        />
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."
-          className="w-full  border-1 border-solid border-gray-400 rounded-xl p-5" 
-          id="postContent rounded-xl"
+          className="w-full  border-1 border-solid border-gray-400 rounded-xl p-5 active:rounded-xl" 
           name="postContent"
           value={content}
           data-testid="postText"
           rows="3"
           onChange={onContentChanged}
         />
-        <section className="flex justify-center">{error}</section>
 
-        <div className="flex justify-center">
-
+        <div className="grid grid-cols-4 space-x-2 mx-2 mb-12">
+          <div className="col-span-3">
+            <SkillSelector 
+              id={id}
+              initialFormState={initialFormState}
+            />
+          </div>
           <div 
-          className="btn btn-primary"
+          className="btn btn-primary flex items-center justify-center"
           type="button" 
           data-testid="sendButton"
           onClick={OnSavePostClicked} disabled={!canSave}>
             Post
           </div>
         </div>
+        <section className="flex justify-center text-red-500 text-sm h-4">{error}</section>
       </form>
     </section>
   )

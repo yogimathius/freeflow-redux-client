@@ -23,7 +23,7 @@ function App() {
         {/* <SideBar /> */}
         <Navbar />
 
-        <div className="App md:grid grid-cols-8">
+        <div className="App md:grid grid-cols-8 font-body">
           <div className="hidden md:col-span-2 md:flex justify-center">
             { user.user ? 
             <UserSideBar /> 

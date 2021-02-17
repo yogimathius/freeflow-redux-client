@@ -17,7 +17,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40">
+    <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40 font-body">
       <section className="grid grid-cols-4 ">
         <div className="flex ml-6 my-1 md:ml-12">
           <Link to="/dashboard">
