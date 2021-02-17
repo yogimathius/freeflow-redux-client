@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimeAgo } from '../posts/TimeAgo'
 import { completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
-
+import { saveState } from '../../helpers/localStorage';
 import { unwrapResult } from '@reduxjs/toolkit'
+import { Link } from 'react-router-dom';
 
 const UserExperienceHistoryItem = ({ experience, userId }) => {
   const dispatch = useDispatch();
@@ -89,10 +90,12 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 mx-2 space-y-1">
-      <div>{helpedUserName.first_name + " " + helpedUserName.last_name}</div>
+    <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 mx-2 space-y-1">
+      <Link className="text-blue-500" to={`/userprofile/${helpedUserName.id}`} onClick={() => saveState(helpedUserName.id)}>
+        <div>{helpedUserName.first_name + " " + helpedUserName.last_name}</div>
+      </Link>
 
-      <div className="md:text-center">
+      <div className="row-start-2 md:row-start-1 md:text-center">
         <TimeAgo timestamp={experience.date_initiated}/>
       </div>
 
@@ -106,8 +109,8 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
         completed ? <div className="text-green-500">Completed</div> : ""}
       </div>
 
-      <div className="md:text-center">
-        {pending ? <button className="text-red-500 text-sm btn btn-warning" onClick={() => removeExperienceClicked()}>Cancel</button>
+      <div className="md:text-center text-xs md:text-sm ">
+        {pending ? <button className="text-red-500 btn btn-warning" onClick={() => removeExperienceClicked()}>Cancel</button>
         : 
         accepted && completedByHelper !== true ? 
         <div className="space-x-2">

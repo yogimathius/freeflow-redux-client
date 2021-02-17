@@ -4,6 +4,8 @@ import { TimeAgo } from '../posts/TimeAgo'
 import { acceptExperience, completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
 import { unwrapResult } from '@reduxjs/toolkit'
 import useVisualMode from '../../hooks/useVisualMode'
+import { saveState } from '../../helpers/localStorage';
+import { Link } from 'react-router-dom';
 
 const SHOW = "SHOW";
 // const CONFIRMCANCEL = "CONFIRMCANCEL";
@@ -135,10 +137,12 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 mx-2 space-y-1">
-      <div>{helperUserName.first_name + " " + helperUserName.last_name}</div>
+    <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 mx-2 space-y-1">
+      <Link className="text-blue-500" to={`/userprofile/${helperUserName.id}`} onClick={() => saveState(helperUserName.id)}>
 
-      <div className="md:text-center">
+        <div>{helperUserName.first_name + " " + helperUserName.last_name}</div>
+      </Link>
+      <div className="row-start-2 md:row-start-1 md:text-center">
         <TimeAgo timestamp={experience.date_initiated}/>
       </div>
 
@@ -153,11 +157,13 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
       </div>
 
       <div className="md:text-center">
+
+        {/* PENDING */}
         {pending ? 
         <div className="space-x-2">
           { mode === SHOW && (
-          <div className="space-x-2">
-           <button className="text-red-500 text-sm btn btn-warning" onClick={() => onConfirmDecline()}>Decline</button>
+          <div className="space-x-2 text-xs md:text-sm ">
+            <button className="text-red-500 btn btn-warning" onClick={() => onConfirmDecline()}>Decline</button>
             <button className="text-green-500 btn btn-tertiary" onClick={() => onConfirmAccept()}>Accept</button> 
           </div>
           )
@@ -187,13 +193,15 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
           ) }
         </div>
         : 
+
+        // ACCEPTED
         accepted && completedByHelped !== true ? 
 
-        <div>
-          { mode === SHOW && (
         <div className="space-x-2">
-        <button className="text-red-500 text-sm btn btn-warning">Cancel</button> 
-              <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button> 
+          { mode === SHOW && (
+          <div className="space-x-2 text-xs md:text-sm ">
+            <button className="text-red-500 btn btn-warning">Cancel</button> 
+            <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button> 
             </div>
           )}
           { mode === CONFIRMACCEPT && (
@@ -210,7 +218,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
 
         </div>
         : 
-        completed || completedByHelped ? <button className="text-green-500 btn btn-secondary">View Details</button> : ""}
+        completed || completedByHelped ? <button className="text-green-500 btn btn-secondary text-xs md:text-sm ">View Details</button> : ""}
       </div>
     </div>
   );

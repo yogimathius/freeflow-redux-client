@@ -172,7 +172,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
             Edit Post
           </Link>
         </div>
-                    : ""  
+        : ""  
       }
     </article>
   )

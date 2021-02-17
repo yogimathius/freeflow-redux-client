@@ -27,7 +27,7 @@ export default function UserPage() {
 
   
   const renderedPosts = sortedArr.map((post, index) => 
-    <PostExcerpt key={index} postId={post.id} />
+    <PostExcerpt key={index} postId={post.id} index={index} />
     )
     
   return (
@@ -47,10 +47,6 @@ export default function UserPage() {
           tagline={user.tagline}
           />
         </div>
-        
-        <p className="m-2">
-          <span className="font-bold">Location:</span> {user.location}
-        </p>
       </div>
       <div className="">
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>

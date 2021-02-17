@@ -40,7 +40,7 @@ export const Navbar = () => {
           <Link className="" to="/dashboard">
             <div className="flex group">
               <div className="">
-                <PostAddIcon fontSize="" />
+                <PostAddIcon />
               </div>
               <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                 Posts
@@ -51,7 +51,7 @@ export const Navbar = () => {
           <Link className="" to="/users">
             <div className="flex group">
               <div className="">
-                <PeopleIcon fontSize="" />
+                <PeopleIcon />
               </div>
               <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                 Users
@@ -62,7 +62,7 @@ export const Navbar = () => {
           <Link className="" to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
             <div className="flex group">
               <div className="">
-                <PersonIcon fontSize="" />
+                <PersonIcon />
               </div>
               <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                 Profile
@@ -73,7 +73,7 @@ export const Navbar = () => {
           <Link className="" to={`/${user?.id}/experiences`} onClick={() => saveState(user?.id)}>
             <div className="flex group">
               <div className="">
-                  <BarChartIcon fontSize="" />
+                  <BarChartIcon />
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                   EXP
@@ -86,7 +86,7 @@ export const Navbar = () => {
             <Link to="/login">
               <div className="flex group">
                 <div className="">
-                  <LockOpenIcon fontSize="" />
+                  <LockOpenIcon />
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                   Login
@@ -97,7 +97,7 @@ export const Navbar = () => {
             <button className="font-bold" onClick={() => handleLogout()}>
               <div className="flex group">
                 <div className="">
-                  <ExitToAppIcon fontSize="" />
+                  <ExitToAppIcon />
                 </div>
                 <div className="opacity-0 group-hover:opacity-100 flex items-end ml-1">
                   Logout

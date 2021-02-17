@@ -19,7 +19,7 @@ const Filter = () => {
 
   const renderedFilters = filterKeys ? filterKeys.map((filter, index) => {
     return (
-      <div  className="btn btn-secondary mr-1 mt-1">
+      <div key={index}  className="btn btn-secondary mr-1 mt-1">
 
       <FilterLink key={index} filter={VisibilityFilters[filter]}>
         {filter}
