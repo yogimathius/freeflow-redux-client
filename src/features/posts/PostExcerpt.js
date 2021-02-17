@@ -82,7 +82,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
   }
 
   return (
-    <article className="rounded-lg p-2 my-3 bg-white shadow-lg" key={post.id}>
+    <article className="rounded-lg p-2 my-3 bg-white shadow-lg space-y-4" key={post.id}>
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
         <PostExcerptSkills postSkillIds={post.skill_ids} />
@@ -114,7 +114,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       {/* TEXT BODY */}
       {mode === SHOW && (
 
-      <p className="flex justify-center px-12 py-5">{post.text_body}</p>
+      <p className="flex justify-center px-12">{post.text_body}</p>
       )}
 
       {mode === EDITING && (
@@ -141,20 +141,22 @@ export default function PostExcerpt({ postId, onPost, index }) {
       <Likes postId={postId} userId={userId} />
 
       <div className="wrap-collapsible">
-
+        
         <input 
           id={"collapsible" + index} className="toggle hidden"  
           type="checkbox">
         </input>
+        {commentsLength === 0  ? "" : 
+        
+          <label htmlFor={"collapsible" + index} className="lbl-toggle">
+          {/* COMMENTS LIST FOR POST */}
 
-        <label htmlFor={"collapsible" + index} className="lbl-toggle">
-        {/* COMMENTS LIST FOR POST */}
+          {commentsLength > 1 ? <span>{commentsLength} comments</span> : ""}
 
-        {commentsLength > 1 ? <span>{commentsLength} comments</span> : ""}
+          {commentsLength === 1 ? <span>{commentsLength} comment</span> : ""}
 
-        {commentsLength === 1 ? <span>{commentsLength} comment</span> : ""}
-
-        </label>
+          </label>
+        }
         <div className="collapsible-content">
           <CommentsList key={index} postId={postId} />
           <div>

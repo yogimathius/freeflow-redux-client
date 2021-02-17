@@ -67,7 +67,7 @@ const ProgressBar = (props) => {
   };
 
   return (
-    <div className="grid grid-cols-6 text-xs space-x-1">
+    <div className="grid grid-cols-6 text-xs">
       <div className={`text-center font-bold text-${colorClass}-500`}>Lv. {level}</div>
 
       <div className="bg-gray-300 col-span-5 rounded">

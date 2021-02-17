@@ -26,7 +26,7 @@
 @layer utilities {
 	.btn
     {
-			@apply px-2 font-bold tracking-widest rounded-lg border-2 cursor-pointer text-center no-underline object-contain;
+			@apply px-2 font-bold tracking-widest rounded border-2 cursor-pointer text-center no-underline object-contain;
     }
 
 	/* .btn i {
@@ -55,20 +55,25 @@
 
 	.btn-primary:hover,
 	.btn-primary:visited:hover {
-		@apply bg-white border-green-500 text-green-600;
+		@apply bg-white border-green-500 text-green-500;
+	}
+
+	.btn-primary:active
+    {
+		@apply bg-green-500 border-green-500 opacity-70;
 	}
 
 	.btn-secondary,
 	.btn-secondary:visited
     {
-		@apply bg-none border-green-600 text-green-600;
+		@apply bg-none border-green-500 text-green-500;
 	}
 
 
 	.btn-secondary:hover,
 	.btn-secondary:visited:hover
 		 {
-		@apply bg-none bg-green-300;
+		@apply bg-none bg-green-500 text-white;
 	}
 
 	.btn-secondary:active

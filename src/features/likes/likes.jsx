@@ -89,16 +89,14 @@ export default function Likes({ postId, userId }) {
     <div onClick={() => unLike(postId, userId)}
     className="flex space-x-2 items-center  cursor-pointer font-bold btn btn-primary">
       <FontAwesomeIcon 
-      className=""
       icon={fasThumbsUp} size="1x" />
-      <div     onClick={() => unLike(postId, userId)}
+      <div onClick={() => unLike(postId, userId)}
       >Like</div>
     </div>
   ) : (     
     <div onClick={() => addLike(postId, userId)}
-    className="flex space-x-2 items-center  cursor-pointer text-black font-bold btn btn-secondary rounded-lg">
+    className="flex space-x-2 items-center  cursor-pointer font-bold btn btn-secondary">
       <FontAwesomeIcon 
-        className="love"
         icon={farThumbsUp} size="1x" />
         <div>Like</div>
     </div>             
@@ -119,7 +117,7 @@ export default function Likes({ postId, userId }) {
 		<p><b>{likeSum} like</b></p> : "";
 		
 	return (
-    <div className="flex items-end justify-end space-x-2 mr-2 text-green-500 mt-3 text-sm">
+    <div className="flex justify-end space-x-2 mr-2 text-green-500 mt-3 text-sm items-center">
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
         <div className="-mt-0.5">
