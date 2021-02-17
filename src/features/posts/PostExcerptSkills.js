@@ -21,7 +21,7 @@ const PostExcerptSkills = ({ postSkillIds }) => {
 		)
 	})
 	return (
-		<div className="text-sm space-x-1">
+		<div className="text-sm space-x-1 flex flex-wrap">
 			<span className="font-bold">Skills:</span> 
 			{renderedPostSkills}
 		</div>

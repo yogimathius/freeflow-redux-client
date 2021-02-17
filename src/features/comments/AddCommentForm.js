@@ -50,8 +50,9 @@ export const AddCommentForm = ({ postId }) => {
           htmlFor="commentContent"></label>
           <textarea 
             placeholder="Leave a comment..."
-            className="w-full  border-1 border-solid border-gray-400 rounded-xl p-2" 
+            className="w-full border-1 border-solid border-gray-400 rounded-lg p-2" 
             name="commentContent"
+            rows="1"
             value={content}
             onChange={onContentChanged}
             onKeyDown={onSaveCommentClicked}

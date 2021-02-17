@@ -82,11 +82,26 @@ export default function PostExcerpt({ postId, onPost, index }) {
   }
 
   return (
-    <article className="rounded p-2 mx-1 my-3 bg-white" key={post.id}>
+    <article className="rounded-lg p-2 my-3 bg-white shadow-lg" key={post.id}>
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
         <PostExcerptSkills postSkillIds={post.skill_ids} />
-        <TimeAgo timestamp={post.time_posted} />
+        <div>
+          <TimeAgo timestamp={post.time_posted} />
+          { userId === post.owner_id ?
+          <div className="space-x-1 flex justify-end mr-2">
+
+            {mode === SHOW && (
+            <div className="space-x-1 flex justify-end mr-2">
+              <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+              <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+            </div>
+            
+            )}
+          </div>
+            : ""
+          }
+        </div>
       </div>
 
       {/* POST AUTHOR */}
@@ -122,19 +137,6 @@ export default function PostExcerpt({ postId, onPost, index }) {
         </div>
         )}
 
-    { userId === post.owner_id ?
-      <div className="space-x-1 flex justify-end mr-2">
-
-        {mode === SHOW && (
-        <div className="space-x-1 flex justify-end mr-2">
-          <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
-          <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
-        </div>
-        
-        )}
-      </div>
-        : ""
-      }
       {/* LIKES */}
       <Likes postId={postId} userId={userId} />
 

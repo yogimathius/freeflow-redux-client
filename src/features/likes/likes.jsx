@@ -119,7 +119,7 @@ export default function Likes({ postId, userId }) {
 		<p><b>{likeSum} like</b></p> : "";
 		
 	return (
-    <div className="flex flex-col items-end justify-end space-x-2 mr-2 text-green-500 mt-3 text-sm">
+    <div className="flex items-end justify-end space-x-2 mr-2 text-green-500 mt-3 text-sm">
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
         <div className="-mt-0.5">
