@@ -35,7 +35,7 @@ export const EditPostForm = ({ postId, onSaveEdit, value }) => {
   }
 
   return (
-    <section className="flex flex-col justify-center px-12 py-5 space-y-2">
+    <section className="flex flex-col justify-center py-5 space-y-2">
       <form className="">
         <label htmlFor="postContent"></label>
         <textarea

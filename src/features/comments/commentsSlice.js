@@ -65,6 +65,7 @@ export const updateComment = createAsyncThunk(
     // console.log("in thunk: ", post_id, commenter_id );
     const response = await axios.put(url, { text_body,
     post_id, commenter_id });
+    console.log("response in update comment: ", response);
     return response.data
   }
 )
@@ -98,9 +99,10 @@ const commentsSlice = createSlice({
     [removeComment.fulfilled]: (state, action) => {
       commentsAdapter.removeOne(state, action.meta.arg.id)
     },
-    [updateComment.fulfilled]:(state, { payload }) => {
-      const { id, ...changes } = payload;
-      commentsAdapter.updateOne(state, {id, changes})
+    [updateComment.fulfilled]:(state, action) => {
+      // const { id, ...changes } = payload;
+      console.log("payload: ", action);
+      commentsAdapter.upsertOne(state, action.meta.arg)
     }
   },
 });

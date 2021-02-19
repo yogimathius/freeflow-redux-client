@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Link = ({ active, children, setVisibilityFilter, filter }) => {
-  console.log("children in Link: ", children, active);
   return (
     <div>
       {active === true ? 

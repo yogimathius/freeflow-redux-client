@@ -21,12 +21,12 @@ if (process.env.REACT_APP_API_BASE_URL) {
 }
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store} className="bg-gray-400">
       <App />
       <Footer />
 
-    </Provider>,
-  // </React.StrictMode>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 )

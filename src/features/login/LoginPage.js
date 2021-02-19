@@ -3,12 +3,18 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Field, Form, Formik} from 'formik'
 import {login} from './userLoginSlice'
 import { Redirect } from 'react-router-dom';
+import { fetchSkills } from '../dbSkills/dbSkillsSlice';
 
 export default function LoginPage() {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
+  // const user = useSelector((state) => state.user)
 
-  if (user) {
+  // const onLoginSubmitted = (values) => {
+  //   dispatch(login(values))
+  // }
+  if (user !==null) {
+    dispatch(fetchSkills())
     return (
       <Redirect to={{ pathname: '/dashboard' }} />
       )
@@ -20,7 +26,8 @@ export default function LoginPage() {
       <Formik
         className="flex justify-center"
         initialValues={{ username: '', password: '' }}
-        onSubmit={(values) => { dispatch(login(values)) }}
+        onSubmit={(values) => { dispatch(login(values))
+        }}
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col w-2/3 md:w-1/4 mx-auto space-y-3">
