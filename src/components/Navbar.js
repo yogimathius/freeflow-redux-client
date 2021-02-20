@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import {logout} from '../features/login/userLoginSlice'
@@ -22,6 +22,11 @@ export const Navbar = (props) => {
     dispatch(logout())
     history.push("/login")
   }
+  useEffect(() => {
+    if(user === null || user === undefined) {
+      setCurrentPage('login')
+    }
+  }, [user])
 
   return (
     <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40 font-body">
@@ -79,12 +84,12 @@ export const Navbar = (props) => {
             setCurrentPage('experiences')
             }}>
             <div className="flex group">
-            <div className={currentPage === 'experiences' ? 'border-b-2 border-white' : ''}>
-                  <BarChartIcon />
-                </div>
-                <div className="flex items-end ml-1">
-                  EXP
-                </div>
+              <div className={currentPage === 'experiences' ? 'border-b-2 border-white' : ''}>
+                <BarChartIcon />
+              </div>
+              <div className="flex items-end ml-1">
+                EXP
+              </div>
               </div>
           </Link>
 
@@ -92,7 +97,7 @@ export const Navbar = (props) => {
           {!user  ?
             <Link to="/login">
               <div className="flex group">
-                <div className="">
+              <div className={currentPage === 'login' ? 'border-b-2 border-white' : ''}>
                   <LockOpenIcon />
                 </div>
                 <div className="flex items-end ml-1">
@@ -101,7 +106,10 @@ export const Navbar = (props) => {
               </div>
             </Link>
             :
-            <button className="font-bold" onClick={() => handleLogout()}>
+            <button className="font-bold" onClick={() => {
+              handleLogout()
+              setCurrentPage('login')
+              }}>
               <div className="flex group">
                 <div className="">
                   <ExitToAppIcon />
