@@ -52,7 +52,7 @@ export default function LoginPage() {
             <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Username" type="text" name="username" />
             <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Password" type="password" name="password" />
             <div className="flex justify-center">
-              <button className="btn btn-primary" type="submit" disabled={isSubmitting}>Login</button>
+              <button className="btn btn-primary" type="submit" >Login</button>
             </div>
           </Form>
         )}
