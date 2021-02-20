@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {Field, Form, Formik} from 'formik'
 import {login} from './userLoginSlice'
@@ -9,12 +9,29 @@ import { fetchUserSkills } from '../userSkills/userSkillsSlice';
 export default function LoginPage() {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
+  const [error, setError] = useState("");
+
   // const user = useSelector((state) => state.user)
 
-  // const onLoginSubmitted = (values) => {
-  //   dispatch(login(values))
-  // }
-  if (user !==null) {
+  const onLoginSubmitted = (values) => {
+    console.log("values on login: ", values);
+    if (values.username === '') {
+      setError('***Username cannot be blank***')
+      setTimeout(() => {
+        setError('');
+      }, 2000);      
+      return;
+    }
+    if (values.password === '') {
+      setError('***Password cannot be blank***')
+      setTimeout(() => {
+        setError('');
+      }, 2000);
+      return;
+    }
+    dispatch(login(values))
+  }
+  if (user !== null) {
     dispatch(fetchSkills())
     dispatch(fetchUserSkills())
     return (
@@ -28,8 +45,7 @@ export default function LoginPage() {
       <Formik
         className="flex justify-center"
         initialValues={{ username: '', password: '' }}
-        onSubmit={(values) => { dispatch(login(values))
-        }}
+        onSubmit={(values) => onLoginSubmitted(values)}
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col w-2/3 md:w-1/4 mx-auto space-y-3">
@@ -41,6 +57,7 @@ export default function LoginPage() {
           </Form>
         )}
       </Formik>
+      <div className="text-red-500 font-bold">{error}</div>
       <p>You can use these login details to test the app: username: dsleaford1 pw: 4lGhIyW </p>
     </div>
   );
