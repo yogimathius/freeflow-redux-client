@@ -17,7 +17,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      borderWidth: ['active', 'focus'],
+      borderWidth: ['active', 'focus', 'hover', 'group-hover'],
       borderColor: ['active'],
     },
   },

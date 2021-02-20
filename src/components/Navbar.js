@@ -32,7 +32,7 @@ export const Navbar = (props) => {
     <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40 font-body">
       <section className="grid grid-cols-8 ">
         <div className="col-span-2 ml-4 my-1 md:ml-12">
-          <Link onClick={() => (setCurrentPage('/dashboard'))} to="/dashboard">
+          <Link onClick={() => (setCurrentPage('dashboard'))} to="/dashboard">
             <img width="75px" className="" src={logo}  alt="freeflow logo"></img>
           </Link>
         </div>
@@ -45,7 +45,7 @@ export const Navbar = (props) => {
 
           <Link onClick={() => (setCurrentPage('dashboard'))} className="" to="/dashboard">
             <div className="flex group">
-              <div className={currentPage === 'dashboard' ? 'border-b-2 border-white' : ''}>
+            <div className={`${currentPage === 'dashboard' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <PostAddIcon />
               </div>
               <div className="flex items-end ml-1">
@@ -56,7 +56,7 @@ export const Navbar = (props) => {
 
           <Link onClick={() => (setCurrentPage('users'))} className="" to="/users">
             <div className="flex group">
-            <div className={currentPage === 'users' ? 'border-b-2 border-white' : ''}>
+            <div className={`${currentPage === 'users' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <PeopleIcon />
               </div>
               <div className="flex items-end ml-1">
@@ -70,7 +70,7 @@ export const Navbar = (props) => {
             setCurrentPage('profile')
             }}>
             <div className="flex group">
-            <div className={currentPage === 'profile' ? 'border-b-2 border-white' : ''}>
+            <div className={`${currentPage === 'profile' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <PersonIcon />
               </div>
               <div className="flex items-end ml-1">
@@ -84,7 +84,7 @@ export const Navbar = (props) => {
             setCurrentPage('experiences')
             }}>
             <div className="flex group">
-              <div className={currentPage === 'experiences' ? 'border-b-2 border-white' : ''}>
+            <div className={`${currentPage === 'experiences' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <BarChartIcon />
               </div>
               <div className="flex items-end ml-1">
@@ -97,7 +97,7 @@ export const Navbar = (props) => {
           {!user  ?
             <Link to="/login">
               <div className="flex group">
-              <div className={currentPage === 'login' ? 'border-b-2 border-white' : ''}>
+              <div className={`${currentPage === 'login' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                   <LockOpenIcon />
                 </div>
                 <div className="flex items-end ml-1">
@@ -111,7 +111,7 @@ export const Navbar = (props) => {
               setCurrentPage('login')
               }}>
               <div className="flex group">
-                <div className="">
+                <div className="group-hover:border-b-2 group-hover:border-white">
                   <ExitToAppIcon />
                 </div>
                 <div className="flex items-end ml-1">
