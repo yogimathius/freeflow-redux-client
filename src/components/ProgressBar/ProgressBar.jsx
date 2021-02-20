@@ -5,76 +5,76 @@ const ProgressBar = (props) => {
 
   let level = 1;
   let experiencePoints = 0;
-  let width;
+  let height;
   let fullExperience;
   let colorClass;
 
   function calculateLevel(points) {
     if (points < 100) {
       fullExperience = 100;
-      width = (points);
+      height = (points);
       colorClass = "blue"
-      return (fullExperience, width, (experiencePoints += points), colorClass);
+      return (fullExperience, height, (experiencePoints += points), colorClass);
     }
     if (points < 260) {
       level = 2;
       fullExperience = 160;
-      width = (((points - 100) * 100) / 16)/10;
+      height = (((points - 100) * 100) / 16)/10;
       experiencePoints += points - 100;
       colorClass = "green"
-      return (fullExperience, width, level, experiencePoints, colorClass);
+      return (fullExperience, height, level, experiencePoints, colorClass);
     }
     if (points < 520) {
       level = 3;
       fullExperience = 260;
-      width = (((points - 260) * 100) / 26)/10;
+      height = (((points - 260) * 100) / 26)/10;
       experiencePoints += points - 260;
       colorClass = "yellow"
-      return (fullExperience, width, level, experiencePoints, colorClass);
+      return (fullExperience, height, level, experiencePoints, colorClass);
     }
     if (points < 1000) {
       level = 4;
       fullExperience = 480;
-      width = (((points - 520) * 100) / 48)/10;
+      height = (((points - 520) * 100) / 48)/10;
       experiencePoints += points - 520;
       colorClass = "red"
-      return (fullExperience, width, level, experiencePoints, colorClass);
+      return (fullExperience, height, level, experiencePoints, colorClass);
     }
     if (points < 1680) {
       level = 5;
       fullExperience = 680;
-      width = (((points - 1000) * 100) / 68)/10;
+      height = (((points - 1000) * 100) / 68)/10;
       experiencePoints += points - 1000;
       colorClass = "purple"
-      return (fullExperience, width, level, experiencePoints, colorClass);
+      return (fullExperience, height, level, experiencePoints, colorClass);
     }
     if (points >= 1680) {
       level = 5;
-      width = 100;
+      height = 100;
       fullExperience = 680;
       experiencePoints = 680;
-      return (fullExperience, width, level, experiencePoints);
+      return (fullExperience, height, level, experiencePoints);
     }
   }
 
   calculateLevel(Math.floor(experience * 5.75));
-
+  console.log("height inn xp bar: ", height)
   const fillerStyles = {
-    height: "100%",
-    width: `${width}%`,
-    // borderRadius: "inherit",
+    width: "100%",
+    height: `${100-height}%`,
+    borderRadius: "inherit",
     textAlign: "right",
   };
 
   return (
-    <div className="grid grid-cols-6 space-x-2">
+    <div className="flex space-x-2">
       <div className={`text-center font-bold text-${colorClass}-500`}>Lv. {level}</div>
 
-      <div className="bg-gray-300 col-span-5 rounded">
-        <div style={fillerStyles}className="bg-gradient-to-r from-green-300 via-green-400 to-green-200 rounded">
-          <span
-            className="labelstyles font-bold"
-          >{`${experiencePoints}/${fullExperience}`}</span>
+      <div className={`bg-${colorClass}-500 flex justify-center rounded w-24`}>
+        <div style={fillerStyles} className="bg-gray-300  rounded">
+          <div className="flex justify-center">
+            <span className={`text-xs text-white mt-2 text-center font-bold px-1`}>{`${experiencePoints}/${fullExperience}`}</span>
+          </div>
         </div>
       </div>
     </div>

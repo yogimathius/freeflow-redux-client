@@ -16,7 +16,7 @@ import UserSideBar from './features/users/UserSideBar';
 
 function App() {
   const user = useSelector(state => state.user)
-
+  console.log(user);
   return (
     <AuthProvider>
       <Router>
