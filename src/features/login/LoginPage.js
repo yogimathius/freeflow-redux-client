@@ -4,6 +4,7 @@ import {Field, Form, Formik} from 'formik'
 import {login} from './userLoginSlice'
 import { Redirect } from 'react-router-dom';
 import { fetchSkills } from '../dbSkills/dbSkillsSlice';
+import { fetchUserSkills } from '../userSkills/userSkillsSlice';
 
 export default function LoginPage() {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ export default function LoginPage() {
   // }
   if (user !==null) {
     dispatch(fetchSkills())
+    dispatch(fetchUserSkills())
     return (
       <Redirect to={{ pathname: '/dashboard' }} />
       )

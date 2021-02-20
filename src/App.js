@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
 } from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthProvider } from './Context';
 import routes from './Config/routes.js';
@@ -12,11 +12,18 @@ import { Navbar } from './components/Navbar'
 
 import AppRoute from './components/AppRoute';
 import UserSideBar from './features/users/UserSideBar';
+import { fetchUserSkills } from './features/userSkills/userSkillsSlice';
 // import Footer from './components/Footer';
 
 function App() {
   const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
   console.log(user);
+  useEffect(() => {
+    dispatch(fetchUserSkills())
+}, [dispatch])
+
   return (
     <AuthProvider>
       <Router>

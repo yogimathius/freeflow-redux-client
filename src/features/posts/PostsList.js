@@ -7,6 +7,8 @@ import {
   fetchPosts,
 } from './postsSlice'
 import Filter from '../filters/Filter';
+import { fetchSkills } from '../dbSkills/dbSkillsSlice';
+import { fetchUserSkills } from '../userSkills/userSkillsSlice';
 
 const PostsList = ({posts}) => {
   const dispatch = useDispatch()
@@ -17,8 +19,13 @@ const PostsList = ({posts}) => {
   useEffect(() => {
     if (postStatus === 'idle') {
       dispatch(fetchPosts())
+      dispatch(fetchUserSkills())
     }
   }, [postStatus, dispatch])
+
+  useEffect(() => {
+      dispatch(fetchSkills())
+  }, [dispatch])
 
   let content
 

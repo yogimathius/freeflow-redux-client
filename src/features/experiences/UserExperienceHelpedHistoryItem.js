@@ -25,9 +25,9 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   function onConfirmDecline() {
     transition(CONFIRMDECLINE)
   }
-  function onConfirmAccept() {
-    transition(CONFIRMACCEPT)
-  }
+  // function onConfirmAccept() {
+  //   transition(CONFIRMACCEPT)
+  // }
   // function onConfirmComplete() {
   //   transition(CONFIRMCOMPLETE)
   // }
@@ -166,14 +166,14 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
           { mode === SHOW && (
           <div className="space-x-2 text-xs md:text-sm ">
             <button className="text-red-500 btn btn-warning" onClick={() => onConfirmDecline()}>Decline</button>
-            <button className="text-green-500 btn btn-tertiary" onClick={() => onConfirmAccept()}>Accept</button> 
+            <button className="text-green-500 btn btn-tertiary" onClick={() => acceptExperienceClicked()}>Accept</button> 
           </div>
           )
 
           }
           { mode === CONFIRMDECLINE && (
             <div className="flex justify-center">
-            <div className="text-center border-2 border-red-500 px-6 py-1 w-min rounded-lg space-y-1">
+            <div className="text-center w-min rounded-lg space-y-1">
               <div className="flex justify-center space-x-2">
                 <button onClick={() => onCancel()} className="btn btn-warning">Cancel</button>
                 <button onClick={() => removeExperienceClicked()} className="btn btn-primary">Confirm</button>
