@@ -68,7 +68,7 @@ const ProgressBar = (props) => {
 
   return (
     <div className="flex space-x-2">
-      <div className={`text-center font-bold text-${colorClass}-500`}>Lv. {level}</div>
+      <div className={`text-center text-xs md:text-base font-bold text-${colorClass}-500`}>Lv. {level}</div>
 
       <div className={`bg-${colorClass}-500 flex justify-center rounded w-24`}>
         <div style={fillerStyles} className="bg-gray-300  rounded">

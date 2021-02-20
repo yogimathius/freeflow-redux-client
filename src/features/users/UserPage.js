@@ -5,6 +5,7 @@ import { selectHelperExperiencesByUserId } from '../experiences/experiencesSlice
 import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from './usersSlice'
 import PostExcerpt from '../posts/PostExcerpt';
+import UserCard from './UserCard';
 // import AddPostForm from '../posts/AddPostForm';
 // import {Link} from 'react-router-dom'
 
@@ -32,7 +33,7 @@ export default function UserPage() {
     <section className="space-y-3 pt-2 mt-2">
       {/* <UserSkillsList /> */}
 
-      {/* <div className="">
+      <div className="md:hidden">
         <div className="col-span-2">
           <UserCard 
           id={user.id} 
@@ -45,7 +46,7 @@ export default function UserPage() {
           tagline={user.tagline}
           />
         </div>
-      </div> */}
+      </div>
       <div className="">
         <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>
       </div>

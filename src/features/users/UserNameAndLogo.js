@@ -15,10 +15,12 @@ export const UserNameAndLogo = ({ userId }) => {
 
   return (
     <div className="flex items-center space-x-2 w-max ml-2">
-      <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500" alt="avatar" src={imgUrl} />
+      <div className="w-10 md:w-full">
+        <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500" alt="avatar" src={imgUrl} />
+      </div>
 
       <div className="inline-block">          
-        <p className="inline-block text-lg font-bold text-blue-500">{author ? fullName : 'Unknown author'}</p>
+        <p className="inline-block text-sm md:text-lg font-bold text-blue-500">{author ? fullName : 'Unknown author'}</p>
         {isActive}
       </div>
     </div>
