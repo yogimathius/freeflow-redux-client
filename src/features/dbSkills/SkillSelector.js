@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills, selectAllskills } from './dbSkillsSlice';
 // import Autocomplete from "../../helpers/Autocomplete";
 import Select from 'react-select';
-import {  selectedSkills, setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice';
+import { setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice';
 
-const SkillSelector = ({ initialFormState }) => {
+const SkillSelector = () => {
 	const dispatch = useDispatch();
 	const skills = useSelector(selectAllskills)
-
+	const selectedSkills = useSelector(state => state.selectedSkills)
+	console.log(selectedSkills);
 	const skillsArr = [];
 
 	for (const skillKey in skills) {
@@ -47,16 +48,17 @@ const SkillSelector = ({ initialFormState }) => {
 
 	const HandleChange = (options) => {
 		dispatch(setSelectedSkills({options}))
-		const selectedSkills = []
+		console.log("selected skills in change handler: ", selectedSkills);
+		const selectedSkillsStorage = []
 		options.forEach(option => {
 			// eslint-disable-next-line array-callback-return
 			skillsArr.filter(skill => {
 				if (skill.name === option.value) {
-					selectedSkills.push(skill.id)
+					selectedSkillsStorage.push(skill.id)
 				}
 			})
 		})
-		localStorage.setItem('selected_skills', JSON.stringify(selectedSkills))
+		localStorage.setItem('selected_skills', JSON.stringify(selectedSkillsStorage))
 	}
 
 	// const clearValue = () => {
@@ -70,7 +72,7 @@ const SkillSelector = ({ initialFormState }) => {
 			<Select
 				onChange={(e) => HandleChange(e)}
 				placeholder="Select a Skill"
-				value={selectedSkills}
+				value={selectedSkills?.options ? selectedSkills.options : null}
 				defaultValue="Select a Skill"
 				isMulti
 				name="skills"
@@ -78,7 +80,6 @@ const SkillSelector = ({ initialFormState }) => {
 				className="basic-multi-select"
 				classNamePrefix="select"
 			/>
-			{/* <button onClick={() => clearValue()}>Clear</button> */}
 		</div>
 	);
 };

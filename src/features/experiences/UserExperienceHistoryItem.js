@@ -28,7 +28,6 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   userId && addRequestStatus === 'idle'
 
   const completeExperienceClicked = async () => {
-    console.log("complete clicked!");
 
   if (canRemove) {
 
@@ -67,7 +66,6 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   }
 
   const removeExperienceClicked = async () => {
-    console.log("cancel clicked!");
 
   if (canRemove) {
     try {

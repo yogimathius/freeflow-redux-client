@@ -13,7 +13,6 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 export const Navbar = (props) => {
-  console.log("props in Navbar: ", props);
   const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const history = useHistory();

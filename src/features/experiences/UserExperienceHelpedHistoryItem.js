@@ -49,7 +49,6 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   userId && addRequestStatus === 'idle'
 
   const acceptExperienceClicked = async () => {
-    console.log("accept clicked!");
 
   if (canRemove) {
     try {
@@ -73,7 +72,6 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   }
 
   const completeExperienceClicked = async () => {
-    console.log("accept clicked!");
 
   if (canRemove) {
 

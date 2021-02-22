@@ -1,29 +1,31 @@
 import {
+  createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit'
 
-
 const initialState = ([])
 
-export let selectedSkills;
+export let selectedSkillsDB = {
+  '': ''
+};
 
 const selectedSkillsSlice = createSlice({
-  name: 'selectedSkills',
+  name: 'selectedSkillsDB',
   initialState: initialState,
   reducers: {
     setSelectedSkills(state, action) {
-      selectedSkills = action.payload.options
+      selectedSkillsDB = action.payload.options[0]
       return action.payload
     },
-    addSelectedSkill(state, action) {
-      selectedSkills.push()
-      return state
+    emptySkillsDB(state, action) {
+      selectedSkillsDB = null
+      return selectedSkillsDB
     }
   },
   extraReducers: {
   }
 })
 
-export const { setSelectedSkills, addSelectedSkill } = selectedSkillsSlice.actions
+export const { setSelectedSkills, addSelectedSkill, emptySkillsDB } = selectedSkillsSlice.actions
 
 export default selectedSkillsSlice.reducer

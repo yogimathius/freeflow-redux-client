@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from './postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
-import { setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice';
+import { emptySkillsDB } from '../dbSkills/selectedSkills/selectedSkillsSlice';
 
+// export const SkillsContext = React.createContext();
 export default function AddPostForm() {
   const [error, setError] = useState("");
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
   const postsState = useSelector(state => state.posts)
+
+
   const posts = postsState ? postsState.entities : "";
 
 
@@ -30,7 +33,7 @@ export default function AddPostForm() {
     const OnSavePostClicked = async () => {
       const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
 
-      dispatch(setSelectedSkills([]))
+      dispatch(emptySkillsDB())
 
     if (content === "") {
       setError("Post cannot be blank");
@@ -75,7 +78,6 @@ export default function AddPostForm() {
       }
     }
   }
-  const initialFormState = { mySelectKey: null };
 
   return (
     <section className="mt-2">
@@ -96,7 +98,6 @@ export default function AddPostForm() {
           <div className="col-span-3">
             <SkillSelector 
               id={id}
-              initialFormState={initialFormState}
             />
           </div>
           <div 

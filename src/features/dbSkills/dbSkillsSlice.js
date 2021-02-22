@@ -13,14 +13,17 @@ const skillsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 })
 
-const initialState = skillsAdapter.getInitialState({
-  status: 'idle',
-  error: null,
-})
 
 export const fetchSkills = createAsyncThunk('skills/fetchSkills', async () => {
   const response = await axios.get(url);
   return response.data
+})
+
+export let selectedSkillsDB;
+
+const initialState = skillsAdapter.getInitialState({
+  status: 'idle',
+  error: null,
 })
 
 export const addNewSkill = createAsyncThunk(
@@ -54,13 +57,11 @@ const skillsSlice = createSlice({
   name: 'skills',
   initialState,
   reducers: {
-    reactionAdded(state, action) {
-      const { skillId, reaction } = action.payload
-      const existingSkill = state.entities[skillId]
-      if (existingSkill) {
-        existingSkill.reactions[reaction]++
-      }
-    },
+    addSelectedSkill (state, action) {
+      console.log("action in add selected: ", action);
+      selectedSkillsDB = (action.payload.options[0])
+      return selectedSkillsDB
+    }
   },
   extraReducers: {
     [fetchSkills.pending]: (state) => {
@@ -84,7 +85,7 @@ const skillsSlice = createSlice({
   },
 })
 
-export const { skillAdded } = skillsSlice.actions
+export const { skillAdded, addSelectedSkill } = skillsSlice.actions
 
 export default skillsSlice.reducer
 

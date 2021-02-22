@@ -33,7 +33,6 @@ export const addNewExperience = createAsyncThunk(
     const { helper_id, helped_id, creator_id} = initialExperiences
 
     const response = await axios.post(`${url}/new`, {helper_id, helped_id, creator_id});
-    // console.log("response: ", response);
     return response.data
   }
 )
@@ -44,10 +43,8 @@ export const acceptExperience = createAsyncThunk(
     const { id } = initialExperiences
 
     const experienceId = id;
-    console.log("id in thunk accept: ", id);
     const response = await axios.put(`${url}/accept`, { experienceId 
     });
-    console.log("response: ", response);
     return response.data
   }
 )
@@ -58,10 +55,8 @@ export const completeExperience = createAsyncThunk(
     const { id, ishelper, comments, submit_completion } = initialExperiences
 
     const experienceId = id;
-    console.log("id in thunk complete: ", id);
     const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments, submit_completion
     });
-    console.log("complete response: ", response);
     return response.data
   }
 )
@@ -72,10 +67,8 @@ export const completeOtherExperience = createAsyncThunk(
     const { id, ishelper, comments } = initialExperiences
 
     const experienceId = id;
-    console.log("id in thunk complete other: ", id);
     const response = await axios.put(`${url}/complete-other`, { experienceId, ishelper, comments 
     });
-    console.log("complete response: ", response);
     return response.data
   }
 )
@@ -86,11 +79,9 @@ export const removeExperience = createAsyncThunk(
     const { id } = initialExperiences
 
     const experienceId = id;
-    console.log("id in thunk delete: ", id);
     const response = await axios.delete(`${url}/delete`, { params: { experienceId 
     }
     });
-    console.log("response: ", response);
     return response.data
   }
 )
@@ -121,19 +112,15 @@ const experiencesSlice = createSlice({
     },
     [addNewExperience.fulfilled]: experiencesAdapter.addOne,
     [acceptExperience.fulfilled]: (state, action) => {
-      console.log("action in accept fulfilled: ", action);
       experiencesAdapter.upsertOne(state, action.payload)
     },
     [completeExperience.fulfilled]: (state, action) => {
-      console.log("action in accept fulfilled: ", action);
       experiencesAdapter.upsertOne(state, action.payload)
     },
     [completeOtherExperience.fulfilled]: (state, action) => {
-      console.log("action in accept fulfilled: ", action);
       experiencesAdapter.upsertOne(state, action.payload)
     },
     [removeExperience.fulfilled]: (state, action) => {
-      console.log("action in remove fulfilled: ", action);
       experiencesAdapter.removeOne(state, action.meta.arg.id)
     },  
   },
