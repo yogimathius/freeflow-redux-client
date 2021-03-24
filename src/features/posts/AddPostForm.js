@@ -33,7 +33,6 @@ export default function AddPostForm() {
     const OnSavePostClicked = async () => {
       const selectedSkills = JSON.parse(localStorage.getItem('selected_skills'));
 
-      dispatch(emptySkillsDB())
 
     if (content === "") {
       setError("Post cannot be blank");
@@ -68,12 +67,15 @@ export default function AddPostForm() {
         )
           unwrapResult(postResultAction)
           setContent('')
+          dispatch(emptySkillsDB())
+
         } catch (err) {
           console.error('Failed to save the post skill: ', err)
         } finally {
           setAddRequestStatus('idle')
           localStorage.setItem('selected_skill', null);
           setError("")
+          
         }
       }
     }

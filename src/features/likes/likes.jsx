@@ -117,7 +117,7 @@ export default function Likes({ postId, userId }) {
 		<p><b>{likeSum} like</b></p> : "";
 		
 	return (
-    <div className="flex justify-end space-x-2 mr-2 text-green-500 mt-3 text-sm items-center">
+    <div className="flex flex-col justify-end space-y-2 mr-2 text-green-500 mt-3 text-sm items-start">
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
         <div className="-mt-0.5">
@@ -126,9 +126,9 @@ export default function Likes({ postId, userId }) {
           {OnlyILikeThis}
           {OnlyOneLikesThis}
         </div>
-        
         {/* conditionally renders like or unlike icon */}
         {LikeUnlikeIcons}
+        
 			</div>
 	);
 };

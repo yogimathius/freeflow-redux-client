@@ -33,7 +33,7 @@ export default function UserPage() {
     <section className="space-y-3 pt-2 mt-2">
       {/* <UserSkillsList /> */}
 
-      <div className="md:hidden">
+      <div className="">
         <div className="col-span-2">
           <UserCard 
           id={user.id} 

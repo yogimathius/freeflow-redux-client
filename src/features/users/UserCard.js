@@ -13,8 +13,8 @@ export default function UserCard(props) {
 
   const experience = (userExperiences.length * 12);
   return (
-    <div className='bg-white rounded-xl m-1 hover:shadow-lg space-y-4 p-3 grid grid-cols-1 ' key={props.id}>
-      <div className="flex flex-col sm:flex-row justify-between mr-4 space-y-2">
+    <div className='bg-white rounded-xl m-1 hover:shadow-lg space-y-4 p-3  ' key={props.id}>
+      <div className="flex flex-col mr-4 space-y-2">
         
       <div className="flex justify-between">
         <div className="space-y-2">
@@ -22,7 +22,7 @@ export default function UserCard(props) {
             <UserNameAndLogo userId={props.id} />
           </Link>
           <div className='mx-4'>
-          <ProgressBar experience={experience} />
+           <ProgressBar experience={experience} />
           </div>
         </div>
         <div className="">
