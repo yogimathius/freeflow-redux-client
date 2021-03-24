@@ -1,5 +1,4 @@
 import {
-  createEntityAdapter,
   createSlice,
 } from '@reduxjs/toolkit'
 
