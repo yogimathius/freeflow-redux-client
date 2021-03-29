@@ -58,7 +58,11 @@ export default function LoginPage() {
         )}
       </Formik>
       <div className="text-red-500 font-bold">{error}</div>
-      <p>You can use these login details to test the app: username: dsleaford1 pw: 4lGhIyW </p>
+      <div>
+        <div>You can use these login details to test the app:</div>
+        <div>Username: <span className="font-bold">dsleaford1</span></div>
+        <div>Password: <span className="font-bold">4lGhIyW</span></div>
+      </div>
     </div>
   );
 }
