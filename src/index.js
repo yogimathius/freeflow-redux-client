@@ -14,6 +14,7 @@ import axios from "axios";
 store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
+// store.dispatch(fetchPosts())
 // store.dispatch(fetchSkills())
 
 if (process.env.REACT_APP_API_BASE_URL) {

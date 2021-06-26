@@ -14,7 +14,7 @@ export default function LoginPage() {
   // const user = useSelector((state) => state.user)
 
   const onLoginSubmitted = (values) => {
-    console.log("values on login: ", values);
+    // console.log("values on login: ", values);
     if (values.username === '') {
       setError('***Username cannot be blank***')
       setTimeout(() => {

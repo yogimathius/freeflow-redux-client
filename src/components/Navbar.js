@@ -92,6 +92,20 @@ export const Navbar = (props) => {
               </div>
           </Link>
 
+          <Link className="" to={`/messages`} onClick={() => {
+            saveState(user?.id) 
+            setCurrentPage('messages')
+            }}>
+            <div className="flex group">
+            <div className={`${currentPage === 'messages' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
+                <BarChartIcon />
+              </div>
+              <div className="flex items-end ml-1">
+                Messages
+              </div>
+              </div>
+          </Link>
+
           <div className="">
           {!user  ?
             <Link to="/login">

@@ -9,7 +9,7 @@ const SkillSelector = () => {
 	const dispatch = useDispatch();
 	const skills = useSelector(selectAllskills)
 	const selectedSkills = useSelector(state => state.selectedSkills)
-	console.log(selectedSkills);
+	// console.log(selectedSkills);
 	const skillsArr = [];
 
 	for (const skillKey in skills) {
@@ -48,7 +48,7 @@ const SkillSelector = () => {
 
 	const HandleChange = (options) => {
 		dispatch(setSelectedSkills({options}))
-		console.log("selected skills in change handler: ", selectedSkills);
+		// console.log("selected skills in change handler: ", selectedSkills);
 		const selectedSkillsStorage = []
 		options.forEach(option => {
 			// eslint-disable-next-line array-callback-return

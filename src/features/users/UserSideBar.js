@@ -15,7 +15,7 @@ const UserSideBar = () => {
   const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, userId))
   const experience = userExperiences.length * 12;
   const stateLoaded = loadState()
-  console.log('from load state: ', stateLoaded);
+  // console.log('from load state: ', stateLoaded);
   return (
     <div className="border-2 border-green-500 rounded-lg m-2 h-content py-3 px-2 fixed md:mt-24  space-y-2"> 
       <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>

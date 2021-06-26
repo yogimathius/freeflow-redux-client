@@ -5,6 +5,7 @@ import { EditPostForm } from '../features/posts/EditPostForm';
 import UserPage from '../features/users/UserPage';
 import LoginPage from '../features/login/LoginPage';
 import UserExperiences from '../features/experiences/UserExperiences'
+import MessagesPage from '../pages/messages/index'
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
   {
     path: '/posts/:postId',
     component: SinglePostPage,
+    isPrivate: true,
+  },
+  {
+    path: '/messages',
+    component: MessagesPage,
     isPrivate: true,
   },
   {
