@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchMessages, selectMessagesByUserId } from './messagesSlice'
+// import sortMessages from '../../helpers/sortMessages'
+import { fetchMessages, selectMessagesByUserId, sortMessages } from './messagesSlice'
 // import MessageListItem from './MessageListItem'
 
 export const UserMessagesList = () => {
@@ -15,7 +16,6 @@ export const UserMessagesList = () => {
   const error = useSelector((state) => state.messages.error)
 
   useEffect(() => {
-    console.log('fetching messages');
     if (messagesStatus === 'idle') {
       dispatch(fetchMessages())
     }
@@ -29,7 +29,10 @@ export const UserMessagesList = () => {
     content = <div>{error}</div>
   }
     
-  console.log('message list: ', messages);
+  // console.log('message list: ', messages);
+  const sortedMessages = sortMessages(messages, userId)
+
+  console.log(sortedMessages);
   // const renderedMessages = messages.map((message, index) => {
 
     // return (

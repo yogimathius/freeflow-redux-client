@@ -6,27 +6,28 @@ import {
   } from '@reduxjs/toolkit';
   import axios from 'axios';
   import { normalize, schema } from 'normalizr'
+import StateManager from 'react-select';
 
-  const url = `https://freeflow-two-point-o.herokuapp.com/api/messages`
+  const url = `http://localhost:8080/api/messages`
   
-  const messagesAdapter = createEntityAdapter({
-    sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent),
-  })
+  // const messagesAdapter = createEntityAdapter({
+  //   sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent),
+  // })
   
   export const fetchMessages = createAsyncThunk('messages/fetchMessages', async () => {
     const messagesEntity = new schema.Entity('messages')
 
     const response = await axios.get(url);
     const normalized = normalize(response.data, [messagesEntity])
-    console.log('response in thunk: ', normalized);
+    // console.log('response in thunk: ', response.data);
     
     return response.data;
   });
   
-  const initialState = messagesAdapter.getInitialState({
+  const initialState = {
     status: 'idle',
     error: null,
-  })
+  }
   
 //   export const addNewMessage = createAsyncThunk(
 //     'messages/addNewMessage',
@@ -93,7 +94,8 @@ import {
       [fetchMessages.fulfilled]: (state, action) => {
         state.status = 'succeeded'
         // Add any fetched posts to the array
-        messagesAdapter.upsertMany(state, action.payload)
+        state.messages = action.payload;
+        // console.log('payload: ', action.payload, 'state: ', state.messages);
       },
       [fetchMessages.rejected]: (state, action) => {
         state.status = 'failed'
@@ -114,14 +116,54 @@ import {
   
   export default messagesSlice.reducer;
   
-  export const {
-    selectAll: selectAllMessages,
-    selectById: selectMessagesById,
-    selectIds: selectMessageIds,
-  } = messagesAdapter.getSelectors((state) => state.messages)
+  export const selectAllMessages = state => state.messages;
   
   export const selectMessagesByUserId = createSelector(
     [selectAllMessages, (state, userId) => userId],
-    (messages, userId) =>
-      messages.filter((message) => message.sender_id === userId || message.receiver_id === userId)
+    (state, userId) => {
+      // console.log('messages begin: ', messages);
+      const userMessages = {}
+      if (state.status === 'succeeded') {
+        const messages = state.messages
+        for (const messageKey in messages) {
+          if (Object.hasOwnProperty.call(messages, messageKey)) {
+            const message = messages[messageKey];
+  
+            if (message.sender_id === userId || message.receiver_id === userId) {
+              userMessages[messageKey] = message
+            }
+            
+          }
+        }
+        return userMessages
+      }
+    }
   )
+
+
+export const sortMessages = (messages, userId) => {
+    const messageMap = {}
+    for (const messageKey in messages) {
+      if (Object.hasOwnProperty.call(messages, messageKey)) {
+        const message = messages[messageKey];
+        const sender_id = message.sender_id;
+        const receiver_id =message.receiver_id;
+
+        console.log(sender_id, receiver_id);
+        if (sender_id !== userId && !messageMap[sender_id]) {
+          messageMap[sender_id] = []
+          messageMap[sender_id].push(message)
+          console.log('in sender check: ', messageMap);
+        } 
+        if (receiver_id !== userId && !messageMap[receiver_id]) {
+          console.log(messageMap);
+          messageMap[receiver_id] = [message]        }
+        if (receiver_id !== userId && messageMap[receiver_id]) {
+          messageMap[receiver_id].push(message)
+        } else {
+          messageMap[sender_id].push(message)
+        }
+      }
+    }
+    return messageMap;
+}
