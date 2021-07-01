@@ -32,11 +32,18 @@ const UserConversationList = () => {
       sortedMessages = sortMessages(userConversations.messages, userId)
 
       messageContent = sortedMessages.messagers.map((messagerName, index) => {
-        const conversation = sortedMessages.messages[messagerName]
+        const messagerId = 
+          sortedMessages.messages[messagerName].receiver === messagerName 
+            ? sortedMessages.messages[messagerName][0].senderid 
+            : sortedMessages.messages[messagerName][0].receiverid
+        console.log(sortedMessages.messages[messagerName][0].receiver, messagerName);
+        console.log(messagerId);
         return (
           <div key={index}>
             <Link to={`${url}/${messagerName}`}>
-              <UserConversationListItem  conversation={conversation} messagerName={messagerName}/>
+              <UserConversationListItem
+                messagerId={messagerId} 
+                messagerName={messagerName}/>
             </Link>
 
           </div>
