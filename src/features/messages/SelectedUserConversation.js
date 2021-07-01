@@ -2,14 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import UserMessageDetail from './UserMessageDetail';
 
-const SelectedUserConversation = ({sortedMessages}) => {
+const SelectedUserConversation = ({sortedMessages, userId}) => {
     let { messagerId } = useParams();
 
     const userMessages = sortedMessages.messages[messagerId]
 
     const renderedMessages = userMessages.map((message, index) => {
         return (
-            <UserMessageDetail key={index} message={message} />
+            <UserMessageDetail key={index} message={message} userId={userId}/>
         )
     })
     return (
