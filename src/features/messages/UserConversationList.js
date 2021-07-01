@@ -4,8 +4,6 @@ import UserConversationListItem from './UserConversationListItem';
 import { fetchMessages, selectAllMessages, sortMessages } from './messagesSlice';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import SelectedUserConversation from './SelectedUserConversation';
-// import SelectedUserConversation from './SelectedUserConversation';
-// import { onMessagerSelected } from './messageHelpers/onMessageSelected';
 
 const UserConversationList = () => {
     const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
@@ -33,9 +31,6 @@ const UserConversationList = () => {
     
       sortedMessages = sortMessages(userConversations.messages, userId)
 
-
-      let singleUserMessages;
-
       messageContent = sortedMessages.messagers.map((messagerName, index) => {
         const conversation = sortedMessages.messages[messagerName]
         return (
@@ -48,7 +43,6 @@ const UserConversationList = () => {
         )
       })
 
-      // selectedMessagesContent
     } else if (messagesStatus === 'rejected') {
       messageContent = <div>{messagesError}</div>
     }
