@@ -7,7 +7,6 @@ const UserConversationListItem = ({conversation, messagerName}) => {
     
     let { path, url } = useRouteMatch();
 
-    console.log('items in item: ', url, path, messagerName);
     return (
         <div className="text-black border-green-500 border-solid border-1 py-4 px-2 my-2 cursor-pointer">
                 {messagerName}
