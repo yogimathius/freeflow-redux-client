@@ -32,7 +32,6 @@ const UserMessageDetail = ({message, userId}) => {
     let fullname;
     let placementStyle;
 
-    console.log(user.id, userId);
     if (user.id === userId) {
       fullname = 'You'
       placementStyle = ''
@@ -40,12 +39,13 @@ const UserMessageDetail = ({message, userId}) => {
       fullname = user.first_name + ' ' + user.last_name
       placementStyle = 'col-start-2'
     }
+    // const fullname = user.first_name + ' ' + user.last_name
     return (
       <div className="grid grid-cols-3">
           <div key={message.id} className={`${placementStyle} col-span-2 bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl`}>
           <div className=" p-3">
             <div className="flex justify-between">
-              <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
+              <Link to={`/userprofile/${fullname}`} onClick={() => saveState(user.id)}>
                 <div className="flex items-center space-x-2">
                   <UserImage />
                     <span className="font-semibold text-blue-500">{fullname}</span>
