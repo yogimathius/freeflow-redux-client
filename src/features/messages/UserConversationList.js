@@ -17,7 +17,7 @@ const UserConversationList = () => {
     const dispatch = useDispatch()
   
     let messageContent
-
+    let sortedMessages
     const messagesStatus = useSelector((state) => state.messages.status)
     const messagesError = useSelector((state) => state.messages.error)
 
@@ -31,14 +31,13 @@ const UserConversationList = () => {
     } else if (messagesStatus === 'succeeded') {
 
     
-      const sortedMessages = sortMessages(userConversations.messages, userId)
+      sortedMessages = sortMessages(userConversations.messages, userId)
 
 
       let singleUserMessages;
 
       messageContent = sortedMessages.messagers.map((messagerName, index) => {
         const conversation = sortedMessages.messages[messagerName]
-        console.log('conversation in list: ', conversation);
         return (
           <div key={index}>
             <Link to={`${url}/${messagerName}`}>
@@ -64,7 +63,9 @@ const UserConversationList = () => {
           </div>
             <Switch>
               <Route path={`${path}/:messagerId`}>
-                <SelectedUserConversation />
+                <SelectedUserConversation
+                  sortedMessages={sortedMessages} userId={userId}
+                />
               </Route>
             </Switch>
 
