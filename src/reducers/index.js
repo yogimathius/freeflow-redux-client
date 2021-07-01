@@ -10,7 +10,6 @@ import userSkillsReducer from '../features/userSkills/userSkillsSlice';
 import filtersReducer from '../features/filters/filtersSlice';
 import selectedSkillsReducer from '../features/dbSkills/selectedSkills/selectedSkillsSlice';
 import messagesReducer from '../features/messages/messagesSlice';
-import conversationsReducer from '../features/messages/userConversationsSlice';
 
 
 const rootReducer = combineReducers({
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
   visibilityFilters: filtersReducer,
   selectedSkills: selectedSkillsReducer,
   messages: messagesReducer,
-  conversations: conversationsReducer
 })
 
 
