@@ -4,7 +4,6 @@ import UserMessageDetail from './UserMessageDetail';
 
 const SelectedUserConversation = ({sortedMessages, userId}) => {
     let { messagerId } = useParams();
-
     const userMessages = sortedMessages.messages[messagerId]
 
     const renderedMessages = userMessages.map((message, index) => {
