@@ -41,9 +41,7 @@ export const sortMessages = (messages, userId) => {
           } 
       }
     }
-    // console.log('with new fn: ', sortedMessageMap);
     const messagers = Object.keys(messageMap.messages)
     messageMap.messagers = messagers;
-    console.log(messageMap);
     return messageMap;
 }
