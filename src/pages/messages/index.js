@@ -1,10 +1,10 @@
 import React from 'react';
-import UserMessagesList from '../../features/messages/UserMessageList';
+import UserMessages from '../../features/messages/index';
 
 const index = () => {
     return (
         <div>
-            <UserMessagesList></UserMessagesList>
+            <UserMessages></UserMessages>
         </div>
     );
 };
