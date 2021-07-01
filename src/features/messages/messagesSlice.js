@@ -15,11 +15,9 @@ import {
   
   export const fetchMessages = createAsyncThunk('messages/fetchMessages', async (userId) => {
     const messagesEntity = new schema.Entity('messages')
-    console.log('run', userId);
     const response = await axios.get(`${url}/${userId}`);
     const normalized = normalize(response.data, [messagesEntity])
 
-    console.log('sorted in thunk: ', normalized);
     return response.data;
   });
   
@@ -144,7 +142,6 @@ export const sortMessages = (messages, userId) => {
         }
 
         if (receiverid !== userId && !messageMap.messages[receiverName]) {
-          console.log(receiverName);
 
           messageMap.messagers.push(receiverName)
           messageMap.messages[receiverName] = [message]     
