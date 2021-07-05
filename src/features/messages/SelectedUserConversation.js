@@ -8,16 +8,21 @@ import UserMessageDetail from './UserMessageDetail'
 const SelectedUserConversation = ({ sortedMessages, userId }) => {
   const { messagerId } = useParams()
   const userMessages = sortedMessages.messages[messagerId]
-
   const renderedMessages = userMessages.map((message, index) => {
     return (
             <UserMessageDetail key={index} message={message} userId={userId}/>
     )
   })
+  let receiverId
+  if (userMessages[0].sender === messagerId) {
+    receiverId = userMessages[0].senderid
+  } else if (userMessages[0].receiver === messagerId) {
+    receiverId = userMessages[0].receiverid
+  }
   return (
         <div className="col-span-2">
             {renderedMessages}
-            <MessageTextEditor messagerId={messagerId} />
+            <MessageTextEditor receiverId={receiverId} />
         </div>
   )
 }
