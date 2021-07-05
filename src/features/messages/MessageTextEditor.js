@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewMessage } from './messagesSlice'
 
-const MessageTextEditor = ({ messagerId }) => {
+const MessageTextEditor = ({ receiverId }) => {
   const [error, setError] = useState('')
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -36,7 +36,7 @@ const MessageTextEditor = ({ messagerId }) => {
           senderID: userId,
           content: content,
           // active: true
-          receiverId: messagerId
+          receiverID: receiverId
         })
       )
       unwrapResult(postResultAction)
