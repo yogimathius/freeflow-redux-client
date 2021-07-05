@@ -26,13 +26,13 @@ export const addNewMessage = createAsyncThunk(
   async (initialMessage) => {
     const {
       senderID,
-      receiverId,
+      receiverID,
       content
     } = initialMessage
-    console.log(senderID, receiverId, content, 'in thunk')
+    console.log(senderID, receiverID, content, 'in thunk')
     const response = await axios.post(`${url}/new`, {
       senderID,
-      receiverId,
+      receiverID,
       textInput: content,
       time_posted: new Date().toISOString()
     })
