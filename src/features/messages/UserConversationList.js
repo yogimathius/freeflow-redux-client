@@ -36,8 +36,6 @@ const UserConversationList = () => {
           sortedMessages.messages[messagerName].receiver === messagerName 
             ? sortedMessages.messages[messagerName][0].senderid 
             : sortedMessages.messages[messagerName][0].receiverid
-        console.log(sortedMessages.messages[messagerName][0].receiver, messagerName);
-        console.log(messagerId);
         return (
           <div key={index}>
             <Link to={`${url}/${messagerName}`}>
