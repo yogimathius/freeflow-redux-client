@@ -1,22 +1,22 @@
 import {
   createSlice,
-  createAsyncThunk
+  createAsyncThunk,
+  createEntityAdapter
   // createSelector,
-  // createEntityAdapter,
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 // import { normalize, schema } from 'normalizr'
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/messages'
 
-// const messagesAdapter = createEntityAdapter({
-//   sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent),
-// })
+const messagesAdapter = createEntityAdapter({
+  sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent)
+})
 
 export const fetchMessages = createAsyncThunk('messages/fetchMessages', async (userId) => {
-  // const messagesEntity = new schema.Entity('messages')
+  console.log('response in thunk: ', `${url}/${userId}`)
   const response = await axios.get(`${url}/${userId}`)
-  // const normalized = normalize(response.data, [messagesEntity])
+  console.log('response in thunk: ', response, `${url}/${userId}`)
 
   return response.data
 })
@@ -69,10 +69,10 @@ export const addNewMessage = createAsyncThunk(
 //     }
 //   )
 
-const initialState = {
+const initialState = messagesAdapter.getInitialState({
   status: 'idle',
   error: null
-}
+})
 
 const messagesSlice = createSlice({
   name: 'messages',
@@ -88,18 +88,20 @@ const messagesSlice = createSlice({
   },
   extraReducers: {
     [fetchMessages.pending]: (state, action) => {
-      state.status = 'pending'
+      console.log('pending: ', state.status)
+      state.status = 'loading'
     },
     [fetchMessages.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      // Add any fetched posts to the array
-      state.messages = action.payload
+      console.log('payload: ', action.payload)
+      console.log(messagesAdapter)
+      messagesAdapter.upsertMany(state, action.payload)
     },
     [fetchMessages.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
-    }
-    // [addNewMessage.fulfilled]: messagesAdapter.addOne,
+    },
+    [addNewMessage.fulfilled]: messagesAdapter.addOne
     // [removeMessage.fulfilled]: (state, action) => {
     //   messagesAdapter.removeOne(state, action.meta.arg.id)
     // },
