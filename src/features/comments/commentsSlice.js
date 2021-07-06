@@ -2,24 +2,24 @@ import {
   createSlice,
   createAsyncThunk,
   createSelector,
-  createEntityAdapter,
-} from '@reduxjs/toolkit';
-import axios from 'axios';
+  createEntityAdapter
+} from '@reduxjs/toolkit'
+import axios from 'axios'
 
-const url = `https://freeflow-two-point-o.herokuapp.com/api/comments`
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/comments'
 
 const commentsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.time_posted.localeCompare(b.time_posted),
+  sortComparer: (a, b) => a.time_posted.localeCompare(b.time_posted)
 })
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
-  const response = await axios.get(url);
-  return response.data;
-});
+  const response = await axios.get(url)
+  return response.data
+})
 
 const initialState = commentsAdapter.getInitialState({
   status: 'idle',
-  error: null,
+  error: null
 })
 
 export const addNewComment = createAsyncThunk(
@@ -28,13 +28,13 @@ export const addNewComment = createAsyncThunk(
     const {
       commenter_id,
       post_id,
-      content,
+      content
     } = initialComment
     const response = await axios.post(`${url}`, {
       commenter_id,
       post_id,
       text_body: content,
-      time_posted: new Date().toISOString(),
+      time_posted: new Date().toISOString()
     })
     return response.data
   }
@@ -43,17 +43,17 @@ export const addNewComment = createAsyncThunk(
 export const removeComment = createAsyncThunk(
   'comments/removeComment',
   async (initialComments) => {
-    const { id, post_id, commenter_id} = initialComments
+    const { id, post_id, commenter_id } = initialComments
     const removeComment = {
       id,
       post_id: post_id,
       commenter_id: commenter_id
-    };
-    const response = await axios.delete(url, { 
-      params: { 
+    }
+    const response = await axios.delete(url, {
+      params: {
         removeComment
       }
-    });
+    })
     return response.post
   }
 )
@@ -62,8 +62,11 @@ export const updateComment = createAsyncThunk(
   'comments/updatePost',
   async (initialPost) => {
     const { text_body, post_id, commenter_id } = initialPost
-    const response = await axios.put(url, { text_body,
-    post_id, commenter_id });
+    const response = await axios.put(url, {
+      text_body,
+      post_id,
+      commenter_id
+    })
     return response.data
   }
 )
@@ -72,13 +75,13 @@ const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    commentUpdated(state, action) {
+    commentUpdated (state, action) {
       const { id, content } = action.payload
       const existingPost = state.entities[id]
       if (existingPost) {
         existingPost.content = content
       }
-    },
+    }
   },
   extraReducers: {
     [fetchComments.pending]: (state, action) => {
@@ -86,7 +89,7 @@ const commentsSlice = createSlice({
     },
     [fetchComments.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      // Add any fetched posts to the array
+      console.log('payload in comments: ', action.payload)
       commentsAdapter.upsertMany(state, action.payload)
     },
     [fetchComments.rejected]: (state, action) => {
@@ -97,21 +100,21 @@ const commentsSlice = createSlice({
     [removeComment.fulfilled]: (state, action) => {
       commentsAdapter.removeOne(state, action.meta.arg.id)
     },
-    [updateComment.fulfilled]:(state, action) => {
+    [updateComment.fulfilled]: (state, action) => {
       // const { id, ...changes } = payload;
       commentsAdapter.upsertOne(state, action.meta.arg)
     }
-  },
-});
+  }
+})
 
-export const { commentAdded, commentUpdated } = commentsSlice.actions;
+export const { commentAdded, commentUpdated } = commentsSlice.actions
 
-export default commentsSlice.reducer;
+export default commentsSlice.reducer
 
 export const {
   selectAll: selectAllComments,
   selectById: selectCommentsById,
-  selectIds: selectCommentIds,
+  selectIds: selectCommentIds
 } = commentsAdapter.getSelectors((state) => state.comments)
 
 export const selectCommentsByPostId = createSelector(

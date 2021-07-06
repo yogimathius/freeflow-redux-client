@@ -1,12 +1,12 @@
-import React from 'react';
-import UserConversationList from './UserConversationList';
+import React from 'react'
+import UserConversationList from './UserConversationList'
 
 const index = () => {
-    return (
+  return (
         <div>
             <UserConversationList />
         </div>
-    );
-};
+  )
+}
 
-export default index;
+export default index

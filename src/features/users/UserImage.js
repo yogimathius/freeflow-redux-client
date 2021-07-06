@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 const UserImage = () => {
-	  function getRandomInt() {
-    return Math.floor(Math.random() * (10000 - 5)) + 4;
+  function getRandomInt () {
+    return Math.floor(Math.random() * (10000 - 5)) + 4
   }
-	const imgUrl = "http://graph.facebook.com/v2.5/" + getRandomInt() + "/picture";
-	
-	return (
-		<img className="inline-block rounded-full p-2 border-2 border-solid border-green-500 w-10" alt="avatar" src={imgUrl} />
-	);
-};
+  const imgUrl = 'http://graph.facebook.com/v2.5/' + getRandomInt() + '/picture'
 
-export default UserImage;
+  return (
+    <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500 w-10" alt="avatar" src={imgUrl} />
+  )
+}
+
+export default UserImage

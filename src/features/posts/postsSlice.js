@@ -2,9 +2,9 @@ import {
   createSlice,
   createAsyncThunk,
   createSelector,
-  createEntityAdapter,
+  createEntityAdapter
 } from '@reduxjs/toolkit'
-import axios from 'axios';
+import axios from 'axios'
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/posts'
 
@@ -14,24 +14,24 @@ const postsAdapter = createEntityAdapter({
 
 const initialState = postsAdapter.getInitialState({
   status: 'idle',
-  error: null,
+  error: null
 })
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/posts');
+  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/posts')
   return response.data
 })
 
 export const addNewPost = createAsyncThunk(
   'posts/addNewPost',
   async (initialPost) => {
-    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id, skill_ids} = initialPost
+    const { text_body, is_helper, is_helped, active, owner_id, avatar, username, id, skill_ids } = initialPost
 
-    const newPost = { 
-      text_body, 
-      is_helper, 
-      is_helped, 
-      active, 
+    const newPost = {
+      text_body,
+      is_helper,
+      is_helped,
+      active,
       time_posted: new Date().toISOString(),
       avatar,
       owner_id,
@@ -40,7 +40,7 @@ export const addNewPost = createAsyncThunk(
       skill_ids
     }
 
-    const response = await axios.post(url, newPost);
+    const response = await axios.post(url, newPost)
     return response.data
   }
 )
@@ -54,7 +54,7 @@ export const removePost = createAsyncThunk(
       params: {
         post_id
       }
-    });
+    })
     return response.data
   }
 )
@@ -63,8 +63,10 @@ export const updatePost = createAsyncThunk(
   'posts/updatePost',
   async (initialPost) => {
     const { text_body, post_id } = initialPost
-    const response = await axios.put(url, { text_body,
-    post_id });
+    const response = await axios.put(url, {
+      text_body,
+      post_id
+    })
     return response.data
   }
 )
@@ -91,11 +93,11 @@ const postsSlice = createSlice({
     [removePost.fulfilled]: (state, action) => {
       postsAdapter.removeOne(state, action.meta.arg.post_id)
     },
-    [updatePost.fulfilled]:(state, { payload }) => {
-      const { id, ...changes } = payload;
-      postsAdapter.updateOne(state, {id, changes})
+    [updatePost.fulfilled]: (state, { payload }) => {
+      const { id, ...changes } = payload
+      postsAdapter.updateOne(state, { id, changes })
     }
-  },
+  }
 })
 
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
@@ -105,12 +107,12 @@ export default postsSlice.reducer
 export const {
   selectAll: selectAllPosts,
   selectById: selectPostById,
-  selectIds: selectPostIds,
+  selectIds: selectPostIds
 } = postsAdapter.getSelectors((state) => state.posts)
 
 export const selectPostsByUser = createSelector(
   [selectAllPosts, (state, userId) => userId],
-  (posts, userId) => posts.filter((post) => { 
+  (posts, userId) => posts.filter((post) => {
     return post.owner_id === userId
   })
 )

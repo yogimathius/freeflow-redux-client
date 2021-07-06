@@ -21,17 +21,16 @@ export const CommentsList = ({ postId }) => {
   if (commentsStatus === 'pending') {
     content = <div className="loader">Loading...</div>
   } else if (commentsStatus === 'fulfilled') {
-
+    
   } else if (commentsStatus === 'rejected') {
     content = <div>{error}</div>
   }
-    
-  const renderedComments = comments.map((comment, index) => {
 
+  const renderedComments = comments.map((comment, index) => {
     return (
       <CommentListItem key={index} comment={comment} postId={postId} />
-      )
-    })
+    )
+  })
 
   return (
     <section className="commentsList">
