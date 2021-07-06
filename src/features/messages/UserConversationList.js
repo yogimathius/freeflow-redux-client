@@ -1,64 +1,61 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import UserConversationListItem from './UserConversationListItem';
-import { fetchMessages, selectAllMessages, sortMessages } from './messagesSlice';
-import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
-import SelectedUserConversation from './SelectedUserConversation';
+import UserConversationListItem from './UserConversationListItem'
+import { fetchMessages, selectAllMessages, sortMessages } from './messagesSlice'
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom'
+import SelectedUserConversation from './SelectedUserConversation'
 
 const UserConversationList = () => {
-    const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
-    const userId = loggedInUser.id;
-    let { path, url } = useRouteMatch();
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+  const userId = loggedInUser.id
+  const { path, url } = useRouteMatch()
 
-    const userConversations = useSelector(selectAllMessages)
-    
-    const dispatch = useDispatch()
-  
-    let messageContent
-    let sortedMessages
-    const messagesStatus = useSelector((state) => state.messages.status)
-    const messagesError = useSelector((state) => state.messages.error)
+  const userConversations = useSelector(selectAllMessages)
 
-    useEffect(() => {
-      if (messagesStatus === 'idle') {
-        dispatch(fetchMessages(userId))
-      }
-    }, [messagesStatus, userId, dispatch])
-    if (messagesStatus === 'pending') {
-      messageContent = <div className="loader">Loading...</div>
-    } else if (messagesStatus === 'succeeded') {
+  const dispatch = useDispatch()
 
-    
-      sortedMessages = sortMessages(userConversations.messages, userId)
-
-      messageContent = sortedMessages.messagers.map((messagerName, index) => {
-        const messagerId = 
-          sortedMessages.messages[messagerName].receiver === messagerName 
-            ? sortedMessages.messages[messagerName][0].senderid 
+  let messageContent
+  let sortedMessages
+  const messagesStatus = useSelector((state) => state.messages.status)
+  const messagesError = useSelector((state) => state.messages.error)
+  console.log('after declaration: ', messagesStatus)
+  useEffect(() => {
+    if (messagesStatus === 'idle') {
+      console.log('dispatched: ', userId)
+      dispatch(fetchMessages(userId))
+    }
+  }, [messagesStatus, userId, dispatch])
+  if (messagesStatus === 'pending') {
+    console.log('status: ', messagesStatus)
+    messageContent = <div className="loader">Loading...</div>
+  } else if (messagesStatus === 'succeeded') {
+    console.log('succeeded')
+    sortedMessages = sortMessages(userConversations.entities, userId)
+    console.log('sorted: ', sortedMessages, userConversations)
+    messageContent = sortedMessages.messagers.map((messagerName, index) => {
+      const messagerId =
+          sortedMessages.messages[messagerName].receiver === messagerName
+            ? sortedMessages.messages[messagerName][0].senderid
             : sortedMessages.messages[messagerName][0].receiverid
-        return (
+      return (
           <div key={index}>
             <Link to={`${url}/${messagerName}`}>
               <UserConversationListItem
-                messagerId={messagerId} 
+                messagerId={messagerId}
                 messagerName={messagerName}/>
             </Link>
 
           </div>
-        )
-      })
+      )
+    })
+  } else if (messagesStatus === 'failed') {
+    messageContent = <div>{messagesError}</div>
+  }
 
-    } else if (messagesStatus === 'rejected') {
-      messageContent = <div>{messagesError}</div>
-    }
-
-
-
-
-    return (
+  return (
         <div className="mt-10 grid grid-cols-3">
           <div>
-            {messageContent}  
+            {messageContent}
           </div>
             <Switch>
               <Route path={`${path}/:messagerId`}>
@@ -69,7 +66,7 @@ const UserConversationList = () => {
             </Switch>
 
         </div>
-    );
-};
+  )
+}
 
-export default UserConversationList;
+export default UserConversationList
