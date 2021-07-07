@@ -19,5 +19,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/prop-types': 0,
+    camelcase: 0
   }
 }

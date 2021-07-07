@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react'
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch
 } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
-import { AuthProvider } from './Context';
-import routes from './Config/routes.js';
+import { AuthProvider } from './Context'
+import routes from './Config/routes.js'
 import { Navbar } from './components/Navbar'
 // import SideBar from './components/SideBar'
 
-import AppRoute from './components/AppRoute';
-import UserSideBar from './features/users/UserSideBar';
-import { fetchUserSkills } from './features/userSkills/userSkillsSlice';
+import AppRoute from './components/AppRoute'
+import UserSideBar from './features/users/UserSideBar'
+import { fetchUserSkills } from './features/userSkills/userSkillsSlice'
 // import Footer from './components/Footer';
 
-function App() {
+function App () {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchUserSkills())
-}, [dispatch])
+  }, [dispatch])
 
   return (
     <AuthProvider>
@@ -31,9 +31,9 @@ function App() {
         <div className="App md:grid grid-cols-8 font-body">
           <Navbar />
           <div className="hidden md:col-span-2 md:flex justify-center">
-            { user.user ? 
-            <UserSideBar /> 
-            : ""
+            { user.user
+              ? <UserSideBar />
+              : ''
             }
           </div>
           <div className="h-16"></div>

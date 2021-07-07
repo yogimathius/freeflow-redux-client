@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { TimeAgo } from '../posts/TimeAgo'
 import {
-  selectPostById,
+  selectPostById
 } from '../posts/postsSlice'
 
 import {
@@ -13,27 +14,29 @@ import {
   removeLike
 } from '../likes/likesSlice'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
-import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
+import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 import { UserNameAndLogo } from '../posts/UserNameAndLogo'
 
-export default function UserPagePostExcerpt({ postId }) {
+export default function UserPagePostExcerpt ({ postId }) {
   const loggedInUser = JSON.parse(localStorage.getItem('user'))
 
   const post = useSelector((state) => selectPostById(state, postId))
 
   const likesList = useSelector((state) => selectLikesByPostId(state, postId))
 
-  const likeSum = likesList.length;
+  const likeSum = likesList.length
 
-  const myLikes = loggedInUser ? likesList.filter(
-    (like) => loggedInUser.id === like.liker_id
-  ) : "";  
-  
-  const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
+  const myLikes = loggedInUser
+    ? likesList.filter(
+      (like) => loggedInUser.id === like.liker_id
+    )
+    : ''
+
+  const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : ''
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
@@ -47,10 +50,9 @@ export default function UserPagePostExcerpt({ postId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewLike({   posting_id: post.id, liker_id: loggedInUser.id })
+          addNewLike({ posting_id: post.id, liker_id: loggedInUser.id })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to save the post: ', err)
       } finally {
@@ -64,10 +66,9 @@ export default function UserPagePostExcerpt({ postId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removeLike({   posting_id: post.id, owner_id: loggedInUser.id })
+          removeLike({ posting_id: post.id, owner_id: loggedInUser.id })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to save the post: ', err)
       } finally {
@@ -76,29 +77,35 @@ export default function UserPagePostExcerpt({ postId }) {
     }
   }
 
-  const LikeUnlikeIcons = iAlreadyLikeThis ? (
-    <FontAwesomeIcon 
+  const LikeUnlikeIcons = iAlreadyLikeThis
+    ? (
+    <FontAwesomeIcon
     onClick={() => unLike(post.id, loggedInUser.id)}
     className=""
     icon={fasHeart} size="1x" />
-  ) : (                  
-    <FontAwesomeIcon 
+      )
+    : (
+    <FontAwesomeIcon
       onClick={() => addLike(post.post_id, loggedInUser.id)}
       className="love"
       icon={farHeart} size="1x" />
-  )
-  
-  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
-  <p ><b>You and {likeSum - 1} others</b></p> : "";
+      )
 
-const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1 ? 
-  <p><b>{likeSum}  likes</b></p> : "";
+  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1
+    ? <p ><b>You and {likeSum - 1} others</b></p>
+    : ''
 
-const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1 ? 
-  <p ><b>You like this</b></p> : "";
+  const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1
+    ? <p><b>{likeSum}  likes</b></p>
+    : ''
 
-const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
-  <p><b>{likeSum} like</b></p> : "";
+  const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1
+    ? <p ><b>You like this</b></p>
+    : ''
+
+  const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1
+    ? <p><b>{likeSum} like</b></p>
+    : ''
 
   return (
     <article className="border-solid border-2 border-black rounded-xl p-4 md:mx-1 my-3 " key={post.id}>
@@ -120,7 +127,7 @@ const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ?
 
       {/* LIKES */}
       <div className="flex items-start justify-end space-x-2 mr-2 text-blue-500 mt-3 text-sm">
-        
+
         {/* conditionally renders like or unlike icon */}
         {LikeUnlikeIcons}
 
@@ -132,7 +139,6 @@ const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ?
           {OnlyOneLikesThis}
         </div>
 
-					
       </div>
 
       {/* VIEW POST */}

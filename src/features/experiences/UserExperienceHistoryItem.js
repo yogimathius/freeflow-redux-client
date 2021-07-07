@@ -1,87 +1,82 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { TimeAgo } from '../posts/TimeAgo'
-import { completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice';
-import { saveState } from '../../helpers/localStorage';
+import { completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice'
+import { saveState } from '../../helpers/localStorage'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const UserExperienceHistoryItem = ({ experience, userId }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   // const [error, setError] = useState("");
 
-  const pending = experience.date_accepted === null ? true : false;
-  const accepted = experience.date_accepted !== null  && experience.date_completed === null  ? true : false;
-  const completed = experience.date_completed !== null ? true : false;
-  const completedByHelper = experience.helper_comments !== null ? true : false;
+  const pending = experience.date_accepted === null
+  const accepted = !!(experience.date_accepted !== null && experience.date_completed === null)
+  const completed = experience.date_completed !== null
+  const completedByHelper = experience.helper_comments !== null
 
   const users = useSelector((state) => state.users)
 
-  const helpedUserName = users.entities[experience.helped_id];
+  const helpedUserName = users.entities[experience.helped_id]
 
   if (!helpedUserName) {
-    return null;
+    return null
   }
   const canRemove =
   userId && addRequestStatus === 'idle'
 
   const completeExperienceClicked = async () => {
-
-  if (canRemove) {
-
-    try {
-      if (experience.submit_completion === false) {
-        setAddRequestStatus('pending')
-        const resultAction = await dispatch(
-          completeExperience({ 
-            id: experience.id, 
-            ishelper: true,
-            comments: "",
-            submit_completion: true
-          })
-        )
-          unwrapResult(resultAction)          
-      } else {
+    if (canRemove) {
+      try {
+        if (experience.submit_completion === false) {
           setAddRequestStatus('pending')
           const resultAction = await dispatch(
-            completeOtherExperience({ 
-              id: experience.id, 
+            completeExperience({
+              id: experience.id,
               ishelper: true,
-              comments: ""
+              comments: '',
+              submit_completion: true
             })
           )
-            unwrapResult(resultAction)  
-      }
-      
+          unwrapResult(resultAction)
+        } else {
+          setAddRequestStatus('pending')
+          const resultAction = await dispatch(
+            completeOtherExperience({
+              id: experience.id,
+              ishelper: true,
+              comments: ''
+            })
+          )
+          unwrapResult(resultAction)
+        }
       } catch (err) {
         console.error('Failed to accept session: ', err)
       } finally {
         setAddRequestStatus('idle')
-        localStorage.setItem('selected_user', null);
+        localStorage.setItem('selected_user', null)
         // setError("")
       }
     }
   }
 
   const removeExperienceClicked = async () => {
-
-  if (canRemove) {
-    try {
-
-      setAddRequestStatus('pending')
-      const resultAction = await dispatch(
-        removeExperience({ 
-          id: experience.id, 
-        })
-      )
+    if (canRemove) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          removeExperience({
+            id: experience.id
+          })
+        )
         unwrapResult(resultAction)
       } catch (err) {
         console.error('Failed to create new session: ', err)
       } finally {
         setAddRequestStatus('idle')
-        localStorage.setItem('selected_user', null);
+        localStorage.setItem('selected_user', null)
         // setError("")
       }
     }
@@ -90,7 +85,7 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 md:grid-rows-1 mx-2 space-y-1">
       <Link className="text-blue-500" to={`/userprofile/${helpedUserName.id}`} onClick={() => saveState(helpedUserName.id)}>
-        <div>{helpedUserName.first_name + " " + helpedUserName.last_name}</div>
+        <div>{helpedUserName.first_name + ' ' + helpedUserName.last_name}</div>
       </Link>
 
       <div className="row-start-2 md:row-start-1 md:text-center">
@@ -98,28 +93,27 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
       </div>
 
       <div className="md:text-center">
-        {pending ? 
-          <div className="text-yellow-500">
+        {pending
+          ? <div className="text-yellow-500">
             Pending
           </div>
-        : 
-        accepted ? <div className="text-blue-500">Incomplete</div> : 
-        completed ? <div className="text-green-500">Completed</div> : ""}
+          : accepted
+            ? <div className="text-blue-500">Incomplete</div>
+            : completed ? <div className="text-green-500">Completed</div> : ''}
       </div>
 
       <div className="md:text-center text-xs md:text-sm ">
-        {pending ? <button className="text-red-500 btn btn-warning" onClick={() => removeExperienceClicked()}>Cancel</button>
-        : 
-        accepted && completedByHelper !== true ? 
-        <div className="space-x-2">
-        <button className="text-red-500 text-sm btn btn-warning">Cancel</button> 
-        <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button> 
+        {pending
+          ? <button className="text-red-500 btn btn-warning" onClick={() => removeExperienceClicked()}>Cancel</button>
+          : accepted && completedByHelper !== true
+            ? <div className="space-x-2">
+        <button className="text-red-500 text-sm btn btn-warning">Cancel</button>
+        <button className="text-green-500 btn btn-secondary" onClick={() => completeExperienceClicked()}>Complete</button>
       </div>
-        : 
-        completed || completedByHelper ? <button className="text-green-500 btn btn-secondary">View Details</button> : ""}
+            : completed || completedByHelper ? <button className="text-green-500 btn btn-secondary">View Details</button> : ''}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserExperienceHistoryItem;
+export default UserExperienceHistoryItem

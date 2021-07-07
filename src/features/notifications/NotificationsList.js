@@ -7,7 +7,7 @@ import { selectAllUsers } from '../users/usersSlice'
 
 import {
   selectAllNotifications,
-  allNotificationsRead,
+  allNotificationsRead
 } from './notificationsSlice'
 
 export const NotificationsList = () => {
@@ -23,11 +23,11 @@ export const NotificationsList = () => {
     const date = parseISO(notification.date)
     const timeAgo = formatDistanceToNow(date)
     const user = users.find((user) => user.id === notification.user) || {
-      name: 'Unknown User',
+      name: 'Unknown User'
     }
 
     const notificationClassname = classnames('notification', {
-      new: notification.isNew,
+      new: notification.isNew
     })
 
     return (

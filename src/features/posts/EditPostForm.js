@@ -1,30 +1,29 @@
+/* eslint-disable react/prop-types */
 import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import {  selectPostById, updatePost } from './postsSlice'
+import { selectPostById, updatePost } from './postsSlice'
 
 export const EditPostForm = ({ postId, onSaveEdit, value }) => {
   const post = useSelector((state) => selectPostById(state, postId))
-  
+
   const [content, setContent] = useState(value)
 
   const dispatch = useDispatch()
 
-  
   const onContentChanged = (e) => setContent(e.target.value)
   // eslint-disable-next-line no-unused-vars
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const onSavePostClicked  = async () => {
+  const onSavePostClicked = async () => {
     if (content) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          updatePost({ text_body: content,  post_id: post.id, changes: { text_body: content} })
+          updatePost({ text_body: content, post_id: post.id, changes: { text_body: content } })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to update post: ', err)
       } finally {

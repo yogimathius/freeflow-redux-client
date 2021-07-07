@@ -1,29 +1,29 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
-import ReactTags from "react-tag-autocomplete";
-import { selectAllskills } from "./dbSkillsSlice";
+import React, { useState, useRef, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import ReactTags from 'react-tag-autocomplete'
+import { selectAllskills } from './dbSkillsSlice'
 
-function Tags(props) {
-	const skills = useSelector(selectAllskills)
-	const [skillsSet, setTags] = useState(skills);
-  const [suggestions, setSuggestions] = useState([]);
+function Tags (props) {
+  const skills = useSelector(selectAllskills)
+  const [skillsSet, setTags] = useState(skills)
+  const [suggestions, setSuggestions] = useState([])
 
   useEffect(() => {
-    setSuggestions(props.suggested);
-  }, [props.suggested]);
+    setSuggestions(props.suggested)
+  }, [props.suggested])
 
-  const reactTags = useRef(null);
+  const reactTags = useRef(null)
 
   const onDelete = (i) => {
-    let skill = skillsSet.slice(0);
-    skill.splice(i, 1);
+    const skill = skillsSet.slice(0)
+    skill.splice(i, 1)
 
-    setTags(skill);
-  };
+    setTags(skill)
+  }
 
   const onAddition = (skill) => {
-    setTags([...skillsSet, skill]);
-  };
+    setTags([...skillsSet, skill])
+  }
 
   return (
     <ReactTags
@@ -34,8 +34,8 @@ function Tags(props) {
       onAddition={onAddition}
       onChange={props.onChange(skills)}
     />
-  );
+  )
 }
 
-export default Tags;
+export default Tags
 // ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
-import {Field, Form, Formik} from 'formik'
-import {login} from './userLoginSlice'
-import { Redirect } from 'react-router-dom';
-import { fetchSkills } from '../dbSkills/dbSkillsSlice';
-import { fetchUserSkills } from '../userSkills/userSkillsSlice';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Field, Form, Formik } from 'formik'
+import { login } from './userLoginSlice'
+import { Redirect } from 'react-router-dom'
+import { fetchSkills } from '../dbSkills/dbSkillsSlice'
+import { fetchUserSkills } from '../userSkills/userSkillsSlice'
 
-export default function LoginPage() {
+export default function LoginPage () {
   const dispatch = useDispatch()
   const { user } = useSelector(state => state.user)
-  const [error, setError] = useState("");
+  const [error, setError] = useState('')
 
   // const user = useSelector((state) => state.user)
 
@@ -17,16 +17,16 @@ export default function LoginPage() {
     if (values.username === '') {
       setError('***Username cannot be blank***')
       setTimeout(() => {
-        setError('');
-      }, 2000);      
-      return;
+        setError('')
+      }, 2000)
+      return
     }
     if (values.password === '') {
       setError('***Password cannot be blank***')
       setTimeout(() => {
-        setError('');
-      }, 2000);
-      return;
+        setError('')
+      }, 2000)
+      return
     }
     dispatch(login(values))
   }
@@ -35,7 +35,7 @@ export default function LoginPage() {
     dispatch(fetchUserSkills())
     return (
       <Redirect to={{ pathname: '/dashboard' }} />
-      )
+    )
   }
 
   return (
@@ -63,6 +63,5 @@ export default function LoginPage() {
         <div>Password: <span className="font-bold">4lGhIyW</span></div>
       </div>
     </div>
-  );
+  )
 }
-

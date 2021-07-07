@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAllUsers } from './usersSlice'
-import store from '../../app/store';
-import { 
-  fetchExperiences, 
-  selectAllExperiences,  
-} from '../experiences/experiencesSlice';
-import UserCard from './UserCard';
-import UserSkillsList from '../userSkills/fetchUserSkills';
-  
-store.dispatch(fetchExperiences());
+import store from '../../app/store'
+import {
+  fetchExperiences,
+  selectAllExperiences
+} from '../experiences/experiencesSlice'
+import UserCard from './UserCard'
+import UserSkillsList from '../userSkills/fetchUserSkills'
+
+store.dispatch(fetchExperiences())
 export const UsersList = () => {
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
-  const experiences = useSelector (selectAllExperiences)
+  const experiences = useSelector(selectAllExperiences)
 
   const experienceStatus = useSelector((state) => state.experiences.status)
   const experienceError = useSelector((state) => state.experiences.error)
@@ -34,25 +34,27 @@ export const UsersList = () => {
     // eslint-disable-next-line no-unused-vars
     experiencesContent = <div>{experienceError}</div>
   }
-  
-  const renderedUsers = users.map((user, id) => {return (
+
+  const renderedUsers = users.map((user, id) => {
+    return (
     <div key={id} className="">
       <UserSkillsList />
-        <UserCard 
-          key={id} 
-          id={user.id} 
-          firstName={user.first_name} 
-          lastName={user.last_name} 
-          active={user.active} 
-          location={user.location} 
-          created_at={user.created_at} 
+        <UserCard
+          key={id}
+          id={user.id}
+          firstName={user.first_name}
+          lastName={user.last_name}
+          active={user.active}
+          location={user.location}
+          created_at={user.created_at}
           profession={user.profession}
           tagline={user.tagline}
         />
     </div>
-  )})
+    )
+  })
 
-    return (
+  return (
     <section className="space-y-3 pt-3 mt-2">
       <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
       {renderedUsers}

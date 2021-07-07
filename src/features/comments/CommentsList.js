@@ -21,7 +21,7 @@ export const CommentsList = ({ postId }) => {
   if (commentsStatus === 'pending') {
     content = <div className="loader">Loading...</div>
   } else if (commentsStatus === 'fulfilled') {
-    
+    console.log()
   } else if (commentsStatus === 'rejected') {
     content = <div>{error}</div>
   }

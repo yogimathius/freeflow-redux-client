@@ -1,16 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectHelpedExperiencesByUserId } from './experiencesSlice';
-import UserExperienceHelpedHistoryItem from './UserExperienceHelpedHistoryItem';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectHelpedExperiencesByUserId } from './experiencesSlice'
+import UserExperienceHelpedHistoryItem from './UserExperienceHelpedHistoryItem'
 
-const UserExperienceHelpedHistory = ({userId}) => {
+const UserExperienceHelpedHistory = ({ userId }) => {
   const experiences = useSelector((state) => selectHelpedExperiencesByUserId(state, userId))
 
-
-  let renderedExperiences;
+  let renderedExperiences
   if (experiences) {
     renderedExperiences = experiences.map((experience, index) => {
-      return <UserExperienceHelpedHistoryItem 
+      return <UserExperienceHelpedHistoryItem
         key={index}
         experience={experience}
         userId={userId}
@@ -22,7 +21,7 @@ const UserExperienceHelpedHistory = ({userId}) => {
       <h3 className="font-bold text-center md:text-xl bg-green-500 rounded my-2 text-white">These users want to help you</h3>
       {renderedExperiences}
     </div>
-  );
-};
+  )
+}
 
-export default UserExperienceHelpedHistory;
+export default UserExperienceHelpedHistory

@@ -1,70 +1,70 @@
-import React from "react";
+import React from 'react'
 
 const ProgressBar = (props) => {
-  let { experience } = props;
+  const { experience } = props
 
-  let level = 1;
-  let experiencePoints = 0;
-  let height;
-  let fullExperience;
-  let colorClass;
+  let level = 1
+  let experiencePoints = 0
+  let height
+  let fullExperience
+  let colorClass
 
-  function calculateLevel(points) {
+  function calculateLevel (points) {
     if (points < 100) {
-      fullExperience = 100;
-      height = (points);
-      colorClass = "blue"
-      return (fullExperience, height, (experiencePoints += points), colorClass);
+      fullExperience = 100
+      height = (points)
+      colorClass = 'blue'
+      return (fullExperience, height, (experiencePoints += points), colorClass)
     }
     if (points < 260) {
-      level = 2;
-      fullExperience = 160;
-      height = (((points - 100) * 100) / 16)/10;
-      experiencePoints += points - 100;
-      colorClass = "green"
-      return (fullExperience, height, level, experiencePoints, colorClass);
+      level = 2
+      fullExperience = 160
+      height = (((points - 100) * 100) / 16) / 10
+      experiencePoints += points - 100
+      colorClass = 'green'
+      return (fullExperience, height, level, experiencePoints, colorClass)
     }
     if (points < 520) {
-      level = 3;
-      fullExperience = 260;
-      height = (((points - 260) * 100) / 26)/10;
-      experiencePoints += points - 260;
-      colorClass = "yellow"
-      return (fullExperience, height, level, experiencePoints, colorClass);
+      level = 3
+      fullExperience = 260
+      height = (((points - 260) * 100) / 26) / 10
+      experiencePoints += points - 260
+      colorClass = 'yellow'
+      return (fullExperience, height, level, experiencePoints, colorClass)
     }
     if (points < 1000) {
-      level = 4;
-      fullExperience = 480;
-      height = (((points - 520) * 100) / 48)/10;
-      experiencePoints += points - 520;
-      colorClass = "red"
-      return (fullExperience, height, level, experiencePoints, colorClass);
+      level = 4
+      fullExperience = 480
+      height = (((points - 520) * 100) / 48) / 10
+      experiencePoints += points - 520
+      colorClass = 'red'
+      return (fullExperience, height, level, experiencePoints, colorClass)
     }
     if (points < 1680) {
-      level = 5;
-      fullExperience = 680;
-      height = (((points - 1000) * 100) / 68)/10;
-      experiencePoints += points - 1000;
-      colorClass = "purple"
-      return (fullExperience, height, level, experiencePoints, colorClass);
+      level = 5
+      fullExperience = 680
+      height = (((points - 1000) * 100) / 68) / 10
+      experiencePoints += points - 1000
+      colorClass = 'purple'
+      return (fullExperience, height, level, experiencePoints, colorClass)
     }
     if (points >= 1680) {
-      level = 5;
-      height = 100;
-      fullExperience = 680;
-      experiencePoints = 680;
-      return (fullExperience, height, level, experiencePoints);
+      level = 5
+      height = 100
+      fullExperience = 680
+      experiencePoints = 680
+      return (fullExperience, height, level, experiencePoints)
     }
   }
 
-  calculateLevel(Math.floor(experience * 5.75));
+  calculateLevel(Math.floor(experience * 5.75))
 
   const fillerStyles = {
-    width: "100%",
-    height: `${100-height}%`,
-    borderRadius: "inherit",
-    textAlign: "right",
-  };
+    width: '100%',
+    height: `${100 - height}%`,
+    borderRadius: 'inherit',
+    textAlign: 'right'
+  }
 
   return (
     <div className="flex space-x-2">
@@ -73,12 +73,12 @@ const ProgressBar = (props) => {
       <div className={`bg-${colorClass}-500 flex justify-center rounded w-24`}>
         <div style={fillerStyles} className="bg-gray-300  rounded">
           <div className="flex justify-center">
-            <span className={`text-xs text-white mt-2 text-center font-bold px-1`}>{`${experiencePoints}/${fullExperience}`}</span>
+            <span className={'text-xs text-white mt-2 text-center font-bold px-1'}>{`${experiencePoints}/${fullExperience}`}</span>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProgressBar;
+export default ProgressBar

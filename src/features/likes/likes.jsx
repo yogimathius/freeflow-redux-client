@@ -1,30 +1,31 @@
-import { unwrapResult } from '@reduxjs/toolkit';
-import React, { useEffect, useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-	fetchLikes, 
-	selectLikesByPostId, 
+  fetchLikes,
+  selectLikesByPostId,
   addNewLike,
   removeLike
-} from './likesSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp as farThumbsUp } from '@fortawesome/free-regular-svg-icons';
-import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons';
+} from './likesSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp as farThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
-export default function Likes({ postId, userId }) {
-	const dispatch = useDispatch()
-	const likes = useSelector((state) => selectLikesByPostId(state, postId))
+export default function Likes ({ postId, userId }) {
+  const dispatch = useDispatch()
+  const likes = useSelector((state) => selectLikesByPostId(state, postId))
 
   const likeStatus = useSelector((state) => state.likes.status)
-  const myLikes = userId ? likes.filter(
-    (like) => userId === like.liker_id
-  ) : "";  
-	const likeSum = likes.length;
+  const myLikes = userId
+    ? likes.filter(
+      (like) => userId === like.liker_id
+    )
+    : ''
+  const likeSum = likes.length
 
-	const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : "";
+  const iAlreadyLikeThis = myLikes ? myLikes.length > 0 : ''
 
-	const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
+  const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const canSave =
    addRequestStatus === 'idle'
@@ -35,10 +36,9 @@ export default function Likes({ postId, userId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewLike({   post_id: postId, liker_id: userId })
+          addNewLike({ post_id: postId, liker_id: userId })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to add like to post: ', err)
       } finally {
@@ -49,23 +49,20 @@ export default function Likes({ postId, userId }) {
 
   // UNLIKE FUNCTION
   const unLike = async () => {
-    
     if (canSave) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removeLike({   id: myLikes[0].id, post_id: postId, liker_id: userId })
+          removeLike({ id: myLikes[0].id, post_id: postId, liker_id: userId })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to remove like from post: ', err)
       } finally {
         setAddRequestStatus('idle')
       }
     }
-	}
-	
+  }
 
   // FETCH LIKES USEEFFECT
   useEffect(() => {
@@ -82,41 +79,48 @@ export default function Likes({ postId, userId }) {
     fetchedLikes = null
   }
   if (fetchedLikes !== undefined && fetchedLikes !== null) {
+    return
   }
 
   // LIKE UNLIKE FUNCTION
-  const LikeUnlikeIcons = iAlreadyLikeThis ? (
+  const LikeUnlikeIcons = iAlreadyLikeThis
+    ? (
     <div onClick={() => unLike(postId, userId)}
     className="flex space-x-2 items-center  cursor-pointer font-bold btn btn-primary">
-      <FontAwesomeIcon 
+      <FontAwesomeIcon
       icon={fasThumbsUp} size="1x" />
       <div onClick={() => unLike(postId, userId)}
       >Like</div>
     </div>
-  ) : (     
+      )
+    : (
     <div onClick={() => addLike(postId, userId)}
     className="flex space-x-2 items-center  cursor-pointer font-bold btn btn-secondary">
-      <FontAwesomeIcon 
+      <FontAwesomeIcon
         icon={farThumbsUp} size="1x" />
         <div>Like</div>
-    </div>             
+    </div>
 
-  )
+      )
 
   // LIKES COUNT
-  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1 ? 
-    <p ><b>You and {likeSum - 1} others</b></p> : "";
+  const IPlusOneLikesThis = iAlreadyLikeThis && likeSum > 1
+    ? <p ><b>You and {likeSum - 1} others</b></p>
+    : ''
 
-  const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1 ? 
-    <p><b>{likeSum}  likes</b></p> : "";
+  const PlusOneLikesThis = !iAlreadyLikeThis && likeSum > 1
+    ? <p><b>{likeSum}  likes</b></p>
+    : ''
 
-  const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1 ? 
-    <p ><b>You like this</b></p> : "";
+  const OnlyILikeThis = iAlreadyLikeThis && likeSum === 1
+    ? <p ><b>You like this</b></p>
+    : ''
 
-  const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1 ? 
-		<p><b>{likeSum} like</b></p> : "";
-		
-	return (
+  const OnlyOneLikesThis = !iAlreadyLikeThis && likeSum === 1
+    ? <p><b>{likeSum} like</b></p>
+    : ''
+
+  return (
     <div className="flex flex-col justify-end space-y-2 mr-2 text-green-500 mt-3 text-sm items-start">
 
         {/* LIKES COUNT - conditionally renders one of these like count templates */}
@@ -128,7 +132,7 @@ export default function Likes({ postId, userId }) {
         </div>
         {/* conditionally renders like or unlike icon */}
         {LikeUnlikeIcons}
-        
-			</div>
-	);
+
+    </div>
+  )
 };

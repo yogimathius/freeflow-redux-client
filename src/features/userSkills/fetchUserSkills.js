@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserSkills, selectAllUserSkills } from './userSkillsSlice';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchUserSkills, selectAllUserSkills } from './userSkillsSlice'
 
-export default function UserSkillsList() {
+export default function UserSkillsList () {
   const dispatch = useDispatch()
   const userSkills = useSelector(selectAllUserSkills)
   let content
@@ -22,6 +22,6 @@ export default function UserSkillsList() {
     content = userSkills
   } else if (userSkillsStatus === 'rejected') {
     content = <div>{error}</div>
-	}
+  }
   return <div>{content}</div>
 }

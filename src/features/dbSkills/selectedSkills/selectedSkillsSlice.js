@@ -1,22 +1,22 @@
 import {
-  createSlice,
+  createSlice
 } from '@reduxjs/toolkit'
 
 const initialState = ([])
 
 export let selectedSkillsDB = {
   '': ''
-};
+}
 
 const selectedSkillsSlice = createSlice({
   name: 'selectedSkillsDB',
   initialState: initialState,
   reducers: {
-    setSelectedSkills(state, action) {
+    setSelectedSkills (state, action) {
       selectedSkillsDB = action.payload.options[0]
       return action.payload
     },
-    emptySkillsDB(state, action) {
+    emptySkillsDB (state, action) {
       selectedSkillsDB = null
       return selectedSkillsDB
     }

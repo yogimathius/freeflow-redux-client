@@ -1,50 +1,50 @@
+/* eslint-disable camelcase */
 import {
   createSlice,
   createAsyncThunk,
   createEntityAdapter,
-  createSelector,
+  createSelector
 } from '@reduxjs/toolkit'
-import axios from 'axios';
+import axios from 'axios'
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/user_skills'
 
 const userSkillsAdapter = createEntityAdapter({
-	selectId: (userSkill) => userSkill.id
+  selectId: (userSkill) => userSkill.id
 })
 
 const initialState = userSkillsAdapter.getInitialState({
   status: 'idle',
-  error: null,
+  error: null
 })
 
 export const fetchUserSkills = createAsyncThunk('skills/fetchUserSkills', async () => {
-	const response = await axios.get(url);
+  const response = await axios.get(url)
   return response.data
 })
 
 export const addNewUserSkill = createAsyncThunk(
   'userSkills/addNewUserSkill',
   async (initialUserSkills) => {
-    const {name} = initialUserSkills
-    const response = await axios.post(url, {name});
+    const { name } = initialUserSkills
+    const response = await axios.post(url, { name })
     return response.data
   }
 )
 
-
 export const removeUserSkill = createAsyncThunk(
   'userSkills/removeUserSkill',
   async (initialUserSkills) => {
-    const { post_id, skill_id} = initialUserSkills
+    const { post_id, skill_id } = initialUserSkills
     const removeUserSkill = {
       post_id: post_id,
-      skill_id: skill_id,
-    };
-    const response = await axios.delete(url, { 
-      params: { 
+      skill_id: skill_id
+    }
+    const response = await axios.delete(url, {
+      params: {
         removeUserSkill
       }
-    });
+    })
     return response.post
   }
 )
@@ -60,7 +60,7 @@ const userSkillsSlice = createSlice({
     },
     [fetchUserSkills.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-			// Add any fetched skills to the array
+      // Add any fetched skills to the array
       userSkillsAdapter.upsertMany(state, action.payload)
     },
     [fetchUserSkills.rejected]: (state, action) => {
@@ -72,8 +72,8 @@ const userSkillsSlice = createSlice({
     },
     [removeUserSkill.fulfilled]: (state, action) => {
       userSkillsAdapter.removeOne(state, action.payload)
-    } 
-  },
+    }
+  }
 })
 
 export const { userSkillAdded } = userSkillsSlice.actions
@@ -83,7 +83,7 @@ export default userSkillsSlice.reducer
 export const {
   selectAll: selectAllUserSkills,
   selectById: selectUserSkillById,
-  selectIds: selectUserSkillIds,
+  selectIds: selectUserSkillIds
 } = userSkillsAdapter.getSelectors((state) => state.userSkills)
 
 export const selectUserSkillsByUserId = createSelector(

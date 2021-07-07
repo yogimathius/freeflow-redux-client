@@ -1,12 +1,12 @@
-import React from 'react';
-import UserMessages from '../../features/messages/index';
+import React from 'react'
+import UserMessages from '../../features/messages/index'
 
 const index = () => {
-    return (
+  return (
         <div>
             <UserMessages></UserMessages>
         </div>
-    );
-};
+  )
+}
 
-export default index;
+export default index

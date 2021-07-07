@@ -1,38 +1,40 @@
+/* eslint-disable multiline-ternary */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import './CollapsibleCommentList.css';
+import './CollapsibleCommentList.css'
 import { UserNameAndLogo } from '../users/UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
   removePost,
-  selectPostById,
+  selectPostById
 } from './postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
-import Likes from '../likes/likes';
-import { CommentsList } from '../comments/CommentsList';
-import { AddCommentForm } from '../comments/AddCommentForm';
-import { selectCommentsByPostId } from '../comments/commentsSlice';
-import useVisualMode from "../../hooks/useVisualMode";
-import { EditPostForm } from './EditPostForm';
-import PostExcerptSkills from './PostExcerptSkills';
+import Likes from '../likes/likes'
+import { CommentsList } from '../comments/CommentsList'
+import { AddCommentForm } from '../comments/AddCommentForm'
+import { selectCommentsByPostId } from '../comments/commentsSlice'
+import useVisualMode from '../../hooks/useVisualMode'
+import { EditPostForm } from './EditPostForm'
+import PostExcerptSkills from './PostExcerptSkills'
 
-const SHOW = "SHOW";
-const CONFIRM = "CONFIRM";
+const SHOW = 'SHOW'
+const CONFIRM = 'CONFIRM'
 // const SAVING = "SAVING";
-const EDITING = "EDITING";
+const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
 
-export default function PostExcerpt({ postId, onPost, index }) {
+export default function PostExcerpt ({ postId, onPost, index }) {
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
 
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : "";
-  
-  const userId = loggedInUser.id;
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+
+  const userId = loggedInUser.id
   const post = useSelector((state) => selectPostById(state, postId))
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
@@ -41,22 +43,21 @@ export default function PostExcerpt({ postId, onPost, index }) {
 
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const { mode, transition } = useVisualMode(SHOW);
+  const { mode, transition } = useVisualMode(SHOW)
 
-
-  function onEdit() {
-    transition(EDITING);
+  function onEdit () {
+    transition(EDITING)
   }
 
-  function onSaveEdit() {
-    transition(SHOW);
+  function onSaveEdit () {
+    transition(SHOW)
   }
 
-  function onConfirmDelete() {
+  function onConfirmDelete () {
     transition(CONFIRM)
   }
 
-  function onCancelDelete() {
+  function onCancelDelete () {
     transition(SHOW)
   }
 
@@ -69,10 +70,9 @@ export default function PostExcerpt({ postId, onPost, index }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removePost({   post_id: post.id })
+          removePost({ post_id: post.id })
         )
         unwrapResult(resultAction)
-
       } catch (err) {
         console.error('Failed to remove like from post: ', err)
       } finally {
@@ -89,18 +89,18 @@ export default function PostExcerpt({ postId, onPost, index }) {
         <PostExcerptSkills postSkillIds={post.skill_ids} />
         <div>
           <TimeAgo timestamp={post.time_posted} />
-          { userId === post.owner_id ?
-          <div className="space-x-1 flex justify-end mr-2">
+          { userId === post.owner_id
+            ? <div className="space-x-1 flex justify-end mr-2">
 
             {mode === SHOW && (
             <div className="space-x-1 flex justify-end mr-2">
               <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
               <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
             </div>
-            
+
             )}
           </div>
-            : ""
+            : ''
           }
         </div>
       </div>
@@ -111,7 +111,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       >
         <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
       </Link>
-      
+
       {/* TEXT BODY */}
       {mode === SHOW && (
 
@@ -119,7 +119,7 @@ export default function PostExcerpt({ postId, onPost, index }) {
       )}
 
       {mode === EDITING && (
-      <EditPostForm 
+      <EditPostForm
         postId={postId}
         onSaveEdit={onSaveEdit}
         value={post.text_body}
@@ -136,25 +136,25 @@ export default function PostExcerpt({ postId, onPost, index }) {
             </div>
           </div>
         </div>
-        )}
+      )}
 
       {/* LIKES */}
       <Likes postId={postId} userId={userId} />
 
       <div className="wrap-collapsible">
-        
-        <input 
-          id={"collapsible" + index} className="toggle hidden"  
+
+        <input
+          id={'collapsible' + index} className="toggle hidden"
           type="checkbox">
         </input>
-        {commentsLength === 0  ? "" : 
-        
-          <label htmlFor={"collapsible" + index} className="lbl-toggle">
+        {commentsLength === 0 ? ''
+
+          : <label htmlFor={'collapsible' + index} className="lbl-toggle">
           {/* COMMENTS LIST FOR POST */}
 
-          {commentsLength > 1 ? <span>{commentsLength} comments</span> : ""}
+          {commentsLength > 1 ? <span>{commentsLength} comments</span> : ''}
 
-          {commentsLength === 1 ? <span>{commentsLength} comment</span> : ""}
+          {commentsLength === 1 ? <span>{commentsLength} comment</span> : ''}
 
           </label>
         }
@@ -167,13 +167,13 @@ export default function PostExcerpt({ postId, onPost, index }) {
         <AddCommentForm postId={postId} />
       </div>
 
-      { onPost === true && user && user.id === post.owner_id ? 
-      <div className="flex justify-center">
+      { onPost === true && user && user.id === post.owner_id
+        ? <div className="flex justify-center">
           <Link to={`/editPost/${post.id}`} className="btn btn-primary">
             Edit Post
           </Link>
         </div>
-        : ""  
+        : ''
       }
     </article>
   )

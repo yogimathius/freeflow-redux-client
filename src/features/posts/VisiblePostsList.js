@@ -11,32 +11,33 @@ const selectVisiblePosts = createSelector(
   [selectPosts, selectSkills, selectFilter],
   (posts, skills, filter) => {
     const postKeys = Object.keys(posts.entities)
-    let skillKeys = Object.keys(skills.entities)
-    
-    let postSkillsArr = []
+    const skillKeys = Object.keys(skills.entities)
 
-    let postArr = []
+    const postSkillsArr = []
+
+    const postArr = []
     postKeys.forEach(postKey => {
       const singlePosts = JSON.parse(JSON.stringify(posts.entities[postKey]))
-      
+
       singlePosts.skills = []
       skillKeys.forEach(skillKey => {
         postSkillsArr.push(skills.entities[skillKey])
         if (singlePosts.skill_ids.includes(skills.entities[skillKey].id)) {
           singlePosts.skills.push(skills.entities[skillKey].name)
-        }})
+        }
+      })
       postArr.push(singlePosts)
     })
-    const sortedArr = [...postArr].sort((a, b) => new Date(b.time_posted) - new Date (a.time_posted))
+    const sortedArr = [...postArr].sort((a, b) => new Date(b.time_posted) - new Date(a.time_posted))
     for (const skill in VisibilityFilters) {
       const filteredSkill = VisibilityFilters[skill]
       if (filter === 'All') {
         return sortedArr
       }
       if (filter === filteredSkill) {
-        
         return sortedArr.filter((post) => {
-          return post.skills.includes(filteredSkill) })
+          return post.skills.includes(filteredSkill)
+        })
       }
     }
     throw new Error('Unknown filter: ' + filter)

@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import {logout} from '../features/login/userLoginSlice'
+import { logout } from '../features/login/userLoginSlice'
 import { saveState } from '../helpers/localStorage'
 import logo from '../images/logo.png'
-import DropDown from './DropDown';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PersonIcon from '@material-ui/icons/Person';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import PostAddIcon from '@material-ui/icons/PostAdd';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import DropDown from './DropDown'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import PersonIcon from '@material-ui/icons/Person'
+import PeopleIcon from '@material-ui/icons/People'
+import BarChartIcon from '@material-ui/icons/BarChart'
+import PostAddIcon from '@material-ui/icons/PostAdd'
+import LockOpenIcon from '@material-ui/icons/LockOpen'
 
 export const Navbar = (props) => {
   const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const history = useHistory();
+  const history = useHistory()
   const [currentPage, setCurrentPage] = useState('/')
   const handleLogout = () => {
     dispatch(logout())
-    history.push("/login")
+    history.push('/login')
   }
   useEffect(() => {
-    if(user === null || user === undefined) {
+    if (user === null || user === undefined) {
       setCurrentPage('login')
     }
   }, [user])
@@ -32,7 +32,7 @@ export const Navbar = (props) => {
       <section className="grid grid-cols-8 ">
         <div className="col-span-2 ml-4 my-1 md:ml-12">
           <Link onClick={() => (setCurrentPage('dashboard'))} to="/dashboard">
-            <img width="75px" className="" src={logo}  alt="freeflow logo"></img>
+            <img width="75px" className="" src={logo} alt="freeflow logo"></img>
           </Link>
         </div>
 
@@ -65,9 +65,9 @@ export const Navbar = (props) => {
           </Link>
 
           <Link className="" to={`/userprofile/${user?.id}`} onClick={() => {
-            saveState(user?.id) 
+            saveState(user?.id)
             setCurrentPage('profile')
-            }}>
+          }}>
             <div className="flex group">
             <div className={`${currentPage === 'profile' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <PersonIcon />
@@ -79,9 +79,9 @@ export const Navbar = (props) => {
           </Link>
 
           <Link className="" to={`/${user?.id}/experiences`} onClick={() => {
-            saveState(user?.id) 
+            saveState(user?.id)
             setCurrentPage('experiences')
-            }}>
+          }}>
             <div className="flex group">
             <div className={`${currentPage === 'experiences' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <BarChartIcon />
@@ -92,10 +92,10 @@ export const Navbar = (props) => {
               </div>
           </Link>
 
-          <Link className="" to={`/messages`} onClick={() => {
-            saveState(user?.id) 
+          <Link className="" to={'/messages'} onClick={() => {
+            saveState(user?.id)
             setCurrentPage('messages')
-            }}>
+          }}>
             <div className="flex group">
             <div className={`${currentPage === 'messages' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <BarChartIcon />
@@ -107,8 +107,8 @@ export const Navbar = (props) => {
           </Link>
 
           <div className="">
-          {!user  ?
-            <Link to="/login">
+          {!user
+            ? <Link to="/login">
               <div className="flex group">
               <div className={`${currentPage === 'login' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                   <LockOpenIcon />
@@ -118,11 +118,10 @@ export const Navbar = (props) => {
                 </div>
               </div>
             </Link>
-            :
-            <button className="font-bold" onClick={() => {
+            : <button className="font-bold" onClick={() => {
               handleLogout()
               setCurrentPage('login')
-              }}>
+            }}>
               <div className="flex group">
                 <div className="group-hover:border-b-2 group-hover:border-white">
                   <ExitToAppIcon />

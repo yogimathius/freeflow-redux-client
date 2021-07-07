@@ -11,38 +11,36 @@ import { TimeAgo } from '../posts/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import { EditCommentForm } from './EditCommentForm'
 
-const SHOW = "SHOW";
+const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
 // const SAVING = "SAVING";
-const EDITING = "EDITING";
+const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
-const CommentListItem = ({comment, postId}) => {
-
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
-  const userId = loggedInUser.id;
+const CommentListItem = ({ comment, postId }) => {
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+  const userId = loggedInUser.id
 
   const dispatch = useDispatch()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const { mode, transition } = useVisualMode(SHOW);
+  const { mode, transition } = useVisualMode(SHOW)
 
-  function onEdit() {
-    transition(EDITING);
+  function onEdit () {
+    transition(EDITING)
   }
 
-  function onSaveEdit() {
-    transition(SHOW);
+  function onSaveEdit () {
+    transition(SHOW)
   }
 
   const users = useSelector(selectAllUsers)
 
   const user = users.find((user) => user.id === comment.commenter_id) || {
-    name: 'Unknown User',
+    name: 'Unknown User'
   }
 
   const canEditOrDelete = [userId].every(Boolean) && addRequestStatus === 'idle'
-
 
   const onDeleteCommentClicked = async () => {
     if (canEditOrDelete) {
@@ -76,23 +74,23 @@ const CommentListItem = ({comment, postId}) => {
           </Link>
           <div className="">
             <TimeAgo timestamp={comment.time_posted} />
-            { userId === comment.commenter_id ?
-              <div className="space-x-1 flex justify-end mr-2">
+            { userId === comment.commenter_id
+              ? <div className="space-x-1 flex justify-end mr-2">
 
               <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
               <button onClick={() => onDeleteCommentClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button>
               </div>
 
-              : ""
+              : ''
             }
           </div>
 
         </div>
-        {mode === SHOW && (          
+        {mode === SHOW && (
           <div>{comment.text_body}</div>
         )}
         {mode === EDITING && (
-          <EditCommentForm 
+          <EditCommentForm
             postId={postId}
             commentId={comment.id}
             onSaveEdit={onSaveEdit}
@@ -102,6 +100,6 @@ const CommentListItem = ({comment, postId}) => {
       </div>
     </div>
   )
-};
+}
 
-export default CommentListItem;
+export default CommentListItem
