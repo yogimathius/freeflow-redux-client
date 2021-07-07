@@ -1,31 +1,31 @@
-import React from 'react';
+import React from 'react'
 
 const findMessager = (message, messageMap, userId) => {
-    const senderid = message.senderid;
-    const receiverid = message.receiverid;
+  const senderid = message.sender_id
+  const receiverid = message.receiver_id
 
-    if (senderid !== userId && !messageMap.messages[senderid]) {
-        const senderName = message.sender;
+  if (senderid !== userId && !messageMap.messages[senderid]) {
+    const senderName = message.sender
 
-        messageMap.messagers.push(senderName)
-        messageMap.messages[senderid] = [message]
-      } 
+    messageMap.messagers.push(senderName)
+    messageMap.messages[senderid] = [message]
+  }
 
-      if (senderid !== userId && messageMap.messages[senderid]) {
-        messageMap.messages[senderid].push(message)
-      }
+  if (senderid !== userId && messageMap.messages[senderid]) {
+    messageMap.messages[senderid].push(message)
+  }
 
-      if (receiverid !== userId && !messageMap.messages[receiverid]) {
-        const receiverName = message.receiver;
+  if (receiverid !== userId && !messageMap.messages[receiverid]) {
+    const receiverName = message.receiver
 
-        messageMap.messagers.push({receiverName})
-        messageMap.messages[receiverid] = [message]     
-      }
+    messageMap.messagers.push({ receiverName })
+    messageMap.messages[receiverid] = [message]
+  }
 
-      if (receiverid !== userId && messageMap.messages[receiverid]) {
-        messageMap.messages[receiverid].push(message)
-      } 
-    return messageMap;
-};
+  if (receiverid !== userId && messageMap.messages[receiverid]) {
+    messageMap.messages[receiverid].push(message)
+  }
+  return messageMap
+}
 
-export default findMessager;
+export default findMessager

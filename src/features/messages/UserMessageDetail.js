@@ -17,7 +17,7 @@ const SHOW = 'SHOW'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 const UserMessageDetail = ({ message, userId }) => {
-  const user = useSelector((state) => selectUserById(state, message.senderid))
+  const user = useSelector((state) => selectUserById(state, message.sender_id))
 
   const { mode, transition } = useVisualMode(SHOW)
 
@@ -53,7 +53,7 @@ const UserMessageDetail = ({ message, userId }) => {
               </Link>
               <div className="">
                 <TimeAgo timestamp={message.time_posted} />
-                { userId === message.senderid
+                { userId === message.sender_id
                   ? <div className="space-x-1 flex justify-end mr-2">
 
                   {/* <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button> */}

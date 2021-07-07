@@ -17,11 +17,11 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
   if (userMessages[0].sender === messagerId) {
     receiver = userMessages[0].sender
     sender = userMessages[0].receiver
-    receiverId = userMessages[0].senderid
+    receiverId = userMessages[0].sender_id
   } else if (userMessages[0].receiver === messagerId) {
     receiver = userMessages[0].receiver
     sender = userMessages[0].sender
-    receiverId = userMessages[0].receiverid
+    receiverId = userMessages[0].receiver_id
   }
   return (
         <div className="col-span-2">

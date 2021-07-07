@@ -30,8 +30,8 @@ const UserConversationList = () => {
     messageContent = sortedMessages.messagers.map((messagerName, index) => {
       const messagerId =
           sortedMessages.messages[messagerName].receiver === messagerName
-            ? sortedMessages.messages[messagerName][0].senderid
-            : sortedMessages.messages[messagerName][0].receiverid
+            ? sortedMessages.messages[messagerName][0].sender_id
+            : sortedMessages.messages[messagerName][0].receiver_id
       return (
           <div key={index}>
             <Link to={`${url}/${messagerName}`}>

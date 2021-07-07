@@ -125,8 +125,8 @@ export const sortMessages = (messages, userId) => {
   for (const messageKey in messages) {
     if (Object.hasOwnProperty.call(messages, messageKey)) {
       const message = messages[messageKey]
-      const senderid = message.senderid
-      const receiverid = message.receiverid
+      const senderid = message.sender_id
+      const receiverid = message.receiver_id
       const senderName = message.sender
       const receiverName = message.receiver
 
