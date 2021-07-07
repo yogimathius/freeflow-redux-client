@@ -43,23 +43,20 @@ export const addNewMessage = createAsyncThunk(
   }
 )
 
-//   export const removeMessage = createAsyncThunk(
-//     'messages/removeMessage',
-//     async (initialMessages) => {
-//       const { id, post_id, messager_id} = initialMessages
-//       const removeMessage = {
-//         id,
-//         post_id: post_id,
-//         messager_id: messager_id
-//       };
-//       const response = await axios.delete(url, {
-//         params: {
-//           removeMessage
-//         }
-//       });
-//       return response.post
-//     }
-//   )
+export const removeMessage = createAsyncThunk(
+  'messages/removeMessage',
+  async (initialMessages) => {
+    console.log('thunk in action')
+    const { messageId } = initialMessages
+
+    const response = await axios.delete(url, {
+      params: {
+        messageId
+      }
+    })
+    return response.data
+  }
+)
 
 //   export const updateMessage = createAsyncThunk(
 //     'messages/updatePost',
@@ -100,10 +97,11 @@ const messagesSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addNewMessage.fulfilled]: messagesAdapter.addOne
-    // [removeMessage.fulfilled]: (state, action) => {
-    //   messagesAdapter.removeOne(state, action.meta.arg.id)
-    // },
+    [addNewMessage.fulfilled]: messagesAdapter.addOne,
+    [removeMessage.fulfilled]: (state, action) => {
+      console.log('action in remove message fulfilled: ', action)
+      messagesAdapter.removeOne(state, action.meta.arg.messageId)
+    }
     // [updateMessage.fulfilled]:(state, action) => {
     //   // const { id, ...changes } = payload;
     //   messagesAdapter.upsertOne(state, action.meta.arg)

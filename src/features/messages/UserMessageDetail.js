@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { saveState } from '../../helpers/localStorage'
 import { TimeAgo } from '../posts/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import UserImage from '../users/UserImage'
 import { selectUserById } from '../users/usersSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { removeMessage } from './messagesSlice'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -29,20 +33,47 @@ const UserMessageDetail = ({ message, userId }) => {
   //   transition(SHOW)
   // }
 
-  let fullname
-  let placementStyle
-
+  let fullname, placementStyle, myMessage
   if (user.id === userId) {
     fullname = 'You'
     placementStyle = ''
+    myMessage = true
   } else {
     fullname = user.first_name + ' ' + user.last_name
     placementStyle = 'col-start-2'
+    myMessage = false
+  }
+
+  const [addRequestStatus, setAddRequestStatus] = useState('idle')
+
+  const dispatch = useDispatch()
+  const canDelete =
+  [userId].every(Boolean) && addRequestStatus === 'idle'
+
+  const onDeleteMessageClicked = async () => {
+    if (canDelete) {
+      try {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(removeMessage({ messageId: message.id }))
+        unwrapResult(resultAction)
+      } catch (err) {
+        console.error('Failed to remove Message: ', err)
+      } finally {
+        setAddRequestStatus('idle')
+      }
+    }
   }
   // const fullname = user.first_name + ' ' + user.last_name
   return (
       <div className="grid grid-cols-3">
-          <div key={message.id} className={`${placementStyle} col-span-2 bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl`}>
+          <div key={message.id} className={`${placementStyle} col-span-2 bg-white mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl`}>
+            { myMessage
+              ? <button className="float-right mt-1 mr-1" onClick={() => onDeleteMessageClicked()}>
+                  <FontAwesomeIcon className="text-red-500" icon={faMinusCircle} />
+                </button>
+              : ''
+            }
+
           <div className=" p-3">
             <div className="flex justify-between">
               <Link to={`/userprofile/${fullname}`} onClick={() => saveState(user.id)}>

@@ -79,7 +79,7 @@ export default function Likes ({ postId, userId }) {
     fetchedLikes = null
   }
   if (fetchedLikes !== undefined && fetchedLikes !== null) {
-    return
+    console.log()
   }
 
   // LIKE UNLIKE FUNCTION

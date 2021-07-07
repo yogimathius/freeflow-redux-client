@@ -1,4 +1,4 @@
-import findMessager from './findMessager'
+// import findMessager from './findMessager'
 
 export const sortMessages = (messages, userId) => {
   const messageMap = {
@@ -6,13 +6,13 @@ export const sortMessages = (messages, userId) => {
     messages: {}
   }
 
-  let sortedMessageMap
+  // let sortedMessageMap
 
   for (const messageKey in messages) {
     if (Object.hasOwnProperty.call(messages, messageKey)) {
       const message = messages[messageKey]
 
-      sortedMessageMap = findMessager(message, messageKey, userId)
+      // sortedMessageMap = findMessager(message, messageKey, userId)
 
       const senderid = message.sender_id
       const receiverid = message.receiver_id

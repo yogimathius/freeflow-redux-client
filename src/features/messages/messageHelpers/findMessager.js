@@ -1,5 +1,3 @@
-import React from 'react'
-
 const findMessager = (message, messageMap, userId) => {
   const senderid = message.sender_id
   const receiverid = message.receiver_id
