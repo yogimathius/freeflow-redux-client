@@ -14,9 +14,7 @@ const messagesAdapter = createEntityAdapter({
 })
 
 export const fetchMessages = createAsyncThunk('messages/fetchMessages', async (userId) => {
-  console.log('response in thunk: ', `${url}/${userId}`)
   const response = await axios.get(`${url}/${userId}`)
-  console.log('response in thunk: ', response, `${url}/${userId}`)
 
   return response.data
 })
@@ -27,16 +25,20 @@ export const addNewMessage = createAsyncThunk(
     const {
       senderID,
       receiverID,
-      content
+      content,
+      sender,
+      receiver
     } = initialMessage
     console.log(senderID, receiverID, content, 'in thunk')
     const response = await axios.post(`${url}/new`, {
       senderID,
       receiverID,
       textInput: content,
-      time_posted: new Date().toISOString()
+      time_sent: new Date().toISOString(),
+      sender,
+      receiver
     })
-    console.log('response in thunk: ', response)
+    console.log('response in send message thunk: ', response.data)
     return response.data
   }
 )
@@ -88,14 +90,11 @@ const messagesSlice = createSlice({
   },
   extraReducers: {
     [fetchMessages.pending]: (state, action) => {
-      console.log('pending: ', state.status)
       state.status = 'loading'
     },
     [fetchMessages.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      console.log('payload: ', action.payload)
-      console.log(messagesAdapter)
-      messagesAdapter.upsertMany(state, action.payload)
+      messagesAdapter.setAll(state, action.payload)
     },
     [fetchMessages.rejected]: (state, action) => {
       state.status = 'failed'

@@ -36,6 +36,7 @@ export const addNewComment = createAsyncThunk(
       text_body: content,
       time_posted: new Date().toISOString()
     })
+    console.log('response in comment thunk: ', response.data)
     return response.data
   }
 )
@@ -89,7 +90,6 @@ const commentsSlice = createSlice({
     },
     [fetchComments.fulfilled]: (state, action) => {
       state.status = 'succeeded'
-      console.log('payload in comments: ', action.payload)
       commentsAdapter.upsertMany(state, action.payload)
     },
     [fetchComments.rejected]: (state, action) => {

@@ -49,7 +49,6 @@ export default function AddPostForm () {
           setAddRequestStatus('pending')
           const postResultAction = await dispatch(
             addNewPost({
-            // id: id,
               owner_id: userId,
               text_body: content,
               active: true,

@@ -18,20 +18,15 @@ const UserConversationList = () => {
   let sortedMessages
   const messagesStatus = useSelector((state) => state.messages.status)
   const messagesError = useSelector((state) => state.messages.error)
-  console.log('after declaration: ', messagesStatus)
   useEffect(() => {
     if (messagesStatus === 'idle') {
-      console.log('dispatched: ', userId)
       dispatch(fetchMessages(userId))
     }
   }, [messagesStatus, userId, dispatch])
   if (messagesStatus === 'pending') {
-    console.log('status: ', messagesStatus)
     messageContent = <div className="loader">Loading...</div>
   } else if (messagesStatus === 'succeeded') {
-    console.log('succeeded')
     sortedMessages = sortMessages(userConversations.entities, userId)
-    console.log('sorted: ', sortedMessages, userConversations)
     messageContent = sortedMessages.messagers.map((messagerName, index) => {
       const messagerId =
           sortedMessages.messages[messagerName].receiver === messagerName

@@ -4,14 +4,10 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewMessage } from './messagesSlice'
 
-const MessageTextEditor = ({ receiverId }) => {
+const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
   const [error, setError] = useState('')
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-
-  const userId = loggedInUser.id
 
   const dispatch = useDispatch()
 
@@ -27,30 +23,26 @@ const MessageTextEditor = ({ receiverId }) => {
         setError('')
       }, 2000)
     }
-    // id = postLength + 1
-    // if (id !== null && id !== undefined) {
+
     try {
       setAddRequestStatus('pending')
       const postResultAction = await dispatch(
         addNewMessage({
           senderID: userId,
           content: content,
-          // active: true
-          receiverID: receiverId
+          receiverID: receiverId,
+          sender,
+          receiver
         })
       )
       unwrapResult(postResultAction)
       setContent('')
-      // dispatch(emptySkillsDB())
     } catch (err) {
-      console.error('Failed to save the post skill: ', err)
+      console.error('Failed to create new message: ', err)
     } finally {
       setAddRequestStatus('idle')
-      localStorage.setItem('selected_skill', null)
       setError('')
     }
-    // }
-    // }
   }
 
   return (

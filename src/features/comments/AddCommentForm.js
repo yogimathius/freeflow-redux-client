@@ -6,8 +6,8 @@ import { addNewComment } from './commentsSlice'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
-	const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ""
-  const userId = loggedInUser.id;
+  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+  const userId = loggedInUser.id
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
@@ -18,46 +18,46 @@ export const AddCommentForm = ({ postId }) => {
     [content, userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onSaveCommentClicked = async (e) => {
-    if(e.keyCode === 13 && e.shiftKey === false) {
-      e.preventDefault();
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault()
 
-    if (canSave) {
-      try {
-        setAddRequestStatus('pending')
-        const resultAction = await dispatch(
-          addNewComment({
-            commenter_id: userId,
-            post_id: postId,
-            content,
-          })
-        )
-        unwrapResult(resultAction)
-        setContent('')
-      } catch (err) {
-        console.error('Failed to save the comment: ', err)
-      } finally {
-        setAddRequestStatus('idle')
+      if (canSave) {
+        try {
+          setAddRequestStatus('pending')
+          const resultAction = await dispatch(
+            addNewComment({
+              commenter_id: userId,
+              post_id: postId,
+              content
+            })
+          )
+          unwrapResult(resultAction)
+          setContent('')
+        } catch (err) {
+          console.error('Failed to save the comment: ', err)
+        } finally {
+          setAddRequestStatus('idle')
+        }
       }
     }
-  }
   }
 
   return (
     <section className="">
       <form>
         <div className="m-1 flex">
-          <label 
+          <label
           htmlFor="commentContent"></label>
-          <textarea 
+          <textarea
             placeholder="Leave a comment..."
-            className="w-full border-1 border-solid border-gray-400 rounded-lg p-2" 
+            className="w-full border-1 border-solid border-gray-400 rounded-lg p-2"
             name="commentContent"
             rows="1"
             value={content}
             onChange={onContentChanged}
             onKeyDown={onSaveCommentClicked}
           />
-          
+
         </div>
       </form>
     </section>

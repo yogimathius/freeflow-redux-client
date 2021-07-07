@@ -13,16 +13,25 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
             <UserMessageDetail key={index} message={message} userId={userId}/>
     )
   })
-  let receiverId
+  let receiverId, receiver, sender
   if (userMessages[0].sender === messagerId) {
+    receiver = userMessages[0].sender
+    sender = userMessages[0].receiver
     receiverId = userMessages[0].senderid
   } else if (userMessages[0].receiver === messagerId) {
+    receiver = userMessages[0].receiver
+    sender = userMessages[0].sender
     receiverId = userMessages[0].receiverid
   }
   return (
         <div className="col-span-2">
             {renderedMessages}
-            <MessageTextEditor receiverId={receiverId} />
+            <MessageTextEditor
+              receiverId={receiverId}
+              userId={userId}
+              receiver={receiver}
+              sender={sender}
+            />
         </div>
   )
 }
