@@ -100,7 +100,11 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
             )}
           </div>
-            : ''
+            : <div className="text-blue-500 font-bold text-sm">
+              <Link to={`${userId}/experiences`}>
+                Offer Help
+              </Link>
+            </div>
           }
         </div>
       </div>
