@@ -59,9 +59,9 @@ const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
           // rows="3"
           onChange={onContentChanged}
         />
-        <div>
+        <div className="flex items-end justify-center">
           <div
-          className="btn btn-primary flex items-center justify-center"
+          className="btn btn-primary flex items-center justify-center mr-4 h-12 w-full"
           type="button"
           data-testid="sendButton"
           onClick={OnSendMessageClicked} disabled={!canSave}>

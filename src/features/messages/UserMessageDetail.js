@@ -40,7 +40,7 @@ const UserMessageDetail = ({ message, userId }) => {
     myMessage = true
   } else {
     fullname = user.first_name + ' ' + user.last_name
-    placementStyle = 'col-start-2'
+    placementStyle = 'col-start-2 bg-green-500 text-white font-bold'
     myMessage = false
   }
 
@@ -65,7 +65,7 @@ const UserMessageDetail = ({ message, userId }) => {
   }
   // const fullname = user.first_name + ' ' + user.last_name
   return (
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 mx-4">
           <div key={message.id} className={`${placementStyle} col-span-2 bg-white mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl`}>
             { myMessage
               ? <button className="float-right mt-1 mr-1" onClick={() => onDeleteMessageClicked()}>

@@ -3,9 +3,9 @@ import UserConversationList from './UserConversationList'
 
 const index = () => {
   return (
-        <div>
-            <UserConversationList />
-        </div>
+    <div className="mt-12 mx-4">
+        <UserConversationList />
+    </div>
   )
 }
 

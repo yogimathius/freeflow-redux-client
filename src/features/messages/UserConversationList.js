@@ -33,7 +33,7 @@ const UserConversationList = () => {
             ? sortedMessages.messages[messagerName][0].sender_id
             : sortedMessages.messages[messagerName][0].receiver_id
       return (
-          <div key={index}>
+          <div key={index} className="hover:shadow">
             <Link to={`${url}/${messagerName}`}>
               <UserConversationListItem
                 messagerId={messagerId}
@@ -49,6 +49,11 @@ const UserConversationList = () => {
 
   return (
         <div className="mt-10 grid grid-cols-3">
+          <div className="col-span-3 mb-8 mr-4">
+            <button className="btn btn-primary float-right ">
+              Compose Message
+            </button>
+          </div>
           <div>
             {messageContent}
           </div>
