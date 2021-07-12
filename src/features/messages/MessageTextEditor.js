@@ -46,9 +46,9 @@ const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
   }
 
   return (
-    <section className="mt-2">
+    <section className="mt-2 mx-7">
       <form
-        className="grid grid-cols-4 space-x-2">
+        className="">
         {/* <label htmlFor="postContent"></label> */}
         <textarea
           placeholder="Send a message..."
@@ -61,7 +61,7 @@ const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
         />
         <div className="flex items-end justify-center">
           <div
-          className="btn btn-primary flex items-center justify-center mr-4 h-12 w-full"
+          className="btn btn-primary flex items-center justify-center h-12 w-full"
           type="button"
           data-testid="sendButton"
           onClick={OnSendMessageClicked} disabled={!canSave}>
