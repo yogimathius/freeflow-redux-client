@@ -8,12 +8,15 @@ import UserMessageDetail from './UserMessageDetail'
 const SelectedUserConversation = ({ sortedMessages, userId }) => {
   const { messagerId } = useParams()
   const userMessages = sortedMessages.messages[messagerId]
+
   const renderedMessages = userMessages.map((message, index) => {
     return (
             <UserMessageDetail key={index} message={message} userId={userId}/>
     )
   })
+
   let receiverId, receiver, sender
+
   if (userMessages[0].sender === messagerId) {
     receiver = userMessages[0].sender
     sender = userMessages[0].receiver
@@ -23,15 +26,20 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
     sender = userMessages[0].sender
     receiverId = userMessages[0].receiver_id
   }
+
   return (
-        <div className="col-span-2">
+        <div className="relative space-y-8 grid grid-rows-4">
+          <div className="row-span-3 overflow-clip flex flex-col justify-end">
             {renderedMessages}
+          </div>
+          <div className="">
             <MessageTextEditor
               receiverId={receiverId}
               userId={userId}
               receiver={receiver}
               sender={sender}
             />
+          </div>
         </div>
   )
 }
