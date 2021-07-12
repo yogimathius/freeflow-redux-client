@@ -14,7 +14,7 @@ const UserConversationList = () => {
 
   const dispatch = useDispatch()
 
-  let messageContent
+  let renderedMessagers
   let sortedMessages
   const messagesStatus = useSelector((state) => state.messages.status)
   const messagesError = useSelector((state) => state.messages.error)
@@ -24,10 +24,10 @@ const UserConversationList = () => {
     }
   }, [messagesStatus, userId, dispatch])
   if (messagesStatus === 'pending') {
-    messageContent = <div className="loader">Loading...</div>
+    renderedMessagers = <div className="loader">Loading...</div>
   } else if (messagesStatus === 'succeeded') {
     sortedMessages = sortMessages(userConversations.entities, userId)
-    messageContent = sortedMessages.messagers.map((messagerName, index) => {
+    renderedMessagers = sortedMessages.messagers.map((messagerName, index) => {
       const messagerId =
           sortedMessages.messages[messagerName].receiver === messagerName
             ? sortedMessages.messages[messagerName][0].sender_id
@@ -44,19 +44,20 @@ const UserConversationList = () => {
       )
     })
   } else if (messagesStatus === 'failed') {
-    messageContent = <div>{messagesError}</div>
+    renderedMessagers = <div>{messagesError}</div>
   }
 
   return (
-        <div className="mt-10 grid grid-cols-3">
-          <div className="col-span-3 mb-8 mr-4">
+      <div className="h-screen overflow-hidden grid grid-cols-4 grid-rows-8 -mt-16 mx-4">
+          <div className="row-start-1 col-span-3 mb-8 mr-4">
             <button className="btn btn-primary float-right ">
               Compose Message
             </button>
           </div>
-          <div>
-            {messageContent}
+          <div className="col-span-1 col-start-1 row-span-8">
+            {renderedMessagers}
           </div>
+          <div className="row-start-2 row-span-7 col-start-2 col-span-3">
             <Switch>
               <Route path={`${path}/:messagerId`}>
                 <SelectedUserConversation
@@ -64,6 +65,7 @@ const UserConversationList = () => {
                 />
               </Route>
             </Switch>
+          </div>
 
         </div>
   )
