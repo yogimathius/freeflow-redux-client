@@ -8,15 +8,14 @@ import { TimeAgo } from '../posts/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import UserImage from '../users/UserImage'
 import { selectUserById } from '../users/usersSlice'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { removeMessage } from './messagesSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
+import DynamicDropDown from '../../components/DynamicDropDown'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
 // const SAVING = "SAVING";
-// const EDITING = 'EDITING'
+const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
 
@@ -24,23 +23,27 @@ const UserMessageDetail = ({ message, userId }) => {
   const user = useSelector((state) => selectUserById(state, message.sender_id))
 
   const { mode, transition } = useVisualMode(SHOW)
-
-  // function onEdit () {
-  //   transition(EDITING)
-  // }
+  console.log('message: ', message)
+  function onEdit () {
+    transition(EDITING)
+  }
 
   // function onSaveEdit () {
   //   transition(SHOW)
   // }
 
-  let fullname, placementStyle, myMessage
+  let placementStyle, myMessage, textBodyStyle, nameAndTimeStyle
+  const fullname = user.first_name + ' ' + user.last_name
+
   if (user.id === userId) {
-    fullname = 'You'
+    textBodyStyle = 'mr-7'
     placementStyle = ''
+    nameAndTimeStyle = ''
     myMessage = true
   } else {
-    fullname = user.first_name + ' ' + user.last_name
-    placementStyle = 'col-start-2 bg-green-500 text-white font-bold'
+    placementStyle = 'col-start-2 '
+    textBodyStyle = 'bg-green-500 text-white font-semibold ml-7'
+    nameAndTimeStyle = 'ml-7'
     myMessage = false
   }
 
@@ -63,19 +66,24 @@ const UserMessageDetail = ({ message, userId }) => {
       }
     }
   }
-  // const fullname = user.first_name + ' ' + user.last_name
+  const editKeys = {
+    linkText: 'edit',
+    onClickCallback: onEdit
+  }
+
+  const deleteKeys = {
+    linkText: 'delete',
+    onClickCallback: onDeleteMessageClicked
+  }
+  const linkTextList = [editKeys, deleteKeys]
+  console.log(linkTextList)
+
   return (
-      <div className="grid grid-cols-3 mx-4">
-          <div key={message.id} className={`${placementStyle} col-span-2 bg-white mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl`}>
-            { myMessage
-              ? <button className="float-right mt-1 mr-1" onClick={() => onDeleteMessageClicked()}>
-                  <FontAwesomeIcon className="text-red-500" icon={faMinusCircle} />
-                </button>
-              : ''
-            }
+      <div className="grid grid-cols-6 mx-4">
+          <div key={message.id} className={`${placementStyle} col-span-5`}>
 
           <div className=" p-3">
-            <div className="flex justify-between">
+            <div className={`flex justify-between items-center ${nameAndTimeStyle}`}>
               <Link to={`/userprofile/${fullname}`} onClick={() => saveState(user.id)}>
                 <div className="flex items-center space-x-2">
                   <UserImage />
@@ -83,21 +91,23 @@ const UserMessageDetail = ({ message, userId }) => {
                 </div>
               </Link>
               <div className="">
-                <TimeAgo timestamp={message.time_posted} />
-                { userId === message.sender_id
-                  ? <div className="space-x-1 flex justify-end mr-2">
-
-                  {/* <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button> */}
-                  {/* <button onClick={() => onDeleteCommentClicked()} className="text-red-600 cursor-pointer text-sm">Delete</button> */}
-                  </div>
-
-                  : ''
-                }
+                <TimeAgo timestamp={message.time_sent} />
               </div>
 
             </div>
             {mode === SHOW && (
-              <div>{message.text_body}</div>
+              <div>
+              { myMessage
+                ? <div className="float-right ">
+                    <DynamicDropDown linkTextList={linkTextList} />
+                  </div>
+                : ''
+              }
+              <div className={` bg-white mx-1 my-2 rounded-xl p-4 ${textBodyStyle}`}>
+                {message.text_body}
+
+              </div>
+              </div>
             )}
             {/* {mode === EDITING && (
               <EditCommentForm
