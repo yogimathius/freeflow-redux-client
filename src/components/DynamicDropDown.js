@@ -23,7 +23,6 @@ const DynamicDropdown = ({ linkTextList }) => {
   }
   // bg colors
   //   let bgColor
-  console.log('in dropdown cp: ', linkTextList)
   const renderedLinks = linkTextList
     ? linkTextList.map((textLinkKeys, index) => {
       return (

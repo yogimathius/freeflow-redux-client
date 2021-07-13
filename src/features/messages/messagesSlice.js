@@ -29,7 +29,7 @@ export const addNewMessage = createAsyncThunk(
       sender,
       receiver
     } = initialMessage
-    console.log(senderID, receiverID, content, 'in thunk')
+
     const response = await axios.post(`${url}/new`, {
       senderID,
       receiverID,
@@ -38,7 +38,6 @@ export const addNewMessage = createAsyncThunk(
       sender,
       receiver
     })
-    console.log('response in send message thunk: ', response.data)
     return response.data
   }
 )
@@ -46,7 +45,6 @@ export const addNewMessage = createAsyncThunk(
 export const removeMessage = createAsyncThunk(
   'messages/removeMessage',
   async (initialMessages) => {
-    console.log('thunk in action')
     const { messageId } = initialMessages
 
     const response = await axios.delete(url, {
@@ -99,7 +97,6 @@ const messagesSlice = createSlice({
     },
     [addNewMessage.fulfilled]: messagesAdapter.addOne,
     [removeMessage.fulfilled]: (state, action) => {
-      console.log('action in remove message fulfilled: ', action)
       messagesAdapter.removeOne(state, action.meta.arg.messageId)
     }
     // [updateMessage.fulfilled]:(state, action) => {

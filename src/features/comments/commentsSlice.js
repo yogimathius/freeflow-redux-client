@@ -36,7 +36,6 @@ export const addNewComment = createAsyncThunk(
       text_body: content,
       time_posted: new Date().toISOString()
     })
-    console.log('response in comment thunk: ', response.data)
     return response.data
   }
 )

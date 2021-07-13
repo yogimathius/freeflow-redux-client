@@ -28,7 +28,7 @@ function App () {
       <Router>
         {/* <SideBar /> */}
 
-        <div className="App md:grid grid-cols-8 font-body">
+        <div className="App md:grid grid-cols-10 font-body">
           <Navbar />
           <div className="hidden md:col-span-2 md:flex justify-center">
             { user.user
@@ -36,8 +36,8 @@ function App () {
               : ''
             }
           </div>
-          <div className="h-16"></div>
-          <div className="bg-gray-100 col-start-3 col-span-4">
+          <div className="h-20"></div>
+          <div className="bg-gray-100 col-start-3 col-span-6">
             <Switch>
               {routes.map((route) => (
                 <AppRoute

@@ -22,7 +22,7 @@ if (process.env.REACT_APP_API_BASE_URL) {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store} className="bg-gray-400 h-screen overflow-hidden">
+    <Provider store={store} className="bg-gray-400 overflow-hidden h-screen">
       <App />
 
     </Provider>

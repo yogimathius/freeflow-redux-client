@@ -1,106 +1,99 @@
 @tailwind base;
 @layer base {
-	Link {
-		@apply text-blue-500;
-	}
-	::-webkit-input-placeholder {
-		@apply text-center flex justify-center items-center;
-	}
-	
-	:-moz-placeholder {
-		@apply text-center flex justify-center items-center;
-	}
-	
-	::-moz-placeholder {
-		@apply text-center flex justify-center items-center;
-	}
-	
-	:-ms-input-placeholder {
-		@apply text-center flex justify-center items-center;
-	}
+  Link {
+    @apply text-blue-500;
+  }
+  ::-webkit-input-placeholder {
+    @apply text-center flex justify-center items-center;
+  }
+
+  :-moz-placeholder {
+    @apply text-center flex justify-center items-center;
+  }
+
+  ::-moz-placeholder {
+    @apply text-center flex justify-center items-center;
+  }
+
+  :-ms-input-placeholder {
+    @apply text-center flex justify-center items-center;
+  }
+
+  /* .last-child-sticky:last-child {
+    position: sticky;
+    bottom: 0;
+  } */
 }
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
-	.btn
-    {
-			@apply px-2 font-bold tracking-widest rounded border-2 cursor-pointer text-center no-underline object-contain;
-    }
+  .btn {
+    @apply px-2 font-bold tracking-widest rounded border-2 cursor-pointer text-center no-underline object-contain;
+  }
 
-	/* .btn i {
+  /* .btn i {
 		@apply text-blue-500;
 	} */
 
-	.btn:focus
-    {
-		@apply outline-none shadow-none;
-    }
+  .btn:focus {
+    @apply outline-none shadow-none;
+  }
 
-	.btn:active
-    {
-		@apply bg-green-500;
-	}
+  .btn:active {
+    @apply bg-green-500;
+  }
 
-	.btn[disabled],
-	.btn.disabled {
-		@apply opacity-50 cursor-default;
-	}
+  .btn[disabled],
+  .btn.disabled {
+    @apply opacity-50 cursor-default;
+  }
 
-	.btn-primary,
-	.btn-primary:visited {
-		@apply bg-green-500 text-white border-green-500;
-	}
+  .btn-primary,
+  .btn-primary:visited {
+    @apply bg-green-500 text-white border-green-500;
+  }
 
-	.btn-primary:hover,
-	.btn-primary:visited:hover {
-		@apply bg-white border-green-500 text-green-500;
-	}
+  .btn-primary:hover,
+  .btn-primary:visited:hover {
+    @apply bg-white border-green-500 text-green-500;
+  }
 
-	.btn-primary:active
-    {
-		@apply bg-green-500 border-green-500 opacity-70;
-	}
+  .btn-primary:active {
+    @apply bg-green-500 border-green-500 opacity-70;
+  }
 
-	.btn-secondary,
-	.btn-secondary:visited
-    {
-		@apply bg-none border-green-500 text-green-500;
-	}
+  .btn-secondary,
+  .btn-secondary:visited {
+    @apply bg-none border-green-500 text-green-500;
+  }
 
+  .btn-secondary:hover,
+  .btn-secondary:visited:hover {
+    @apply bg-none bg-green-500 text-white;
+  }
 
-	.btn-secondary:hover,
-	.btn-secondary:visited:hover
-		 {
-		@apply bg-none bg-green-500 text-white;
-	}
+  .btn-secondary:active {
+    @apply bg-green-500 opacity-70;
+  }
 
-	.btn-secondary:active
-    {
-		@apply bg-green-500 opacity-70;
-	}
+  .btn-tertiary,
+  .btn-tertiary:visited {
+    @apply border-blue-500 text-blue-500;
+  }
 
-	.btn-tertiary,
-	.btn-tertiary:visited
-    {
-		@apply border-blue-500 text-blue-500;
-    }
-
-	.btn-tertiary:hover,
-	.btn-tertiary:visited:hover,
-	.btn-tertiary:focus
-    {
-		@apply bg-blue-200;
-    }
-	.btn-warning,
-	.btn-warning:visited {
-		@apply border-red-500 text-red-500;
-	}
-	.btn-warning:hover,
-	.btn-warning:visited:hover,
-	.btn-warning:focus
-    {
-		@apply bg-red-200;
-    }
+  .btn-tertiary:hover,
+  .btn-tertiary:visited:hover,
+  .btn-tertiary:focus {
+    @apply bg-blue-200;
+  }
+  .btn-warning,
+  .btn-warning:visited {
+    @apply border-red-500 text-red-500;
+  }
+  .btn-warning:hover,
+  .btn-warning:visited:hover,
+  .btn-warning:focus {
+    @apply bg-red-200;
+  }
 }

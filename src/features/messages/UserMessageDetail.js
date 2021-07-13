@@ -23,7 +23,6 @@ const UserMessageDetail = ({ message, userId }) => {
   const user = useSelector((state) => selectUserById(state, message.sender_id))
 
   const { mode, transition } = useVisualMode(SHOW)
-  console.log('message: ', message)
   function onEdit () {
     transition(EDITING)
   }
@@ -76,13 +75,12 @@ const UserMessageDetail = ({ message, userId }) => {
     onClickCallback: onDeleteMessageClicked
   }
   const linkTextList = [editKeys, deleteKeys]
-  console.log(linkTextList)
 
   return (
       <div className="grid grid-cols-6 mx-4">
           <div key={message.id} className={`${placementStyle} col-span-5`}>
 
-          <div className=" p-3">
+          <div className="p-3">
             <div className={`flex justify-between items-center ${nameAndTimeStyle}`}>
               <Link to={`/userprofile/${fullname}`} onClick={() => saveState(user.id)}>
                 <div className="flex items-center space-x-2">

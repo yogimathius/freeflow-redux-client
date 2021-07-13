@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
+
 import MessageTextEditor from './MessageTextEditor'
 import UserMessageDetail from './UserMessageDetail'
 
@@ -15,6 +16,20 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
     )
   })
 
+  const messageEl = useRef(null)
+
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener('DOMNodeInserted', event => {
+        const { innerHeight: height } = window
+
+        const { currentTarget: target } = event
+        console.log(parseInt(target.scrollHeight) + 50)
+        target.scroll({ top: height, behavior: 'smooth' })
+      })
+    }
+  }, [])
+
   let receiverId, receiver, sender
 
   if (userMessages[0].sender === messagerId) {
@@ -28,8 +43,8 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
   }
 
   return (
-        <div className="relative space-y-8 grid grid-rows-4">
-          <div className="row-span-3 overflow-clip flex flex-col justify-end">
+        <div className="space-y-8 w-100">
+          <div className="overflow-y-scroll overscroll-contain h-1/2 snap snap-y snap-end snap-mandatory" ref={messageEl}>
             {renderedMessages}
           </div>
           <div className="">
