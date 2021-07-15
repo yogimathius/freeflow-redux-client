@@ -126,7 +126,8 @@ export const sortMessages = (messages, userId) => {
       const receiverName = message.receiver
 
       if (senderid !== userId && !messageMap.messages[senderName]) {
-        messageMap.messagers.push(senderName)
+        const messager = { name: senderName, userId: senderid }
+        messageMap.messagers.push(messager)
         messageMap.messages[senderName] = [message]
       }
 
@@ -135,7 +136,9 @@ export const sortMessages = (messages, userId) => {
       }
 
       if (receiverid !== userId && !messageMap.messages[receiverName]) {
-        messageMap.messagers.push(receiverName)
+        const messager = { name: receiverName, userId: receiverid }
+
+        messageMap.messagers.push(messager)
         messageMap.messages[receiverName] = [message]
       }
 
