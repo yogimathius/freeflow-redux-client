@@ -9,7 +9,7 @@ import UserMessageDetail from './UserMessageDetail'
 // eslint-disable-next-line react/prop-types
 const SelectedUserConversation = ({ sortedMessages, userId }) => {
   const { messagerId } = useParams()
-  const userMessages = sortedMessages.messages[messagerId]
+  const userMessages = sortedMessages[messagerId]
 
   const renderedMessages = userMessages.map((message, index) => {
     return (
