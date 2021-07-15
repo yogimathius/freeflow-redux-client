@@ -1,7 +1,7 @@
 /* eslint-disable no-tabs */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSkills, selectAllskills } from './dbSkillsSlice'
+import { fetchSkills, selectAllskills } from '../../reducers/dbSkillsSlice'
 // import Autocomplete from "../../helpers/Autocomplete";
 import Select from 'react-select'
 import { setSelectedSkills } from '../dbSkills/selectedSkills/selectedSkillsSlice'

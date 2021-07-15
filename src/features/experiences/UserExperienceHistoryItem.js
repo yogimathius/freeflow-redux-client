@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TimeAgo } from '../posts/TimeAgo'
-import { completeExperience, completeOtherExperience, removeExperience } from './experiencesSlice'
+import { completeExperience, completeOtherExperience, removeExperience } from '../../reducers/experiencesSlice'
 import { saveState } from '../../helpers/localStorage'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { Link } from 'react-router-dom'

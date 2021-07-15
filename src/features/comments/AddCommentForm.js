@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 
-import { addNewComment } from './commentsSlice'
+import { addNewComment } from '../../reducers/commentsSlice'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')

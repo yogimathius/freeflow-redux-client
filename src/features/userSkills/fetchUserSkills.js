@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUserSkills, selectAllUserSkills } from './userSkillsSlice'
+import { fetchUserSkills, selectAllUserSkills } from '../../reducers/userSkillsSlice'
 
 export default function UserSkillsList () {
   const dispatch = useDispatch()

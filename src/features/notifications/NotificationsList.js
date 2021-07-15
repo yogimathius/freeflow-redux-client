@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { formatDistanceToNow, parseISO } from 'date-fns'
 import classnames from 'classnames'
 
-import { selectAllUsers } from '../users/usersSlice'
+import { selectAllUsers } from '../../reducers/usersSlice'
 
 import {
   selectAllNotifications,
   allNotificationsRead
-} from './notificationsSlice'
+} from '../../reducers/notificationsSlice'
 
 export const NotificationsList = () => {
   const dispatch = useDispatch()

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { VisibilityFilters, addVisibilityFilter } from './filtersSlice'
+import { VisibilityFilters, addVisibilityFilter } from '../../reducers/filtersSlice'
 import FilterLink from './FilterLink.js'
 import React, { useEffect } from 'react'
 

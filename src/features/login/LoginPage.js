@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Field, Form, Formik } from 'formik'
-import { login } from './userLoginSlice'
+import { login } from '../../reducers/userLoginSlice'
 import { Redirect } from 'react-router-dom'
-import { fetchSkills } from '../dbSkills/dbSkillsSlice'
-import { fetchUserSkills } from '../userSkills/userSkillsSlice'
+import { fetchSkills } from '../../reducers/dbSkillsSlice'
+import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 
 export default function LoginPage () {
   const dispatch = useDispatch()

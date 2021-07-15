@@ -5,7 +5,7 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 
 // import Autocomplete from "../../helpers/Autocomplete";
 import Select from 'react-select'
-import { selectAllUsers } from '../users/usersSlice'
+import { selectAllUsers } from '../../reducers/usersSlice'
 import SelectedUserConversation from './SelectedUserConversation'
 // import UserConversationListItem from './messagerNameItem'
 import { setSelectedUser } from './selectedUserSlice'

@@ -1,4 +1,4 @@
-import visibilityFilters, { addVisibilityFilter } from './filtersSlice'
+import visibilityFilters, { addVisibilityFilter } from '../../reducers/filtersSlice'
 
 describe('visibilityFilters reducer', () => {
   it('should handle initial state', () => {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom'
 
-import { fetchMessages, selectAllMessages, sortMessages } from './messagesSlice'
+import { fetchMessages, selectAllMessages, sortMessages } from '../../reducers/messagesSlice'
 import useVisualMode from '../../hooks/useVisualMode'
 
 import SelectedUserConversation from './SelectedUserConversation'

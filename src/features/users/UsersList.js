@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAllUsers } from './usersSlice'
+import { selectAllUsers } from '../../reducers/usersSlice'
 import store from '../../app/store'
 import {
   fetchExperiences,
   selectAllExperiences
-} from '../experiences/experiencesSlice'
+} from '../../reducers/experiencesSlice'
 import UserCard from './UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
 

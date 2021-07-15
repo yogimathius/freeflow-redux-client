@@ -9,13 +9,13 @@ import { TimeAgo } from './TimeAgo'
 import {
   removePost,
   selectPostById
-} from './postsSlice'
+} from '../../reducers/postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { saveState } from '../../helpers/localStorage'
 import Likes from '../likes/likes'
 import { CommentsList } from '../comments/CommentsList'
 import { AddCommentForm } from '../comments/AddCommentForm'
-import { selectCommentsByPostId } from '../comments/commentsSlice'
+import { selectCommentsByPostId } from '../../reducers/commentsSlice'
 import useVisualMode from '../../hooks/useVisualMode'
 import { EditPostForm } from './EditPostForm'
 import PostExcerptSkills from './PostExcerptSkills'

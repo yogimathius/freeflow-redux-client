@@ -6,10 +6,10 @@ import AddPostForm from './AddPostForm'
 
 import {
   fetchPosts
-} from './postsSlice'
+} from '../../reducers/postsSlice'
 import Filter from '../filters/Filter'
-import { fetchSkills } from '../dbSkills/dbSkillsSlice'
-import { fetchUserSkills } from '../userSkills/userSkillsSlice'
+import { fetchSkills } from '../../reducers/dbSkillsSlice'
+import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 
 const PostsList = ({ posts }) => {
   const dispatch = useDispatch()

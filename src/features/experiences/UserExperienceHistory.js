@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectHelperExperiencesByUserId } from './experiencesSlice'
+import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice'
 import UserExperienceHistoryItem from './UserExperienceHistoryItem'
 
 const UserExperienceHistory = ({ userId }) => {

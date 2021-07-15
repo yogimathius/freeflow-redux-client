@@ -6,7 +6,7 @@ import {
   selectLikesByPostId,
   addNewLike,
   removeLike
-} from './likesSlice'
+} from '../../reducers/likesSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp as farThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp as fasThumbsUp } from '@fortawesome/free-solid-svg-icons'

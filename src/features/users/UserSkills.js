@@ -3,8 +3,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { setVisibilityFilter } from '../filters/filtersSlice'
-import { selectUserSkillsByUserId } from '../userSkills/userSkillsSlice'
+import { setVisibilityFilter } from '../../reducers/filtersSlice'
+import { selectUserSkillsByUserId } from '../../reducers/userSkillsSlice'
 
 const UserSkills = (props) => {
   const skillsForUser = useSelector(state => selectUserSkillsByUserId(state, props.userId))

@@ -2,7 +2,7 @@
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { removePost } from './postsSlice'
+import { removePost } from '../../reducers/postsSlice'
 
 const OnDeletePostClicked = async (props) => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')

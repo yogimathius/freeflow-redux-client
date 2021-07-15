@@ -12,7 +12,7 @@ import {
   selectLikesByPostId,
   addNewLike,
   removeLike
-} from '../likes/likesSlice'
+} from '../../reducers/likesSlice'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'

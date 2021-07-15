@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAllUsers } from '../users/usersSlice'
+import { selectAllUsers } from '../../reducers/usersSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 
 import UserImage from '../users/UserImage'
-import { removeComment } from './commentsSlice'
+import { removeComment } from '../../reducers/commentsSlice'
 import { Link } from 'react-router-dom'
 import { saveState } from '../../helpers/localStorage'
 import { TimeAgo } from '../posts/TimeAgo'

@@ -12,7 +12,7 @@ import { Navbar } from './components/Navbar'
 
 import AppRoute from './components/AppRoute'
 import UserSideBar from './features/users/UserSideBar'
-import { fetchUserSkills } from './features/userSkills/userSkillsSlice'
+import { fetchUserSkills } from './reducers/userSkillsSlice'
 // import Footer from './components/Footer';
 
 function App () {

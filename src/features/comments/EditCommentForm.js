@@ -2,7 +2,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectCommentsById, updateComment } from './commentsSlice'
+import { selectCommentsById, updateComment } from '../../reducers/commentsSlice'
 
 export const EditCommentForm = ({ commentId, onSaveEdit, value, postId }) => {
   const comment = useSelector((state) => selectCommentsById(state, commentId))

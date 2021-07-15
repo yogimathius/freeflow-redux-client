@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
-import { addNewExperience } from './experiencesSlice'
+import { addNewExperience } from '../../reducers/experiencesSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 
 const CreateExperience = ({ userId }) => {

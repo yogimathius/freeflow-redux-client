@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { addNewPost } from './postsSlice'
+import { addNewPost } from '../../reducers/postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import { emptySkillsDB } from '../dbSkills/selectedSkills/selectedSkillsSlice'
 

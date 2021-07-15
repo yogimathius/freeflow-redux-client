@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { createSelector } from '@reduxjs/toolkit'
 import PostsList from './PostsList'
-import { VisibilityFilters } from '../filters/filtersSlice'
+import { VisibilityFilters } from '../../reducers/filtersSlice'
 
 const selectPosts = (state) => state.posts
 const selectSkills = (state) => state.skills

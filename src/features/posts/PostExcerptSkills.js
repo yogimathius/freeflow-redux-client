@@ -2,8 +2,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSkills, selectSkillsByIds } from '../dbSkills/dbSkillsSlice'
-import { setVisibilityFilter } from '../filters/filtersSlice'
+import { fetchSkills, selectSkillsByIds } from '../../reducers/dbSkillsSlice'
+import { setVisibilityFilter } from '../../reducers/filtersSlice'
 import { Link } from 'react-router-dom'
 
 const PostExcerptSkills = ({ postSkillIds }) => {

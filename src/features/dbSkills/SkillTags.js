@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import ReactTags from 'react-tag-autocomplete'
-import { selectAllskills } from './dbSkillsSlice'
+import { selectAllskills } from '../../reducers/dbSkillsSlice'
 
 function Tags (props) {
   const skills = useSelector(selectAllskills)

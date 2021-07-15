@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectPostsByUser } from '../posts/postsSlice'
-import { selectHelperExperiencesByUserId } from '../experiences/experiencesSlice'
+import { selectPostsByUser } from '../../reducers/postsSlice'
+import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice'
 import { loadState } from '../../helpers/localStorage'
-import { selectUserById } from './usersSlice'
+import { selectUserById } from '../../reducers/usersSlice'
 import PostExcerpt from '../posts/PostExcerpt'
 import UserCard from './UserCard'
 // import AddPostForm from '../posts/AddPostForm';

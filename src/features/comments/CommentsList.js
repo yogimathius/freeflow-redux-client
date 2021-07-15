@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchComments, selectCommentsByPostId } from './commentsSlice'
+import { fetchComments, selectCommentsByPostId } from '../../reducers/commentsSlice'
 import CommentListItem from './CommentListItem'
 
 export const CommentsList = ({ postId }) => {

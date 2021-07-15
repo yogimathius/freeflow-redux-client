@@ -2,7 +2,7 @@
 import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addNewMessage } from './messagesSlice'
+import { addNewMessage } from '../../reducers/messagesSlice'
 
 const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
   const [error, setError] = useState('')

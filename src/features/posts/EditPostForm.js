@@ -3,7 +3,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectPostById, updatePost } from './postsSlice'
+import { selectPostById, updatePost } from '../../reducers/postsSlice'
 
 export const EditPostForm = ({ postId, onSaveEdit, value }) => {
   const post = useSelector((state) => selectPostById(state, postId))

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { logout } from '../features/login/userLoginSlice'
+import { logout } from '../reducers/userLoginSlice'
 import { saveState } from '../helpers/localStorage'
 import logo from '../images/logo.png'
 import DropDown from './DropDown'

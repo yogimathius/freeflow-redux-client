@@ -2,7 +2,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CommentsList } from '../comments/CommentsList'
-import { selectPostById } from './postsSlice'
+import { selectPostById } from '../../reducers/postsSlice'
 import { AddCommentForm } from '../comments/AddCommentForm'
 import PostExcerpt from './PostExcerpt'
 import { Link } from 'react-router-dom'
