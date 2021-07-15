@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import { fetchMessages, selectAllMessages, sortMessages } from '../../reducers/messagesSlice'
+// import {}
 import useVisualMode from '../../hooks/useVisualMode'
 
 import SelectedUserConversation from './SelectedUserConversation'
-import UserConversationListItem from './messagerNameItem'
+import MessagerNameList from './MessagerNameList'
 import CreateMessageForm from './CreateMessageForm'
 import UsernameSelector from './UsernameSelector'
+import { setUserConversations, selectAllConversations, fetchConversations } from '../../reducers/userConversationsSlice'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -34,45 +36,33 @@ const UserConversationList = () => {
   const userId = loggedInUser.id
   const { path, url } = useRouteMatch()
 
-  const userConversations = useSelector(selectAllMessages)
+  const userConversations = useSelector(selectAllConversations)
 
   const dispatch = useDispatch()
 
-  let renderedMessagers
-  let sortedMessages
-  const messagesStatus = useSelector((state) => state.messages.status)
-  const messagesError = useSelector((state) => state.messages.error)
-  useEffect(() => {
-    if (messagesStatus === 'idle') {
-      dispatch(fetchMessages(userId))
-    }
-  }, [messagesStatus, userId, dispatch])
-  if (messagesStatus === 'pending') {
-    renderedMessagers = <div className="loader">Loading...</div>
-  } else if (messagesStatus === 'succeeded') {
-    sortedMessages = sortMessages(userConversations.entities, userId)
-    renderedMessagers = sortedMessages.messagers.map((messagerName, index) => {
-      const messagerId =
-          sortedMessages.messages[messagerName].receiver === messagerName
-            ? sortedMessages.messages[messagerName][0].sender_id
-            : sortedMessages.messages[messagerName][0].receiver_id
-      return (
-          <div key={index} className="">
-            <Link onClick={() => setCurrentPage(messagerName)} to={`${url}/${messagerName}`}>
-              <UserConversationListItem
-                messagerId={messagerId}
-                messagerName={messagerName}
-                currentPage={currentPage}
-                />
+  const conversationsStatus = useSelector((state) => state.userConversations.status)
 
-            </Link>
-          </div>
-      )
-    })
-  } else if (messagesStatus === 'failed') {
+  const messagesError = useSelector((state) => state.userConversations.error)
+
+  useEffect(() => {
+    if (conversationsStatus === 'idle') {
+      dispatch(fetchConversations(userId))
+    }
+  }, [conversationsStatus, userId, dispatch])
+
+  let renderedMessagers, conversations
+  if (conversationsStatus === 'pending') {
+    renderedMessagers = <div className="loader">Loading...</div>
+  } else if (conversationsStatus === 'succeeded') {
+    conversations = userConversations.userConversations
+    // sortedMessages = sortMessages(userConversations.entities, userId)
+
+    // dispatch(setUserConversations(sortedMessages.messagers))
+  } else if (conversationsStatus === 'failed') {
     renderedMessagers = <div>{messagesError}</div>
   }
 
+  console.log('conversations: ', conversations)
   return (
       <div className="grid grid-cols-4 grid-rows-8 mx-4">
           {/* {mode === SHOW && (
@@ -89,9 +79,9 @@ const UserConversationList = () => {
               {/* <button onClick={() => transition(SHOW)} className="btn btn-warning col-span-1">Cancel</button> */}
               {/* </div> */}
               <UsernameSelector
-                sortedMessages={sortedMessages}
+                sortedMessages={conversations?.messages}
                 userId={userId}
-                messagers={sortedMessages?.messagers}
+                messagers={conversations?.messagers}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 url={url}
@@ -99,15 +89,20 @@ const UserConversationList = () => {
               />
             </div>
           {/* )} */}
-          <div className="row-start-2 col-span-1 col-start-1 row-span-6 flex flex-col">
-            {renderedMessagers}
-          </div>
+
+          <MessagerNameList
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            url={url}
+            userConversationNames={conversations?.messagers}
+          />
+
           {mode === SHOW && (
             <div className="row-start-3 row-span-7 col-start-2 col-span-3 ">
               <Switch>
                 <Route path={`${path}/:messagerId`}>
                   <SelectedUserConversation
-                    sortedMessages={sortedMessages} userId={userId}
+                    sortedMessages={conversations?.messages} userId={userId}
                   />
                 </Route>
               </Switch>
