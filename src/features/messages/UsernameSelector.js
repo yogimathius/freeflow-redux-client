@@ -8,7 +8,7 @@ import Select from 'react-select'
 import { selectAllUsers } from '../../reducers/usersSlice'
 import SelectedUserConversation from './SelectedUserConversation'
 // import UserConversationListItem from './messagerNameItem'
-import { setSelectedUser } from './selectedUserSlice'
+import { setSelectedUser } from '../../reducers/selectedUserSlice'
 
 const UsernameSelector = ({ sortedMessages, userId, messagers, currentPage, setCurrentPage, url, path }) => {
   const dispatch = useDispatch()

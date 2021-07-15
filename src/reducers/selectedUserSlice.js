@@ -8,7 +8,7 @@ export let selectedUserDB = {
   '': ''
 }
 
-const selectedSkillsSlice = createSlice({
+const selectedUserSlice = createSlice({
   name: 'selectedUserDB',
   initialState: initialState,
   reducers: {
@@ -25,6 +25,6 @@ const selectedSkillsSlice = createSlice({
   }
 })
 
-export const { setSelectedUser, addSelectedSkill, emptyUserDB } = selectedSkillsSlice.actions
+export const { setSelectedUser, addSelectedSkill, emptyUserDB } = selectedUserSlice.actions
 
-export default selectedSkillsSlice.reducer
+export default selectedUserSlice.reducer

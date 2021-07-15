@@ -8,8 +8,10 @@ import userLoginReducer from './userLoginSlice'
 import skillsReducer from './dbSkillsSlice'
 import userSkillsReducer from './userSkillsSlice'
 import filtersReducer from './filtersSlice'
-import selectedSkillsReducer from '../features/dbSkills/selectedSkills/selectedSkillsSlice'
+import selectedSkillsReducer from './selectedSkillsSlice'
 import messagesReducer from './messagesSlice'
+import selectedUserReducer from './selectedUserSlice'
+import userConversationReducer from './userConversationsSlice'
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -22,7 +24,9 @@ const rootReducer = combineReducers({
   userSkills: userSkillsReducer,
   visibilityFilters: filtersReducer,
   selectedSkills: selectedSkillsReducer,
-  messages: messagesReducer
+  messages: messagesReducer,
+  selectedUSer: selectedUserReducer,
+  userConversations: userConversationReducer
 })
 
 export default rootReducer

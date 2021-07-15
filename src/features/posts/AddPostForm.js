@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from '../../reducers/postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
-import { emptySkillsDB } from '../dbSkills/selectedSkills/selectedSkillsSlice'
+import { emptySkillsDB } from '../../reducers/selectedSkillsSlice'
 
 // export const SkillsContext = React.createContext();
 export default function AddPostForm () {
