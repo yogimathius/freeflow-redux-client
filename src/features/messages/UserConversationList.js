@@ -12,6 +12,7 @@ import MessagerNameList from './MessagerNameList'
 import CreateMessageForm from './CreateMessageForm'
 import UsernameSelector from './UsernameSelector'
 import { setUserConversations, selectAllConversations, fetchConversations } from '../../reducers/userConversationsSlice'
+import { setCurrentPage } from '../../reducers/currentPageSlice'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -21,7 +22,7 @@ const COMPOSE = 'COMPOSE'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 const UserConversationList = () => {
-  const [currentPage, setCurrentPage] = useState('')
+  // const [currentPage, setCurrentPage] = useState('')
   const { mode, transition } = useVisualMode(SHOW)
 
   function onComposeMessage () {
@@ -40,8 +41,13 @@ const UserConversationList = () => {
 
   const dispatch = useDispatch()
 
-  const conversationsStatus = useSelector((state) => state.userConversations.status)
+  const handleOnClickLink = (messagerName) => {
+    console.log('messager name: ', messagerName)
+    dispatch(setCurrentPage(messagerName))
+  }
 
+  const conversationsStatus = useSelector((state) => state.userConversations.status)
+  const currentPage = useSelector((state) => state.currentPage)
   const messagesError = useSelector((state) => state.userConversations.error)
 
   useEffect(() => {
@@ -62,7 +68,6 @@ const UserConversationList = () => {
     renderedMessagers = <div>{messagesError}</div>
   }
 
-  console.log('conversations: ', conversations)
   return (
       <div className="grid grid-cols-4 grid-rows-8 mx-4">
           {/* {mode === SHOW && (
@@ -83,7 +88,7 @@ const UserConversationList = () => {
                 userId={userId}
                 messagers={conversations?.messagers}
                 currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
+                setCurrentPage={handleOnClickLink}
                 url={url}
                 path={path}
               />
@@ -92,9 +97,10 @@ const UserConversationList = () => {
 
           <MessagerNameList
             currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            setCurrentPage={handleOnClickLink}
             url={url}
             userConversationNames={conversations?.messagers}
+            userId={userId}
           />
 
           {mode === SHOW && (

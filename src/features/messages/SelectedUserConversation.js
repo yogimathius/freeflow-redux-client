@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
@@ -9,7 +10,14 @@ import UserMessageDetail from './UserMessageDetail'
 // eslint-disable-next-line react/prop-types
 const SelectedUserConversation = ({ sortedMessages, userId }) => {
   const { messagerId } = useParams()
+  // const history = useHistory()
+  // const selectedUser = useSelector(state => state.selectedUser.selectedUser)
+  // if (selectedUser && selectedUser.value) {
+  //   const selectedUserId = selectedUser.value.userId
+  //   userMessages = sortedMessages[selectedUserId]
+  // } else {
   const userMessages = sortedMessages[messagerId]
+  // }
 
   const renderedMessages = userMessages.map((message, index) => {
     return (

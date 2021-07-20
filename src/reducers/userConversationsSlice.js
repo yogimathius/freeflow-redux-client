@@ -43,7 +43,7 @@ import {
 import axios from 'axios'
 // import { normalize, schema } from 'normalizr'
 
-const url = 'http://localhost:8080/api/conversations'
+const url = 'https://freeflow-two-point-o.herokuapp.com/api/conversations'
 
 // const conversationsAdapter = createEntityAdapter({
 //   // sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent)
@@ -51,7 +51,6 @@ const url = 'http://localhost:8080/api/conversations'
 
 export const fetchConversations = createAsyncThunk('conversations/fetchConversations', async (userId) => {
   const response = await axios.get(`${url}/${userId}`)
-  console.log('in thunk: ', response.data)
   return response.data
 })
 
@@ -67,6 +66,10 @@ const userConversationSlice = createSlice({
     setUserConversations (state, action) {
       // userConversationDB = action.payload.options[0]
       return action.payload
+    },
+    addUserConversation (state, action) {
+      state.userConversations.messagers.push(action.payload)
+      return state
     }
     // clearSelectedUser (state, action) {
     //   console.log('payload in clear selected user: ', action.payload)
@@ -77,11 +80,9 @@ const userConversationSlice = createSlice({
   extraReducers: {
 
     [fetchConversations.pending]: (state, action) => {
-      console.log('loading')
       state.status = 'loading'
     },
     [fetchConversations.fulfilled]: (state, action) => {
-      console.log('success')
       state.status = 'succeeded'
       state.userConversations = action.payload
     },
@@ -96,7 +97,7 @@ const userConversationSlice = createSlice({
   }
 })
 
-export const { setUserConversations, addSelectedSkill, emptyUserDB } = userConversationSlice.actions
+export const { setUserConversations, addUserConversation, emptyUserDB } = userConversationSlice.actions
 
 export default userConversationSlice.reducer
 
