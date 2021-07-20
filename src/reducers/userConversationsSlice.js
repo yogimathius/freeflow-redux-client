@@ -1,58 +1,38 @@
-// import {
-//   createSlice
-// } from '@reduxjs/toolkit'
-
-// const initialState = ([])
-
-// export let userConversationDB = {
-//   '': ''
-// }
-
-// const userConversationSlice = createSlice({
-//   name: 'userConversationDB',
-//   initialState: initialState,
-//   reducers: {
-//     addUserConversation (state, action) {
-//       console.log('action in add user conv: ', action.payload)
-//       userConversationDB.push(action.payload)
-//     },
-//     setUserConversations (state, action) {
-//       userConversationDB = action.payload
-//       return action.payload
-//     },
-//     clearSelectedUser (state, action) {
-//       console.log('payload in clear selected user: ', action.payload)
-//       userConversationDB = userConversationDB.filter(conv => conv.name !== action.payload)
-//       return userConversationDB
-//     }
-//   },
-//   extraReducers: {
-//   }
-// })
-
-// export const { addUserConversation, setUserConversations, clearSelectedUser } = userConversationSlice.actions
-
-// export default userConversationSlice.reducer
-
 import {
   createSlice,
-  createAsyncThunk,
-  createEntityAdapter
-  // createSelector,
+  createAsyncThunk
 } from '@reduxjs/toolkit'
 import axios from 'axios'
-// import { normalize, schema } from 'normalizr'
 
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/conversations'
-
-// const conversationsAdapter = createEntityAdapter({
-//   // sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent)
-// })
 
 export const fetchConversations = createAsyncThunk('conversations/fetchConversations', async (userId) => {
   const response = await axios.get(`${url}/${userId}`)
   return response.data
 })
+
+export const addNewMessage = createAsyncThunk(
+  'conversations/addNewMessage',
+  async (initialMessage) => {
+    const {
+      senderID,
+      receiverID,
+      content,
+      sender,
+      receiver
+    } = initialMessage
+
+    const response = await axios.post('https://freeflow-two-point-o.herokuapp.com/api/messages/new', {
+      senderID,
+      receiverID,
+      textInput: content,
+      time_sent: new Date().toISOString(),
+      sender,
+      receiver
+    })
+    return response.data
+  }
+)
 
 const initialState = {
   status: 'idle',
@@ -68,14 +48,15 @@ const userConversationSlice = createSlice({
       return action.payload
     },
     addUserConversation (state, action) {
+      const user = action.payload
+
       state.userConversations.messagers.push(action.payload)
+      state.userConversations.messages[user.name] = [{ isNew: true, receiverId: user.userId }]
       return state
+    },
+    addMessageToConversation (state, action) {
+
     }
-    // clearSelectedUser (state, action) {
-    //   console.log('payload in clear selected user: ', action.payload)
-    //   userConversationDB = userConversationDB.filter(conv => conv.name !== action.payload)
-    //   return userConversationDB
-    // }
   },
   extraReducers: {
 
@@ -89,11 +70,21 @@ const userConversationSlice = createSlice({
     [fetchConversations.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
+    },
+    [addNewMessage.fulfilled]: (state, action) => {
+      console.log(action.payload)
+      const id = action.payload.id
+      const receiver = action.payload.receiver
+      const receiver_id = action.payload.receiver_id
+      const sender = action.payload.sender
+      const sender_id = action.payload.sender_id
+      const text_body = action.payload.text_body
+      const time_sent = action.payload.time_sent
+      const active = action.payload.active
+
+      const message = { id, receiver, receiver_id, sender, sender_id, text_body, time_sent, active }
+      state.userConversations.messages[receiver].push(message)
     }
-    // [addNewMessage.fulfilled]: conversationsAdapter.addOne,
-    // [removeMessage.fulfilled]: (state, action) => {
-    //   conversationsAdapter.removeOne(state, action.meta.arg.messageId)
-    // }
   }
 })
 

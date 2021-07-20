@@ -19,16 +19,22 @@ const UsernameSelector = ({ sortedMessages, userId, messagers, currentPage, setC
   const usernameOptions = []
   const usernames = users.forEach((user, index) => {
     const username = user.first_name + ' ' + user.last_name
-    const userId = user.id
-    const usernameOptionObject = { value: { username, userId }, label: username }
-    usernameOptions.push(usernameOptionObject)
+    const userIdInList = user.id
+    const usernameOptionObject = { value: { username, userIdInList }, label: username }
+    if (userIdInList !== userId) {
+      usernameOptions.push(usernameOptionObject)
+    }
   })
 
   const HandleChange = (selectedUser) => {
     const userAlreadyInMessages = messagers.find(messager => messager.name === selectedUser.value.username)
 
     if (userAlreadyInMessages === undefined) {
-      dispatch(addUserConversation({ name: selectedUser.value.username, userId: selectedUser.value.userId }))
+      const username = selectedUser.value.username
+      console.log(selectedUser)
+      dispatch(addUserConversation({ name: username, userId: selectedUser.value.userIdInList }))
+      setCurrentPage(username)
+      history.push(`${url}/${username}`)
     }
 
     if (userAlreadyInMessages !== undefined) {

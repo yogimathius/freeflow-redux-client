@@ -10,38 +10,46 @@ import UserMessageDetail from './UserMessageDetail'
 // eslint-disable-next-line react/prop-types
 const SelectedUserConversation = ({ sortedMessages, userId }) => {
   const { messagerId } = useParams()
-  // const history = useHistory()
-  // const selectedUser = useSelector(state => state.selectedUser.selectedUser)
-  // if (selectedUser && selectedUser.value) {
-  //   const selectedUserId = selectedUser.value.userId
-  //   userMessages = sortedMessages[selectedUserId]
-  // } else {
+
   const userMessages = sortedMessages[messagerId]
-  // }
+  let receiverId, receiver, sender, renderedMessages
 
-  const renderedMessages = userMessages.map((message, index) => {
-    return (
-        <UserMessageDetail key={index} message={message} userId={userId}/>
-    )
-  })
+  if (userMessages && !userMessages[0].isNew) {
+    renderedMessages = userMessages.length > 0
+      ? userMessages.map((message, index) => {
+        return (
+          <UserMessageDetail key={index} message={message} userId={userId}/>
+        )
+      })
+      : ''
 
-  let receiverId, receiver, sender
+    if (userMessages[0].sender === messagerId) {
+      receiver = userMessages[0].sender
+      sender = userMessages[0].receiver
+      receiverId = userMessages[0].sender_id
+    } else if (userMessages[0].receiver === messagerId) {
+      receiver = userMessages[0].receiver
+      sender = userMessages[0].sender
+      receiverId = userMessages[0].receiver_id
+    }
+  }
 
-  if (userMessages[0].sender === messagerId) {
-    receiver = userMessages[0].sender
-    sender = userMessages[0].receiver
-    receiverId = userMessages[0].sender_id
-  } else if (userMessages[0].receiver === messagerId) {
-    receiver = userMessages[0].receiver
-    sender = userMessages[0].sender
-    receiverId = userMessages[0].receiver_id
+  if (userMessages && userMessages[0].isNew) {
+    receiverId = userMessages[0].receiverId
+    receiver = Object.keys(userMessages)
+    console.log('receiver with keys: ', receiver)
   }
 
   return (
         <div className="space-y-8 w-100">
-          <ScrollToBottom className="overflow-y-scroll overscroll-contain h-1/2 snap snap-y snap-end snap-mandatory">
-              {renderedMessages}
-          </ScrollToBottom>
+          {renderedMessages !== '' && (
+            <ScrollToBottom className="overflow-y-scroll overscroll-contain h-1/2 snap snap-y snap-end snap-mandatory">
+                {renderedMessages}
+            </ScrollToBottom>
+          )}
+          {userMessages[0].isNew && (
+            <div>Send {messagerId} a message</div>
+          )}
           <div className="">
             <MessageTextEditor
               receiverId={receiverId}
