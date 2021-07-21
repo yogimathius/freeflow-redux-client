@@ -103,7 +103,6 @@ const userConversationSlice = createSlice({
       console.log(typeof id)
       const receiver = action.meta.arg.receiver
       state.userConversations.messages[receiver] = state.userConversations.messages[receiver].filter(message => {
-        console.log('message in filter: ', message.id)
         return message.id !== id
       })
     }
