@@ -42,15 +42,18 @@ export const addNewMessage = createAsyncThunk(
   }
 )
 
-//   export const updateMessage = createAsyncThunk(
-//     'messages/updatePost',
-//     async (initialPost) => {
-//       const { text_body, post_id, messager_id } = initialPost
-//       const response = await axios.put(url, { text_body,
-//       post_id, messager_id });
-//       return response.data
-//     }
-//   )
+export const updateMessage = createAsyncThunk(
+  'messages/updatePost',
+  async (initialPost) => {
+    const { text_body, post_id, messager_id } = initialPost
+    const response = await axios.put(url, {
+      text_body,
+      post_id,
+      messager_id
+    })
+    return response.data
+  }
+)
 
 const initialState = messagesAdapter.getInitialState({
   status: 'idle',

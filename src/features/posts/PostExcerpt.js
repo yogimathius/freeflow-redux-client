@@ -82,6 +82,10 @@ export default function PostExcerpt ({ postId, onPost, index }) {
     }
   }
 
+  const experienceOption = {
+    value: post.owner_id,
+    label: post.first_name + ' ' + post.last_name
+  }
   return (
     <article className="rounded-lg p-2 my-3 bg-white shadow-lg space-y-4" key={post.id}>
       {/* TAGS, TIMEAGO */}
@@ -101,7 +105,7 @@ export default function PostExcerpt ({ postId, onPost, index }) {
             )}
           </div>
             : <div className="text-blue-500 font-bold text-sm">
-              <Link to={`${userId}/experiences`}>
+              <Link to={{ pathname: `${userId}/experiences`, query: { owner: experienceOption } }}>
                 Offer Help
               </Link>
             </div>

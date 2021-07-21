@@ -48,6 +48,19 @@ export const removeMessage = createAsyncThunk(
   }
 )
 
+export const updateMessage = createAsyncThunk(
+  'messages/updatePost',
+  async (initialPost) => {
+    const { text_body, post_id, messager_id } = initialPost
+    const response = await axios.put(url, {
+      text_body,
+      post_id,
+      messager_id
+    })
+    return response.data
+  }
+)
+
 const initialState = {
   status: 'idle',
   error: null

@@ -11,6 +11,7 @@ import { selectUserById } from '../../reducers/usersSlice'
 import { removeMessage } from '../../reducers/userConversationsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import DynamicDropDown from '../../components/DynamicDropDown'
+import EditMessageForm from './EditMessageForm'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -110,11 +111,11 @@ const UserMessageDetail = ({ message, userId }) => {
               </div>
             )}
             {/* {mode === EDITING && (
-              <EditCommentForm
-                postId={postId}
-                commentId={comment.id}
-                onSaveEdit={onSaveEdit}
-                value={comment.text_body}
+              <EditMessageForm
+                messageId={message.id}
+                value={message.text_body}
+                senderId={message.sender_id}
+                receiverId={message.receiver_id}
               />
             )} */}
           </div>

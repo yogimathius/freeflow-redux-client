@@ -3,11 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import { addNewExperience } from '../../reducers/experiencesSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
+import { useLocation } from 'react-router-dom'
 
 const CreateExperience = ({ userId }) => {
   const dispatch = useDispatch()
+  const { query, search } = useLocation()
+  console.log('query in create experience: ', query)
   const [error, setError] = useState('')
-
+  let userRoutedFromPosts
+  if (query !== undefined) {
+    userRoutedFromPosts = query.owner
+  }
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const user = useSelector(state => state.user.user)
@@ -72,7 +78,7 @@ const CreateExperience = ({ userId }) => {
       }
     }
   }
-
+  const defaultValue = userRoutedFromPosts || 'Select a User'
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 space-x-2 pt-2">
       <div className="col-start-1 md:col-span-2 ml-2">
@@ -82,7 +88,7 @@ const CreateExperience = ({ userId }) => {
           onChange={(e) => HandleChange(e)}
           placeholder="Select a User"
           // value={selectedSkills}
-          defaultValue="Select a User"
+          defaultValue={defaultValue}
           name="users"
           options={userOptions}
           className="basic-multi-select"
