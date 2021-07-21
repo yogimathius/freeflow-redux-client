@@ -51,10 +51,15 @@ export const acceptExperience = createAsyncThunk(
 export const completeExperience = createAsyncThunk(
   'experiences/completeExperience',
   async (initialExperiences) => {
-    const { id, ishelper, comments, submit_completion } = initialExperiences
-
+    const { id, ishelper, comments, helper_submit_completion, helped_submit_completion } = initialExperiences
     const experienceId = id
-    const response = await axios.put(`${url}/complete`, { experienceId, ishelper, comments, submit_completion })
+    let response
+    if (helper_submit_completion !== '') {
+      response = await axios.put(`${url}/complete`, { experienceId, ishelper, helper_submit_completion })
+    }
+    if (helped_submit_completion !== '') {
+      response = await axios.put(`${url}/complete`, { experienceId, ishelper, helped_submit_completion })
+    }
     return response.data
   }
 )

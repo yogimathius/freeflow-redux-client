@@ -105,7 +105,10 @@ export default function PostExcerpt ({ postId, onPost, index }) {
             )}
           </div>
             : <div className="text-blue-500 font-bold text-sm">
-              <Link to={{ pathname: `${userId}/experiences`, query: { owner: experienceOption } }}>
+              <Link
+                to={{ pathname: `${userId}/experiences`, query: { owner: experienceOption } }}
+                onClick={() => localStorage.setItem('selected_user', JSON.stringify(experienceOption))}
+              >
                 Offer Help
               </Link>
             </div>
@@ -177,7 +180,10 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
       { onPost === true && user && user.id === post.owner_id
         ? <div className="flex justify-center">
-          <Link to={`/editPost/${post.id}`} className="btn btn-primary">
+          <Link
+            to={`/editPost/${post.id}`}
+            className="btn btn-primary"
+          >
             Edit Post
           </Link>
         </div>

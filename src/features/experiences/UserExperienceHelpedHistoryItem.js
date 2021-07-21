@@ -35,7 +35,7 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   const pending = experience.date_accepted === null
   const accepted = !!(experience.date_accepted !== null && experience.date_completed === null)
   const completed = experience.date_completed !== null
-  const completedByHelped = experience.helped_comments !== null
+  const completedByHelped = experience.helped_submit_completion
 
   const users = useSelector((state) => state.users)
 
@@ -70,28 +70,28 @@ const UserExperienceHelpedHistoryItem = ({ experience, userId }) => {
   const completeExperienceClicked = async () => {
     if (canRemove) {
       try {
-        if (experience.submit_completion === false) {
-          setAddRequestStatus('pending')
-          const resultAction = await dispatch(
-            completeExperience({
-              id: experience.id,
-              ishelper: false,
-              comments: '',
-              submit_completion: true
-            })
-          )
-          unwrapResult(resultAction)
-        } else {
-          setAddRequestStatus('pending')
-          const resultAction = await dispatch(
-            completeOtherExperience({
-              id: experience.id,
-              ishelper: false,
-              comments: ''
-            })
-          )
-          unwrapResult(resultAction)
-        }
+        // if (experience.submit_completion === false) {
+        setAddRequestStatus('pending')
+        const resultAction = await dispatch(
+          completeExperience({
+            id: experience.id,
+            ishelper: false,
+            helper_submit_completion: '',
+            helped_submit_completion: true
+          })
+        )
+        unwrapResult(resultAction)
+        // } else {
+        //   setAddRequestStatus('pending')
+        //   const resultAction = await dispatch(
+        //     completeOtherExperience({
+        //       id: experience.id,
+        //       ishelper: false,
+        //       comments: ''
+        //     })
+        //   )
+        //   unwrapResult(resultAction)
+        // }
       } catch (err) {
         console.error('Failed to accept session: ', err)
       } finally {
