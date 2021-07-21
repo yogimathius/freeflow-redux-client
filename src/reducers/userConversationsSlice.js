@@ -34,6 +34,20 @@ export const addNewMessage = createAsyncThunk(
   }
 )
 
+export const removeMessage = createAsyncThunk(
+  'conversations/removeMessage',
+  async (initialMessages) => {
+    const { messageId } = initialMessages
+    console.log('message Id: ', messageId)
+    const response = await axios.delete(`https://freeflow-two-point-o.herokuapp.com/api/messages/${messageId}`, {
+      params: {
+        messageId
+      }
+    })
+    return response.data
+  }
+)
+
 const initialState = {
   status: 'idle',
   error: null
@@ -72,7 +86,7 @@ const userConversationSlice = createSlice({
       state.error = action.error.message
     },
     [addNewMessage.fulfilled]: (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload, state)
       const id = action.payload.id
       const receiver = action.payload.receiver
       const receiver_id = action.payload.receiver_id
@@ -81,9 +95,17 @@ const userConversationSlice = createSlice({
       const text_body = action.payload.text_body
       const time_sent = action.payload.time_sent
       const active = action.payload.active
-
       const message = { id, receiver, receiver_id, sender, sender_id, text_body, time_sent, active }
       state.userConversations.messages[receiver].push(message)
+    },
+    [removeMessage.fulfilled]: (state, action) => {
+      const id = action.meta.arg.messageId
+      console.log(typeof id)
+      const receiver = action.meta.arg.receiver
+      state.userConversations.messages[receiver] = state.userConversations.messages[receiver].filter(message => {
+        console.log('message in filter: ', message.id)
+        return message.id !== id
+      })
     }
   }
 })

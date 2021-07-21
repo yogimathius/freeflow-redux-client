@@ -22,6 +22,7 @@ const MessageTextEditor = ({ receiverId, userId, receiver, sender }) => {
       setTimeout(() => {
         setError('')
       }, 2000)
+      return
     }
 
     try {

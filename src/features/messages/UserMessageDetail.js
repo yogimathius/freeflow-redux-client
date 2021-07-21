@@ -8,7 +8,7 @@ import { TimeAgo } from '../posts/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import UserImage from '../users/UserImage'
 import { selectUserById } from '../../reducers/usersSlice'
-import { removeMessage } from '../../reducers/messagesSlice'
+import { removeMessage } from '../../reducers/userConversationsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import DynamicDropDown from '../../components/DynamicDropDown'
 
@@ -53,10 +53,12 @@ const UserMessageDetail = ({ message, userId }) => {
   [userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onDeleteMessageClicked = async () => {
+    console.log('clicked', message)
+    const receiver = message.receiver
     if (canDelete) {
       try {
         setAddRequestStatus('pending')
-        const resultAction = await dispatch(removeMessage({ messageId: message.id }))
+        const resultAction = await dispatch(removeMessage({ messageId: message.id, receiver }))
         unwrapResult(resultAction)
       } catch (err) {
         console.error('Failed to remove Message: ', err)
