@@ -9,6 +9,7 @@ import { setVisibilityFilter } from '../../reducers/filtersSlice'
 import { removeUserSkill, selectUserSkillsByUserId } from '../../reducers/userSkillsSlice'
 import useVisualMode from '../../hooks/useVisualMode'
 import { setSelectedSkills } from '../../reducers/selectedSkillsSlice'
+import { unwrapResult } from '@reduxjs/toolkit'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -28,7 +29,6 @@ const UserSkills = ({ userId }) => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()
-  console.log(loggedInUser, userId)
 
   const { mode, transition } = useVisualMode(SHOW)
 
@@ -38,33 +38,56 @@ const UserSkills = ({ userId }) => {
 
   const canSave = loggedInUser.user.id === userId && addRequestStatus === 'idle'
 
+  const selectedSkillNames = []
+
   const onSaveClicked = async (e) => {
     e.preventDefault()
-    const userSkillsList = []
-    for (const userSkill of skillsForUser) {
-      const skillName = userSkill.name
-      const skillId = userSkill.id
-      const skillObj = {
-        skillName,
-        skillId
-      }
-      userSkillsList.push(skillObj)
-      if (!selectedSkills.options.includes(skillName)) {
-        try {
-          setAddRequestStatus('pending')
-          const postResultAction = await dispatch(removeUserSkill({
-            name: skillName,
-            userId
-          })
-          )
-        } catch (err) {
-          console.error('Failed to remove the user skill: ', err)
-        } finally {
-          setAddRequestStatus('idle')
-          setError('')
+
+    const filtered = []
+    const skillsCopy = { ...selectedSkills }
+    for (const userSkillKey in skillsForUser) {
+      for (const selectedSkill of skillsCopy.options) {
+        if (skillsForUser[userSkillKey].name !== selectedSkill.value) {
+          filtered.push(skillsForUser[userSkillKey].name)
         }
       }
     }
+
+    console.log(filtered)
+    // const userSkillsMap = {}
+    // const userSkillNames = []
+    // for (const userSkill of skillsForUser) {
+    //   const skillName = userSkill.name
+    //   const skillId = userSkill.id
+    //   const skillObj = {
+    //     skillName,
+    //     skillId
+    //   }
+    //   userSkillNames.push(skillName)
+    //   userSkillsMap[skillName] = {skillObj}
+    // }
+
+    // for (const selectedSkill of selectedSkills.options) {
+    //   if (!userSkillsMap[selectedSkill.value])
+    // }
+    // if (!selectedSkillNames.includes(skillName)) {
+    //   try {
+    //     setAddRequestStatus('pending')
+    //     const postResultAction = await dispatch(removeUserSkill({
+    //       name: skillName,
+    //       userId
+    //     })
+    //     )
+    //     unwrapResult(postResultAction)
+    //     // setContent('')
+    //     // dispatch(emptySkillsDB())
+    //   } catch (err) {
+    //     console.error('Failed to remove the user skill: ', err)
+    //   } finally {
+    //     setAddRequestStatus('idle')
+    //     setError('')
+    //   }
+    // }
     // selectedSkills.map(selectedSkill => {
     //   .map
     //   if (!skillsForUser.includes(selectedSkill)) {

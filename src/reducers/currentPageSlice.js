@@ -9,7 +9,6 @@ const currentPageSlice = createSlice({
   initialState: initialState,
   reducers: {
     setCurrentPage (state, action) {
-      console.log('in slice: ', state, action)
       state = action.payload
       return action.payload
     }

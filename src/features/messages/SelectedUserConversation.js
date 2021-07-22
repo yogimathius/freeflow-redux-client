@@ -37,7 +37,6 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
   if (userMessages && userMessages[0].isNew) {
     receiverId = userMessages[0].receiverId
     receiver = Object.keys(userMessages)
-    console.log('receiver with keys: ', receiver)
   }
 
   return (

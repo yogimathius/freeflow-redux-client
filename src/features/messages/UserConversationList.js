@@ -42,7 +42,6 @@ const UserConversationList = () => {
   const dispatch = useDispatch()
 
   const handleOnClickLink = (messagerName) => {
-    console.log('messager name: ', messagerName)
     dispatch(setCurrentPage(messagerName))
   }
 

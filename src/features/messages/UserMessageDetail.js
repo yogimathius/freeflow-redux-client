@@ -54,7 +54,6 @@ const UserMessageDetail = ({ message, userId }) => {
   [userId].every(Boolean) && addRequestStatus === 'idle'
 
   const onDeleteMessageClicked = async () => {
-    console.log('clicked', message)
     const receiver = message.receiver
     if (canDelete) {
       try {

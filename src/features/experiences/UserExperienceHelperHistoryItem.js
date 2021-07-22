@@ -11,7 +11,6 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   // const [error, setError] = useState("");
-  console.log('experience in bug: ', experience)
   const pending = experience.status === 'pending'
   const accepted = experience.status === 'in-progress'
   const completed = experience.status === 'completed'

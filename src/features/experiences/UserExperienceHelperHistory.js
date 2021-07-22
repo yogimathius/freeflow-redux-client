@@ -9,7 +9,6 @@ const UserExperienceHelperHistory = ({ userId }) => {
   let renderedExperiences
   if (experiences) {
     renderedExperiences = experiences.map((experience, index) => {
-      console.log('experience: ', experience)
       return <UserExperienceHelperHistoryItem
         key={index}
         experience={experience}

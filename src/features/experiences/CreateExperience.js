@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom'
 const CreateExperience = ({ userId }) => {
   const dispatch = useDispatch()
   const { query, search } = useLocation()
-  console.log('query in create experience: ', query)
   const [error, setError] = useState('')
   let userRoutedFromPosts
   if (query !== undefined) {

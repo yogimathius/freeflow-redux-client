@@ -28,7 +28,6 @@ const UsernameSelector = ({ sortedMessages, userId, messagers, currentPage, setC
 
     if (userAlreadyInMessages === undefined) {
       const username = selectedUser.value.username
-      console.log(selectedUser)
       dispatch(addUserConversation({ name: username, userId: selectedUser.value.userIdInList }))
       setCurrentPage(username)
       history.push(`${url}/${username}`)
