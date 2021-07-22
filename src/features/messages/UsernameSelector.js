@@ -2,12 +2,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, withRouter } from 'react-router-dom'
-
-// import Autocomplete from "../../helpers/Autocomplete";
 import Select from 'react-select'
+
 import { selectAllUsers } from '../../reducers/usersSlice'
-import SelectedUserConversation from './SelectedUserConversation'
-// import UserConversationListItem from './messagerNameItem'
 import { setSelectedUser } from '../../reducers/selectedUserSlice'
 import { addUserConversation } from '../../reducers/userConversationsSlice'
 

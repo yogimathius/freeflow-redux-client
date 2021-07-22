@@ -35,10 +35,10 @@ export const addNewUserSkill = createAsyncThunk(
 export const removeUserSkill = createAsyncThunk(
   'userSkills/removeUserSkill',
   async (initialUserSkills) => {
-    const { post_id, skill_id } = initialUserSkills
+    const { name, userId } = initialUserSkills
     const removeUserSkill = {
-      post_id: post_id,
-      skill_id: skill_id
+      name,
+      user_id: userId
     }
     const response = await axios.delete(url, {
       params: {

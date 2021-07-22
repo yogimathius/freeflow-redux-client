@@ -13,6 +13,7 @@ const selectedSkillsSlice = createSlice({
   initialState: initialState,
   reducers: {
     setSelectedSkills (state, action) {
+      console.log('action: ', action)
       selectedSkillsDB = action.payload.options[0]
       return action.payload
     },

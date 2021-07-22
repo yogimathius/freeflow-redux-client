@@ -35,14 +35,14 @@ export default function UserPage () {
       <div className="">
         <div className="col-span-2">
           <UserCard
-          id={user.id}
-          firstName={user.first_name}
-          lastName={user.last_name}
-          active={user.active}
-          location={user.location}
-          created_at={user.created_at}
-          profession={user.profession}
-          tagline={user.tagline}
+            id={user.id}
+            firstName={user.first_name}
+            lastName={user.last_name}
+            active={user.active}
+            location={user.location}
+            created_at={user.created_at}
+            profession={user.profession}
+            tagline={user.tagline}
           />
         </div>
       </div>

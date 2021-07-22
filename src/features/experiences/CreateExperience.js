@@ -80,8 +80,11 @@ const CreateExperience = ({ userId }) => {
   }
   const defaultValue = userRoutedFromPosts || 'Select a User'
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 space-x-2 pt-2">
-      <div className="col-start-1 md:col-span-2 ml-2">
+    <div className="grid grid-cols-2 md:grid-cols-6 space-x-2 py-4">
+      <div className="col-span-6 flex justify-center font-bold text-2xl text-green-500 pb-4">
+        Find a User to offer help!
+      </div>
+      <div className="md:col-start-2 md:col-span-2 ml-2">
         <label
         htmlFor="new session"> </label>
         <Select
@@ -96,7 +99,7 @@ const CreateExperience = ({ userId }) => {
         />
       </div>
 
-      <div className="col-start-2 md:col-start-3 md:col-span-2 flex justify-center">
+      <div className="col-start-2 md:col-start-4 md:col-span-2 flex justify-center">
         <button onClick={() => CreateExperience()} className="btn btn-secondary">Create Session</button>
       </div>
       <section className="flex justify-center items-center text-red-500">{error}</section>
