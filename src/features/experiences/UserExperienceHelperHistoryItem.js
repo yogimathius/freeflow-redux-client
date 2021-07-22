@@ -11,11 +11,10 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   // const [error, setError] = useState("");
-
-  const pending = experience.date_accepted === null
-  const accepted = !!(experience.date_accepted !== null && experience.date_completed === null)
-  const completed = experience.date_completed !== null
-  const completedByHelper = experience.helper_submit_completion
+  console.log('experience in bug: ', experience)
+  const pending = experience.status === 'pending'
+  const accepted = experience.status === 'in-progress'
+  const completed = experience.status === 'completed'
 
   const users = useSelector((state) => state.users)
 
@@ -105,27 +104,29 @@ const UserExperienceHistoryItem = ({ experience, userId }) => {
 
       <div className="md:text-center text-xs md:text-sm ">
           {pending
-            ? <button
-                className="text-red-500 btn btn-warning"
-                onClick={() => removeExperienceClicked()}
-              >
-                Cancel
-              </button>
-            : accepted && completedByHelper !== true
+            ? <div className="space-x-2">
+                <button
+                  className="text-red-500 btn btn-warning"
+                  onClick={() => removeExperienceClicked()}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="text-blue-500 btn btn-secondary"
+                  onClick={() => removeExperienceClicked()}
+                >
+                  Message
+                </button>
+              </div>
+            : accepted
               ? <div className="space-x-2">
                   <button
                     className="text-red-500 text-sm btn btn-warning">
                       Cancel
                   </button>
 
-                  <button
-                    className="text-green-500 btn btn-secondary"
-                    onClick={() => completeExperienceClicked()}>
-                      Complete
-                  </button>
-
                 </div>
-              : completed || completedByHelper
+              : completed
                 ? <button
                   className="text-green-500 btn btn-secondary"
                 >

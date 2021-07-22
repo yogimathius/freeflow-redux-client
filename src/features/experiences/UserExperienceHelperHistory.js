@@ -1,15 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice'
-import UserExperienceHistoryItem from './UserExperienceHistoryItem'
+import UserExperienceHelperHistoryItem from './UserExperienceHelperHistoryItem'
 
-const UserExperienceHistory = ({ userId }) => {
+const UserExperienceHelperHistory = ({ userId }) => {
   const experiences = useSelector((state) => selectHelperExperiencesByUserId(state, userId))
 
   let renderedExperiences
   if (experiences) {
     renderedExperiences = experiences.map((experience, index) => {
-      return <UserExperienceHistoryItem
+      console.log('experience: ', experience)
+      return <UserExperienceHelperHistoryItem
         key={index}
         experience={experience}
         userId={userId}
@@ -24,4 +25,4 @@ const UserExperienceHistory = ({ userId }) => {
   )
 }
 
-export default UserExperienceHistory
+export default UserExperienceHelperHistory

@@ -1,6 +1,6 @@
 import React from 'react'
 import CreateExperience from './CreateExperience'
-import UserExperienceHistory from './UserExperienceHistory'
+import UserExperienceHelperHistory from './UserExperienceHelperHistory'
 import UserExperienceHelpedHistory from './UserExperienceHelpedHistory'
 
 const UserExperiences = ({ match }) => {
@@ -9,7 +9,7 @@ const UserExperiences = ({ match }) => {
   return (
     <div className="space-y-2 mt-2 pt-1">
       <CreateExperience userId={userId} />
-      <UserExperienceHistory
+      <UserExperienceHelperHistory
         userId={userId}
       />
       <UserExperienceHelpedHistory
