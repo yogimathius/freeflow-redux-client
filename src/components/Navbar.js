@@ -11,6 +11,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import BarChartIcon from '@material-ui/icons/BarChart'
 import PostAddIcon from '@material-ui/icons/PostAdd'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
+import { emptySkillsDB } from '../reducers/selectedSkillsSlice'
 
 export const Navbar = (props) => {
   const { user } = useSelector(state => state.user)
@@ -27,6 +28,11 @@ export const Navbar = (props) => {
     }
   }, [user])
 
+  const onDashboardClicked = () => {
+    setCurrentPage('dashboard')
+    dispatch(emptySkillsDB())
+  }
+
   return (
     <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40 font-body">
       <section className="grid grid-cols-8 ">
@@ -42,7 +48,7 @@ export const Navbar = (props) => {
 
         <div className="col-start-3 col-span-4 hidden md:flex justify-evenly my-2 space-x-12 font-bold items-end text-white">
 
-          <Link onClick={() => (setCurrentPage('dashboard'))} className="" to="/dashboard">
+          <Link onClick={() => (onDashboardClicked())} className="" to="/dashboard">
             <div className="flex group">
             <div className={`${currentPage === 'dashboard' ? 'border-b-2 border-white' : ''} group-hover:border-b-2 group-hover:border-white`}>
                 <PostAddIcon />
