@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
@@ -8,12 +8,22 @@ import MessageTextEditor from './MessageTextEditor'
 import UserMessageDetail from './UserMessageDetail'
 
 // eslint-disable-next-line react/prop-types
-const SelectedUserConversation = ({ sortedMessages, userId }) => {
+const SelectedUserConversation = ({ sortedMessages }) => {
+  const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
+
   const { messagerId } = useParams()
+  const conversationsStatus = useSelector((state) => state.userConversations.status)
+  const userConversations = useSelector((state) => state.userConversations)
 
-  const userMessages = sortedMessages[messagerId]
+  let conversations
+
+  if (conversationsStatus === 'succeeded') {
+    conversations = userConversations.userConversations
+  }
+
+  const userMessages = conversations !== undefined ? conversations?.messages[messagerId] : ''
+
   let receiverId, receiver, sender, renderedMessages
-
   if (userMessages && !userMessages[0].isNew) {
     renderedMessages = userMessages.length > 0
       ? userMessages.map((message, index) => {
@@ -38,7 +48,6 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
     receiverId = userMessages[0].receiverId
     receiver = Object.keys(userMessages)
   }
-
   return (
         <div className="space-y-8 w-100">
           {renderedMessages !== '' && (
@@ -46,7 +55,7 @@ const SelectedUserConversation = ({ sortedMessages, userId }) => {
                 {renderedMessages}
             </ScrollToBottom>
           )}
-          {userMessages[0].isNew && (
+          {userMessages[0]?.isNew && (
             <div>Send {messagerId} a message</div>
           )}
           <div className="">
