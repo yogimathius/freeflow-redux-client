@@ -36,13 +36,13 @@ const UserMessageDetail = ({ message, userId }) => {
   const fullname = user.first_name + ' ' + user.last_name
 
   if (user.id === userId) {
-    textBodyStyle = 'mr-7'
-    placementStyle = ''
+    textBodyStyle = 'bg-green-500 text-white font-semibold mr-7'
+    placementStyle = 'col-start-2 '
     nameAndTimeStyle = ''
     myMessage = true
   } else {
-    placementStyle = 'col-start-2 '
-    textBodyStyle = 'bg-green-500 text-white font-semibold ml-7'
+    placementStyle = ''
+    textBodyStyle = 'ml-7'
     nameAndTimeStyle = 'ml-7'
     myMessage = false
   }
