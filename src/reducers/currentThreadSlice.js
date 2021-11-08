@@ -4,11 +4,11 @@ import {
 
 const initialState = ''
 
-const currentPageSlice = createSlice({
-  name: 'currentPage',
+const currentThreadSlice = createSlice({
+  name: 'currentThread',
   initialState: initialState,
   reducers: {
-    setCurrentPage (state, action) {
+    setCurrentThread (state, action) {
       state = action.payload
       return action.payload
     }
@@ -17,6 +17,6 @@ const currentPageSlice = createSlice({
   }
 })
 
-export const { setCurrentPage } = currentPageSlice.actions
+export const { setCurrentThread } = currentThreadSlice.actions
 
-export default currentPageSlice.reducer
+export default currentThreadSlice.reducer

@@ -12,7 +12,7 @@ import MessagerNameList from './MessagerNameList'
 import CreateMessageForm from './CreateMessageForm'
 import UsernameSelector from './UsernameSelector'
 import { setUserConversations, selectAllConversations, fetchConversations } from '../../reducers/userConversationsSlice'
-import { setCurrentPage } from '../../reducers/currentPageSlice'
+import { setCurrentThread } from '../../reducers/currentThreadSlice'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -22,8 +22,10 @@ const COMPOSE = 'COMPOSE'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 const UserConversationList = () => {
-  // const [currentPage, setCurrentPage] = useState('')
+  // const [currentPage, setCurrentThread] = useState('')
+  const dispatch = useDispatch()
   const { mode, transition } = useVisualMode(SHOW)
+  const { path, url } = useRouteMatch()
 
   function onComposeMessage () {
     transition(COMPOSE)
@@ -33,40 +35,14 @@ const UserConversationList = () => {
     transition(SHOW)
   }
 
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-  const userId = loggedInUser.id
-  const { path, url } = useRouteMatch()
-
-  const userConversations = useSelector(selectAllConversations)
-
-  const dispatch = useDispatch()
+  const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
 
   const handleOnClickLink = (messagerName) => {
-    dispatch(setCurrentPage(messagerName))
+    dispatch(setCurrentThread(messagerName))
   }
 
-  const conversationsStatus = useSelector((state) => state.userConversations.status)
-  const currentPage = useSelector((state) => state.currentPage)
-  const messagesError = useSelector((state) => state.userConversations.error)
-
-  useEffect(() => {
-    if (conversationsStatus === 'idle') {
-      dispatch(fetchConversations(userId))
-    }
-  }, [conversationsStatus, userId, dispatch])
-
-  let renderedMessagers, conversations
-  if (conversationsStatus === 'pending') {
-    renderedMessagers = <div className="loader">Loading...</div>
-  } else if (conversationsStatus === 'succeeded') {
-    conversations = userConversations.userConversations
-    // sortedMessages = sortMessages(userConversations.entities, userId)
-
-    // dispatch(setUserConversations(sortedMessages.messagers))
-  } else if (conversationsStatus === 'failed') {
-    renderedMessagers = <div>{messagesError}</div>
-  }
-
+  const conversations = useSelector((state) => state.userConversations.userConversations)
+  const currentThread = useSelector((state) => state.currentThread)
   return (
       <div className="grid grid-cols-4 grid-rows-8 mx-4">
           {/* {mode === SHOW && (
@@ -83,11 +59,10 @@ const UserConversationList = () => {
               {/* <button onClick={() => transition(SHOW)} className="btn btn-warning col-span-1">Cancel</button> */}
               {/* </div> */}
               <UsernameSelector
-                sortedMessages={conversations?.messages}
                 userId={userId}
                 messagers={conversations?.messagers}
-                currentPage={currentPage}
-                setCurrentPage={handleOnClickLink}
+                currentThread={currentThread}
+                setCurrentThread={handleOnClickLink}
                 url={url}
                 path={path}
               />
@@ -95,8 +70,8 @@ const UserConversationList = () => {
           {/* )} */}
 
           <MessagerNameList
-            currentPage={currentPage}
-            setCurrentPage={handleOnClickLink}
+            currentThread={currentThread}
+            setCurrentThread={handleOnClickLink}
             url={url}
             userConversationNames={conversations?.messagers}
             userId={userId}

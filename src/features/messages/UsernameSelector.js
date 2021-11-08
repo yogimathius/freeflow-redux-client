@@ -8,7 +8,7 @@ import { selectAllUsers } from '../../reducers/usersSlice'
 import { setSelectedUser } from '../../reducers/selectedUserSlice'
 import { addUserConversation } from '../../reducers/userConversationsSlice'
 
-const UsernameSelector = ({ sortedMessages, userId, messagers, currentPage, setCurrentPage, url, path }) => {
+const UsernameSelector = ({ sortedMessages, userId, messagers, currentThread, setCurrentThread, url, path }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
@@ -29,14 +29,14 @@ const UsernameSelector = ({ sortedMessages, userId, messagers, currentPage, setC
     if (userAlreadyInMessages === undefined) {
       const username = selectedUser.value.username
       dispatch(addUserConversation({ name: username, userId: selectedUser.value.userIdInList }))
-      setCurrentPage(username)
+      setCurrentThread(username)
       history.push(`${url}/${username}`)
     }
 
     if (userAlreadyInMessages !== undefined) {
       dispatch(setSelectedUser({ selectedUser }))
       const username = userAlreadyInMessages.name
-      setCurrentPage(username)
+      setCurrentThread(username)
       history.push(`${url}/${username}`)
     }
   }

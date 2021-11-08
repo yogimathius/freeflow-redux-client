@@ -12,7 +12,8 @@ import selectedSkillsReducer from './selectedSkillsSlice'
 import messagesReducer from './messagesSlice'
 import selectedUserReducer from './selectedUserSlice'
 import userConversationReducer from './userConversationsSlice'
-import currentPageReducer from './currentPageSlice'
+import currentThreadReducer from './currentThreadSlice'
+import unreadCountReducer from './unreadCountSlice'
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   messages: messagesReducer,
   selectedUser: selectedUserReducer,
   userConversations: userConversationReducer,
-  currentPage: currentPageReducer
+  currentThread: currentThreadReducer,
+  unreadCount: unreadCountReducer
 })
 
 export default rootReducer

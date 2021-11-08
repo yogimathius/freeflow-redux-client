@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import MessagerNameItem from './MessagerNameItem'
 
-const MessageNameList = ({ url, currentPage, setCurrentPage, userConversationNames, userId }) => {
+const MessageNameList = ({ url, currentThread, setCurrentThread, userConversationNames, userId }) => {
   const renderedMessagers = userConversationNames
     ? userConversationNames.map((messagerObj, index) => {
       const messagerId = messagerObj.userId
@@ -11,11 +11,11 @@ const MessageNameList = ({ url, currentPage, setCurrentPage, userConversationNam
         const messagerName = messagerObj.name
         return (
           <div key={index} className="">
-            <Link onClick={() => setCurrentPage(messagerName)} to={`${url}/${messagerName}`}>
+            <Link onClick={() => setCurrentThread(messagerName)} to={`${url}/${messagerName}`}>
               <MessagerNameItem
                 messagerId={messagerId}
                 messager={messagerName}
-                currentPage={currentPage}
+                currentThread={currentThread}
               />
 
             </Link>
