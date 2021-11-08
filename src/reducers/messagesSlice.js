@@ -19,6 +19,11 @@ export const fetchMessages = createAsyncThunk('messages/fetchMessages', async (u
   return response.data
 })
 
+export const fetchUnreadCount = createAsyncThunk('messages/fetchMessages', async (userId) => {
+  const response = await axios.get(`${url}/unread_count`, { userID: userId })
+  return response.data
+})
+
 export const addNewMessage = createAsyncThunk(
   'messages/addNewMessage',
   async (initialMessage) => {
@@ -84,7 +89,10 @@ const messagesSlice = createSlice({
       state.status = 'failed'
       state.error = action.error.message
     },
-    [addNewMessage.fulfilled]: messagesAdapter.addOne
+    [addNewMessage.fulfilled]: messagesAdapter.addOne,
+    [fetchUnreadCount.fulfilled]: (state, action) => {
+    }
+
     // [removeMessage.fulfilled]: (state, action) => {
     //   messagesAdapter.removeOne(state, action.meta.arg.messageId)
     // }
