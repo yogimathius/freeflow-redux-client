@@ -26,11 +26,10 @@ function App () {
   return (
     <AuthProvider>
       <Router>
-        {/* <SideBar /> */}
 
-        <div className="App md:grid grid-cols-10 font-body">
+        <div className="App xl:grid grid-cols-10 font-body">
           <Navbar />
-          <div className="hidden md:col-span-2 md:flex justify-center">
+          <div className="hidden xl:col-span-2 xl:flex justify-center">
             { user.user
               ? <UserSideBar />
               : ''

@@ -37,8 +37,7 @@ export const UsersList = () => {
 
   const renderedUsers = users.map((user, id) => {
     return (
-    <div key={id} className="">
-      <UserSkillsList />
+      <div key={id} className="">
         <UserCard
           key={id}
           id={user.id}
@@ -49,15 +48,18 @@ export const UsersList = () => {
           created_at={user.created_at}
           profession={user.profession}
           tagline={user.tagline}
+          position="right"
         />
-    </div>
+      </div>
     )
   })
 
   return (
     <section className="space-y-3 pt-3 mt-2">
       <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
-      {renderedUsers}
+      <div className="grid grid-cols-2 gap-y-2">
+        {renderedUsers}
+      </div>
     </section>
   )
 }

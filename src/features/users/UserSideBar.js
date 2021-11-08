@@ -16,7 +16,7 @@ const UserSideBar = () => {
   const experience = userExperiences.length * 12
 
   return (
-    <div className="border-2 border-green-500 rounded-lg m-2 h-content py-3 px-2 fixed md:mt-24  space-y-2">
+    <div className="border-b-3 border-green-500 m-2 h-content py-3 px-4 fixed md:mt-24  space-y-2">
       <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
         <UserNameAndLogo userId={user?.id} />
       </Link>
@@ -30,7 +30,7 @@ const UserSideBar = () => {
             location={user?.location}
           />
       </div>
-      <div className="mx-4 text-sm">
+      <div className="text-sm">
         <UserSkills
           userId={user?.id}
         />

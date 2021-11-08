@@ -111,6 +111,7 @@ const UserSkills = ({ userId }) => {
     })
     : ''
 
+  // console.log('user options: '.userSkillOptions)
   useEffect(() => {
     if (userSkillOptions.length > 0) {
       dispatch(setSelectedSkills({ options: userSkillOptions }))
@@ -120,11 +121,13 @@ const UserSkills = ({ userId }) => {
   return (
     <>
     {mode === SHOW && (
-      <div className="space-x-1 flex flex-wrap items-center md:nowrap">
-        <div className=" font-bold">My Skills: </div>
-        {renderedSkills}
+      <div>
+        <div className="space-x-1 flex flex-wrap items-center md:nowrap">
+          <div className=" font-bold">My Skills: </div>
+          {renderedSkills}
+        </div>
         {loggedInUser.user.id === userId && (
-          <button onClick={() => onEditSkillsClicked()} className="font-bold text-green-500 text-xs">Edit Skills</button>
+          <button onClick={() => onEditSkillsClicked()} className="font-bold text-green-500 text-xs">Update Skills</button>
         )}
       </div>
     )}
