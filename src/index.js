@@ -9,10 +9,13 @@ import { fetchPosts } from './reducers/postsSlice'
 import { fetchSkills } from './reducers/dbSkillsSlice'
 // import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 import axios from 'axios'
+import { fetchConversations } from './reducers/userConversationsSlice'
+const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
 
 store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
+store.dispatch(fetchConversations(userId))
 
 // store.dispatch(fetchSkills())
 
