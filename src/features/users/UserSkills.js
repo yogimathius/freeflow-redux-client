@@ -53,7 +53,6 @@ const UserSkills = ({ userId }) => {
       }
     }
 
-    console.log(filtered)
     // const userSkillsMap = {}
     // const userSkillNames = []
     // for (const userSkill of skillsForUser) {
@@ -112,7 +111,6 @@ const UserSkills = ({ userId }) => {
     })
     : ''
 
-  // console.log('user options: '.userSkillOptions)
   useEffect(() => {
     if (userSkillOptions.length > 0) {
       dispatch(setSelectedSkills({ options: userSkillOptions }))
