@@ -55,7 +55,7 @@ export const UsersList = () => {
   })
 
   return (
-    <section className="space-y-3 pt-3 mt-2">
+    <section className="space-y-3 pt-3 mt-2 m-4">
       <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
       <div className="grid grid-cols-2 gap-y-2">
         {renderedUsers}

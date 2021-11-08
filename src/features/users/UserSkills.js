@@ -123,7 +123,7 @@ const UserSkills = ({ userId }) => {
     {mode === SHOW && (
       <div>
         <div className="space-x-1 flex flex-wrap items-center md:nowrap">
-          <div className=" font-bold">My Skills: </div>
+          <div className=" font-bold">Skills: </div>
           {renderedSkills}
         </div>
         {loggedInUser.user.id === userId && (

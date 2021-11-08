@@ -16,9 +16,9 @@ export default function UserCard (props) {
   const position = props.position === 'right' ? 'text-right' : 'text-left'
 
   return (
-    <div className='flex flex-col justify-between bg-white rounded-xl m-1 hover:shadow-lg space-y-4 p-3 h-full' key={props.id}>
+    <div className='flex flex-col justify-start md:justify-between bg-white rounded-xl m-1 hover:shadow-lg space-y-4 p-3 h-full' key={props.id}>
       <div className="flex flex-col mr-4 space-y-2">
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row justify-between space-y-2 md:space-y-0">
           <div className="space-y-6">
             <Link to={`/userprofile/${props.id}`} onClick={() => saveState(props.id)}>
               <UserNameAndLogo userId={props.id} />
