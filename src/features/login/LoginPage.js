@@ -5,6 +5,7 @@ import { login } from '../../reducers/userLoginSlice'
 import { Redirect } from 'react-router-dom'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
+import { fetchUnreadCount } from '../../reducers/unreadCountSlice'
 
 export default function LoginPage () {
   const dispatch = useDispatch()
@@ -33,6 +34,7 @@ export default function LoginPage () {
   if (user !== null) {
     dispatch(fetchSkills())
     dispatch(fetchUserSkills())
+    dispatch(fetchUnreadCount())
     return (
       <Redirect to={{ pathname: '/dashboard' }} />
     )
