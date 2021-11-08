@@ -111,6 +111,12 @@ export default function PostExcerpt ({ postId, onPost, index }) {
               >
                 Offer Help
               </Link>
+              <Link
+                to={{ pathname: `${userId}/experiences`, query: { owner: experienceOption } }}
+                onClick={() => localStorage.setItem('selected_user', JSON.stringify(experienceOption))}
+              >
+                Send Message
+              </Link>
             </div>
           }
         </div>
