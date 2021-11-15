@@ -10,13 +10,14 @@ import { fetchSkills } from './reducers/dbSkillsSlice'
 // import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 import axios from 'axios'
 import { fetchConversations } from './reducers/userConversationsSlice'
+import { fetchComments } from './reducers/commentsSlice'
 const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
 
 store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
 store.dispatch(fetchPosts())
 store.dispatch(fetchConversations(userId))
-
+store.dispatch(fetchComments())
 // store.dispatch(fetchSkills())
 
 if (process.env.REACT_APP_API_BASE_URL) {
