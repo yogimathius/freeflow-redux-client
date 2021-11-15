@@ -12,19 +12,19 @@ export const CommentsList = ({ postId }) => {
   const commentsStatus = useSelector((state) => state.comments.status)
   const error = useSelector((state) => state.comments.error)
 
-  useEffect(() => {
-    if (commentsStatus === 'idle') {
-      dispatch(fetchComments())
-    }
-  }, [commentsStatus, dispatch])
+  // useEffect(() => {
+  //   if (commentsStatus === 'idle') {
+  //     dispatch(fetchComments())
+  //   }
+  // }, [commentsStatus, dispatch])
 
-  if (commentsStatus === 'pending') {
-    content = <div className="loader">Loading...</div>
-  } else if (commentsStatus === 'fulfilled') {
-    console.log()
-  } else if (commentsStatus === 'rejected') {
-    content = <div>{error}</div>
-  }
+  // if (commentsStatus === 'pending') {
+  //   content = <div className="loader">Loading...</div>
+  // } else if (commentsStatus === 'fulfilled') {
+  //   console.log()
+  // } else if (commentsStatus === 'rejected') {
+  //   content = <div>{error}</div>
+  // }
 
   const renderedComments = comments.map((comment, index) => {
     return (
