@@ -3,7 +3,7 @@
 import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import './CollapsibleCommentList.css'
+import { CSSTransition } from 'react-transition-group'
 import { UserNameAndLogo } from '../users/UserNameAndLogo'
 import { TimeAgo } from './TimeAgo'
 import {
@@ -29,7 +29,10 @@ const EDITING = 'EDITING'
 
 export default function PostExcerpt ({ postId, onPost, index }) {
   const [expanded, setExpanded] = useState(false)
-  const clickHandler = useCallback(() => setExpanded(!expanded), [expanded])
+  const [inProp, setInProp] = useState(false)
+  const [showButton, setShowButton] = useState(true)
+  const clickHandler = useCallback(() => setShowButton(!showButton), [showButton])
+  const [showMessage, setShowMessage] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -161,30 +164,39 @@ export default function PostExcerpt ({ postId, onPost, index }) {
       {/* LIKES */}
       <Likes postId={postId} userId={userId} />
 
-      <div className="wrap-collapsible">
-
-      <li onClick={clickHandler} className={expanded ? 'expanded' : 'collapsed'}>
+      <div>
 
         {commentsLength === 0 ? ''
 
-          : <h4 className="">
+          : <button type="button" onClick={() => setShowMessage(!showMessage)} className="">
           {/* COMMENTS LIST FOR POST */}
 
           {commentsLength > 1 ? <span>{commentsLength} comments</span> : ''}
 
           {commentsLength === 1 ? <span>{commentsLength} comment</span> : ''}
 
-          </h4>
+          </button>
         }
-        <ul className="submenu">
-          <CommentsList key={index} postId={postId} />
+        <CSSTransition
+          in={showMessage}
+          timeout={300}
+          classNames="alert"
+          unmountOnExit
+          // onEnter={() => setShowMessage(false)}
+          // onExited={() => setShowButton(true)}
+        >
           <div>
-            {/* <section className="validation">{error}</section> */}
+            <ul>
+              <CommentsList key={index} postId={postId} />
+              <div>
+                {/* <section className="validation">{error}</section> */}
+              </div>
+            </ul>
+            <AddCommentForm postId={postId} />
           </div>
-        </ul>
-        <AddCommentForm postId={postId} />
-        </li>
-      </div>
+        </CSSTransition>
+
+        </div>
 
       { onPost === true && user && user.id === post.owner_id
         ? <div className="flex justify-center">
