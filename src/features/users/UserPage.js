@@ -6,6 +6,7 @@ import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from '../../reducers/usersSlice'
 import PostExcerpt from '../posts/PostExcerpt'
 import UserCard from './UserCard'
+import UserPageAssets from './UserPageAssets'
 // import AddPostForm from '../posts/AddPostForm';
 // import {Link} from 'react-router-dom'
 
@@ -34,15 +35,16 @@ export default function UserPage () {
 
       <div className="">
         <div className="col-span-2">
-          <UserCard
-            id={user.id}
-            firstName={user.first_name}
-            lastName={user.last_name}
-            active={user.active}
-            location={user.location}
-            created_at={user.created_at}
-            profession={user.profession}
-            tagline={user.tagline}
+          <UserPageAssets
+            userId={user.id}
+            canUpdate={true}
+            // firstName={user.first_name}
+            // lastName={user.last_name}
+            // active={user.active}
+            // location={user.location}
+            // created_at={user.created_at}
+            // profession={user.profession}
+            // tagline={user.tagline}
           />
         </div>
       </div>
