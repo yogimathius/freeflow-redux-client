@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './CollapsibleCommentList.css'
@@ -28,6 +28,9 @@ const EDITING = 'EDITING'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 export default function PostExcerpt ({ postId, onPost, index }) {
+  const [expanded, setExpanded] = useState(false)
+  const clickHandler = useCallback(() => setExpanded(!expanded), [expanded])
+
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
@@ -160,28 +163,27 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
       <div className="wrap-collapsible">
 
-        <input
-          id={'collapsible' + index} className="toggle hidden"
-          type="checkbox">
-        </input>
+      <li onClick={clickHandler} className={expanded ? 'expanded' : 'collapsed'}>
+
         {commentsLength === 0 ? ''
 
-          : <label htmlFor={'collapsible' + index} className="lbl-toggle">
+          : <h4 className="">
           {/* COMMENTS LIST FOR POST */}
 
           {commentsLength > 1 ? <span>{commentsLength} comments</span> : ''}
 
           {commentsLength === 1 ? <span>{commentsLength} comment</span> : ''}
 
-          </label>
+          </h4>
         }
-        <div className="collapsible-content">
+        <ul className="submenu">
           <CommentsList key={index} postId={postId} />
           <div>
             {/* <section className="validation">{error}</section> */}
           </div>
-        </div>
+        </ul>
         <AddCommentForm postId={postId} />
+        </li>
       </div>
 
       { onPost === true && user && user.id === post.owner_id
