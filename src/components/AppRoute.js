@@ -5,12 +5,11 @@ import { useSelector } from 'react-redux'
 import { Redirect, Route } from 'react-router-dom'
 
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
-  const loggedInUser = useSelector(state => state.user)
-
+  const loggedInUser = useSelector(state => state.user.user)
   return (
 		<Route
 			path={path}
-			render={(props) => isPrivate && loggedInUser === null
+			render={(props) => isPrivate && loggedInUser === undefined
 			  ? (<Redirect to={{ pathname: '/login' }} />)
 			  : (<Component {...props} />)
 			}
