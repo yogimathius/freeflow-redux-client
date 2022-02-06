@@ -2,9 +2,11 @@ import React from 'react'
 import CreateExperience from './CreateExperience'
 import UserExperienceHelperHistory from './UserExperienceHelperHistory'
 import UserExperienceHelpedHistory from './UserExperienceHelpedHistory'
+import { loadState } from '../../helpers/localStorage'
 
 const UserExperiences = ({ match }) => {
-  const userId = match.params.userId
+  const loggedInUser = loadState()
+  const userId = loggedInUser.id
 
   return (
     <div className="space-y-2 mt-2 pt-1">

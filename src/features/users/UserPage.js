@@ -11,15 +11,13 @@ import UserPageAssets from './UserPageAssets'
 // import {Link} from 'react-router-dom'
 
 export default function UserPage () {
-  const userId = loadState()
-  // const loggedInUser = useSelector(state => state.user)
-  const user = useSelector((state) => selectUserById(state, userId))
-
+  const loggedInUser = loadState()
+  const userId = loggedInUser.id
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
   const experiencesForUser = useSelector((state) => selectHelperExperiencesByUserId(state, userId))
 
-  if (!user || !postsForUser || !experiencesForUser) {
+  if (!userId || !postsForUser || !experiencesForUser) {
     return null
   }
 
@@ -36,7 +34,7 @@ export default function UserPage () {
       <div className="">
         <div className="col-span-2">
           <UserPageAssets
-            userId={user.id}
+            userId={userId}
             canUpdate={true}
             // firstName={user.first_name}
             // lastName={user.last_name}

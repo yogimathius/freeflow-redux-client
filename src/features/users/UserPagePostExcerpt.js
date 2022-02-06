@@ -18,11 +18,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { saveState } from '../../helpers/localStorage'
+import { loadState, saveState } from '../../helpers/localStorage'
 import { UserNameAndLogo } from '../posts/UserNameAndLogo'
 
 export default function UserPagePostExcerpt ({ postId }) {
-  const loggedInUser = JSON.parse(localStorage.getItem('user'))
+  const loggedInUserID = loadState()
 
   const post = useSelector((state) => selectPostById(state, postId))
 
@@ -30,9 +30,9 @@ export default function UserPagePostExcerpt ({ postId }) {
 
   const likeSum = likesList.length
 
-  const myLikes = loggedInUser
+  const myLikes = loggedInUserID
     ? likesList.filter(
-      (like) => loggedInUser.id === like.liker_id
+      (like) => loggedInUserID === like.liker_id
     )
     : ''
 
@@ -50,7 +50,7 @@ export default function UserPagePostExcerpt ({ postId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          addNewLike({ posting_id: post.id, liker_id: loggedInUser.id })
+          addNewLike({ posting_id: post.id, liker_id: loggedInUserID })
         )
         unwrapResult(resultAction)
       } catch (err) {
@@ -66,7 +66,7 @@ export default function UserPagePostExcerpt ({ postId }) {
       try {
         setAddRequestStatus('pending')
         const resultAction = await dispatch(
-          removeLike({ posting_id: post.id, owner_id: loggedInUser.id })
+          removeLike({ posting_id: post.id, owner_id: loggedInUserID })
         )
         unwrapResult(resultAction)
       } catch (err) {
@@ -80,13 +80,13 @@ export default function UserPagePostExcerpt ({ postId }) {
   const LikeUnlikeIcons = iAlreadyLikeThis
     ? (
     <FontAwesomeIcon
-    onClick={() => unLike(post.id, loggedInUser.id)}
+    onClick={() => unLike(post.id, loggedInUserID)}
     className=""
     icon={fasHeart} size="1x" />
       )
     : (
     <FontAwesomeIcon
-      onClick={() => addLike(post.post_id, loggedInUser.id)}
+      onClick={() => addLike(post.post_id, loggedInUserID)}
       className="love"
       icon={farHeart} size="1x" />
       )

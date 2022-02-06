@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { loadState } from '../helpers/localStorage'
 // Slice
 const url = 'https://freeflow-two-point-o.herokuapp.com/api/login-real'
 
-const initialUser = localStorage.getItem('user')
-  ? JSON.parse(localStorage.getItem('user'))
-  : null
+const initialUser = loadState()
 
 const userLoginSlice = createSlice({
   name: 'user',

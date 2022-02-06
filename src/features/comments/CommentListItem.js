@@ -6,7 +6,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import UserImage from '../users/UserImage'
 import { removeComment } from '../../reducers/commentsSlice'
 import { Link } from 'react-router-dom'
-import { saveState } from '../../helpers/localStorage'
+import { loadState, saveState } from '../../helpers/localStorage'
 import { TimeAgo } from '../posts/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import { EditCommentForm } from './EditCommentForm'
@@ -18,9 +18,7 @@ const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
 const CommentListItem = ({ comment, postId }) => {
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-  const userId = loggedInUser.id
-
+  const userId = loadState()
   const dispatch = useDispatch()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 

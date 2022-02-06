@@ -13,10 +13,11 @@ import { Navbar } from './components/Navbar'
 import AppRoute from './components/AppRoute'
 import UserSideBar from './features/users/UserSideBar'
 import { fetchUserSkills } from './reducers/userSkillsSlice'
+import { loadState } from './helpers/localStorage'
 // import Footer from './components/Footer';
 
 function App () {
-  const user = useSelector(state => state.user)
+  const user = loadState()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function App () {
         <div className="App xl:grid grid-cols-10 font-body">
           <Navbar />
           <div className="hidden xl:col-span-2 xl:flex justify-center">
-            { user.user
+            { user
               ? <UserSideBar />
               : ''
             }

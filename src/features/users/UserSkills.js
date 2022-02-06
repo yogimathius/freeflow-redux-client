@@ -10,6 +10,7 @@ import { removeUserSkill, selectUserSkillsByUserId } from '../../reducers/userSk
 import useVisualMode from '../../hooks/useVisualMode'
 import { setSelectedSkills } from '../../reducers/selectedSkillsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
+import { loadState } from '../../helpers/localStorage'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -18,10 +19,10 @@ const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
 
-const UserSkills = ({ userId }) => {
+const UserSkills = ({ userId, canUpdate }) => {
   const [error, setError] = useState('')
 
-  const loggedInUser = useSelector(state => state.user)
+  const loggedInUserID = loadState()
 
   const skillsForUser = useSelector(state => selectUserSkillsByUserId(state, userId))
   const selectedSkills = useSelector(state => state.selectedSkills)
@@ -36,7 +37,7 @@ const UserSkills = ({ userId }) => {
     transition(EDITING)
   }
 
-  const canSave = loggedInUser.user.id === userId && addRequestStatus === 'idle'
+  // const canSave = loggedInUserID === userId && addRequestStatus === 'idle'
 
   const selectedSkillNames = []
 
@@ -111,7 +112,6 @@ const UserSkills = ({ userId }) => {
     })
     : ''
 
-  // console.log('user options: '.userSkillOptions)
   useEffect(() => {
     if (userSkillOptions.length > 0) {
       dispatch(setSelectedSkills({ options: userSkillOptions }))
@@ -126,7 +126,7 @@ const UserSkills = ({ userId }) => {
           <div className=" font-bold">Skills: </div>
           {renderedSkills}
         </div>
-        {loggedInUser.user.id === userId && (
+        {loggedInUserID === userId && canUpdate && (
           <button onClick={() => onEditSkillsClicked()} className="font-bold text-green-500 text-xs">Update Skills</button>
         )}
       </div>

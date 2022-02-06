@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewComment } from '../../reducers/commentsSlice'
+import { loadState } from '../../helpers/localStorage'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
-  const userId = loggedInUser.id
+  const userId = loadState()
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const dispatch = useDispatch()

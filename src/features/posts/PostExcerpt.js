@@ -11,7 +11,7 @@ import {
   selectPostById
 } from '../../reducers/postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
-import { saveState } from '../../helpers/localStorage'
+import { loadState, saveState } from '../../helpers/localStorage'
 import Likes from '../likes/likes'
 import { CommentsList } from '../comments/CommentsList'
 import { AddCommentForm } from '../comments/AddCommentForm'
@@ -38,9 +38,9 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
   const { user } = useSelector(state => state.user)
 
-  const loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+  const loggedInUserID = loadState()
 
-  const userId = loggedInUser.id
+  const userId = loggedInUserID
   const post = useSelector((state) => selectPostById(state, postId))
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))

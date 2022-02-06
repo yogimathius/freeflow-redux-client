@@ -4,15 +4,16 @@ import { selectUserById } from '../../reducers/usersSlice'
 import { Link } from 'react-router-dom'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { selectCompletedExperiencesByHelperId } from '../../reducers/experiencesSlice'
-import { saveState } from '../../helpers/localStorage'
+import { loadState, saveState } from '../../helpers/localStorage'
 import { UserNameAndLogo } from './UserNameAndLogo'
 import UserInfo from './UserInfo'
 import UserSkills from './UserSkills'
 
 const UserSideBar = () => {
-  const userId = useSelector(state => state.user.user.id)
-  const user = useSelector((state) => selectUserById(state, userId))
-  const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, userId))
+  const loggedInUser = loadState()
+  const loggedInUserID = loggedInUser.id
+  const user = useSelector((state) => selectUserById(state, loggedInUserID))
+  const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, loggedInUserID))
   const experience = userExperiences.length * 12
 
   return (

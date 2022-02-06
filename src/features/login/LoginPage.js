@@ -6,10 +6,12 @@ import { Redirect } from 'react-router-dom'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 import { fetchUnreadCount } from '../../reducers/unreadCountSlice'
+import { loadState } from '../../helpers/localStorage'
 
 export default function LoginPage () {
   const dispatch = useDispatch()
-  const { user } = useSelector(state => state.user)
+  const user = loadState()
+
   const [error, setError] = useState('')
 
   // const user = useSelector((state) => state.user)
@@ -31,7 +33,7 @@ export default function LoginPage () {
     }
     dispatch(login(values))
   }
-  if (user !== null) {
+  if (user !== undefined) {
     dispatch(fetchSkills())
     dispatch(fetchUserSkills())
     dispatch(fetchUnreadCount())
