@@ -1,13 +1,13 @@
-const email = localStorage.getItem('currentUser')
-  ? JSON.parse(localStorage.getItem('currentUser')).email
+const username = global.localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user')).username
   : ''
-const token = localStorage.getItem('currentUser')
-  ? JSON.parse(localStorage.getItem('currentUser')).auth_token
+const token = localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user')).auth_token
   : ''
 
 export const initialState = {
-  email: '' || email,
-  token: '' || token,
+  username: username,
+  token: token,
   loading: false,
   errorMessage: null
 }
@@ -23,7 +23,7 @@ export const AuthReducer = (initialState, action) => {
 
       return {
         ...initialState,
-        email: action.payload.email,
+        username: action.payload.username,
         id: action.payload.id,
         token: action.payload.password,
         loading: false
