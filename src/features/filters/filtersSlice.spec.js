@@ -2,7 +2,7 @@ import visibilityFilters, { addVisibilityFilter } from '../../reducers/filtersSl
 
 describe('visibilityFilters reducer', () => {
   it('should handle initial state', () => {
-    expect(visibilityFilters(undefined, {})).toEqual('SHOW_ALL')
+    expect(visibilityFilters(undefined, {})).toEqual('All')
   })
 })
 
