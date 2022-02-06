@@ -4,6 +4,7 @@ import Select from 'react-select'
 import { addNewExperience } from '../../reducers/experiencesSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { useLocation } from 'react-router-dom'
+import { selectUserById } from '../../reducers/usersSlice'
 
 const CreateExperience = ({ userId }) => {
   const dispatch = useDispatch()
@@ -15,7 +16,8 @@ const CreateExperience = ({ userId }) => {
   }
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
-  const user = useSelector(state => state.user.user)
+  const userID = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+  const user = useSelector((state) => selectUserById(state, userID))
 
   const users = useSelector((state) => state.users.entities)
 
