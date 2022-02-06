@@ -107,7 +107,12 @@ const userConversationSlice = createSlice({
       const time_sent = action.payload.time_sent
       const active = action.payload.active
       const message = { id, receiver, receiver_id, sender, sender_id, text_body, time_sent, active }
-      state.userConversations.messages[receiver].push(message)
+      if (state.userConversations.messages[receiver]) {
+        state.userConversations.messages[receiver].push(message)
+      } else {
+        state.userConversations.messages[receiver] = []
+        state.userConversations.messages[receiver].push(message)
+      }
     },
     [removeMessage.fulfilled]: (state, action) => {
       const id = action.meta.arg.messageId
