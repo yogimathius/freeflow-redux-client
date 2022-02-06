@@ -96,4 +96,57 @@
   .btn-warning:focus {
     @apply bg-red-200;
   }
+
+  /* .submenu {
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+  }
+
+  .submenu.show {
+    height: 100%;
+  } */
+  /* .CommentsOpen {
+    animation: openComments 0.8s ease-out forwards;
+  }
+
+  .CommentsClosed {
+    animation: closeComments 0.8s ease-out forwards;
+  }
+
+  @keyframes openComments {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: 100%;
+    }
+  }
+
+  @keyframes closeComments {
+    0% {
+      height: 90%;
+    }
+    100% {
+      height: 0;
+    }
+  } */
+
+  .alert-enter {
+    height: 0;
+  }
+
+  .alert-enter-active {
+    height: 100%;
+    transition: height 800ms;
+  }
+
+  .alert-exit {
+    height: 100%;
+  }
+
+  .alert-exit-active {
+    height: 0;
+    transition: height 800ms;
+  }
 }
