@@ -40,7 +40,7 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
   const loggedInUserID = loadState()
 
-  const userId = loggedInUserID
+  const userId = loggedInUserID.id
   const post = useSelector((state) => selectPostById(state, postId))
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
