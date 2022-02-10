@@ -5,12 +5,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 // Import your own reducer
 import usersReducer from '../reducers/usersSlice'
+import userLoginSlice from '../reducers/userLoginSlice'
 
 function render (
   ui,
   {
     preloadedState,
-    store = configureStore({ reducer: { users: usersReducer }, preloadedState }),
+    store = configureStore({ reducer: { users: usersReducer, user: userLoginSlice }, preloadedState }),
     ...renderOptions
   } = {}
 ) {
