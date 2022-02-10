@@ -9,13 +9,6 @@ import 'regenerator-runtime/runtime'
 import { render } from './features/test-utils'
 import App from './App'
 
-// We use msw to intercept the network request during the test,
-// and return the response 'John Smith' after 150ms
-// when receiving a get request to the `/api/user` endpoint
-export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
-]
-
 jest.mock('@material-ui/icons', () => {
   const icons = {
     __esModule: true
@@ -23,12 +16,19 @@ jest.mock('@material-ui/icons', () => {
 
   const handler = {
     get: function (_, prop) {
-      return () => <div className={`mock_${prop}Icon`} />
+      return () => (
+      <div className={`mock_${prop}Icon`} />)
     }
   }
 
   return new Proxy(icons, handler)
 })
+// We use msw to intercept the network request during the test,
+// and return the response null
+// when receiving a get request to the `/api/user_skills` endpoint
+export const handlers = [
+  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
+]
 
 const server = setupServer(...handlers)
 
