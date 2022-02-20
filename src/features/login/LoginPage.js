@@ -52,15 +52,35 @@ export default function LoginPage () {
       >
         {({ isSubmitting }) => (
           <Form className="flex flex-col w-2/3 md:w-1/4 mx-auto space-y-3">
-            <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Username" type="text" name="username" />
-            <Field className="text-center rounded-xl py-1 border-1 border-gray-400" placeholder="Password" type="password" name="password" />
+            <label htmlFor="username">username</label>
+            <Field
+              id="username"
+              className="text-center rounded-xl py-1 border-1 border-gray-400"
+              placeholder="Username"
+              type="text"
+              name="username" />
+
+            <label htmlFor="password">password</label>
+            <Field
+              id="password"
+              className="text-center rounded-xl py-1 border-1 border-gray-400"
+              placeholder="Password"
+              type="password"
+              name="password" />
+
             <div className="flex justify-center">
-              <button className="btn btn-primary" type="submit" >Login</button>
+              <button
+                role='button'
+                data-testid='login-button'
+                className="btn btn-primary"
+                type="submit" >
+                  Login
+              </button>
             </div>
           </Form>
         )}
       </Formik>
-      <div className="text-red-500 font-bold">{error}</div>
+      <div data-testid="error" className="text-red-500 font-bold">{error}</div>
       <div>
         <div>You can use these login details to test the app:</div>
         <div>Username: <span className="font-bold">dsleaford1</span></div>
