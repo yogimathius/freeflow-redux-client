@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom'
 import { loadState } from '../../helpers/localStorage'
 
 export const onLoginSubmitted = async (username, password, dispatch) => {
-  console.log('login submitted')
   try {
     dispatch(login(username, password))
   } catch (err) {
