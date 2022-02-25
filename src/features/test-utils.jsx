@@ -1,18 +1,25 @@
 // test-utils.jsx
 import React from 'react'
 import { render as rtlRender } from '@testing-library/react'
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 // Import your own reducer
 import usersReducer from '../reducers/usersSlice'
 import userSkillsReducer from '../reducers/userSkillsSlice'
 import userLoginReducer from '../reducers/userLoginSlice'
+import configureMockStore from 'redux-mock-store'
 
-function render (
+const reducers = combineReducers({ users: usersReducer, user: userLoginReducer, user_skills: userSkillsReducer })
+
+const mockStore = configureStore({ reducer: reducers })
+
+const mockStoreTwo = configureMockStore({ reducer: reducers })
+
+function renderWithRedux (
   ui,
   {
     preloadedState,
-    store = configureStore({ reducer: { users: usersReducer, user: userLoginReducer, user_skills: userSkillsReducer }, preloadedState }),
+    store = configureStore({ reducer: reducers, preloadedState }),
     ...renderOptions
   } = {}
 ) {
@@ -25,4 +32,4 @@ function render (
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { render }
+export { renderWithRedux, mockStore, mockStoreTwo }
