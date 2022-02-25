@@ -1,42 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Field, Form, Formik } from 'formik'
-import { login } from '../../reducers/userLoginSlice'
-import { Redirect } from 'react-router-dom'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { Redirect, useHistory } from 'react-router-dom'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
-import { fetchUnreadCount } from '../../reducers/unreadCountSlice'
+
 import { loadState } from '../../helpers/localStorage'
 
-export default function LoginPage () {
+export default function LoginPage ({ onLoginSubmitted }) {
   const dispatch = useDispatch()
   const user = loadState()
 
-  const [error, setError] = useState('')
-
-  // const user = useSelector((state) => state.user)
-
-  const onLoginSubmitted = (values) => {
-    if (values.username === '') {
-      setError('***Username cannot be blank***')
-      setTimeout(() => {
-        setError('')
-      }, 2000)
-      return
-    }
-    if (values.password === '') {
-      setError('***Password cannot be blank***')
-      setTimeout(() => {
-        setError('')
-      }, 2000)
-      return
-    }
-    dispatch(login(values))
-  }
   if (user !== undefined) {
     dispatch(fetchSkills())
     dispatch(fetchUserSkills())
-    dispatch(fetchUnreadCount())
+
     return (
       <Redirect to={{ pathname: '/dashboard' }} />
     )
@@ -48,25 +26,47 @@ export default function LoginPage () {
       <Formik
         className="flex justify-center"
         initialValues={{ username: '', password: '' }}
-        onSubmit={(values) => onLoginSubmitted(values)}
+        onSubmit={(values) => {
+          const username = values.username
+          const password = values.password
+          onLoginSubmitted(username, password, dispatch)
+        }}
+        validate={(values) => {
+          const errors = {}
+          if (!values.username) {
+            errors.username = '*Required*'
+          }
+          if (!values.password) {
+            errors.password = '*Required*'
+          }
+
+          return errors
+        }}
       >
-        {({ isSubmitting }) => (
           <Form className="flex flex-col w-2/3 md:w-1/4 mx-auto space-y-3">
             <label htmlFor="username">username</label>
             <Field
               id="username"
+              data-testid="username"
               className="text-center rounded-xl py-1 border-1 border-gray-400"
               placeholder="Username"
               type="text"
               name="username" />
+              <div className='text-red-500'>
+                <ErrorMessage data-testid="usernameError" name="username" component="div" />
+              </div>
 
             <label htmlFor="password">password</label>
             <Field
               id="password"
+              data-testid="password"
               className="text-center rounded-xl py-1 border-1 border-gray-400"
               placeholder="Password"
               type="password"
               name="password" />
+              <div className='text-red-500'>
+                <ErrorMessage data-testid="passwordError" name="password" component="div" />
+              </div>
 
             <div className="flex justify-center">
               <button
@@ -78,9 +78,8 @@ export default function LoginPage () {
               </button>
             </div>
           </Form>
-        )}
       </Formik>
-      <div data-testid="error" className="text-red-500 font-bold">{error}</div>
+
       <div>
         <div>You can use these login details to test the app:</div>
         <div>Username: <span className="font-bold">dsleaford1</span></div>
