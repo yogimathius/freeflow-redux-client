@@ -2,22 +2,26 @@ import React from 'react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import 'regenerator-runtime/runtime'
-import { screen } from '@testing-library/react'
-import { Field, Form, Formik } from 'formik'
-
-// We're using our own custom render function and not RTL's render.
-// Our custom utils also re-export everything from RTL
-// so we can import fireEvent and screen here as well
-import { render } from '../../test-utils'
-import LoginPage from '../LoginPage'
+import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
+
+import { screen } from '@testing-library/dom'
+
+import { shallow, mount } from 'enzyme'
+import { renderWithRedux, mockStore } from '../../test-utils'
+import LoginPage, { otherFunctions } from '../LoginPage'
 import { act } from 'react-dom/test-utils'
+import { Provider } from 'react-redux'
+import { fireEvent, waitFor, cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 // We use msw to intercept the network request during the test,
 // and return the response null
 // when receiving a get request to the `/api/user_skills` endpoint
 export const handlers = [
   rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null),
+  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', null),
+  rest.get('https://freeflow-two-point-o.herokuapp.com/api/messages/unread_count', null),
   rest.post('https://freeflow-two-point-o.herokuapp.com/api/login-real', (req, res, ctx) => {
     const { username, password } = req.body
     return res(
@@ -37,29 +41,53 @@ beforeAll(() => {
 
 // Reset any runtime request handlers we may add during the tests.
 afterEach(() => server.resetHandlers())
+afterEach(cleanup)
 
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-test('makes a post request to login a user', async () => {
-  const onLoginSubmitted = jest.fn()
-  const { getByTestId, getByText } = render(<LoginPage />)
-  // const errorMsg = screen.getByTestId('error')
-  userEvent.type(screen.getByLabelText(/username/i), '')
-  userEvent.type(screen.getByLabelText(/password/i), 'Dee')
-  await act(async () => {
-    userEvent.click(screen.getByRole('button', { name: /Login/i }))
+describe('User Login Page', () => {
+  test('fails to login without providing a username', async () => {
+    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginPage />)
+
+    await act(async () => {
+      userEvent.type(getByLabelText(/password/i), 'Dee')
+
+      userEvent.click(getByRole('button', { name: /Login/i }))
+    })
+
+    expect(getByTestId('usernameError')).toBeTruthy()
+    expect(getByTestId('usernameError')).toHaveTextContent('*Required*')
   })
 
-  expect(getByTestId('error')).toBeTruthy()
+  test('fails to login without providing a password', async () => {
+    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginPage />)
 
-  const errorMsg = getByText('***Username cannot be blank***')
+    await act(async () => {
+      userEvent.type(getByLabelText(/username/i), 'Dee')
 
-  expect(errorMsg).toBeTruthy()
+      userEvent.click(getByRole('button', { name: /Login/i }))
+    })
 
-  userEvent.type(screen.getByLabelText(/username/i), 'John')
+    expect(getByTestId('passwordError')).toBeTruthy()
+    expect(getByTestId('passwordError')).toHaveTextContent('*Required*')
+  })
 
-  await act(async () => {
-    userEvent.click(screen.getByRole('button', { name: /Login/i }))
+  test('calls on login submitted when username and password is valid', async () => {
+    const onLoginSubmitted = jest.fn()
+
+    const { getByLabelText, getByText } = renderWithRedux(<Provider store={mockStore}><LoginPage onLoginSubmitted={onLoginSubmitted} />
+     </Provider>)
+
+    await act(async () => {
+      fireEvent.change(getByLabelText(/username/i), { target: { value: 'Dee' } })
+      fireEvent.change(getByLabelText(/password/i), { target: { value: 'password' } })
+    })
+
+    fireEvent.click(getByText('Login'))
+
+    await waitFor(() => {
+      expect(onLoginSubmitted).toHaveBeenCalledOnce()
+    })
   })
 })
