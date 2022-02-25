@@ -6,7 +6,7 @@ import 'regenerator-runtime/runtime'
 // We're using our own custom render function and not RTL's render.
 // Our custom utils also re-export everything from RTL
 // so we can import fireEvent and screen here as well
-import { render } from './features/test-utils'
+import { renderWithRedux } from './features/test-utils'
 import App from './App'
 
 jest.mock('@material-ui/icons', () => {
@@ -44,5 +44,5 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('Renders the app without crashing', async () => {
-  render(<App />)
+  renderWithRedux(<App />)
 })
