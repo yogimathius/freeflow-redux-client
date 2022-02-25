@@ -1,15 +1,18 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-const LoginForm = ({ onLoginSubmitted, dispatch }) => {
+const LoginForm = ({ handleLogin }) => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+
   return (
     <Formik
     className="flex justify-center"
     initialValues={{ username: '', password: '' }}
     onSubmit={(values) => {
-      const username = values.username
-      const password = values.password
-      onLoginSubmitted(username, password, dispatch)
+      handleLogin(values, dispatch, history)
     }}
     validate={(values) => {
       const errors = {}
