@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { loadState } from '../helpers/localStorage'
 
