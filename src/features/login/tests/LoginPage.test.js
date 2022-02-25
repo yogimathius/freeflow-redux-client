@@ -48,7 +48,7 @@ afterAll(() => server.close())
 
 describe('User Login Page', () => {
   test('fails to login without providing a username', async () => {
-    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
+    const { getByTestId, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
 
     await act(async () => {
       userEvent.type(getByLabelText(/password/i), 'Dee')
@@ -61,7 +61,7 @@ describe('User Login Page', () => {
   })
 
   test('fails to login without providing a password', async () => {
-    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
+    const { getByTestId, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
 
     await act(async () => {
       userEvent.type(getByLabelText(/username/i), 'Dee')
@@ -74,9 +74,9 @@ describe('User Login Page', () => {
   })
 
   test('calls on login submitted when username and password is valid', async () => {
-    const onLoginSubmitted = jest.fn()
+    const handleLogin = jest.fn()
 
-    const { getByLabelText, getByText } = renderWithRedux(<Provider store={mockStore}><LoginForm onLoginSubmitted={onLoginSubmitted} />
+    const { getByLabelText, getByText } = renderWithRedux(<Provider store={mockStore}><LoginForm handleLogin={handleLogin} />
      </Provider>)
 
     await act(async () => {
@@ -87,7 +87,7 @@ describe('User Login Page', () => {
     fireEvent.click(getByText('Login'))
 
     await waitFor(() => {
-      expect(onLoginSubmitted).toHaveBeenCalledOnce()
+      expect(handleLogin).toHaveBeenCalledOnce()
     })
   })
 })
