@@ -32,6 +32,7 @@ export const login = (username, password) => async dispatch => {
     if (res.status === 200) {
       const userId = res.data
       dispatch(loginSuccess(userId))
+      return userId
     }
   } catch (e) {
     return console.error(e.message)
