@@ -10,7 +10,6 @@ import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import * as matchers from 'jest-extended'
-import { toBeArray, toBeSealed } from 'jest-extended'
 
 const localStorageMock = {
   getItem: jest.fn(),
@@ -23,6 +22,3 @@ configure({ adapter: new Adapter() })
 
 // add all jest-extended matchers
 expect.extend(matchers)
-
-// or just add specific matchers
-expect.extend({ toBeArray, toBeSealed })
