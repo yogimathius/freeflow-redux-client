@@ -1,4 +1,4 @@
-describe('Creating a post', () => {
+describe.skip('Creating a post', () => {
   it('Displays the post in the list', () => {
     cy.visit('/')
 
