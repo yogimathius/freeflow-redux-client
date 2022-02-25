@@ -9,7 +9,7 @@ import { screen } from '@testing-library/dom'
 
 import { shallow, mount } from 'enzyme'
 import { renderWithRedux, mockStore } from '../../test-utils'
-import LoginPage, { otherFunctions } from '../LoginPage'
+import LoginForm from '../LoginForm'
 import { act } from 'react-dom/test-utils'
 import { Provider } from 'react-redux'
 import { fireEvent, waitFor, cleanup } from '@testing-library/react'
@@ -48,7 +48,7 @@ afterAll(() => server.close())
 
 describe('User Login Page', () => {
   test('fails to login without providing a username', async () => {
-    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginPage />)
+    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
 
     await act(async () => {
       userEvent.type(getByLabelText(/password/i), 'Dee')
@@ -61,7 +61,7 @@ describe('User Login Page', () => {
   })
 
   test('fails to login without providing a password', async () => {
-    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginPage />)
+    const { getByTestId, getByText, getByLabelText, getByRole } = renderWithRedux(<LoginForm />)
 
     await act(async () => {
       userEvent.type(getByLabelText(/username/i), 'Dee')
@@ -76,7 +76,7 @@ describe('User Login Page', () => {
   test('calls on login submitted when username and password is valid', async () => {
     const onLoginSubmitted = jest.fn()
 
-    const { getByLabelText, getByText } = renderWithRedux(<Provider store={mockStore}><LoginPage onLoginSubmitted={onLoginSubmitted} />
+    const { getByLabelText, getByText } = renderWithRedux(<Provider store={mockStore}><LoginForm onLoginSubmitted={onLoginSubmitted} />
      </Provider>)
 
     await act(async () => {

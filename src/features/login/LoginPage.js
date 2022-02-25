@@ -6,10 +6,10 @@ import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 
 import { loadState } from '../../helpers/localStorage'
 import LoginForm from './LoginForm'
-import { checkLoggedIn } from './loginHelpers'
+import { checkLoggedIn, onLoginSubmitted } from './loginHelpers'
 import LoginDetails from './LoginDetails'
 
-export default function LoginPage ({ onLoginSubmitted }) {
+export default function LoginPage () {
   const dispatch = useDispatch()
 
   checkLoggedIn(dispatch)
