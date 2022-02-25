@@ -52,7 +52,7 @@ test('should create an action to fetch posts', () => {
   })
 })
 
-test.only('should create an action to add a new post', () => {
+test.skip('should create an action to add a new post', () => {
   const previousState = {
     entities: {
       1: {
