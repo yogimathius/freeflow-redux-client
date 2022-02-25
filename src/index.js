@@ -11,7 +11,7 @@ import { fetchSkills } from './reducers/dbSkillsSlice'
 import axios from 'axios'
 import { fetchConversations } from './reducers/userConversationsSlice'
 import { fetchComments } from './reducers/commentsSlice'
-const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
+const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].id : ''
 
 store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
