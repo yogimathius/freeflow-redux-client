@@ -8,7 +8,6 @@ This app is still in development. The objective is to build a game-ified social 
 
 ## Dependencies
 
-    "@craco/craco": "^6.1.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@reduxjs/toolkit": "^1.4.0",
@@ -33,7 +32,7 @@ This app is still in development. The objective is to build a game-ified social 
 
 ## Dev Dependencies
 
-		"@fortawesome/fontawesome-svg-core": "^1.2.32",
+    	"@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
