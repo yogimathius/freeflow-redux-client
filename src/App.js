@@ -3,19 +3,16 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { AuthProvider } from './context'
 import routes from './config/routes.js'
 import { Navbar } from './components/Navbar'
-// import SideBar from './components/SideBar'
 
 import AppRoute from './components/AppRoute'
 import UserSideBar from './features/users/UserSideBar'
 import { fetchUserSkills } from './reducers/userSkillsSlice'
 import { loadState } from './helpers/localStorage'
-import { onLoginSubmitted } from './features/login/loginHelpers'
-// import Footer from './components/Footer';
 
 function App () {
   const user = loadState()
@@ -46,7 +43,6 @@ function App () {
                   path={route.path}
                   component={route.component}
                   isPrivate={route.isPrivate}
-                  props={route.path === '/login' ? onLoginSubmitted : null}
                 />
               ))}
             </Switch>
