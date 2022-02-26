@@ -7,9 +7,13 @@ import { Provider } from 'react-redux'
 import usersReducer from '../reducers/usersSlice'
 import userSkillsReducer from '../reducers/userSkillsSlice'
 import userLoginReducer from '../reducers/userLoginSlice'
+import postsReducer from '../reducers/postsSlice'
+import skillsReducer from '../reducers/dbSkillsSlice'
+import filtersReducer from '../reducers/filtersSlice'
+
 import configureMockStore from 'redux-mock-store'
 
-const reducers = combineReducers({ users: usersReducer, user: userLoginReducer, user_skills: userSkillsReducer })
+const reducers = combineReducers({ users: usersReducer, user: userLoginReducer, user_skills: userSkillsReducer, posts: postsReducer, skills: skillsReducer, visibilityFilters: filtersReducer })
 
 const mockStore = configureStore({ reducer: reducers })
 
