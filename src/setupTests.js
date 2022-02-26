@@ -11,6 +11,23 @@ import Adapter from 'enzyme-adapter-react-16'
 
 import * as matchers from 'jest-extended'
 
+import { server } from './mocks/server'
+
+beforeAll(() => {
+  // Enable the mocking in tests.
+  server.listen()
+})
+
+afterEach(() => {
+  // Reset any runtime handlers tests may use.
+  server.resetHandlers()
+})
+
+afterAll(() => {
+  // Clean up once the tests are done.
+  server.close()
+})
+
 const localStorageMock = {
   getItem: jest.fn(),
   setItem: jest.fn(),
