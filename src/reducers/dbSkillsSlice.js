@@ -18,11 +18,10 @@ export const fetchSkills = createAsyncThunk('skills/fetchSkills', async () => {
   return response.data
 })
 
-export let selectedSkillsDB
-
 const initialState = skillsAdapter.getInitialState({
   status: 'idle',
-  error: null
+  error: null,
+  selectedSkillsDB: []
 })
 
 export const addNewSkill = createAsyncThunk(
@@ -55,9 +54,10 @@ const skillsSlice = createSlice({
   name: 'skills',
   initialState,
   reducers: {
-    addSelectedSkill (state, action) {
-      selectedSkillsDB = (action.payload.options[0])
-      return selectedSkillsDB
+    setSelectedSkills (state, action) {
+      // console.log('payload: '.action.payload)
+      state.selectedSkillsDB = action.payload.optionIds
+      return action.payload
     }
   },
   extraReducers: {
@@ -82,7 +82,7 @@ const skillsSlice = createSlice({
   }
 })
 
-export const { skillAdded, addSelectedSkill } = skillsSlice.actions
+export const { skillAdded } = skillsSlice.actions
 
 export default skillsSlice.reducer
 
@@ -95,6 +95,7 @@ export const {
 export const selectSkillsByIds = createSelector(
   [selectAllskills, (state, skillIds) => skillIds],
   (skills, skillIds) => {
+    // console.log({ skills, skillIds })
     const filteredSkills = []
     // eslint-disable-next-line array-callback-return
     skills.filter((skill) => {
@@ -105,5 +106,14 @@ export const selectSkillsByIds = createSelector(
       })
     })
     return filteredSkills
+  }
+)
+
+export const selectSkillsById = createSelector(
+  [selectAllskills, (state, skillIds) => skillIds],
+  (skills, skillId) => {
+    // console.log({ skills, skillIds })
+    // eslint-disable-next-line array-callback-return
+    return skills.filter((skill) => skill.id === skillId)
   }
 )
