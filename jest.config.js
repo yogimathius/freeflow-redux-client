@@ -1,6 +1,6 @@
 module.exports = {
   verbose: true,
-  setupFilesAfterEnv: ['<rootDir>src/setupTests.js', 'jest-extended/all'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js', 'jest-extended/all'],
   testPathIgnorePatterns: ['<rootDir>/__tests__/setup/*'],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   moduleDirectories: ['node_modules', 'src'],
