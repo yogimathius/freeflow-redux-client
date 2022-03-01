@@ -142,9 +142,11 @@ describe('Home Page', () => {
     expect(getByTestId('errorMessage')).toHaveTextContent('Please select a skill')
   })
 
-  test.skip('successfully calls OnSavePostClicked with content and one skill selected', async () => {
+  test.only('successfully calls OnSavePostClicked with content and one skill selected', async () => {
+    const OnSavePostClicked = jest.fn()
+
     const selectedSkills = {
-      options: [{
+      selectedSkills: [{
         label: 'Cooking',
         value: 'Cooking'
       }]
@@ -154,8 +156,8 @@ describe('Home Page', () => {
       getByTestId,
       queryAllByTestId
     } = renderWithRedux(
-      <AddPostForm />,
-      { initialState: selectedSkills }
+      <AddPostForm OnSavePostClicked={OnSavePostClicked} />,
+      { preloadedState: selectedSkills }
     )
 
     const selectOptions = queryAllByTestId('selector')
@@ -166,28 +168,7 @@ describe('Home Page', () => {
       userEvent.click(getByTestId('sendButton'))
     })
 
-    expect(getByTestId('errorMessage')).toBeNull()
-  })
-
-  test.skip('successfully calls OnSavePostClicked with content and one skill selected with mount', async () => {
-    localStorage.setItem('selected_skills', [1])
-
-    const selectedSkills = {
-      options: [{
-        label: 'Cooking',
-        value: 'Cooking'
-      }]
-    }
-
-    const wrapper = mount(<Provider store={mockStore}><AddPostForm selectedSkills={{ selectedSkills }} /></Provider>)
-
-    const selector = wrapper.find(SkillSelector) // you can use 'input' instead of '.Select-control'
-
-    // wrapper.find(SkillSelector).simulate('keyDown', { keyCode: 40 }) // you can use 'input' instead of '.Select-control'
-    // wrapper.find(Select).simulate('keyDown', { keyCode: 13 })
-
-    await act(async () => {
-      expect(wrapper.find('.errorMessage')).toHaveTextContent('')
-    })
+    expect(getByTestId('errorMessage')).toHaveTextContent('')
+    expect(OnSavePostClicked).toHaveBeenCalled()
   })
 })
