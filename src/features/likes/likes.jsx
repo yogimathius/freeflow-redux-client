@@ -78,9 +78,6 @@ export default function Likes ({ postId, userId }) {
   } else if (likeStatus === 'failed') {
     fetchedLikes = null
   }
-  if (fetchedLikes !== undefined && fetchedLikes !== null) {
-    console.log()
-  }
 
   // LIKE UNLIKE FUNCTION
   const LikeUnlikeIcons = iAlreadyLikeThis
