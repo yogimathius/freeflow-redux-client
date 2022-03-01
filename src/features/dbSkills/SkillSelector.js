@@ -52,8 +52,6 @@ const SkillSelector = () => {
     options.forEach(option => {
       selectedSkillsStorage.push(option.value)
     })
-    console.log({ selectedSkillsStorage, options })
-    localStorage.setItem('selected_skills', JSON.stringify(selectedSkillsStorage))
   }
 
   return (
