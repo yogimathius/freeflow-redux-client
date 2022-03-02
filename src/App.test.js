@@ -3,9 +3,6 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import 'regenerator-runtime/runtime'
 
-// We're using our own custom render function and not RTL's render.
-// Our custom utils also re-export everything from RTL
-// so we can import fireEvent and screen here as well
 import { renderWithRedux } from './features/test-utils'
 import App from './App'
 
