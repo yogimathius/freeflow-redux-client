@@ -40,6 +40,8 @@ afterEach(() => server.resetHandlers())
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-test('Renders the app without crashing', async () => {
-  renderWithRedux(<App />)
+describe('App', () => {
+  test('Renders the app without crashing', async () => {
+    renderWithRedux(<App />)
+  })
 })

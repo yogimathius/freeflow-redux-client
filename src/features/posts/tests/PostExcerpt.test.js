@@ -134,7 +134,7 @@ afterEach(cleanup)
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-describe('Home Page', () => {
+describe('PostExcerpt', () => {
   test('renders the PostsList on the home page without crashing', async () => {
     const postId = '1'
     const onPost = jest.fn()

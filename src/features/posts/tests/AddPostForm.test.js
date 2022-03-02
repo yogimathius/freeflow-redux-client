@@ -51,7 +51,7 @@ afterEach(cleanup)
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-describe('Home Page', () => {
+describe('AddPostForm', () => {
   test('renders the AddPostForm without crashing', async () => {
     const OnSavePostClicked = jest.fn()
 

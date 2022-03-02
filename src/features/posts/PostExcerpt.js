@@ -46,7 +46,6 @@ export default function PostExcerpt ({
 
   const { user } = useSelector(state => state.user)
 
-  console.log({ loggedInUser })
   let userId
 
   if (loggedInUser) {

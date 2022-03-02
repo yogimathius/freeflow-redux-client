@@ -60,7 +60,7 @@ afterEach(cleanup)
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-describe('Home Page', () => {
+describe('PostsList', () => {
   test('renders the PostsList on the home page without crashing', async () => {
     renderWithRedux(<VisiblePostsList />)
   })
