@@ -8,7 +8,7 @@
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
     "test": "jest",
-    "test:watch": "npm test -- --watch --setupFilesAfterEnv='./src/setupTests.ts"
+    "test:watch": "npm test -- --watch --setupFilesAfterEnv='./src/setupTests.ts'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -85,7 +85,7 @@
     "formik": "^2.2.5",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
-    "jest-environment-jsdom": "^27.0.6",
+    "jest-environment-jsdom": "^27.2.2",
     "jest-extended": "^2.0.0",
     "jest-localstorage-mock": "^2.4.18",
     "jest-transform-stub": "^2.0.0",
