@@ -55,7 +55,6 @@ const skillsSlice = createSlice({
   initialState,
   reducers: {
     setSelectedSkills (state, action) {
-      // console.log('payload: '.action.payload)
       state.selectedSkillsDB = action.payload.optionIds
       return action.payload
     }
@@ -95,7 +94,6 @@ export const {
 export const selectSkillsByIds = createSelector(
   [selectAllskills, (state, skillIds) => skillIds],
   (skills, skillIds) => {
-    // console.log({ skills, skillIds })
     const filteredSkills = []
     // eslint-disable-next-line array-callback-return
     skills.filter((skill) => {
@@ -112,8 +110,6 @@ export const selectSkillsByIds = createSelector(
 export const selectSkillsById = createSelector(
   [selectAllskills, (state, skillIds) => skillIds],
   (skills, skillId) => {
-    // console.log({ skills, skillIds })
-    // eslint-disable-next-line array-callback-return
     return skills.filter((skill) => skill.id === skillId)
   }
 )
