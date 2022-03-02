@@ -4,21 +4,22 @@ import {
 
 const initialState = ([])
 
-export let selectedSkillsDB = {
-  '': ''
-}
+export let selectedSkillsDB = []
 
 const selectedSkillsSlice = createSlice({
   name: 'selectedSkillsDB',
   initialState: initialState,
   reducers: {
     setSelectedSkills (state, action) {
-      selectedSkillsDB = action.payload.options[0]
+      selectedSkillsDB = action.payload.optionIds
       return action.payload
     },
     emptySkillsDB (state, action) {
       selectedSkillsDB = null
       return selectedSkillsDB
+    },
+    addSelectedSkill (state, action) {
+      selectedSkillsDB.push(action.payload.optionIds)
     }
   },
   extraReducers: {

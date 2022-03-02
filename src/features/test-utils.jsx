@@ -10,10 +10,22 @@ import userLoginReducer from '../reducers/userLoginSlice'
 import postsReducer from '../reducers/postsSlice'
 import skillsReducer from '../reducers/dbSkillsSlice'
 import filtersReducer from '../reducers/filtersSlice'
+import selectedSkillsReducer from '../reducers/selectedSkillsSlice'
 
 import configureMockStore from 'redux-mock-store'
 
-const reducers = combineReducers({ users: usersReducer, user: userLoginReducer, user_skills: userSkillsReducer, posts: postsReducer, skills: skillsReducer, visibilityFilters: filtersReducer })
+export const reducers = combineReducers(
+  {
+    users: usersReducer,
+    user: userLoginReducer,
+    user_skills:
+    userSkillsReducer,
+    posts: postsReducer,
+    skills: skillsReducer,
+    visibilityFilters: filtersReducer,
+    selectedSkills: selectedSkillsReducer
+  }
+)
 
 const mockStore = configureStore({ reducer: reducers })
 

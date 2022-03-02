@@ -38,9 +38,13 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
   const { user } = useSelector(state => state.user)
 
-  const loggedInUserID = loadState()
+  const loggedInUser = loadState()
 
-  const userId = loggedInUserID.id
+  let userId
+
+  if (loggedInUser) {
+    userId = loggedInUser.id
+  }
   const post = useSelector((state) => selectPostById(state, postId))
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))

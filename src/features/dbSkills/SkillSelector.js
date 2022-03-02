@@ -42,22 +42,16 @@ const SkillSelector = () => {
   }
 
   fetchedSkills.forEach((skill) => {
-    const skillObj = { value: skill.name, label: skill.name }
+    const skillObj = { value: skill.id, label: skill.name }
     skillOptions.push(skillObj)
   })
 
   const HandleChange = (options) => {
-    dispatch(setSelectedSkills({ options }))
+    dispatch(setSelectedSkills(options))
     const selectedSkillsStorage = []
     options.forEach(option => {
-      // eslint-disable-next-line array-callback-return
-      skillsArr.filter(skill => {
-        if (skill.name === option.value) {
-          selectedSkillsStorage.push(skill.id)
-        }
-      })
+      selectedSkillsStorage.push(option.value)
     })
-    localStorage.setItem('selected_skills', JSON.stringify(selectedSkillsStorage))
   }
 
   return (
@@ -67,7 +61,7 @@ const SkillSelector = () => {
 		<Select
 			onChange={(e) => HandleChange(e)}
 			placeholder="Select a Skill"
-			value={selectedSkills?.options ? selectedSkills.options : null}
+			value={selectedSkills || null}
 			defaultValue="Select a Skill"
 			isMulti
 			name="skills"

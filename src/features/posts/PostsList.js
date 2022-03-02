@@ -10,6 +10,7 @@ import {
 import Filter from '../filters/Filter'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
+import { OnSavePostClicked } from './utils/onSavePostClicked'
 
 const PostsList = ({ posts }) => {
   const dispatch = useDispatch()
@@ -42,14 +43,14 @@ const PostsList = ({ posts }) => {
 
   return (
     <div className="pt-3 mx-2">
-      <AddPostForm />
+      <AddPostForm OnSavePostClicked={OnSavePostClicked} />
       <Filter />
       {posts.length !== 0
         ? <section className="">
           {content}
         </section>
         : <div className="flex justify-center h-24 items-center bg-white mx-2 mt-3 rounded-lg border-1 border-gray-300 mb-3">Sorry! None found.</div>
-    }
+      }
     </div>
   )
 }
