@@ -94,10 +94,7 @@ describe('Home Page', () => {
       }]
     }
 
-    const {
-      getByTestId,
-      queryAllByTestId
-    } = renderWithRedux(
+    const { getByTestId } = renderWithRedux(
       <AddPostForm OnSavePostClicked={OnSavePostClicked} />,
       { preloadedState: selectedSkills }
     )

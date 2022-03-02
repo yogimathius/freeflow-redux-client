@@ -1,11 +1,10 @@
-import { render, fireEvent, waitFor, cleanup } from '@testing-library/react'
+import { cleanup } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import React from 'react'
 import 'regenerator-runtime/runtime'
 
 import { renderWithRedux } from '../../test-utils'
-import PostsList from '../PostsList'
 import { VisiblePostsList } from '../VisiblePostsList'
 
 export const handlers = [
@@ -45,15 +44,6 @@ export const handlers = [
     )
   }),
   rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
-
-  // rest.post('https://freeflow-two-point-o.herokuapp.com/api/', (req, res, ctx) => {
-  //   const { username, password } = req.body
-  //   return res(
-  //     ctx.json({
-  //       username
-  //     })
-  //   )
-  // })
 ]
 
 const server = setupServer(...handlers)
