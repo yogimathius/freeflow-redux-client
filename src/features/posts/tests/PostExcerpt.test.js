@@ -9,7 +9,7 @@ import { renderWithRedux } from '../../test-utils'
 import PostExcerpt from '../PostExcerpt'
 import userEvent from '@testing-library/user-event'
 
-const mockPosts = {
+const mockState = {
   posts: {
     ids: [1],
     entities: {
@@ -47,6 +47,13 @@ const mockPosts = {
     },
     error: null,
     status: 'succeeded'
+  },
+  user: {
+    user: {
+      id: 1,
+      username: 'username',
+      avatar: 'avatarurl'
+    }
   }
 }
 
@@ -54,7 +61,7 @@ export const handlers = [
   rest.get('https://freeflow-two-point-o.herokuapp.com/api/posts', (req, res, ctx) => {
     return res(
       ctx.json(
-        mockPosts
+        mockState
       )
     )
   }),
@@ -135,18 +142,52 @@ describe('Home Page', () => {
     renderWithRedux(
     <Router>
       <PostExcerpt postId={postId} onPost={onPost} index={index} />
-    </Router>, { preloadedState: mockPosts })
+    </Router>, { preloadedState: mockState })
   })
 
-  test.only('calls onEdit when Edit button is clicked', async () => {
+  test('calls onEdit when Edit button is clicked and user logged in', async () => {
     const postId = '1'
-    const onPost = jest.fn()
+    const onEdit = jest.fn()
     const index = 1
+    const loggedInUser = {
+      id: 1,
+      username: 'username',
+      avatar: 'avatarurl'
+    }
     const { getByTestId } = renderWithRedux(
     <Router>
-      <PostExcerpt postId={postId} onPost={onPost} index={index} />
-    </Router>, { preloadedState: mockPosts })
+      <PostExcerpt
+        postId={postId}
+        onEdit={onEdit}
+        index={index}
+        loggedInUser={loggedInUser} />
+    </Router>, { preloadedState: mockState })
 
-    // userEvent.click(getByTestId('editButton'))
+    userEvent.click(getByTestId('editButton'))
+
+    expect(onEdit).toHaveBeenCalled()
+  })
+
+  test('calls onConfirmDelete when Edit button is clicked and user logged in', async () => {
+    const postId = '1'
+    const onConfirmDelete = jest.fn()
+    const index = 1
+    const loggedInUser = {
+      id: 1,
+      username: 'username',
+      avatar: 'avatarurl'
+    }
+    const { getByTestId } = renderWithRedux(
+    <Router>
+      <PostExcerpt
+        postId={postId}
+        onConfirmDelete={onConfirmDelete}
+        index={index}
+        loggedInUser={loggedInUser} />
+    </Router>, { preloadedState: mockState })
+
+    userEvent.click(getByTestId('confirmDeleteButton'))
+
+    expect(onConfirmDelete).toHaveBeenCalled()
   })
 })
