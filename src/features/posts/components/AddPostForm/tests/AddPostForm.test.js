@@ -8,7 +8,7 @@ import { setupServer } from 'msw/node'
 import { act } from 'react-dom/test-utils'
 import 'regenerator-runtime/runtime'
 
-import { renderWithRedux } from '../../test-utils'
+import { renderWithRedux } from '../../../../test-utils'
 import AddPostForm from '../AddPostForm'
 
 export const handlers = [

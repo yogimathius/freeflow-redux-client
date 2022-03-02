@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewPost } from '../../reducers/postsSlice'
-import SkillSelector from '../dbSkills/SkillSelector'
-import { emptySkillsDB } from '../../reducers/selectedSkillsSlice'
-import { checkPostErrors } from './utils/checkPostErrors'
+import { addNewPost } from '../../../../reducers/postsSlice'
+import SkillSelector from '../../../dbSkills/SkillSelector'
+import { emptySkillsDB } from '../../../../reducers/selectedSkillsSlice'
+import { checkPostErrors } from '../../utils/checkPostErrors'
 
 export default function AddPostForm ({ OnSavePostClicked }) {
   const [error, setError] = useState('')
