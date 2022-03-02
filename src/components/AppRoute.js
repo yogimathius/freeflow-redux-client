@@ -4,14 +4,15 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { loadState } from '../helpers/localStorage'
 
-const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
-  const loggedInUserID = loadState()
+const AppRoutes = ({ component: Component, path, isPrivate, loggedInUser, props, ...rest }) => {
   return (
 		<Route
 			path={path}
-			render={(props) => isPrivate && loggedInUserID === undefined
+			render={(props) => isPrivate && loggedInUser === undefined
 			  ? (<Redirect to={{ pathname: '/login' }} />)
-			  : (<Component {...props} />)
+			  : (<Component
+						{...props}
+						loggedInUser={loggedInUser} />)
 			}
 			{...rest}
 		/>
