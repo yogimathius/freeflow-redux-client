@@ -11,8 +11,9 @@ import Filter from '../filters/Filter'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 import { OnSavePostClicked } from './utils/onSavePostClicked'
+import { onCancelDelete, onConfirmDelete, onEdit, onSaveEdit } from './utils/visualModeTransitions'
 
-const PostsList = ({ posts }) => {
+const PostsList = ({ posts, loggedInUser }) => {
   const dispatch = useDispatch()
 
   const postStatus = useSelector((state) => state.posts.status)
@@ -35,7 +36,16 @@ const PostsList = ({ posts }) => {
     content = <div className="loader">Loading...</div>
   } else if (postStatus === 'succeeded') {
     content = posts.map((post, index) => (
-      <PostExcerpt key={index} postId={post.id} index={index} />
+      <PostExcerpt
+        key={index}
+        postId={post.id}
+        index={index}
+        loggedInUser={loggedInUser}
+        onCancelDelete={onCancelDelete}
+        onConfirmDelete={onConfirmDelete}
+        onEdit={onEdit}
+        onSaveEdit={onSaveEdit}
+      />
     ))
   } else if (postStatus === 'failed') {
     content = <div>{postError}</div>
