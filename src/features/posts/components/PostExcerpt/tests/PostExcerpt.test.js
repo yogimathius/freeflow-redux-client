@@ -5,8 +5,8 @@ import React from 'react'
 import 'regenerator-runtime/runtime'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { renderWithRedux } from '../../test-utils'
-import PostExcerpt from '../PostExcerpt'
+import { renderWithRedux } from '../../../../test-utils'
+import PostExcerpt from './PostExcerpt'
 import userEvent from '@testing-library/user-event'
 
 const mockState = {

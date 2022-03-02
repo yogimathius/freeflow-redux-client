@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch, connect } from 'react-redux'
-import PostExcerpt from './PostExcerpt'
-import AddPostForm from './AddPostForm'
+import PostExcerpt from './components/PostExcerpt/tests/PostExcerpt'
+import AddPostForm from './components/AddPostForm/AddPostForm'
 
 import {
   fetchPosts
