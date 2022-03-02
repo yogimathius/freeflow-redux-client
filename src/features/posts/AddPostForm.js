@@ -3,19 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addNewPost } from '../../reducers/postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import { emptySkillsDB } from '../../reducers/selectedSkillsSlice'
+import { checkPostErrors } from './utils/checkPostErrors'
 
-const checkPostErrors = (content, skills) => {
-  let error
-  if (content === '') {
-    error = 'Post cannot be blank'
-    return error
-  } else if (!skills || skills.length === 0) {
-    error = 'Please select a skill'
-    return error
-  } else {
-    return false
-  }
-}
 export default function AddPostForm ({ OnSavePostClicked }) {
   const [error, setError] = useState('')
   const [content, setContent] = useState('')
