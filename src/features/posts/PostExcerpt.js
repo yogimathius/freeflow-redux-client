@@ -27,7 +27,16 @@ const EDITING = 'EDITING'
 // const ERROR_SAVE = "ERROR_SAVE";
 // const ERROR_DELETE = "ERROR_DELETE";
 
-export default function PostExcerpt ({ postId, onPost, index }) {
+export default function PostExcerpt ({
+  postId,
+  onPost,
+  index,
+  loggedInUser,
+  onCancelDelete,
+  onConfirmDelete,
+  onEdit,
+  onSaveEdit
+}) {
   const [expanded, setExpanded] = useState(false)
   const [inProp, setInProp] = useState(false)
   const [showButton, setShowButton] = useState(true)
@@ -37,9 +46,7 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
   const { user } = useSelector(state => state.user)
 
-  const loggedInUser = loadState()
-
-  console.log(loggedInUser)
+  console.log({ loggedInUser })
   let userId
 
   if (loggedInUser) {
@@ -55,22 +62,6 @@ export default function PostExcerpt ({ postId, onPost, index }) {
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
   const { mode, transition } = useVisualMode(SHOW)
-
-  function onEdit () {
-    transition(EDITING)
-  }
-
-  function onSaveEdit () {
-    transition(SHOW)
-  }
-
-  function onConfirmDelete () {
-    transition(CONFIRM)
-  }
-
-  function onCancelDelete () {
-    transition(SHOW)
-  }
 
   const canEditOrRemove =
   [userId].every(Boolean) && addRequestStatus === 'idle'
@@ -110,13 +101,20 @@ export default function PostExcerpt ({ postId, onPost, index }) {
             {mode === SHOW && (
             <div className="space-x-1 flex justify-end mr-2">
               <button
-                onClick={() => onEdit() }
+                role="button"
+                onClick={() => onEdit(transition, EDITING) }
                 className="text-red-600 cursor-pointer text-sm"
                 data-testid="editButton"
               >
                   Edit
               </button>
-              <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
+              <button
+                onClick={() => onConfirmDelete(transition, CONFIRM)}
+                className="text-red-600 cursor-pointer text-sm"
+                data-testid="confirmDeleteButton"
+              >
+                Delete
+              </button>
             </div>
 
             )}
@@ -140,10 +138,14 @@ export default function PostExcerpt ({ postId, onPost, index }) {
       </div>
 
       {/* POST AUTHOR */}
-      <Link to={`/userprofile/${post.owner_id}`}
-      onClick={() => saveState(post.owner_id)}
+      <Link
+        to={`/userprofile/${post.owner_id}`}
+        onClick={() => saveState(post.owner_id)}
       >
-        <UserNameAndLogo onClick={saveState(post.owner_id)} userId={post.owner_id} />
+        <UserNameAndLogo
+          onClick={saveState(post.owner_id)}
+          userId={post.owner_id}
+        />
       </Link>
 
       {/* TEXT BODY */}
@@ -155,7 +157,7 @@ export default function PostExcerpt ({ postId, onPost, index }) {
       {mode === EDITING && (
       <EditPostForm
         postId={postId}
-        onSaveEdit={onSaveEdit}
+        onSaveEdit={() => onSaveEdit(transition, SHOW)}
         value={post.text_body}
       />
       )}
@@ -165,7 +167,7 @@ export default function PostExcerpt ({ postId, onPost, index }) {
           <div className="text-center border-2 border-red-500 px-12 py-3 w-min rounded-lg space-y-2">
             <div className="text-red-500 font-bold">Delete this post?</div>
             <div className="flex justify-center space-x-2">
-              <button onClick={() => onCancelDelete()} className="btn btn-warning">Cancel</button>
+              <button onClick={() => onCancelDelete(transition, SHOW)} className="btn btn-warning">Cancel</button>
               <button onClick={() => onDeletePostClicked()} className="btn btn-primary">Confirm</button>
             </div>
           </div>
