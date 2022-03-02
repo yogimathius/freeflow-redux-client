@@ -33,18 +33,19 @@ export default function PostExcerpt ({ postId, onPost, index }) {
   const [showButton, setShowButton] = useState(true)
   const clickHandler = useCallback(() => setShowButton(!showButton), [showButton])
   const [showMessage, setShowMessage] = useState(false)
-
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
 
   const loggedInUser = loadState()
 
+  console.log(loggedInUser)
   let userId
 
   if (loggedInUser) {
     userId = loggedInUser.id
   }
+
   const post = useSelector((state) => selectPostById(state, postId))
 
   const postComments = useSelector((state) => selectCommentsByPostId(state, postId))
@@ -108,7 +109,13 @@ export default function PostExcerpt ({ postId, onPost, index }) {
 
             {mode === SHOW && (
             <div className="space-x-1 flex justify-end mr-2">
-              <button onClick={() => onEdit()} className="text-red-600 cursor-pointer text-sm">Edit</button>
+              <button
+                onClick={() => onEdit() }
+                className="text-red-600 cursor-pointer text-sm"
+                data-testid="editButton"
+              >
+                  Edit
+              </button>
               <button onClick={() => onConfirmDelete()} className="text-red-600 cursor-pointer text-sm">Delete</button>
             </div>
 
