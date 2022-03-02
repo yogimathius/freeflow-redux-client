@@ -11,6 +11,8 @@ import postsReducer from '../reducers/postsSlice'
 import skillsReducer from '../reducers/dbSkillsSlice'
 import filtersReducer from '../reducers/filtersSlice'
 import selectedSkillsReducer from '../reducers/selectedSkillsSlice'
+import commentsReducer from '../reducers/commentsSlice'
+import likesReducer from '../reducers/likesSlice'
 
 import configureMockStore from 'redux-mock-store'
 
@@ -23,7 +25,10 @@ export const reducers = combineReducers(
     posts: postsReducer,
     skills: skillsReducer,
     visibilityFilters: filtersReducer,
-    selectedSkills: selectedSkillsReducer
+    selectedSkills: selectedSkillsReducer,
+    comments: commentsReducer,
+    likes: likesReducer
+
   }
 )
 
