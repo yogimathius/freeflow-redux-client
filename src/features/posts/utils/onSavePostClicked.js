@@ -11,7 +11,6 @@ export const OnSavePostClicked = async (
   emptySkillsDB,
   canSave
 ) => {
-  console.log('called')
   if (canSave) {
     const skillIds = selectedSkills.map(skill => skill.value)
     try {
