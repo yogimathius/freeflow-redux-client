@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { unwrapResult } from '@reduxjs/toolkit'
 import { addNewPost } from '../../reducers/postsSlice'
 import SkillSelector from '../dbSkills/SkillSelector'
 import { emptySkillsDB } from '../../reducers/selectedSkillsSlice'
 
-// export const SkillsContext = React.createContext();
-export default function AddPostForm () {
+const checkPostErrors = (content, skills) => {
+  let error
+  if (content === '') {
+    error = 'Post cannot be blank'
+    return error
+  } else if (!skills || skills.length === 0) {
+    error = 'Please select a skill'
+    return error
+  } else {
+    return false
+  }
+}
+export default function AddPostForm ({ OnSavePostClicked }) {
   const [error, setError] = useState('')
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -28,50 +38,27 @@ export default function AddPostForm () {
 
   const postLength = Object.keys(posts).length
 
-  const OnSavePostClicked = async () => {
-    if (content === '') {
-      setError('Post cannot be blank')
+  const validate = () => {
+    if (checkPostErrors(content, selectedSkills) !== false) {
+      const error = checkPostErrors(content, selectedSkills)
+      setError(error)
       setTimeout(() => {
         setError('')
       }, 2000)
-      return
-    }
-    if (selectedSkills === null || selectedSkills.length === 0) {
-      setError('Please select a skill')
-      setTimeout(() => {
-        setError('')
-      }, 2000)
-      return
-    }
-    if (canSave) {
+    } else {
       id = postLength + 1
-      if (id !== null && id !== undefined) {
-        const skillIds = selectedSkills.map(skill => skill.value)
-        try {
-          setAddRequestStatus('pending')
-          const postResultAction = await dispatch(
-            addNewPost({
-              owner_id: userId,
-              text_body: content,
-              active: true,
-              is_helper: false,
-              is_helped: false,
-              avatar: loggedInUser.avatar,
-              username: loggedInUser.username,
-              skill_ids: skillIds
-            })
-          )
-          unwrapResult(postResultAction)
-          setContent('')
-          dispatch(emptySkillsDB())
-        } catch (err) {
-          console.error('Failed to save the post skill: ', err)
-        } finally {
-          setAddRequestStatus('idle')
-          localStorage.setItem('selected_skill', null)
-          setError('')
-        }
-      }
+      OnSavePostClicked(
+        content,
+        selectedSkills,
+        setAddRequestStatus,
+        dispatch,
+        addNewPost,
+        userId,
+        loggedInUser,
+        setContent,
+        emptySkillsDB,
+        canSave
+      )
     }
   }
 
@@ -100,7 +87,8 @@ export default function AddPostForm () {
           className="btn btn-primary flex items-center justify-center sendButton"
           type="button"
           data-testid="sendButton"
-          onClick={OnSavePostClicked} disabled={!canSave}>
+          onClick={() => validate()}
+          disabled={!canSave}>
             Post
           </div>
         </div>
