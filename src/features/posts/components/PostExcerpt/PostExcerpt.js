@@ -10,21 +10,21 @@ import {
   removePost,
   selectPostById
 } from '../../reducers/postsSlice'
-import { unwrapResult } from '@reduxjs/toolkit'
-import { loadState, saveState } from '../../../../helpers/localStorage'
+import { saveState } from '../../../../helpers/localStorage'
 import Likes from '../../../likes/likes'
 import { CommentsList } from '../../../comments/CommentsList'
 import { AddCommentForm } from '../../../comments/AddCommentForm'
 import { selectCommentsByPostId } from '../../../../reducers/commentsSlice'
 import useVisualMode from '../../../../hooks/useVisualMode'
 import { EditPostForm } from '../EditPostForm/EditPostForm'
-import PostExcerptSkills from '../../PostExcerptSkills'
+import PostExcerptSkills from './components/PostExcerptSkills/PostExcerptSkills'
 import { onEditPostClicked } from '../../utils/onEditPostClicked'
 import EditDeleteButtons from './components/EditDeleteButtons'
 import HelpUserActions from './components/HelpUserActions'
 import ConfirmCancelDelete from './components/ConfirmCancelDelete'
 import UserLink from './components/UserLink'
 import onDeletePostClicked from '../../utils/onDeletePostClicked'
+import CommentsCount from '../CommentsCount/CommentsCount'
 
 const SHOW = 'SHOW'
 const CONFIRM = 'CONFIRM'
@@ -137,15 +137,11 @@ export default function PostExcerpt ({
       <div>
 
         {commentsLength === 0 ? ''
-
-          : <button type="button" onClick={() => setShowMessage(!showMessage)} className="">
-          {/* COMMENTS LIST FOR POST */}
-
-          {commentsLength > 1 ? <span>{commentsLength} comments</span> : ''}
-
-          {commentsLength === 1 ? <span>{commentsLength} comment</span> : ''}
-
-          </button>
+          : <CommentsCount
+              commentsLength={commentsLength}
+              setShowMessage={setShowMessage}
+              showMessage={showMessage}
+              />
         }
         <CSSTransition
           in={showMessage}
