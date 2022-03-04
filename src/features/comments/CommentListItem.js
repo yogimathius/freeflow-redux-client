@@ -7,7 +7,7 @@ import UserImage from '../users/UserImage'
 import { removeComment } from '../../reducers/commentsSlice'
 import { Link } from 'react-router-dom'
 import { loadState, saveState } from '../../helpers/localStorage'
-import { TimeAgo } from '../posts/TimeAgo'
+import { TimeAgo } from '../../components/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import { EditCommentForm } from './EditCommentForm'
 
