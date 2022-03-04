@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { TimeAgo } from '../posts/TimeAgo'
+import { TimeAgo } from '../../components/TimeAgo'
 import { acceptExperience, completeExperience, completeOtherExperience, removeExperience } from '../../reducers/experiencesSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import useVisualMode from '../../hooks/useVisualMode'

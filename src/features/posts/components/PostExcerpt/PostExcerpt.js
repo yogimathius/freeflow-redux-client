@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { UserNameAndLogo } from '../../../users/UserNameAndLogo'
-import { TimeAgo } from '../../TimeAgo'
+import { TimeAgo } from '../../../../components/TimeAgo'
 import {
   removePost,
   selectPostById
