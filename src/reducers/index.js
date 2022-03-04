@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import postsReducer from './postsSlice'
+import postsReducer from '../features/posts/reducers/postsSlice'
 import usersReducer from './usersSlice'
 import likesReducer from './likesSlice'
 import commentsReducer from './commentsSlice'

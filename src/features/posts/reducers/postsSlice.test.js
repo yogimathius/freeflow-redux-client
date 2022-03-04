@@ -1,6 +1,6 @@
 import 'regenerator-runtime'
 
-import postsReducer, { fetchPosts, addNewPost, removePost, updatePost } from '../postsSlice'
+import postsReducer, { fetchPosts, addNewPost, removePost, updatePost } from './postsSlice'
 
 describe('postsSlice', () => {
   test('should return the initial state', () => {

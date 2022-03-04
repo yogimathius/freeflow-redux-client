@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectPostsByUser } from '../../reducers/postsSlice'
+import { selectPostsByUser } from '../posts/reducers/postsSlice'
 import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice'
 import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from '../../reducers/usersSlice'
