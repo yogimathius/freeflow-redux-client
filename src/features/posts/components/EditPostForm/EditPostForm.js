@@ -3,7 +3,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectPostById, updatePost } from '../../../../reducers/postsSlice'
+import { selectPostById, updatePost } from '../../reducers/postsSlice'
 import EditForm from './components/EditForm'
 import SaveEditButton from './components/SaveEditButton'
 

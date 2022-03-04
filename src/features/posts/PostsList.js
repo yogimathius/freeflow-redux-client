@@ -6,7 +6,7 @@ import AddPostForm from './components/AddPostForm/AddPostForm'
 
 import {
   fetchPosts
-} from '../../reducers/postsSlice'
+} from './reducers/postsSlice'
 import Filter from '../filters/Filter'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'

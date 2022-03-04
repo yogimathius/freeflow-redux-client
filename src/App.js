@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { AuthProvider } from './context'
 import routes from './config/routes.js'
 import { Navbar } from './components/Navbar'
 
@@ -23,35 +22,32 @@ function App () {
   }, [dispatch])
 
   return (
-    <AuthProvider>
-      <Router>
+    <Router>
 
-        <div className="App xl:grid grid-cols-10 font-body">
-          <Navbar />
-          <div className="hidden xl:col-span-2 xl:flex justify-center">
-            { user
-              ? <UserSideBar />
-              : ''
-            }
-          </div>
-          <div className="h-20"></div>
-          <div className="bg-gray-100 col-start-3 col-span-6">
-            <Switch>
-              {routes.map((route) => (
-                <AppRoute
-                  key={route.path}
-                  path={route.path}
-                  component={route.component}
-                  isPrivate={route.isPrivate}
-                  loggedInUser={user}
-                />
-              ))}
-            </Switch>
-          </div>
+      <div className="App xl:grid grid-cols-10 font-body">
+        <Navbar />
+        <div className="hidden xl:col-span-2 xl:flex justify-center">
+          { user
+            ? <UserSideBar />
+            : ''
+          }
         </div>
-      </Router>
-    </AuthProvider>
-
+        <div className="h-20"></div>
+        <div className="bg-gray-100 col-start-3 col-span-6">
+          <Switch>
+            {routes.map((route) => (
+              <AppRoute
+                key={route.path}
+                path={route.path}
+                component={route.component}
+                isPrivate={route.isPrivate}
+                loggedInUser={user}
+              />
+            ))}
+          </Switch>
+        </div>
+      </div>
+    </Router>
   )
 }
 

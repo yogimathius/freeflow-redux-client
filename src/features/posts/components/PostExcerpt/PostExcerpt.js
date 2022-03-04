@@ -9,7 +9,7 @@ import { TimeAgo } from '../../TimeAgo'
 import {
   removePost,
   selectPostById
-} from '../../../../reducers/postsSlice'
+} from '../../reducers/postsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { loadState, saveState } from '../../../../helpers/localStorage'
 import Likes from '../../../likes/likes'
@@ -24,7 +24,7 @@ import EditDeleteButtons from './components/EditDeleteButtons'
 import HelpUserActions from './components/HelpUserActions'
 import ConfirmCancelDelete from './components/ConfirmCancelDelete'
 import UserLink from './components/UserLink'
-import onDeletePostClicked from '../../onDeletePostClicked'
+import onDeletePostClicked from '../../utils/onDeletePostClicked'
 
 const SHOW = 'SHOW'
 const CONFIRM = 'CONFIRM'
