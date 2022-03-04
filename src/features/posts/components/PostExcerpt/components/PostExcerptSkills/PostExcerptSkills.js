@@ -2,8 +2,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSkills, selectSkillsByIds } from '../../reducers/dbSkillsSlice'
-import { setVisibilityFilter } from '../../reducers/filtersSlice'
+import { fetchSkills, selectSkillsByIds } from '../../../../../../reducers/dbSkillsSlice'
+import { setVisibilityFilter } from '../../../../../../reducers/filtersSlice'
 import { Link } from 'react-router-dom'
 
 const PostExcerptSkills = ({ postSkillIds }) => {
@@ -30,7 +30,7 @@ const PostExcerptSkills = ({ postSkillIds }) => {
     )
   })
   return (
-		<div className="text-sm space-x-1 flex flex-wrap">
+		<div data-testid="skillLinks" className="text-sm space-x-1 flex flex-wrap">
 			<span className="font-bold">Skills:</span>
 			{renderedPostSkills}
 		</div>
