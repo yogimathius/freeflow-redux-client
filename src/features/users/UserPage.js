@@ -4,7 +4,7 @@ import { selectPostsByUser } from '../../reducers/postsSlice'
 import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice'
 import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from '../../reducers/usersSlice'
-import PostExcerpt from '../posts/components/PostExcerpt/tests/PostExcerpt'
+import PostExcerpt from '../posts/components/PostExcerpt/PostExcerpt'
 import UserCard from './UserCard'
 import UserPageAssets from './UserPageAssets'
 // import AddPostForm from '../posts/AddPostForm';
