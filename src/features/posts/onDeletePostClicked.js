@@ -4,15 +4,17 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { removePost } from '../../reducers/postsSlice'
 
-const OnDeletePostClicked = async (props) => {
-  const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  const dispatch = useDispatch()
-
-  if (props.canEditOrRemove) {
+const onDeletePostClicked = async ({
+  setAddRequestStatus,
+  canEditOrRemove,
+  postId,
+  dispatch
+}) => {
+  if (canEditOrRemove) {
     try {
       setAddRequestStatus('pending')
       const resultAction = await dispatch(
-        removePost({ post_id: props.postId })
+        removePost({ post_id: postId })
       )
       unwrapResult(resultAction)
     } catch (err) {
@@ -23,4 +25,4 @@ const OnDeletePostClicked = async (props) => {
   }
 }
 
-export default OnDeletePostClicked
+export default onDeletePostClicked
