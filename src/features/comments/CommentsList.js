@@ -19,9 +19,9 @@ export const CommentsList = ({ postId }) => {
   })
 
   return (
-    <section className="commentsList">
+    <ul className="commentsList">
       {content}
       {renderedComments}
-    </section>
+    </ul>
   )
 }
