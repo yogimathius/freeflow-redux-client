@@ -61,7 +61,7 @@ const CommentListItem = ({ comment, postId }) => {
   }
 
   return (
-    <div key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl">
+    <li key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl">
       <div className="p-3">
         <div className="flex justify-between">
           <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
@@ -96,7 +96,7 @@ const CommentListItem = ({ comment, postId }) => {
           />
         )}
       </div>
-    </div>
+    </li>
   )
 }
 
