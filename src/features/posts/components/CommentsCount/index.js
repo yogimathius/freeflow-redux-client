@@ -1,0 +1,1 @@
+export { CommentsCount } from './CommentsCount'
