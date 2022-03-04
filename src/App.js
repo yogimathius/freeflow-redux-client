@@ -14,8 +14,6 @@ import UserSideBar from './features/users/UserSideBar'
 import { fetchUserSkills } from './reducers/userSkillsSlice'
 import { loadState } from './helpers/localStorage'
 
-export const loggedInUser = loadState()
-
 function App () {
   const user = loadState()
   const dispatch = useDispatch()
@@ -45,7 +43,7 @@ function App () {
                   path={route.path}
                   component={route.component}
                   isPrivate={route.isPrivate}
-                  loggedInUser={loggedInUser}
+                  loggedInUser={user}
                 />
               ))}
             </Switch>
