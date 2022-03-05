@@ -1,0 +1,1 @@
+export { VisiblePostsList } from './VisiblePostsList'
