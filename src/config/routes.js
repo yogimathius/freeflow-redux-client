@@ -1,6 +1,6 @@
-import { VisiblePostsList } from '../features/posts/VisiblePostsList'
+import { VisiblePostsList } from '../features/posts'
 import { UsersList } from '../features/users/UsersList'
-import { SinglePostPage } from '../features/posts/SinglePostPage'
+import { SinglePostPage } from '../features/posts/components/SinglePostPage'
 import { EditPostForm } from '../features/posts/components/EditPostForm/EditPostForm'
 import UserPage from '../features/users/UserPage'
 import LoginPage from '../features/login/LoginPage'
