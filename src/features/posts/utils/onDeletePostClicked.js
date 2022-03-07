@@ -2,23 +2,27 @@
 import { unwrapResult } from '@reduxjs/toolkit'
 import { removePost } from '../reducers/postsSlice'
 
-const onDeletePostClicked = async ({
+const onDeletePostClicked = async (
   setAddRequestStatus,
   canEditOrRemove,
   postId,
-  dispatch
-}) => {
+  dispatch,
+  transition,
+  SHOW
+) => {
+  const post_id = postId
   if (canEditOrRemove) {
     try {
       setAddRequestStatus('pending')
       const resultAction = await dispatch(
-        removePost({ post_id: postId })
+        removePost(post_id, { post_id }, post_id)
       )
       unwrapResult(resultAction)
     } catch (err) {
       console.error('Failed to remove like from post: ', err)
     } finally {
       setAddRequestStatus('idle')
+      transition(SHOW)
     }
   }
 }
