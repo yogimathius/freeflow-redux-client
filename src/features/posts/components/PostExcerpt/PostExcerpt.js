@@ -128,7 +128,6 @@ export default function PostExcerpt ({
           canEditOrRemove={canEditOrRemove}
           postId={postId}
           dispatch={dispatch}
-          transition=
          />
       )}
 
