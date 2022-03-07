@@ -105,29 +105,30 @@ export default function PostExcerpt ({
       )}
 
       {mode === EDITING && (
-      <EditPostForm
-        postId={postId}
-        onSaveEdit={() => onSaveEdit(transition, SHOW)}
-        value={post.text_body}
-        onEditPostClicked={() => onEditPostClicked(
-          setAddRequestStatus,
-          canEditOrRemove,
-          postId,
-          dispatch
-        )}
-      />
+        <EditPostForm
+          postId={postId}
+          onSaveEdit={() => onSaveEdit(transition, SHOW)}
+          value={post.text_body}
+          onEditPostClicked={() => onEditPostClicked(
+            setAddRequestStatus,
+            canEditOrRemove,
+            postId,
+            dispatch
+          )}
+        />
       )}
 
       {mode === CONFIRM && (
         <ConfirmCancelDelete
           onCancelDelete={onCancelDelete}
-          onDeletePostClicked={() => onDeletePostClicked(
-            setAddRequestStatus,
-            canEditOrRemove,
-            postId
-          )}
+          onDeletePostClicked={() => onDeletePostClicked()}
           transition={transition}
           SHOW={SHOW}
+          setAddRequestStatus={setAddRequestStatus}
+          canEditOrRemove={canEditOrRemove}
+          postId={postId}
+          dispatch={dispatch}
+          transition=
          />
       )}
 
