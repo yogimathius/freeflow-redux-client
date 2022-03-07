@@ -189,5 +189,7 @@ describe('PostExcerpt', () => {
     userEvent.click(getByTestId('confirmDeleteButton'))
 
     expect(onConfirmDelete).toHaveBeenCalled()
+
+    expect(await getByTestId('confirmButton').toBeInTheDocument())
   })
 })
