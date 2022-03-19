@@ -4,7 +4,8 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { loadState } from '../helpers/localStorage'
 
-const AppRoutes = ({ component: Component, path, isPrivate, loggedInUser, props, ...rest }) => {
+const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
+  const loggedInUser = loadState()
   return (
 		<Route
 			path={path}
