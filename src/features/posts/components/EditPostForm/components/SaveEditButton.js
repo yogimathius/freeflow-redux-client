@@ -18,7 +18,7 @@ const SaveEditButton = ({
       type="button"
       onClick={() => {
         if (validPost()) {
-          onEditPostClicked(
+          return onEditPostClicked(
             content,
             setAddRequestStatus,
             dispatch,
