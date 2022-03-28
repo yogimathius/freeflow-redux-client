@@ -62,7 +62,7 @@ const CommentListItem = ({ comment, postId }) => {
 
   return (
     <li key={comment.id} className="flex space-x-2 my-2 ">
-      <div className='w-16 mr-2'>
+      <div className='w-12 mx-2'>
         <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
           <UserImage />
         </Link>
@@ -71,12 +71,10 @@ const CommentListItem = ({ comment, postId }) => {
       <div className="p-3 bg-gray-100 rounded-xl w-max">
         <div className="flex justify-between">
           <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
-            <div className="flex items-center">
-                <span className="font-semibold text-sm">{`${user.first_name} ${user.last_name}`}</span>
-            </div>
+            <div className="font-semibold text-sm mr-2">{`${user.first_name} ${user.last_name}`}</div>
           </Link>
           <div className="">
-            <TimeAgo timestamp={comment.time_posted} />
+
             { userId === comment.commenter_id
               ? <div className="space-x-1 flex justify-end mr-2">
 
@@ -100,6 +98,9 @@ const CommentListItem = ({ comment, postId }) => {
             value={comment.text_body}
           />
         )}
+      </div>
+      <div className='text-sm'>
+        <TimeAgo timestamp={comment.time_posted} />
       </div>
     </li>
   )
