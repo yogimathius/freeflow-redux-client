@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const CommentsCount = ({ commentsLength, setShowMessage, showMessage }) => {
   const commentCount = commentsLength > 1 ? commentsLength + ' comments' : commentsLength + ' comment'
 
+  const view = showMessage ? 'Hide ' : 'View '
   return (
-    <button type="button" onClick={() => setShowMessage(!showMessage)} className="">
-      <span>{commentCount}</span>
+    <button type="button" onClick={() => setShowMessage(!showMessage)} className="flex justify-center w-full">
+      <span>{view} {commentCount}</span>
     </button>
   )
 }
