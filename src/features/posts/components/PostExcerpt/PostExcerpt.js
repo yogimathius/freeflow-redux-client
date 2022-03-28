@@ -155,7 +155,7 @@ export default function PostExcerpt ({
           classNames="alert"
           unmountOnExit
         >
-          <div>
+          <div className='my-4'>
             <CommentsList key={index} postId={postId} />
             <div>
               {/* <section className="validation">{error}</section> */}
