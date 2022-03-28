@@ -11,7 +11,7 @@ export const TimeAgo = ({ timestamp }) => {
   }
   console.log(timeAgo.replace('about', '').replace('ear', ''))
 
-  const condensedTimeAgo = timeAgo.replace('about', '').replace('ear', '').split(' ').join('')
+  const condensedTimeAgo = timeAgo.replace('about', '').replace('ear', '').replace('our', '').split(' ').join('')
 
   return (
     <span className="text-gray-500" title={timestamp}>
