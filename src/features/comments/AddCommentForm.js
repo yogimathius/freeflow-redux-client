@@ -4,6 +4,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewComment } from '../../reducers/commentsSlice'
 import { loadState } from '../../helpers/localStorage'
+import UserImage from '../users/UserImage'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
@@ -43,8 +44,9 @@ export const AddCommentForm = ({ postId }) => {
   }
 
   return (
-    <section className="">
-      <form>
+    <section className="flex space-x-2 mt-2">
+      <UserImage />
+      <form className='w-full'>
         <div className="flex">
           <label
           htmlFor="commentContent"></label>
