@@ -7,7 +7,7 @@ const UserImage = () => {
   const imgUrl = 'http://graph.facebook.com/v2.5/' + getRandomInt() + '/picture'
 
   return (
-    <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500 w-10" alt="avatar" src={imgUrl} />
+    <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500" alt="avatar" src={imgUrl} />
   )
 }
 
