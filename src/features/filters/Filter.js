@@ -31,9 +31,9 @@ const Filter = () => {
     : ''
 
   return (
-    <div className="flex flex-col justify-center">
-      <div className="text-xs font-extrabold mr-2 text-center">Filter by: </div>
-      <div className="flex justify-center flex-wrap">
+    <div className="flex flex-col justify-center mx-2 my-2">
+      <div className="text-xs font-extrabold ml-2">Filter by: </div>
+      <div className="flex flex-wrap">
         {renderedFilters}
       </div>
     </div>
