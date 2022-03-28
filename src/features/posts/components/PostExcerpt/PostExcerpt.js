@@ -104,7 +104,7 @@ export default function PostExcerpt ({
 
       {/* TEXT BODY */}
       {mode === SHOW && (
-        <p className="flex justify-center px-12">{post.text_body}</p>
+        <p className="">{post.text_body}</p>
       )}
 
       {mode === EDITING && (
