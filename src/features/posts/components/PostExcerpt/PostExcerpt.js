@@ -72,22 +72,20 @@ export default function PostExcerpt ({
   }
 
   return (
-    <article className="rounded-lg p-2 my-2 bg-white shadow-lg space-y-4 mx-2" key={post.id}>
+    <article className="rounded-lg p-4 my-2 bg-white shadow-lg space-y-4 mx-2" key={post.id}>
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
         <PostExcerptSkills postSkillIds={post.skill_ids} />
-        <div>
+        <div className='flex flex-col items-end'>
           <TimeAgo timestamp={post.time_posted} />
           { userId === post.owner_id
-            ? <div className="space-x-1 flex justify-end mr-2">
-                {mode === SHOW && (
+            ? mode === SHOW && (
                   <EditDeleteButtons
                     onEdit={onEdit}
                     onConfirmDelete={onConfirmDelete} transition={transition}
                     EDITING={EDITING}
                     CONFIRM={CONFIRM} />
-                )}
-              </div>
+            )
             : <HelpUserActions
                 userId={userId}
                 experienceOption={experienceOption}
