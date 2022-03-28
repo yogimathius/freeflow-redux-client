@@ -157,9 +157,9 @@ export default function PostExcerpt ({
             <div>
               {/* <section className="validation">{error}</section> */}
             </div>
-            <AddCommentForm postId={postId} />
           </div>
         </CSSTransition>
+        <AddCommentForm postId={postId} />
 
       </div>
 

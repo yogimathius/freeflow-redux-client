@@ -7,9 +7,9 @@ import { loadState } from '../../helpers/localStorage'
 
 export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
-  const userId = loadState()
+  const userId = loadState().id
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-
+  console.log({ userId })
   const dispatch = useDispatch()
 
   const onContentChanged = (e) => setContent(e.target.value)
@@ -45,7 +45,7 @@ export const AddCommentForm = ({ postId }) => {
   return (
     <section className="">
       <form>
-        <div className="m-1 flex">
+        <div className="flex">
           <label
           htmlFor="commentContent"></label>
           <textarea
