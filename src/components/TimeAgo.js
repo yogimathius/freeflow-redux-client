@@ -11,7 +11,7 @@ export const TimeAgo = ({ timestamp }) => {
   }
 
   return (
-    <span className="text-gray-500 mb-2" title={timestamp}>
+    <span className="text-gray-500" title={timestamp}>
      <i>{timeAgo}</i>
     </span>
   )
