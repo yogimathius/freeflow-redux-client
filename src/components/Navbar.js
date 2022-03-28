@@ -34,19 +34,19 @@ export const Navbar = (props) => {
   }
 
   return (
-    <nav className="pt-3 pb-1 mb-4 bg-green-500 fixed w-full z-40 font-body">
-      <section className="grid grid-cols-8 ">
-        <div className="col-span-2 ml-4 my-1 md:ml-12">
+    <nav className="pt-3 pb-1 bg-green-500 fixed w-full z-40 font-body">
+      <section className="flex justify-between md:grid grid-cols-10">
+        <div className="ml-4 my-1">
           <Link onClick={() => (setCurrentPage('dashboard'))} to="/dashboard">
-            <img width="75px" className="" src={logo} alt="freeflow logo"></img>
+            <img width="" className="h-12 w-12" src={logo} alt="freeflow logo"></img>
           </Link>
         </div>
 
-        <div className="col-start-7 mr-4 md:hidden z-50 flex items-center">
+        <div className="col-start-10 lg:hidden z-50 flex justify-end items-center mr-4">
           <DropDown user={user} saveState={saveState} handleLogout={handleLogout} />
         </div>
 
-        <div className="col-start-3 col-span-4 hidden md:flex justify-evenly my-2 space-x-12 font-bold items-end text-white">
+        <div className="col-start-2 col-span-8 xl:col-start-3 xl:col-span-6 hidden lg:flex justify-between my-2 mx-4 space-x-8 font-bold items-end text-white">
 
           <Link onClick={() => (onDashboardClicked())} className="" to="/dashboard">
             <div className="flex group">
