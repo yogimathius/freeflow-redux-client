@@ -72,7 +72,7 @@ export default function PostExcerpt ({
   }
 
   return (
-    <article className="rounded-lg p-2 my-3 bg-white shadow-lg space-y-4" key={post.id}>
+    <article className="rounded-lg p-2 my-2 bg-white shadow-lg space-y-4 mx-2" key={post.id}>
       {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-3">
         <PostExcerptSkills postSkillIds={post.skill_ids} />

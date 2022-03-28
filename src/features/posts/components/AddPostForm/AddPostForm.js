@@ -52,13 +52,13 @@ export default function AddPostForm ({ OnSavePostClicked }) {
   }
 
   return (
-    <section className="mt-2">
+    <section className="-mt-2 pt-2 mb-4">
       <form
-        className="space-y-2 mx-2">
+        className="space-y-2 mx-2 mt-0">
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."
-          className="w-full  border-1 border-solid border-gray-400 rounded-xl p-5 active:rounded-xl"
+          className="w-full border-1 border-solid border-gray-400 rounded-xl p-5 active:rounded-xl"
           name="postContent"
           value={content}
           data-testid="postText"
@@ -66,12 +66,14 @@ export default function AddPostForm ({ OnSavePostClicked }) {
           onChange={onContentChanged}
         />
 
-        <div className="grid grid-cols-4 space-x-2 mx-2 mb-12">
-          <div className="col-span-3" data-testid="selector">
+        <div className="grid grid-cols-4 space-x-2">
+          <div className="col-span-2" data-testid="selector">
             <SkillSelector
               id={id}
             />
           </div>
+          <div data-testid="errorMessage" className="flex justify-center items-center text-red-500 text-sm errorMessage">{error}</div>
+
           <div
           className="btn btn-primary flex items-center justify-center sendButton"
           type="button"
@@ -81,7 +83,6 @@ export default function AddPostForm ({ OnSavePostClicked }) {
             Post
           </div>
         </div>
-        <section data-testid="errorMessage" className="flex justify-center text-red-500 text-sm h-4 errorMessage">{error}</section>
       </form>
     </section>
   )
