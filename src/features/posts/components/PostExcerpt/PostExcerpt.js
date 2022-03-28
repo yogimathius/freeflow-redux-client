@@ -135,17 +135,20 @@ export default function PostExcerpt ({
       )}
 
       {/* LIKES */}
-      <Likes postId={postId} userId={userId} />
 
       <div>
+        <div className='grid grid-cols-3 space-x-2 items-center'>
 
-        {commentsLength === 0 ? ''
-          : <CommentsCount
-              commentsLength={commentsLength}
-              setShowMessage={setShowMessage}
-              showMessage={showMessage}
+          <Likes postId={postId} userId={userId} />
+          {commentsLength === 0 ? ''
+            : <CommentsCount
+                commentsLength={commentsLength}
+                setShowMessage={setShowMessage}
+                showMessage={showMessage}
               />
-        }
+          }
+        </div>
+
         <CSSTransition
           in={showMessage}
           timeout={300}
