@@ -16,12 +16,12 @@ export const UserNameAndLogo = ({ userId }) => {
   const isActive = author && author.active ? <p className="text-green-400 text-sm font-semibold">Online</p> : <p className="text-gray-500 text-sm font-semibold">Offline</p>
 
   return (
-    <div className="flex space-x-1 items-center w-max">
-      <div className="w-10 md:w-1/2">
+    <div className="flex space-x-1 items-center">
+      <div className="w-max mr-4">
         <img className="inline-block rounded-full p-2 border-2 border-solid border-green-500" alt="avatar" src={imgUrl} />
       </div>
 
-      <div className="inline-block">
+      <div className="w-max">
         <p className="inline-block text-sm md:text-lg font-bold text-blue-500">{author ? fullName : 'Unknown author'}</p>
         {isActive}
       </div>
