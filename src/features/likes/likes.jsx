@@ -118,7 +118,7 @@ export default function Likes ({ postId, userId }) {
     : ''
 
   return (
-    <div className="flex items-center space-x-2 text-green-500 mt-3 text-sm">
+    <div className="flex items-center space-x-2 text-green-500 text-sm">
         {/* conditionally renders like or unlike icon */}
 
         {LikeUnlikeIcons}
