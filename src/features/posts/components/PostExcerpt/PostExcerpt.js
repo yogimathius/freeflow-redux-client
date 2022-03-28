@@ -72,30 +72,35 @@ export default function PostExcerpt ({
   }
 
   return (
-    <article className="rounded-lg p-4 my-2 bg-white shadow-lg space-y-4 mx-2" key={post.id}>
+    <article className="rounded-lg p-4 my-2 bg-white shadow-lg space-y-2 mx-2" key={post.id}>
       {/* TAGS, TIMEAGO */}
-      <div className="flex justify-between my-3">
+      <div className="flex justify-between my-2">
         <PostExcerptSkills postSkillIds={post.skill_ids} />
-        <div className='flex flex-col items-end'>
-          <TimeAgo timestamp={post.time_posted} />
-          { userId === post.owner_id
-            ? mode === SHOW && (
-                  <EditDeleteButtons
-                    onEdit={onEdit}
-                    onConfirmDelete={onConfirmDelete} transition={transition}
-                    EDITING={EDITING}
-                    CONFIRM={CONFIRM} />
-            )
-            : <HelpUserActions
-                userId={userId}
-                experienceOption={experienceOption}
-              />
-          }
-        </div>
+        <TimeAgo timestamp={post.time_posted} />
+
       </div>
 
       {/* POST AUTHOR */}
-      <UserLink post={post} saveState={saveState} />
+      <div className='flex justify-between'>
+        <UserLink post={post} saveState={saveState} />
+
+        <div className='flex flex-col items-end'>
+            { userId === post.owner_id
+              ? mode === SHOW && (
+                    <EditDeleteButtons
+                      onEdit={onEdit}
+                      onConfirmDelete={onConfirmDelete} transition={transition}
+                      EDITING={EDITING}
+                      CONFIRM={CONFIRM} />
+              )
+              : <HelpUserActions
+                  userId={userId}
+                  experienceOption={experienceOption}
+                />
+            }
+        </div>
+
+      </div>
 
       {/* TEXT BODY */}
       {mode === SHOW && (
