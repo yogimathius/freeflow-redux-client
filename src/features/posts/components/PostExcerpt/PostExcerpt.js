@@ -112,12 +112,7 @@ export default function PostExcerpt ({
           postId={postId}
           onSaveEdit={() => onSaveEdit(transition, SHOW)}
           value={post.text_body}
-          onEditPostClicked={() => onEditPostClicked(
-            setAddRequestStatus,
-            canEditOrRemove,
-            postId,
-            dispatch
-          )}
+          onEditPostClicked={onEditPostClicked}
         />
       )}
 
