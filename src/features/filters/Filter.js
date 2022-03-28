@@ -32,7 +32,7 @@ const Filter = () => {
 
   return (
     <div className="flex flex-col justify-center mx-2 my-2">
-      <div className="text-xs font-extrabold ml-2">Filter by: </div>
+      <div className="text-xs font-extrabold ml-2">Filter posts by: </div>
       <div className="flex flex-wrap">
         {renderedFilters}
       </div>
