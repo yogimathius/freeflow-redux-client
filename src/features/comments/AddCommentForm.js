@@ -10,7 +10,6 @@ export const AddCommentForm = ({ postId }) => {
   const [content, setContent] = useState('')
   const userId = loadState().id
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
-  console.log({ userId })
   const dispatch = useDispatch()
 
   const onContentChanged = (e) => setContent(e.target.value)

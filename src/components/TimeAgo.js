@@ -9,7 +9,6 @@ export const TimeAgo = ({ timestamp }) => {
     const timePeriod = formatDistanceToNow(date, { includeSeconds: true })
     timeAgo = `${timePeriod}`
   }
-  console.log(timeAgo.replace('about', '').replace('ear', ''))
 
   const condensedTimeAgo = timeAgo.replace('about', '').replace('ear', '').replace('our', '').split(' ').join('')
 
