@@ -44,8 +44,10 @@ export const AddCommentForm = ({ postId }) => {
   }
 
   return (
-    <section className="flex space-x-2 mt-2">
-      <UserImage />
+    <section className="flex space-x-2 mt-2 mx-2">
+      <div className='w-12 mr-2'>
+        <UserImage />
+      </div>
       <form className='w-full'>
         <div className="flex">
           <label
