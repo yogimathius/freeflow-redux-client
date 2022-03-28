@@ -7,12 +7,15 @@ export const TimeAgo = ({ timestamp }) => {
   if (timestamp) {
     const date = parseISO(timestamp)
     const timePeriod = formatDistanceToNow(date, { includeSeconds: true })
-    timeAgo = `${timePeriod} ago`
+    timeAgo = `${timePeriod}`
   }
+  console.log(timeAgo.replace('about', '').replace('ear', ''))
+
+  const condensedTimeAgo = timeAgo.replace('about', '').replace('ear', '').split(' ').join('')
 
   return (
     <span className="text-gray-500" title={timestamp}>
-     <i>{timeAgo}</i>
+     <i>{condensedTimeAgo}</i>
     </span>
   )
 }
