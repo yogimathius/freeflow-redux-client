@@ -33,7 +33,7 @@ function App () {
           }
         </div>
         <div className="h-20"></div>
-        <div className="bg-gray-100 col-start-2 col-span-8 xl:col-start-3 xl:col-span-6 lg:mt-20 xl:mt-0">
+        <div className="bg-gray-100 col-start-2 col-span-8 xl:col-start-3 xl:col-span-6  -mt-2 lg:mt-16 xl:-mt-2 pt-2">
           <Switch>
             {routes.map((route) => (
               <AppRoute
