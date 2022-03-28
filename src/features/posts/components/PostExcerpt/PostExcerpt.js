@@ -157,7 +157,7 @@ export default function PostExcerpt ({
             </div>
           </div>
         </CSSTransition>
-        <AddCommentForm postId={postId} />
+        <AddCommentForm postId={postId} loggedInUser={loggedInUser} />
 
       </div>
 
