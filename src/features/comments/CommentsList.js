@@ -19,7 +19,7 @@ export const CommentsList = ({ postId }) => {
   })
 
   return (
-    <ul className="commentsList">
+    <ul>
       {content}
       {renderedComments}
     </ul>

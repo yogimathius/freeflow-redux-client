@@ -61,13 +61,18 @@ const CommentListItem = ({ comment, postId }) => {
   }
 
   return (
-    <li key={comment.id} className="bg-white  mx-1 border-2 border-solid border-green-500 border-opacity-25 my-2 rounded-xl">
-      <div className="p-3">
+    <li key={comment.id} className="flex space-x-2 my-2 ">
+      <div className='w-16 mr-2'>
+        <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
+          <UserImage />
+        </Link>
+      </div>
+
+      <div className="p-3 bg-gray-100 rounded-xl w-max">
         <div className="flex justify-between">
           <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
-            <div className="flex items-center space-x-2">
-              <UserImage />
-                <span className="font-semibold text-blue-500">{`${user.first_name} ${user.last_name}`}</span>
+            <div className="flex items-center">
+                <span className="font-semibold text-sm">{`${user.first_name} ${user.last_name}`}</span>
             </div>
           </Link>
           <div className="">
@@ -85,7 +90,7 @@ const CommentListItem = ({ comment, postId }) => {
 
         </div>
         {mode === SHOW && (
-          <div>{comment.text_body}</div>
+          <div className='max-w-3xl'>{comment.text_body}</div>
         )}
         {mode === EDITING && (
           <EditCommentForm
