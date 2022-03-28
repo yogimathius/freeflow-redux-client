@@ -6,9 +6,9 @@ import { addNewComment } from '../../reducers/commentsSlice'
 import { loadState } from '../../helpers/localStorage'
 import UserImage from '../users/UserImage'
 
-export const AddCommentForm = ({ postId }) => {
+export const AddCommentForm = ({ postId, loggedInUser }) => {
   const [content, setContent] = useState('')
-  const userId = loadState().id
+  const userId = loggedInUser
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
   const dispatch = useDispatch()
 
