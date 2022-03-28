@@ -99,7 +99,7 @@ const CommentListItem = ({ comment, postId }) => {
           />
         )}
       </div>
-      <div className='text-sm'>
+      <div className='mt-1 text-sm'>
         <TimeAgo timestamp={comment.time_posted} />
       </div>
     </li>
