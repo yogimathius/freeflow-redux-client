@@ -36,7 +36,7 @@ export const Navbar = (props) => {
   return (
     <nav className="pt-3 pb-1 bg-green-500 fixed w-full z-40 font-body">
       <section className="flex justify-between md:grid grid-cols-10">
-        <div className="xl:col-span-2 flex justify-center items-center ml-4 my-1">
+        <div className="xl:col-span-2 flex lg:justify-center items-center ml-4 my-1">
           <Link onClick={() => (setCurrentPage('dashboard'))} to="/dashboard">
             <img width="" className="h-12 w-12" src={logo} alt="freeflow logo"></img>
           </Link>
