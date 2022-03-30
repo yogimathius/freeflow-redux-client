@@ -2,7 +2,7 @@
 import React from 'react'
 import { parseISO, formatDistanceToNow } from 'date-fns'
 
-export const TimeAgo = ({ timestamp }) => {
+export const TimeAgo = ({ timestamp, condensed }) => {
   let timeAgo = ''
   if (timestamp) {
     const date = parseISO(timestamp)
@@ -14,7 +14,7 @@ export const TimeAgo = ({ timestamp }) => {
 
   return (
     <span className="text-gray-500" title={timestamp}>
-     <i>{condensedTimeAgo}</i>
+     <i>{condensed ? condensedTimeAgo : timeAgo + ' ago'}</i>
     </span>
   )
 }
