@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { parseISO, formatDistanceToNow } from 'date-fns'
+import { timeAgoCondenser } from '../helpers/timeAgoCondenser'
 
 export const TimeAgo = ({ timestamp, condensed }) => {
   let timeAgo = ''
@@ -10,7 +11,7 @@ export const TimeAgo = ({ timestamp, condensed }) => {
     timeAgo = `${timePeriod}`
   }
 
-  const condensedTimeAgo = timeAgo.replace('about', '').replace('ear', '').replace('our', '').split(' ').join('')
+  const condensedTimeAgo = timeAgoCondenser(timeAgo)
 
   return (
     <span className="text-gray-500" title={timestamp}>
