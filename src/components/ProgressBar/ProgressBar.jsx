@@ -1,5 +1,4 @@
 import React from 'react'
-
 const ProgressBar = (props) => {
   const { experience } = props
 
@@ -67,17 +66,18 @@ const ProgressBar = (props) => {
   }
 
   return (
-    <div className="flex space-x-2">
-      <div className={`text-center text-xs md:text-base font-bold text-${colorClass}-500`}>Lv. {level}</div>
+    <div className='flex'>
+      <div className="flex items-baseline space-x-2">
+        <div className={`text-center text-xs md:text-base font-bold text-${colorClass}-500`}>Lv. {level}</div>
+        <span className={`text-${colorClass}-500 text-xs mt-2 text -center font-bold px-1`}>{`${experiencePoints}/${fullExperience}`}</span>
+      </div>
 
-      <div className={`bg-${colorClass}-500 flex justify-center rounded w-24`}>
-        <div style={fillerStyles} className="bg-gray-300  rounded">
-          <div className="flex justify-center">
-            <span className={'text-xs text-white mt-2 text-center font-bold px-1'}>{`${experiencePoints}/${fullExperience}`}</span>
-          </div>
+      <div className={`bg-${colorClass}-500 flex justify-center w-6`}>
+        <div style={fillerStyles} className="bg-gray-300">
         </div>
       </div>
     </div>
+
   )
 }
 
