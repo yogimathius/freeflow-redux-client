@@ -18,11 +18,11 @@ export default function UserCard ({ user, infoPosition, isList }) {
   return (
     <div className='flex flex-col justify-start md:justify-between bg-white rounded-xl hover:shadow-lg space-y-4 p-4 h-full' key={user.id}>
       <div className="flex flex-col md:flex-row justify-between space-y-2 md:space-y-0">
-        <div className={'flex flex-row justify-between w-full space-y-4'}>
-          <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
-            <UserNameAndLogo userId={user.id} />
-          </Link>
-          <div className='flex flex-col'>
+        <div className={'flex flex-row justify-between items-center w-full'}>
+          <div className='space-y-4'>
+            <Link to={`/userprofile/${user.id}`} onClick={() => saveState(user.id)}>
+              <UserNameAndLogo userId={user.id} />
+            </Link>
             <UserInfo
               profession={user.profession}
               tagline={user.tagline}
@@ -30,9 +30,8 @@ export default function UserCard ({ user, infoPosition, isList }) {
               position={position}
               isHidden={isHidden}
             />
-            <ProgressBar experience={experience} />
-
           </div>
+          <ProgressBar experience={experience} />
         </div>
 
       </div>
