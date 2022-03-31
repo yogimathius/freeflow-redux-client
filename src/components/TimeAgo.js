@@ -11,7 +11,7 @@ export const TimeAgo = ({ timestamp, condensed }) => {
     timeAgo = `${timePeriod}`
   }
 
-  const condensedTimeAgo = timeAgoCondenser(timeAgo)
+  const condensedTimeAgo = condensed && timeAgoCondenser(timeAgo)
 
   return (
     <span className="text-gray-500" title={timestamp}>
