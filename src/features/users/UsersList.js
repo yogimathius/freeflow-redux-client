@@ -40,15 +40,8 @@ export const UsersList = () => {
       <div key={id} className="">
         <UserCard
           key={id}
-          id={user.id}
-          firstName={user.first_name}
-          lastName={user.last_name}
-          active={user.active}
-          location={user.location}
-          created_at={user.created_at}
-          profession={user.profession}
-          tagline={user.tagline}
-          position="right"
+          user={user}
+          infoPosition="right"
         />
       </div>
     )

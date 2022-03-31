@@ -26,18 +26,6 @@ const UserSideBar = () => {
       <div className="flex justify-center">
         <ProgressBar experience={experience} />
       </div>
-      {/* <div> */}
-      {/* <UserInfo
-            profession={user?.profession}
-            tagline={user?.tagline}
-            location={user?.location}
-          />
-      </div> */}
-      {/* <div className="text-sm">
-        <UserSkills
-          userId={user?.id}
-        />
-      </div> */}
     </div>
   )
 }
