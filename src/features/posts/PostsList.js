@@ -52,14 +52,14 @@ const PostsList = ({ posts, loggedInUser }) => {
   }
 
   return (
-    <div className="mx-2">
+    <div className="mx-4">
       <AddPostForm OnSavePostClicked={OnSavePostClicked} />
       <Filter />
       {posts.length !== 0
         ? <section className="mt-4">
             {content}
           </section>
-        : <div className="flex justify-center h-24 items-center bg-white mx-2 mt-2 rounded-lg border-1 border-gray-300 mb-3">Sorry! None found.</div>
+        : <div className="flex justify-center h-24 items-center bg-white mt-2 rounded-lg border-1 border-gray-300 mb-3">Sorry! None found.</div>
       }
     </div>
   )

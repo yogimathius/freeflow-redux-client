@@ -54,7 +54,7 @@ export default function AddPostForm ({ OnSavePostClicked }) {
   return (
     <section className="xl:-mt-2 pt-2 mb-4">
       <form
-        className="space-y-2 mx-2 mt-0">
+        className="space-y-2 mt-0">
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."
