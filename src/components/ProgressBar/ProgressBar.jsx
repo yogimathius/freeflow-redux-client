@@ -66,13 +66,13 @@ const ProgressBar = (props) => {
   }
 
   return (
-    <div className='flex'>
-      <div className="flex items-baseline space-x-2">
+    <div className='flex items-end space-x-1'>
+      <div className="flex flex-col items-start space-y-1 -mb-0.5">
         <div className={`text-center text-xs md:text-base font-bold text-${colorClass}-500`}>Lv. {level}</div>
-        <span className={`text-${colorClass}-500 text-xs mt-2 text -center font-bold px-1`}>{`${experiencePoints}/${fullExperience}`}</span>
+        <span className={`text-${colorClass}-500 text-xs mt-2 text -center font-bold`}>{`${experiencePoints}/${fullExperience}`}</span>
       </div>
 
-      <div className={`bg-${colorClass}-500 flex justify-center w-6`}>
+      <div className={`bg-${colorClass}-500 flex justify-center w-6 h-10`}>
         <div style={fillerStyles} className="bg-gray-300">
         </div>
       </div>
