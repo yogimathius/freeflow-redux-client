@@ -6,7 +6,6 @@ import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from '../../reducers/usersSlice'
 import PostExcerpt from '../posts/components/PostExcerpt/PostExcerpt'
 import UserCard from './UserCard'
-import UserPageAssets from './UserPageAssets'
 // import AddPostForm from '../posts/AddPostForm';
 // import {Link} from 'react-router-dom'
 
@@ -30,20 +29,14 @@ export default function UserPage () {
   )
 
   return (
-    <section className="space-y-3 pt-2 mt-2">
-      {/* <UserSkillsList /> */}
-
+    <section className="space-y-3 pt-2 mt-2 mx-4">
       <div className="">
-        <div className="col-span-2">
-          <UserPageAssets
-            userId={userId}
-            canUpdate={true}
-            user={user}
-          />
-        </div>
+        <UserCard
+          user={user}
+        />
       </div>
       <div className="">
-        <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white mx-12">Timeline: </h2>
+        <h2 className="text-2xl font-semibold text-center border-2 border-green-500 rounded-xl bg-green-500 text-white">Timeline: </h2>
       </div>
       <section className="">
         {renderedPosts}
