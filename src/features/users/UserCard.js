@@ -9,12 +9,12 @@ import { UserNameAndLogo } from './UserNameAndLogo'
 import UserInfo from './UserInfo'
 import UserSkills from './UserSkills'
 
-export default function UserCard ({ user, infoPosition }) {
+export default function UserCard ({ user, infoPosition, isList }) {
   const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, user.id))
 
   const experience = (userExperiences.length * 12)
   const position = infoPosition === 'right' ? 'text-right' : 'text-left'
-
+  const isHidden = isList ? 'hidden' : ''
   return (
     <div className='flex flex-col justify-start md:justify-between bg-white rounded-xl hover:shadow-lg space-y-4 p-4 h-full' key={user.id}>
       <div className="flex flex-col md:flex-row justify-between space-y-2 md:space-y-0">
@@ -29,6 +29,7 @@ export default function UserCard ({ user, infoPosition }) {
           tagline={user.tagline}
           location={user.location}
           position={position}
+          isHidden={isHidden}
         />
       </div>
       <div className="text-sm">
