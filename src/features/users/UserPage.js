@@ -15,6 +15,8 @@ export default function UserPage () {
   const userId = loggedInUser.id
   const postsForUser = useSelector((state) => selectPostsByUser(state, userId))
 
+  const user = useSelector(state => selectUserById(state, userId))
+
   const experiencesForUser = useSelector((state) => selectHelperExperiencesByUserId(state, userId))
 
   if (!userId || !postsForUser || !experiencesForUser) {
@@ -36,13 +38,7 @@ export default function UserPage () {
           <UserPageAssets
             userId={userId}
             canUpdate={true}
-            // firstName={user.first_name}
-            // lastName={user.last_name}
-            // active={user.active}
-            // location={user.location}
-            // created_at={user.created_at}
-            // profession={user.profession}
-            // tagline={user.tagline}
+            user={user}
           />
         </div>
       </div>
