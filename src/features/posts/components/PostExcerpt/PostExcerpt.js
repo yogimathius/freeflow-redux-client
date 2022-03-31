@@ -73,14 +73,11 @@ export default function PostExcerpt ({
 
   return (
     <article className="rounded-lg p-4 my-4 bg-white shadow-lg space-y-2" key={post.id}>
-      {/* TAGS, TIMEAGO */}
       <div className="flex justify-between my-2">
         <PostExcerptSkills postSkillIds={post.skill_ids} />
         <TimeAgo timestamp={post.time_posted} />
-
       </div>
 
-      {/* POST AUTHOR */}
       <div className='flex justify-between'>
         <UserLink post={post} saveState={saveState} />
 
@@ -102,7 +99,6 @@ export default function PostExcerpt ({
 
       </div>
 
-      {/* TEXT BODY */}
       {mode === SHOW && (
         <p className="">{post.text_body}</p>
       )}
@@ -128,8 +124,6 @@ export default function PostExcerpt ({
           dispatch={dispatch}
          />
       )}
-
-      {/* LIKES */}
 
       <div>
         <div className='grid grid-cols-3 space-x-2 items-center'>
