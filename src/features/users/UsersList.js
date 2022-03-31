@@ -37,11 +37,12 @@ export const UsersList = () => {
 
   const renderedUsers = users.map((user, id) => {
     return (
-      <div key={id} className="">
+      <div key={id} className="gap-2">
         <UserCard
           key={id}
           user={user}
           infoPosition="right"
+          isList={true}
         />
       </div>
     )
@@ -50,7 +51,7 @@ export const UsersList = () => {
   return (
     <section className="space-y-3 pt-3 mt-2 m-4">
       <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
-      <div className="grid grid-cols-2 gap-y-2">
+      <div className="grid grid-cols-2 gap-4">
         {renderedUsers}
       </div>
     </section>
