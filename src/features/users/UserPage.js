@@ -29,7 +29,7 @@ export default function UserPage () {
   )
 
   return (
-    <section className="space-y-3 pt-2 mt-2 mx-4">
+    <section className="space-y-4 pt-2 mx-4">
       <div className="">
         <UserCard
           user={user}
