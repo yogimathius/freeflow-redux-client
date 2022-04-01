@@ -19,11 +19,13 @@ const UserSideBar = () => {
   const experience = userExperiences.length * 12
 
   return (
-    <div className={`${isHidden} border-b-3 border-green-500 m-2 h-content py-3 px-4 fixed md:mt-24  space-y-2`}>
-      <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
-        <UserNameAndLogo userId={user?.id} />
-      </Link>
-      <div className="flex justify-center">
+    <div className={`${isHidden} h-content p-4 fixed flex items-center justify-end 2xl:justify-center mt-20 2xl:space-x-2`}>
+      <div className=''>
+        <Link to={`/userprofile/${user?.id}`} onClick={() => saveState(user?.id)}>
+          <UserNameAndLogo isSideBar={true} userId={user?.id} />
+        </Link>
+      </div>
+      <div className='text-sm'>
         <ProgressBar experience={experience} />
       </div>
     </div>
