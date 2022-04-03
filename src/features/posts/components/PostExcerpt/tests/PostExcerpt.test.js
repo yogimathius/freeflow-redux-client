@@ -168,7 +168,7 @@ describe('PostExcerpt', () => {
     expect(onEdit).toHaveBeenCalled()
   })
 
-  test.skip('calls onConfirmDelete when Edit button is clicked and user logged in', async () => {
+  test('calls onConfirmDelete when Edit button is clicked and user logged in', async () => {
     const postId = '1'
     const onConfirmDelete = jest.fn()
     const index = 1
