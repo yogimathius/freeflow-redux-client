@@ -15,6 +15,7 @@ import commentsReducer from '../reducers/commentsSlice'
 import likesReducer from '../reducers/likesSlice'
 
 import configureMockStore from 'redux-mock-store'
+import experiencesReducer from '../reducers/experiencesSlice'
 
 export const reducers = combineReducers(
   {
@@ -27,8 +28,8 @@ export const reducers = combineReducers(
     visibilityFilters: filtersReducer,
     selectedSkills: selectedSkillsReducer,
     comments: commentsReducer,
-    likes: likesReducer
-
+    likes: likesReducer,
+    experiences: experiencesReducer
   }
 )
 
@@ -44,6 +45,7 @@ function renderWithRedux (
     ...renderOptions
   } = {}
 ) {
+  console.log({ preloadedState }, store.getState())
   function Wrapper ({ children }) {
     return <Provider store={store}>{children}</Provider>
   }
