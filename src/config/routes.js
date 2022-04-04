@@ -1,7 +1,7 @@
 import { UsersList } from '../features/users/UsersList'
 import { SinglePostPage } from '../features/posts/components/SinglePostPage'
 import { EditPostForm } from '../features/posts/components/EditPostForm/EditPostForm'
-import UserPage from '../features/users/UserPage'
+import UserPage from '../pages/profile'
 import LoginPage from '../features/login/LoginPage'
 import UserExperiences from '../features/experiences/UserExperiences'
 import MessagesPage from '../pages/messages'
