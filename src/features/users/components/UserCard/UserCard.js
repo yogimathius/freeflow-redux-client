@@ -6,7 +6,7 @@ import { saveState } from '../../../../helpers/localStorage'
 import { useSelector } from 'react-redux'
 import { selectCompletedExperiencesByHelperId } from '../../../../reducers/experiencesSlice'
 import { UserNameAndLogo } from '../../UserNameAndLogo'
-import UserInfo from '../../UserInfo'
+import UserInfo from './components/UserInfo'
 import UserSkills from '../../UserSkills'
 
 export default function UserCard ({ user, infoPosition, isList }) {
