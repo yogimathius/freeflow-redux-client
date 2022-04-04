@@ -7,13 +7,15 @@ const ProgressBar = (props) => {
   let height
   let fullExperience
   let colorClass
+  let bgColorClass
 
   function calculateLevel (points) {
     if (points < 100) {
       fullExperience = 100
       height = (points)
       colorClass = 'blue'
-      return (fullExperience, height, (experiencePoints += points), colorClass)
+      bgColorClass = 'blue'
+      return (fullExperience, height, (experiencePoints += points), colorClass, bgColorClass)
     }
     if (points < 260) {
       level = 2
@@ -21,7 +23,9 @@ const ProgressBar = (props) => {
       height = (((points - 100) * 100) / 16) / 10
       experiencePoints += points - 100
       colorClass = 'green'
-      return (fullExperience, height, level, experiencePoints, colorClass)
+      bgColorClass = 'green'
+
+      return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
     if (points < 520) {
       level = 3
@@ -29,7 +33,9 @@ const ProgressBar = (props) => {
       height = (((points - 260) * 100) / 26) / 10
       experiencePoints += points - 260
       colorClass = 'yellow'
-      return (fullExperience, height, level, experiencePoints, colorClass)
+      bgColorClass = 'yellow'
+
+      return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
     if (points < 1000) {
       level = 4
@@ -37,7 +43,9 @@ const ProgressBar = (props) => {
       height = (((points - 520) * 100) / 48) / 10
       experiencePoints += points - 520
       colorClass = 'red'
-      return (fullExperience, height, level, experiencePoints, colorClass)
+      bgColorClass = 'red'
+
+      return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
     if (points < 1680) {
       level = 5
@@ -45,7 +53,9 @@ const ProgressBar = (props) => {
       height = (((points - 1000) * 100) / 68) / 10
       experiencePoints += points - 1000
       colorClass = 'purple'
-      return (fullExperience, height, level, experiencePoints, colorClass)
+      bgColorClass = 'purple'
+
+      return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
     if (points >= 1680) {
       level = 5
@@ -72,7 +82,7 @@ const ProgressBar = (props) => {
         <span className={`text-${colorClass}-500 text-xs mt-2 text -center font-bold`}>{`${experiencePoints}/${fullExperience}`}</span>
       </div>
 
-      <div className={`bg-${colorClass}-500 flex justify-center w-6 h-10`}>
+      <div className={`${bgColorClass}-500 flex justify-center w-6 h-10`}>
         <div style={fillerStyles} className="bg-gray-300">
         </div>
       </div>
