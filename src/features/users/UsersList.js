@@ -6,7 +6,7 @@ import {
   fetchExperiences,
   selectAllExperiences
 } from '../../reducers/experiencesSlice'
-import UserCard from './UserCard'
+import UserCard from './components/UserCard/UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
 
 store.dispatch(fetchExperiences())

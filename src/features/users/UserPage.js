@@ -5,7 +5,7 @@ import { selectHelperExperiencesByUserId } from '../../reducers/experiencesSlice
 import { loadState } from '../../helpers/localStorage'
 import { selectUserById } from '../../reducers/usersSlice'
 import PostExcerpt from '../posts/components/PostExcerpt/PostExcerpt'
-import UserCard from './UserCard'
+import UserCard from './components/UserCard/UserCard'
 // import AddPostForm from '../posts/AddPostForm';
 // import {Link} from 'react-router-dom'
 
