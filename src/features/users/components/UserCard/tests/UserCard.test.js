@@ -69,7 +69,7 @@ const mockState = {
 }
 
 describe('UserCard', () => {
-  test('renders the UserCard on the home page without crashing', async () => {
+  test('renders the UserCard component without crashing', async () => {
     const user = mockState.user.user
     renderWithRedux(
     <Router>
