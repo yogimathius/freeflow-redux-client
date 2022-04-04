@@ -1,11 +1,11 @@
 import React from 'react'
-import UserMessages from '../../features/messages/index'
+import Messages from '../../features/messages'
 
 const index = () => {
   return (
-        <div>
-            <UserMessages></UserMessages>
-        </div>
+    <div>
+      <Messages></Messages>
+    </div>
   )
 }
 

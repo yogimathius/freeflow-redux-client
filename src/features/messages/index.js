@@ -1,10 +1,10 @@
 import React from 'react'
 import UserConversationList from './UserConversationList'
 
-const index = () => {
+const Messages = () => {
   return (
-        <UserConversationList />
+    <UserConversationList />
   )
 }
 
-export default index
+export default Messages
