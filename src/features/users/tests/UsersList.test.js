@@ -1,6 +1,3 @@
-import { cleanup } from '@testing-library/react'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
 import React from 'react'
 import 'regenerator-runtime/runtime'
 
@@ -60,9 +57,8 @@ const mockState = {
   }
 }
 
-describe('PostsList', () => {
-  test('renders the PostsList on the home page without crashing', async () => {
-    // console.log({ pre })
+describe('UsersList', () => {
+  test('renders the UsersList on the home page without crashing', async () => {
     renderWithRedux(<UsersList />, { preloadedState: mockState })
   })
 })
