@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ProgressBar from '../../components/ProgressBar/ProgressBar'
-import { saveState } from '../../helpers/localStorage'
+import ProgressBar from '../../../../components/ProgressBar/ProgressBar'
+import { saveState } from '../../../../helpers/localStorage'
 import { useSelector } from 'react-redux'
-import { selectCompletedExperiencesByHelperId } from '../../reducers/experiencesSlice'
-import { UserNameAndLogo } from './UserNameAndLogo'
-import UserInfo from './UserInfo'
-import UserSkills from './UserSkills'
+import { selectCompletedExperiencesByHelperId } from '../../../../reducers/experiencesSlice'
+import { UserNameAndLogo } from '../../UserNameAndLogo'
+import UserInfo from '../../UserInfo'
+import UserSkills from '../../UserSkills'
 
 export default function UserCard ({ user, infoPosition, isList }) {
   const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, user.id))
