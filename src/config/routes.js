@@ -5,7 +5,7 @@ import { EditPostForm } from '../features/posts/components/EditPostForm/EditPost
 import UserPage from '../features/users/UserPage'
 import LoginPage from '../features/login/LoginPage'
 import UserExperiences from '../features/experiences/UserExperiences'
-import MessagesPage from '../pages/messages/index'
+import MessagesPage from '../pages/messages'
 
 const routes = [
   {
