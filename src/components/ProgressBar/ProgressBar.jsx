@@ -14,7 +14,7 @@ const ProgressBar = (props) => {
       fullExperience = 100
       height = (points)
       colorClass = 'blue'
-      bgColorClass = 'blue'
+      bgColorClass = 'bg-blue-500'
       return (fullExperience, height, (experiencePoints += points), colorClass, bgColorClass)
     }
     if (points < 260) {
@@ -23,7 +23,7 @@ const ProgressBar = (props) => {
       height = (((points - 100) * 100) / 16) / 10
       experiencePoints += points - 100
       colorClass = 'green'
-      bgColorClass = 'green'
+      bgColorClass = 'bg-green-500'
 
       return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
@@ -33,7 +33,7 @@ const ProgressBar = (props) => {
       height = (((points - 260) * 100) / 26) / 10
       experiencePoints += points - 260
       colorClass = 'yellow'
-      bgColorClass = 'yellow'
+      bgColorClass = 'bg-yellow-500'
 
       return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
@@ -43,7 +43,7 @@ const ProgressBar = (props) => {
       height = (((points - 520) * 100) / 48) / 10
       experiencePoints += points - 520
       colorClass = 'red'
-      bgColorClass = 'red'
+      bgColorClass = 'bg-red-500'
 
       return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
@@ -53,7 +53,7 @@ const ProgressBar = (props) => {
       height = (((points - 1000) * 100) / 68) / 10
       experiencePoints += points - 1000
       colorClass = 'purple'
-      bgColorClass = 'purple'
+      bgColorClass = 'bg-purple-500'
 
       return (fullExperience, height, level, experiencePoints, colorClass, bgColorClass)
     }
