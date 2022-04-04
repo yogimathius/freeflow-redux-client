@@ -5,9 +5,9 @@ import ProgressBar from '../../../../components/ProgressBar/ProgressBar'
 import { saveState } from '../../../../helpers/localStorage'
 import { useSelector } from 'react-redux'
 import { selectCompletedExperiencesByHelperId } from '../../../../reducers/experiencesSlice'
-import { UserNameAndLogo } from '../../UserNameAndLogo'
 import UserInfo from './components/UserInfo'
 import UserSkills from '../../UserSkills'
+import UserNameAndLogo from '../UserNameAndLogo'
 
 export default function UserCard ({ user, infoPosition, isList }) {
   const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, user.id))

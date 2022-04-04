@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { UserNameAndLogo } from '../../../../users/UserNameAndLogo'
+import UserNameAndLogo from '../../../../users/components/UserNameAndLogo'
 
 const UserLink = ({ post, saveState }) => {
   return (

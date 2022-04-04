@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom'
 import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { selectCompletedExperiencesByHelperId } from '../../reducers/experiencesSlice'
 import { loadState, saveState } from '../../helpers/localStorage'
-import { UserNameAndLogo } from './UserNameAndLogo'
+import UserNameAndLogo from './components/UserNameAndLogo'
 
 const UserSideBar = () => {
   const loggedInUser = loadState()
