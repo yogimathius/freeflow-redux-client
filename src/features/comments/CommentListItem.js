@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectAllUsers } from '../../reducers/usersSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 
-import UserImage from '../users/UserImage'
+import UserImage from '../users/components/UserImage'
 import { removeComment } from '../../reducers/commentsSlice'
 import { Link } from 'react-router-dom'
 import { loadState, saveState } from '../../helpers/localStorage'

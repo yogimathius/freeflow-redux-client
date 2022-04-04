@@ -4,7 +4,7 @@ import { unwrapResult } from '@reduxjs/toolkit'
 
 import { addNewComment } from '../../reducers/commentsSlice'
 import { loadState } from '../../helpers/localStorage'
-import UserImage from '../users/UserImage'
+import UserImage from '../users/components/UserImage'
 
 export const AddCommentForm = ({ postId, loggedInUser }) => {
   const [content, setContent] = useState('')
