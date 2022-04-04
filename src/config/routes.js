@@ -3,7 +3,7 @@ import { SinglePostPage } from '../features/posts/components/SinglePostPage'
 import { EditPostForm } from '../features/posts/components/EditPostForm/EditPostForm'
 import UserPage from '../pages/profile'
 import LoginPage from '../features/login/LoginPage'
-import UserExperiences from '../features/experiences/UserExperiences'
+import ExperiencesPage from '../pages/experiences'
 import MessagesPage from '../pages/messages'
 import PostsPage from '../pages/posts'
 
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: '/:userId/experiences',
-    component: UserExperiences,
+    component: ExperiencesPage,
     isPrivate: true
   },
   {
