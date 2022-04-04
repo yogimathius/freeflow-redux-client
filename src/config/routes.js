@@ -1,4 +1,4 @@
-import { UsersList } from '../features/users/UsersList'
+import UsersListPage from '../pages/users'
 import { SinglePostPage } from '../features/posts/components/SinglePostPage'
 import { EditPostForm } from '../features/posts/components/EditPostForm/EditPostForm'
 import UserPage from '../pages/profile'
@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/users',
-    component: UsersList,
+    component: UsersListPage,
     isPrivate: true
   },
   {
