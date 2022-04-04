@@ -21,7 +21,7 @@ export const reducers = combineReducers(
   {
     users: usersReducer,
     user: userLoginReducer,
-    user_skills:
+    userSkills:
     userSkillsReducer,
     posts: postsReducer,
     skills: skillsReducer,
@@ -45,7 +45,6 @@ function renderWithRedux (
     ...renderOptions
   } = {}
 ) {
-  console.log({ preloadedState }, store.getState())
   function Wrapper ({ children }) {
     return <Provider store={store}>{children}</Provider>
   }
