@@ -6,8 +6,6 @@ import ProgressBar from '../../components/ProgressBar/ProgressBar'
 import { selectCompletedExperiencesByHelperId } from '../../reducers/experiencesSlice'
 import { loadState, saveState } from '../../helpers/localStorage'
 import { UserNameAndLogo } from './UserNameAndLogo'
-import UserInfo from './UserInfo'
-import UserSkills from './UserSkills'
 
 const UserSideBar = () => {
   const loggedInUser = loadState()
