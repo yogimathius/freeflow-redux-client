@@ -3,10 +3,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { selectUserById } from '../../reducers/usersSlice'
-import IsOnline from './components/IsOnline'
+import { selectUserById } from '../../../../reducers/usersSlice'
+import IsOnline from '../IsOnline'
 
-export const UserNameAndLogo = ({ userId, isSideBar }) => {
+const UserNameAndLogo = ({ userId, isSideBar }) => {
   const author = useSelector((state) => selectUserById(state, userId))
   function getRandomInt () {
     return Math.floor(Math.random() * (10000 - 5)) + 4
@@ -31,3 +31,5 @@ export const UserNameAndLogo = ({ userId, isSideBar }) => {
     </div>
   )
 }
+
+export default UserNameAndLogo

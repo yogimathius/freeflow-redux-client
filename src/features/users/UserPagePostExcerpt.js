@@ -19,7 +19,7 @@ import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { loadState, saveState } from '../../helpers/localStorage'
-import { UserNameAndLogo } from '../posts/UserNameAndLogo'
+import UserNameAndLogo from './components/UserNameAndLogo'
 
 export default function UserPagePostExcerpt ({ postId }) {
   const loggedInUserID = loadState()
