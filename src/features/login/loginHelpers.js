@@ -10,7 +10,11 @@ export const handleLogin = async (values, dispatch, history) => {
   dispatch(login(username, password))
     .then((res) => {
       dispatch(fetchSkills())
+    })
+    .then(() => {
       dispatch(fetchUserSkills())
+    })
+    .then(() => {
       history.push('/dashboard')
     })
     .catch((err) => {
