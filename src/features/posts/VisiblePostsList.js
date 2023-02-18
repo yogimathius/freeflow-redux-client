@@ -11,6 +11,9 @@ const selectFilter = (state) => state.visibilityFilters
 const selectVisiblePosts = createSelector(
   [selectPosts, selectSkills, selectFilter],
   (posts, skills, filter) => {
+    if (!skills || !posts) {
+      return
+    }
     const { postArr } = extractSinglePosts(posts, skills)
     const sortedArr = [...postArr].sort((a, b) => new Date(b.time_posted) - new Date(a.time_posted))
     for (const skill in VisibilityFilters) {
