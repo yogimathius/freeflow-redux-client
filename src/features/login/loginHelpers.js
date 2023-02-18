@@ -4,6 +4,8 @@ import { fetchPosts } from '../posts/reducers/postsSlice'
 
 import { login } from '../../reducers/userLoginSlice'
 import { loadState } from '../../helpers/localStorage'
+import { fetchUsers } from '../../reducers/usersSlice'
+import { fetchComments } from '../../reducers/commentsSlice'
 
 export const handleLogin = async (values, dispatch, history) => {
   const username = values.username
@@ -12,12 +14,11 @@ export const handleLogin = async (values, dispatch, history) => {
   dispatch(login(username, password))
     .then((res) => {
       dispatch(fetchSkills())
-    })
-    .then(() => {
       dispatch(fetchUserSkills())
-    })
-    .then(() => {
       dispatch(fetchPosts())
+      dispatch(fetchUsers())
+      dispatch(fetchUsers())
+      dispatch(fetchComments())
     })
     .then(() => {
       history.push('/dashboard')

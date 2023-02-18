@@ -12,10 +12,6 @@ import { fetchConversations } from './reducers/userConversationsSlice'
 import { fetchComments } from './reducers/commentsSlice'
 const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
 
-store.dispatch(fetchSkills())
-store.dispatch(fetchUsers())
-store.dispatch(fetchComments())
-// store.dispatch(fetchSkills())
 if (userId) {
   store.dispatch(fetchConversations(userId))
 }
