@@ -6,6 +6,8 @@ import { login } from '../../reducers/userLoginSlice'
 import { loadState } from '../../helpers/localStorage'
 import { fetchUsers } from '../../reducers/usersSlice'
 import { fetchComments } from '../../reducers/commentsSlice'
+import { fetchExperiences } from '../../reducers/experiencesSlice'
+import { fetchConversations } from '../../reducers/userConversationsSlice'
 
 export const handleLogin = async (values, dispatch, history) => {
   const username = values.username
@@ -13,12 +15,15 @@ export const handleLogin = async (values, dispatch, history) => {
 
   dispatch(login(username, password))
     .then((res) => {
+      console.log(res)
       dispatch(fetchSkills())
       dispatch(fetchUserSkills())
       dispatch(fetchPosts())
       dispatch(fetchUsers())
       dispatch(fetchUsers())
       dispatch(fetchComments())
+      dispatch(fetchExperiences())
+      dispatch(fetchConversations(res[0].id))
     })
     .then(() => {
       history.push('/dashboard')

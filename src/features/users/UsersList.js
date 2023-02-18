@@ -9,7 +9,6 @@ import {
 import UserCard from './components/UserCard/UserCard'
 import UserSkillsList from '../userSkills/fetchUserSkills'
 
-store.dispatch(fetchExperiences())
 export const UsersList = () => {
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
