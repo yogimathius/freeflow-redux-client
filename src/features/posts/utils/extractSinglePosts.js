@@ -7,7 +7,6 @@ const extractSinglePosts = (posts, skills) => {
 
   postKeys.forEach(postKey => {
     const singlePosts = JSON.parse(JSON.stringify(posts.entities[postKey]))
-
     singlePosts.skills = []
     skillKeys.forEach(skillKey => {
       postSkillsArr.push(skills.entities[skillKey])

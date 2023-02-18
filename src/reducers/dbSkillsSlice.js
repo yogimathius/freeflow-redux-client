@@ -9,9 +9,7 @@ import axios from 'axios'
 
 const url = '/api/db_skills'
 
-const skillsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => a.name.localeCompare(b.name)
-})
+const skillsAdapter = createEntityAdapter()
 
 export const fetchSkills = createAsyncThunk('skills/fetchSkills', async () => {
   const response = await axios.get(url)

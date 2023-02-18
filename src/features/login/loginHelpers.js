@@ -1,5 +1,7 @@
 import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 import { fetchSkills } from '../../reducers/dbSkillsSlice'
+import { fetchPosts } from '../posts/reducers/postsSlice'
+
 import { login } from '../../reducers/userLoginSlice'
 import { loadState } from '../../helpers/localStorage'
 
@@ -13,6 +15,9 @@ export const handleLogin = async (values, dispatch, history) => {
     })
     .then(() => {
       dispatch(fetchUserSkills())
+    })
+    .then(() => {
+      dispatch(fetchPosts())
     })
     .then(() => {
       history.push('/dashboard')
