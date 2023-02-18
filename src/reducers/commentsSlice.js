@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/comments'
+const url = '/api/comments'
 
 const commentsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.time_posted.localeCompare(b.time_posted)

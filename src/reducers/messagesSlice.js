@@ -7,7 +7,7 @@ import {
 import axios from 'axios'
 // import { normalize, schema } from 'normalizr'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/messages'
+const url = '/api/messages'
 
 const messagesAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.time_sent.localeCompare(b.time_sent)

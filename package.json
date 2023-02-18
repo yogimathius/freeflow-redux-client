@@ -2,7 +2,7 @@
   "name": "redux-essentials-example",
   "version": "1.0.0",
   "private": true,
-  "proxy": "https://freeflow-two-point-o.herokuapp.com/api",
+  "proxy": "https://freeflow-api-production.up.railway.app/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -4,7 +4,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/conversations'
+const url = '/api/conversations'
 
 export const fetchConversations = createAsyncThunk('conversations/fetchConversations', async (userId) => {
   const response = await axios.get(`${url}/${userId}`)
@@ -22,7 +22,7 @@ export const addNewMessage = createAsyncThunk(
       receiver
     } = initialMessage
 
-    const response = await axios.post('https://freeflow-two-point-o.herokuapp.com/api/messages/new', {
+    const response = await axios.post('/api/messages/new', {
       senderID,
       receiverID,
       textInput: content,
@@ -38,7 +38,7 @@ export const removeMessage = createAsyncThunk(
   'conversations/removeMessage',
   async (initialMessages) => {
     const { messageId } = initialMessages
-    const response = await axios.delete(`https://freeflow-two-point-o.herokuapp.com/api/messages/${messageId}`, {
+    const response = await axios.delete(`/api/messages/${messageId}`, {
       params: {
         messageId
       }

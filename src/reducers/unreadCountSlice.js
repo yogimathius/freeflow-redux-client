@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/messages'
+const url = '/api/messages'
 
 export const fetchUnreadCount = createAsyncThunk('messages/fetchMessages', async (userId) => {
   const response = await axios.get(`${url}/unread_count`, { userID: userId })

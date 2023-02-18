@@ -6,7 +6,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/experiences'
+const url = '/api/experiences'
 
 const experiencesAdapter = createEntityAdapter({
   selectId: (experience) => experience.id
@@ -23,7 +23,7 @@ export const fetchExperiences = createAsyncThunk('experiences/fetchExperiences',
 })
 
 export const getExperienceCountByUser = createAsyncThunk('experiences/getExperienceCount', async () => {
-  const response = await axios.get('https://freeflow-two-point-o.herokuapp.com/api/experiences/user')
+  const response = await axios.get('/api/experiences/user')
   return response.data
 })
 

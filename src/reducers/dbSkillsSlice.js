@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/db_skills'
+const url = '/api/db_skills'
 
 const skillsAdapter = createEntityAdapter({
   sortComparer: (a, b) => a.name.localeCompare(b.name)

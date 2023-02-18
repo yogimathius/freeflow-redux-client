@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const url = 'https://freeflow-two-point-o.herokuapp.com/api/user_skills'
+const url = '/api/user_skills'
 
 const userSkillsAdapter = createEntityAdapter({
   selectId: (userSkill) => userSkill.id

@@ -1,8 +1,8 @@
 import { rest } from 'msw'
 
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', (req, res) => {
+  rest.get('/api/user_skills', null),
+  rest.get('/api/db_skills', (req, res) => {
     return res.json(
       {
         id: 1,
@@ -10,9 +10,9 @@ export const handlers = [
         name: 'Research'
       })
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/messages/unread_count', null),
-  rest.post('https://freeflow-two-point-o.herokuapp.com/api/login-real', (req, res, ctx) => {
+  rest.get('/api/user_skills', null),
+  rest.get('/api/messages/unread_count', null),
+  rest.post('/api/login-real', (req, res, ctx) => {
     const { username, password } = req.body
     return res(
       ctx.json({
@@ -20,7 +20,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/posts', (req, res) => {
+  rest.get('/api/posts', (req, res) => {
     return res.json(
       [
         {
@@ -37,6 +37,6 @@ export const handlers = [
       ]
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/comments', null),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', null)
+  rest.get('/api/comments', null),
+  rest.get('/api/db_skills', null)
 ]
