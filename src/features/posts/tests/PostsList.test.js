@@ -8,7 +8,7 @@ import { renderWithRedux } from '../../test-utils'
 import { VisiblePostsList } from '../VisiblePostsList'
 
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/posts', (req, res, ctx) => {
+  rest.get('/api/posts', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -29,8 +29,8 @@ export const handlers = [
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/comments', null),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', (req, res, ctx) => {
+  rest.get('/api/comments', null),
+  rest.get('/api/db_skills', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -43,7 +43,7 @@ export const handlers = [
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
+  rest.get('/api/user_skills', null)
 ]
 
 const server = setupServer(...handlers)

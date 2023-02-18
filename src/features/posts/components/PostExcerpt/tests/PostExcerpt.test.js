@@ -58,14 +58,14 @@ const mockState = {
 }
 
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/posts', (req, res, ctx) => {
+  rest.get('/api/posts', (req, res, ctx) => {
     return res(
       ctx.json(
         mockState
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/comments', (req, res, ctx) => {
+  rest.get('/api/comments', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -84,7 +84,7 @@ export const handlers = [
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/likes', (req, res, ctx) => {
+  rest.get('/api/likes', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -103,7 +103,7 @@ export const handlers = [
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', (req, res, ctx) => {
+  rest.get('/api/db_skills', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -116,7 +116,7 @@ export const handlers = [
       )
     )
   }),
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
+  rest.get('/api/user_skills', null)
 
 ]
 

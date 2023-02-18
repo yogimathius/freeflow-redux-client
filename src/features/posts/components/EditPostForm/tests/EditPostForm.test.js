@@ -35,7 +35,7 @@ const mockState = {
 }
 
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', (req, res, ctx) => {
+  rest.get('/api/db_skills', (req, res, ctx) => {
     return res(
       ctx.json(
         [
@@ -48,7 +48,7 @@ export const handlers = [
       )
     )
   }),
-  rest.put('https://freeflow-two-point-o.herokuapp.com/api/posts', true)
+  rest.put('/api/posts', true)
 ]
 
 const server = setupServer(...handlers)

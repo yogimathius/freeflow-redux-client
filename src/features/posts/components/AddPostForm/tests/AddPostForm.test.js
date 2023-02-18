@@ -12,7 +12,7 @@ import { renderWithRedux } from '../../../../test-utils'
 import AddPostForm from '../AddPostForm'
 
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/db_skills', (req, res, ctx) => {
+  rest.get('/api/db_skills', (req, res, ctx) => {
     return res(
       ctx.json(
         [

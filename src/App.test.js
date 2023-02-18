@@ -24,7 +24,7 @@ jest.mock('@material-ui/icons', () => {
 // and return the response null
 // when receiving a get request to the `/api/user_skills` endpoint
 export const handlers = [
-  rest.get('https://freeflow-two-point-o.herokuapp.com/api/user_skills', null)
+  rest.get('/api/user_skills', null)
 ]
 
 const server = setupServer(...handlers)

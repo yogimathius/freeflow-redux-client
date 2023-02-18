@@ -1,6 +1,4 @@
-const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-
-const ROOT_URL = 'https://freeflow-two-point-o.herokuapp.com/api/login/'
+const ROOT_URL = '/api/login/'
 
 export async function loginUser (dispatch, loginPayload) {
   const requestOptions = {
@@ -13,7 +11,7 @@ export async function loginUser (dispatch, loginPayload) {
 
   try {
     dispatch({ type: 'REQUEST_LOGIN' })
-    const response = await fetch(`${proxyurl}${ROOT_URL}`, requestOptions)
+    const response = await fetch(ROOT_URL, requestOptions)
     const data = await response.json()
     if (data.username) {
       dispatch({ type: 'LOGIN_SUCCESS', payload: data })
