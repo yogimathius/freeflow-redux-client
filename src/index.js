@@ -5,7 +5,6 @@ import App from './App'
 import store from './app/store'
 import { Provider } from 'react-redux'
 import { fetchUsers } from './reducers/usersSlice'
-import { fetchPosts } from './features/posts/reducers/postsSlice'
 import { fetchSkills } from './reducers/dbSkillsSlice'
 // import { fetchSkills } from './features/dbSkills/dbSkillsSlice'
 import axios from 'axios'
@@ -15,7 +14,6 @@ const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('u
 
 store.dispatch(fetchSkills())
 store.dispatch(fetchUsers())
-store.dispatch(fetchPosts())
 store.dispatch(fetchComments())
 // store.dispatch(fetchSkills())
 if (userId) {
