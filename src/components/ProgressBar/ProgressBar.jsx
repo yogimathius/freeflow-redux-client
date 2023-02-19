@@ -82,7 +82,7 @@ const ProgressBar = (props) => {
         <span className={`text-${colorClass}-500 text-xs mt-2 text -center font-bold`}>{`${experiencePoints}/${fullExperience}`}</span>
       </div>
 
-      <div className={`${bgColorClass}-500 flex justify-center w-6 h-10`}>
+      <div className={`${bgColorClass} flex justify-center w-6 h-10`}>
         <div style={fillerStyles} className="bg-gray-300">
         </div>
       </div>
