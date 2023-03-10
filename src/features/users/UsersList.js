@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAllUsers } from '../../reducers/usersSlice'
-import store from '../../app/store'
+import { selectAllUsers, fetchUsers } from '../../reducers/usersSlice'
 import {
   fetchExperiences,
   selectAllExperiences
 } from '../../reducers/experiencesSlice'
 import UserCard from './components/UserCard/UserCard'
-import UserSkillsList from '../userSkills/fetchUserSkills'
 
 export const UsersList = () => {
   const dispatch = useDispatch()
@@ -21,6 +19,7 @@ export const UsersList = () => {
     if (experienceStatus === 'idle') {
       dispatch(fetchExperiences())
     }
+    dispatch(fetchUsers())
   }, [experienceStatus, dispatch])
 
   let experiencesContent
