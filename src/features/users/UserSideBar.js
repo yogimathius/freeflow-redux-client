@@ -9,6 +9,9 @@ import UserNameAndLogo from './components/UserNameAndLogo'
 
 const UserSideBar = () => {
   const loggedInUser = loadState()
+  if (!loggedInUser) {
+    return null
+  }
   const loggedInUserID = loggedInUser.id
   const location = useLocation()
   const isHidden = location.pathname.includes('profile') ? 'hidden' : ''
