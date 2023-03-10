@@ -6,7 +6,9 @@ import store from './app/store'
 import { Provider } from 'react-redux'
 import axios from 'axios'
 
-if (process.env.REACT_APP_API_BASE_URL) {
+if (process.env.NODE_ENV === 'development') {
+  axios.defaults.baseURL = 'http://localhost:8080/'
+} else if (process.env.REACT_APP_API_BASE_URL) {
   axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
 }
 
