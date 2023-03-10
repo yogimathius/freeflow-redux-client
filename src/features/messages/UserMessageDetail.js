@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { saveState } from '../../helpers/localStorage'
 import { TimeAgo } from '../../components/TimeAgo'
 import useVisualMode from '../../hooks/useVisualMode'
 import UserImage from '../users/components/UserImage'
-import { selectUserById } from '../../reducers/usersSlice'
-import { removeMessage } from '../../reducers/userConversationsSlice'
+import { fetchUsers, selectUserById } from '../../reducers/usersSlice'
+import { fetchConversations, removeMessage } from '../../reducers/userConversationsSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import DynamicDropDown from '../../components/DynamicDropDown'
 import EditMessageForm from './EditMessageForm'
@@ -21,6 +21,15 @@ const EDITING = 'EDITING'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 const UserMessageDetail = ({ message, userId }) => {
+  const conversationsStatus = useSelector((state) => state.userConversations.status)
+
+  useEffect(() => {
+    if (conversationsStatus === 'idle') {
+      dispatch(fetchConversations(userId))
+    }
+    dispatch(fetchUsers)
+  })
+
   const user = useSelector((state) => selectUserById(state, message.sender_id))
 
   const { mode, transition } = useVisualMode(SHOW)
