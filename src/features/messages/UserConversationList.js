@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
-import { fetchMessages, selectAllMessages, sortMessages } from '../../reducers/messagesSlice'
-// import {}
 import useVisualMode from '../../hooks/useVisualMode'
 
 import SelectedUserConversation from './SelectedUserConversation'
 import MessagerNameList from './MessagerNameList'
 import CreateMessageForm from './CreateMessageForm'
 import UsernameSelector from './UsernameSelector'
-import { setUserConversations, selectAllConversations, fetchConversations } from '../../reducers/userConversationsSlice'
+import { fetchConversations } from '../../reducers/userConversationsSlice'
 import { setCurrentThread } from '../../reducers/currentThreadSlice'
+import { fetchUsers } from '../../reducers/usersSlice'
+import { loadState } from '../../helpers/localStorage'
 
 const SHOW = 'SHOW'
 // const CONFIRM = "CONFIRM";
@@ -22,10 +22,18 @@ const COMPOSE = 'COMPOSE'
 // const ERROR_DELETE = "ERROR_DELETE";
 
 const UserConversationList = () => {
-  // const [currentPage, setCurrentThread] = useState('')
   const dispatch = useDispatch()
   const { mode, transition } = useVisualMode(SHOW)
   const { path, url } = useRouteMatch()
+  const { id } = loadState()
+  const conversationsStatus = useSelector((state) => state.userConversations.status)
+
+  useEffect(() => {
+    if (conversationsStatus === 'loading') {
+      dispatch(fetchConversations(id))
+    }
+    dispatch(fetchUsers)
+  })
 
   function onComposeMessage () {
     transition(COMPOSE)
@@ -34,8 +42,6 @@ const UserConversationList = () => {
   function onSendComposeMessage () {
     transition(SHOW)
   }
-
-  const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : ''
 
   const handleOnClickLink = (messagerName) => {
     dispatch(setCurrentThread(messagerName))
@@ -59,7 +65,7 @@ const UserConversationList = () => {
               {/* <button onClick={() => transition(SHOW)} className="btn btn-warning col-span-1">Cancel</button> */}
               {/* </div> */}
               <UsernameSelector
-                userId={userId}
+                userId={id}
                 messagers={conversations?.messagers}
                 currentThread={currentThread}
                 setCurrentThread={handleOnClickLink}
@@ -74,7 +80,7 @@ const UserConversationList = () => {
             setCurrentThread={handleOnClickLink}
             url={url}
             userConversationNames={conversations?.messagers}
-            userId={userId}
+            userId={id}
           />
 
           {mode === SHOW && (
@@ -82,7 +88,7 @@ const UserConversationList = () => {
               <Switch>
                 <Route path={`${path}/:messagerId`}>
                   <SelectedUserConversation
-                    sortedMessages={conversations?.messages} userId={userId}
+                    sortedMessages={conversations?.messages} userId={id}
                   />
                 </Route>
               </Switch>
