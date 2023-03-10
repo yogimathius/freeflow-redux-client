@@ -9,7 +9,9 @@ import axios from 'axios'
 
 const usersAdapter = createEntityAdapter()
 
-const initialState = usersAdapter.getInitialState()
+const initialState = usersAdapter.getInitialState({
+  status: 'idle'
+})
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const response = await axios.get('/api/users')
@@ -26,7 +28,11 @@ const usersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchUsers.fulfilled]: usersAdapter.setAll
+    [fetchUsers.fulfilled]: (state, action) => {
+      console.log('succeeded', action)
+      state.status = 'succeeded'
+      usersAdapter.setAll(state, action.payload)
+    }
   }
 })
 
