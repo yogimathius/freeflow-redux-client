@@ -1,15 +1,14 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable react/prop-types */
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { TimeAgo } from '../../../../components/TimeAgo'
 import {
-  removePost,
   selectPostById
 } from '../../reducers/postsSlice'
-import { saveState } from '../../../../helpers/localStorage'
+import { loadState, saveState } from '../../../../helpers/localStorage'
 import Likes from '../../../likes/likes'
 import { CommentsList } from '../../../comments/CommentsList'
 import { AddCommentForm } from '../../../comments/AddCommentForm'
@@ -36,7 +35,6 @@ export default function PostExcerpt ({
   postId,
   onPost,
   index,
-  loggedInUser,
   onCancelDelete,
   onConfirmDelete,
   onEdit,
@@ -46,12 +44,8 @@ export default function PostExcerpt ({
   const dispatch = useDispatch()
 
   const { user } = useSelector(state => state.user)
-
-  let userId
-
-  if (loggedInUser) {
-    userId = loggedInUser.id
-  }
+  const loggedInUser = loadState()
+  const userId = loggedInUser.id
 
   const post = useSelector((state) => selectPostById(state, postId))
 
