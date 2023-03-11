@@ -29,7 +29,6 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchUsers.fulfilled]: (state, action) => {
-      console.log('succeeded', action)
       state.status = 'succeeded'
       usersAdapter.setAll(state, action.payload)
     }
