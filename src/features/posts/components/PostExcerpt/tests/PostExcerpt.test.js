@@ -8,6 +8,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { renderWithRedux } from '../../../../test-utils'
 import PostExcerpt from '../PostExcerpt'
 import userEvent from '@testing-library/user-event'
+import { setup } from 'jest-localstorage-mock'
+import { loadState } from '../../../../../helpers/localStorage'
 
 const mockState = {
   posts: {
@@ -133,8 +135,13 @@ afterEach(cleanup)
 
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
+jest.mock('../../../../../helpers/localStorage')
 
 describe('PostExcerpt', () => {
+  beforeEach(() => {
+    loadState.mockReturnValue({ id: 1, username: 'dsleaford1', avatar: 'https://robohash.org/nequenemonostrum.jpg$11size=50x50&set=set1' })
+  })
+
   test('renders the PostsList on the home page without crashing', async () => {
     const postId = '1'
     const onPost = jest.fn()
@@ -149,18 +156,13 @@ describe('PostExcerpt', () => {
     const postId = '1'
     const onEdit = jest.fn()
     const index = 1
-    const loggedInUser = {
-      id: 1,
-      username: 'username',
-      avatar: 'avatarurl'
-    }
+
     const { getByTestId } = renderWithRedux(
     <Router>
       <PostExcerpt
         postId={postId}
         onEdit={onEdit}
-        index={index}
-        loggedInUser={loggedInUser} />
+        index={index} />
     </Router>, { preloadedState: mockState })
 
     userEvent.click(getByTestId('editButton'))
