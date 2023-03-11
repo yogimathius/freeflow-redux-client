@@ -15,13 +15,6 @@ export const UsersList = () => {
   const experienceStatus = useSelector((state) => state.experiences.status)
   const experienceError = useSelector((state) => state.experiences.error)
 
-  useEffect(() => {
-    if (experienceStatus === 'idle') {
-      dispatch(fetchExperiences())
-    }
-    dispatch(fetchUsers())
-  }, [experienceStatus, dispatch])
-
   let experiencesContent
 
   if (experienceStatus === 'loading') {

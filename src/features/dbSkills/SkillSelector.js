@@ -21,12 +21,6 @@ const SkillSelector = () => {
 
   const skillStatus = useSelector((state) => state.skills.status)
 
-  useEffect(() => {
-    if (skillStatus === 'idle') {
-      dispatch(fetchSkills())
-    }
-  }, [skillStatus, dispatch])
-
   let fetchedSkills
   if (skillStatus === 'loading') {
     fetchedSkills = null

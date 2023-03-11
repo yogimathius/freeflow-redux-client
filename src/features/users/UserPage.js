@@ -9,26 +9,11 @@ import UserCard from './components/UserCard/UserCard'
 
 export default function UserPage () {
   const loggedInUser = loadState()
-  const dispatch = useDispatch()
-
   const userId = loggedInUser.id
 
-  const experienceStatus = useSelector((state) => state.experiences.status)
   const usersStatus = useSelector((state) => state.users.status)
   const postsStatus = useSelector((state) => state.posts.status)
   const userError = useSelector((state) => state.users.error)
-
-  useEffect(() => {
-    if (experienceStatus === 'idle') {
-      dispatch(fetchExperiences())
-    }
-    if (usersStatus === 'idle') {
-      dispatch(fetchUsers())
-    }
-    if (postsStatus === 'idle') {
-      dispatch(fetchPosts())
-    }
-  }, [experienceStatus, dispatch])
 
   const user = useSelector(state => selectUserById(state, userId))
   const experiencesForUser = useSelector((state) => selectHelperExperiencesByUserId(state, userId))

@@ -12,13 +12,27 @@ import AppRoute from './components/AppRoute'
 import UserSideBar from './features/users/UserSideBar'
 import { fetchUserSkills } from './reducers/userSkillsSlice'
 import { loadState } from './helpers/localStorage'
+import { fetchSkills } from './reducers/dbSkillsSlice.js'
+import { fetchPosts } from './features/posts/reducers/postsSlice.js'
+import { fetchUsers } from './reducers/usersSlice.js'
+import { fetchComments } from './reducers/commentsSlice.js'
+import { fetchExperiences } from './reducers/experiencesSlice.js'
+import { fetchConversations } from './reducers/userConversationsSlice.js'
 
 function App () {
   const user = loadState()
   const dispatch = useDispatch()
-
   useEffect(() => {
-    dispatch(fetchUserSkills())
+    if (user) {
+      dispatch(fetchSkills())
+      dispatch(fetchUserSkills())
+      dispatch(fetchPosts())
+      dispatch(fetchUsers())
+      dispatch(fetchUsers())
+      dispatch(fetchComments())
+      dispatch(fetchExperiences())
+      dispatch(fetchConversations(user.id))
+    }
   }, [dispatch])
 
   return (

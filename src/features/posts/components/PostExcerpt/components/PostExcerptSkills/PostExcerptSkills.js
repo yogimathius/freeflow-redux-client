@@ -13,14 +13,6 @@ const PostExcerptSkills = ({ postSkillIds }) => {
     dispatch(setVisibilityFilter(filter))
   }
 
-  const postSkillsStatus = useSelector((state) => state.skills.status)
-
-  useEffect(() => {
-    if (postSkillsStatus === 'idle') {
-      dispatch(fetchSkills())
-    }
-  }, [postSkillsStatus, dispatch])
-
   const postSkills = useSelector((state) => selectSkillsByIds(state, postSkillIds))
   const renderedPostSkills = postSkills.map((postSkill, index) => {
     return (

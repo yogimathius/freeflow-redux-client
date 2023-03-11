@@ -14,21 +14,8 @@ import { OnSavePostClicked } from './utils/onSavePostClicked'
 import { onCancelDelete, onConfirmDelete, onEdit, onSaveEdit } from './utils/visualModeTransitions'
 
 const PostsList = ({ posts, loggedInUser }) => {
-  const dispatch = useDispatch()
-
   const postStatus = useSelector((state) => state.posts.status)
   const postError = useSelector((state) => state.posts.error)
-
-  useEffect(() => {
-    if (postStatus === 'idle') {
-      dispatch(fetchPosts())
-      dispatch(fetchUserSkills())
-    }
-  }, [postStatus, dispatch])
-
-  useEffect(() => {
-    dispatch(fetchSkills())
-  }, [dispatch])
 
   let content
 

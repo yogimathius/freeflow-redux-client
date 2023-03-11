@@ -28,13 +28,6 @@ const UserConversationList = () => {
   const { id } = loadState()
   const conversationsStatus = useSelector((state) => state.userConversations.status)
 
-  useEffect(() => {
-    if (conversationsStatus === 'loading') {
-      dispatch(fetchConversations(id))
-    }
-    dispatch(fetchUsers)
-  })
-
   function onComposeMessage () {
     transition(COMPOSE)
   }

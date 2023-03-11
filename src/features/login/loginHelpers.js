@@ -14,17 +14,6 @@ export const handleLogin = async (values, dispatch, history) => {
   const password = values.password
 
   dispatch(login(username, password))
-    .then((res) => {
-      console.log(res)
-      dispatch(fetchSkills())
-      dispatch(fetchUserSkills())
-      dispatch(fetchPosts())
-      dispatch(fetchUsers())
-      dispatch(fetchUsers())
-      dispatch(fetchComments())
-      dispatch(fetchExperiences())
-      dispatch(fetchConversations(res[0].id))
-    })
     .then(() => {
       history.push('/dashboard')
     })
@@ -36,9 +25,7 @@ export const handleLogin = async (values, dispatch, history) => {
 export const checkLoggedIn = (dispatch) => {
   const user = loadState()
 
-  if (user !== undefined) {
-    dispatch(fetchSkills())
-    dispatch(fetchUserSkills())
+  if (user) {
     return true
   }
 }

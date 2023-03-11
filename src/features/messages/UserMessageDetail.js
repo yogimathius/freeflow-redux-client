@@ -23,13 +23,6 @@ const EDITING = 'EDITING'
 const UserMessageDetail = ({ message, userId }) => {
   const conversationsStatus = useSelector((state) => state.userConversations.status)
 
-  useEffect(() => {
-    if (conversationsStatus === 'idle') {
-      dispatch(fetchConversations(userId))
-    }
-    dispatch(fetchUsers)
-  })
-
   const user = useSelector((state) => selectUserById(state, message.sender_id))
 
   const { mode, transition } = useVisualMode(SHOW)
