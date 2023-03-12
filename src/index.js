@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 // }
 
 ReactDOM.render(
-  <Provider store={store} className="bg-gray-400 overflow-hidden h-screen">
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')

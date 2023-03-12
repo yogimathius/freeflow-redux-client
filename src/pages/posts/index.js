@@ -3,9 +3,7 @@ import { VisiblePostsList } from '../../features/posts'
 
 const index = () => {
   return (
-    <div>
-      <VisiblePostsList></VisiblePostsList>
-    </div>
+    <VisiblePostsList></VisiblePostsList>
   )
 }
 
