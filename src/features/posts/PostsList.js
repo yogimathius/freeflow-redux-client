@@ -1,15 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch, connect } from 'react-redux'
+import React from 'react'
+import { useSelector, connect } from 'react-redux'
 import PostExcerpt from './components/PostExcerpt/PostExcerpt'
 import AddPostForm from './components/AddPostForm/AddPostForm'
 
-import {
-  fetchPosts
-} from './reducers/postsSlice'
 import Filter from '../filters/Filter'
-import { fetchSkills } from '../../reducers/dbSkillsSlice'
-import { fetchUserSkills } from '../../reducers/userSkillsSlice'
 import { OnSavePostClicked } from './utils/onSavePostClicked'
 import { onCancelDelete, onConfirmDelete, onEdit, onSaveEdit } from './utils/visualModeTransitions'
 
@@ -39,11 +34,11 @@ const PostsList = ({ posts, loggedInUser }) => {
   }
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 pt-4">
       <AddPostForm OnSavePostClicked={OnSavePostClicked} />
       <Filter />
       {posts.length !== 0
-        ? <section className="mt-4">
+        ? <section>
             {content}
           </section>
         : <div className="flex justify-center h-24 items-center bg-white mt-2 rounded-lg border-1 border-gray-300 mb-3">Sorry! None found.</div>

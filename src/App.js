@@ -38,16 +38,9 @@ function App () {
   return (
     <Router>
 
-      <div className="App lg:grid grid-cols-10 font-body">
+      <div className="App lg:grid grid-cols-10 font-body bg-gray-50 mt-16">
         <Navbar />
-        <div className="hidden xl:col-span-2 xl:flex justify-end">
-          { user
-            ? <UserSideBar />
-            : ''
-          }
-        </div>
-        <div className="h-20"></div>
-        <div className="bg-gray-100 col-start-2 col-span-8 xl:col-start-3 xl:col-span-6 -mt-2 lg:mt-16 xl:-mt-2 pt-2">
+        <div className="bg-white col-start-2 col-span-8 xl:col-start-3 xl:col-span-6 -mt-2 lg:mt-16 xl:-mt-2 rounded-lg">
           <Switch>
             {routes.map((route) => (
               <AppRoute
