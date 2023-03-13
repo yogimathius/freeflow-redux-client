@@ -3,6 +3,9 @@
   Link {
     @apply text-blue-500;
   }
+  html {
+    @apply bg-gray-50;
+  }
   ::-webkit-input-placeholder {
     @apply text-center flex justify-center items-center;
   }
