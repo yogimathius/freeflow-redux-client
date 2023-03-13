@@ -37,9 +37,9 @@ function App () {
   return (
     <Router>
 
-      <div className="App font-body bg-gray-50">
+      <div className="App font-body">
         <Navbar />
-        <div className="bg-white rounded-lg w-2/3 mx-auto ml-60">
+        <div className="rounded-lg w-2/3 mx-auto ml-60">
           <Switch>
             {routes.map((route) => (
               <AppRoute
