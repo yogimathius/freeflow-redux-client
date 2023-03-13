@@ -47,14 +47,14 @@ export default function AddPostForm ({ OnSavePostClicked, closeModal }) {
         setContent,
         emptySkillsDB,
         canSave
-      )
+      ).then(closeModal)
     }
   }
 
   return (
-    <section className="bg-white fixed top-20 left:0 w-1/2 py-12 z-50 xl:-mt-2 mb-4">
-      <form
-        className="space-y-2 mt-0">
+    <>
+      <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <form className='bg-white fixed top-32 left-80 w-1/2 py-12 px-12 z-50 xl:-mt-2 mb-4 space-y-2 mt-0 rounded-lg'>
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."
@@ -84,6 +84,6 @@ export default function AddPostForm ({ OnSavePostClicked, closeModal }) {
           </div>
         </div>
       </form>
-    </section>
+    </>
   )
 }
