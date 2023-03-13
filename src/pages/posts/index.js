@@ -1,9 +1,9 @@
 import React from 'react'
 import { VisiblePostsList } from '../../features/posts'
 
-const index = () => {
+const index = ({ openModal }) => {
   return (
-    <VisiblePostsList></VisiblePostsList>
+    <VisiblePostsList openModal={openModal}></VisiblePostsList>
   )
 }
 
