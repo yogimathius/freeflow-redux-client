@@ -9,7 +9,7 @@ const UserExperiences = ({ match }) => {
   const userId = loggedInUser.id
 
   return (
-    <div className="space-y-2 mt-2 pt-1">
+    <div className="space-y-2 pt-1 mt-16">
       <CreateExperience userId={userId} />
       <UserExperienceHelperHistory
         userId={userId}
