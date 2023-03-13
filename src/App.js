@@ -42,7 +42,7 @@ function App () {
 
       <div className="App font-body">
         <Navbar experience={experience} />
-        <div className="rounded-lg w-2/3 mx-auto ml-60">
+        <div className="rounded-lg w-2/3 mx-auto ml-32 lg:ml-60">
           <Switch>
             {routes.map((route) => (
               <AppRoute
