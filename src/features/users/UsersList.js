@@ -28,7 +28,7 @@ export const UsersList = () => {
 
   const renderedUsers = users.map((user, id) => {
     return (
-      <div key={id} className="gap-2">
+      <div key={id} className="gap-2 border-1 border-gray-200 rounded-lg">
         <UserCard
           key={id}
           user={user}
