@@ -9,7 +9,6 @@ import routes from './config/routes.js'
 import { Navbar } from './components/Navbar'
 
 import AppRoute from './components/AppRoute'
-import UserSideBar from './features/users/UserSideBar'
 import { fetchUserSkills } from './reducers/userSkillsSlice'
 import { loadState } from './helpers/localStorage'
 import { fetchSkills } from './reducers/dbSkillsSlice.js'
@@ -38,9 +37,9 @@ function App () {
   return (
     <Router>
 
-      <div className="App lg:grid grid-cols-10 font-body bg-gray-50 mt-16">
+      <div className="App font-body bg-gray-50">
         <Navbar />
-        <div className="bg-white col-start-2 col-span-8 xl:col-start-3 xl:col-span-6 -mt-2 lg:mt-16 xl:-mt-2 rounded-lg">
+        <div className="bg-white rounded-lg w-2/3 mx-auto ml-60">
           <Switch>
             {routes.map((route) => (
               <AppRoute

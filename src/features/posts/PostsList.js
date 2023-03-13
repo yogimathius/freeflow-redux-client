@@ -34,7 +34,7 @@ const PostsList = ({ posts, loggedInUser }) => {
   }
 
   return (
-    <div className="mx-4 pt-4">
+    <div className="mx-4 mt-16 pt-4 rounded-lg">
       <AddPostForm OnSavePostClicked={OnSavePostClicked} />
       <Filter />
       {posts.length !== 0
