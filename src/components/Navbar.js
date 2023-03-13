@@ -6,19 +6,17 @@ import { saveState } from '../helpers/localStorage'
 import logo from '../images/logo.png'
 import { emptySkillsDB } from '../reducers/selectedSkillsSlice'
 import ProgressBar from './ProgressBar/ProgressBar'
-import { selectCompletedExperiencesByHelperId } from '../reducers/experiencesSlice'
 
-export const Navbar = (props) => {
+export const Navbar = ({ experience }) => {
   const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const history = useHistory()
-  const [currentPage, setCurrentPage] = useState('/')
+  const [_, setCurrentPage] = useState('/')
   const handleLogout = () => {
     dispatch(logout())
     history.push('/login')
   }
-  const userExperiences = useSelector((state) => selectCompletedExperiencesByHelperId(state, user.id))
-  const experience = userExperiences.length * 12
+
   useEffect(() => {
     if (user === null || user === undefined) {
       setCurrentPage('login')
@@ -38,9 +36,13 @@ export const Navbar = (props) => {
             <img width="" className="h-12" src={logo} alt="freeflow logo"></img>
           </Link>
         </div>
-        <div className='mr-4 xl:mr-12'>
-          <ProgressBar experience={experience} />
-        </div>
+        {user
+          ? (
+          <div className='mr-4 xl:mr-12'>
+            <ProgressBar experience={experience} />
+          </div>
+            )
+          : null}
       </nav>
       <aside id="default-sidebar" className="fixed top-10 bg-gray-50 left-0 z-40 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <section className="h-full px-8 py-4 bg-gray-50 dark:bg-gray-800">

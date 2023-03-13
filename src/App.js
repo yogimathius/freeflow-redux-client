@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import routes from './config/routes.js'
 import { Navbar } from './components/Navbar'
@@ -15,7 +15,7 @@ import { fetchSkills } from './reducers/dbSkillsSlice.js'
 import { fetchPosts } from './features/posts/reducers/postsSlice.js'
 import { fetchUsers } from './reducers/usersSlice.js'
 import { fetchComments } from './reducers/commentsSlice.js'
-import { fetchExperiences } from './reducers/experiencesSlice.js'
+import { fetchExperiences, selectCompletedExperiencesByHelperId } from './reducers/experiencesSlice.js'
 import { fetchConversations } from './reducers/userConversationsSlice.js'
 
 function App () {
@@ -34,11 +34,14 @@ function App () {
     }
   }, [dispatch])
 
+  const userExperiences = user ? useSelector((state) => selectCompletedExperiencesByHelperId(state, user.id)) : null
+  const experience = userExperiences ? userExperiences.length * 12 : null
+
   return (
     <Router>
 
       <div className="App font-body">
-        <Navbar />
+        <Navbar experience={experience} />
         <div className="rounded-lg w-2/3 mx-auto ml-60">
           <Switch>
             {routes.map((route) => (
