@@ -32,8 +32,8 @@ export const Navbar = (props) => {
 
   return (
     <div className='bg-gray-50'>
-      <nav className="fixed top-0 inset-x-0 z-50 h-16 text-white bg-gray-50 font-medium flex justify-between items-center ml-12 pt-2">
-        <div className="flex lg:justify-center items-center">
+      <nav className="fixed top-0 inset-x-0 z-50 h-16 text-white bg-white border-b-2 font-medium flex justify-between items-center py-2">
+        <div className="flex lg:justify-center items-center ml-12">
           <Link onClick={() => (setCurrentPage('dashboard'))} to="/dashboard">
             <img width="" className="h-12" src={logo} alt="freeflow logo"></img>
           </Link>
