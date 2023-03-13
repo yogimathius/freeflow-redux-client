@@ -5,7 +5,7 @@ import SkillSelector from '../../../dbSkills/SkillSelector'
 import { emptySkillsDB } from '../../../../reducers/selectedSkillsSlice'
 import { checkPostErrors } from '../../utils/checkPostErrors'
 
-export default function AddPostForm ({ OnSavePostClicked }) {
+export default function AddPostForm ({ OnSavePostClicked, closeModal }) {
   const [error, setError] = useState('')
   const [content, setContent] = useState('')
   const [addRequestStatus, setAddRequestStatus] = useState('idle')
@@ -52,7 +52,7 @@ export default function AddPostForm ({ OnSavePostClicked }) {
   }
 
   return (
-    <section className="xl:-mt-2 mb-4">
+    <section className="bg-white fixed top-20 left:0 w-1/2 py-12 z-50 xl:-mt-2 mb-4">
       <form
         className="space-y-2 mt-0">
         <label htmlFor="postContent"></label>
