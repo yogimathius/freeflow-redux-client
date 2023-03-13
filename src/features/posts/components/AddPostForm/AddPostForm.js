@@ -4,6 +4,8 @@ import { addNewPost } from '../../reducers/postsSlice'
 import SkillSelector from '../../../dbSkills/SkillSelector'
 import { emptySkillsDB } from '../../../../reducers/selectedSkillsSlice'
 import { checkPostErrors } from '../../utils/checkPostErrors'
+import { IconButton } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
 
 export default function AddPostForm ({ OnSavePostClicked, closeModal }) {
   const [error, setError] = useState('')
@@ -55,6 +57,9 @@ export default function AddPostForm ({ OnSavePostClicked, closeModal }) {
     <>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
       <form className='bg-white fixed top-32 left-80 w-1/2 py-12 px-12 z-50 xl:-mt-2 mb-4 space-y-2 mt-0 rounded-lg'>
+        <IconButton className="close" onClick={closeModal}>
+          <CloseIcon />
+        </IconButton>
         <label htmlFor="postContent"></label>
         <textarea
           placeholder="Add a new post..."

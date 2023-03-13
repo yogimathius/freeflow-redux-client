@@ -24,12 +24,15 @@ function App () {
   const user = loadState()
   const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
+  const [isDisabled, setDisabled] = useState(false)
 
   const openModal = () => {
+    setDisabled(true)
     setShowModal(true)
   }
 
   const closeModal = () => {
+    setDisabled(false)
     setShowModal(false)
   }
 
@@ -63,6 +66,7 @@ function App () {
                 isPrivate={route.isPrivate}
                 loggedInUser={user}
                 openModal={openModal}
+                isDisabled={isDisabled}
               />
             ))}
           </Switch>
