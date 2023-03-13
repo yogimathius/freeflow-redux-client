@@ -34,7 +34,7 @@ export default function UserPage () {
   } else if (usersStatus === 'succeeded') {
     return (
       <section className="space-y-4 pt-2 mx-4 mt-16">
-        <div className="w-1/2">
+        <div className="w-1/2 border-1 border-gray-200 rounded-lg">
           <UserCard
             user={user}
           />
