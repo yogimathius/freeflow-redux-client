@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch
@@ -17,10 +17,22 @@ import { fetchUsers } from './reducers/usersSlice.js'
 import { fetchComments } from './reducers/commentsSlice.js'
 import { fetchExperiences, selectCompletedExperiencesByHelperId } from './reducers/experiencesSlice.js'
 import { fetchConversations } from './reducers/userConversationsSlice.js'
+import AddPostForm from './features/posts/components/AddPostForm/AddPostForm.js'
+import { OnSavePostClicked } from './features/posts/utils/onSavePostClicked.js'
 
 function App () {
   const user = loadState()
   const dispatch = useDispatch()
+  const [showModal, setShowModal] = useState(false)
+
+  const openModal = () => {
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   useEffect(() => {
     if (user) {
       dispatch(fetchSkills())
@@ -50,10 +62,16 @@ function App () {
                 component={route.component}
                 isPrivate={route.isPrivate}
                 loggedInUser={user}
+                openModal={openModal}
               />
             ))}
           </Switch>
         </div>
+        {showModal
+          ? (
+            <AddPostForm OnSavePostClicked={OnSavePostClicked} closeModal={closeModal} />
+            )
+          : null}
       </div>
     </Router>
   )

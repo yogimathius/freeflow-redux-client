@@ -6,6 +6,7 @@ import { loadState } from '../helpers/localStorage'
 
 const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) => {
   const loggedInUser = loadState()
+
   return (
 		<Route
 			path={path}
@@ -13,7 +14,9 @@ const AppRoutes = ({ component: Component, path, isPrivate, props, ...rest }) =>
 			  ? (<Redirect to={{ pathname: '/login' }} />)
 			  : (<Component
 						{...props}
-						loggedInUser={loggedInUser} />)
+						{...rest}
+						loggedInUser={loggedInUser}
+						openModal={rest.openModal} />)
 			}
 			{...rest}
 		/>
