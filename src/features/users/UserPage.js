@@ -33,7 +33,7 @@ export default function UserPage () {
     return <div className="loader">Loading...</div>
   } else if (usersStatus === 'succeeded') {
     return (
-      <section className="space-y-4 pt-2 mx-4">
+      <section className="space-y-4 pt-2 mx-4 mt-16">
         <div className="w-1/2">
           <UserCard
             user={user}

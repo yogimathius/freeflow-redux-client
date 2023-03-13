@@ -40,8 +40,7 @@ export const UsersList = () => {
   })
 
   return (
-    <section className="space-y-3 pt-3 mx-4">
-      <h2 className="text-2xl font-bold text-center text-green-500">Users</h2>
+    <section className="space-y-3 pt-3 mx-4 mt-16">
       <div className="grid lg:grid-cols-2 gap-4">
         {renderedUsers}
       </div>
