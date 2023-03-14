@@ -5,6 +5,7 @@ import {
   createEntityAdapter
 } from '@reduxjs/toolkit'
 import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/comments'
 
@@ -13,7 +14,7 @@ const commentsAdapter = createEntityAdapter({
 })
 
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
-  const response = await axios.get(url)
+  const response = await axiosInstance.get(url)
   return response.data
 })
 
@@ -30,7 +31,7 @@ export const addNewComment = createAsyncThunk(
       post_id,
       content
     } = initialComment
-    const response = await axios.post(`${url}`, {
+    const response = await axiosInstance.post(`${url}`, {
       commenter_id,
       post_id,
       text_body: content,
@@ -49,7 +50,7 @@ export const removeComment = createAsyncThunk(
       post_id: post_id,
       commenter_id: commenter_id
     }
-    const response = await axios.delete(url, {
+    const response = await axiosInstance.delete(url, {
       params: {
         removeComment
       }
@@ -62,7 +63,7 @@ export const updateComment = createAsyncThunk(
   'comments/updatePost',
   async (initialPost) => {
     const { text_body, post_id, commenter_id } = initialPost
-    const response = await axios.put(url, {
+    const response = await axiosInstance.put(url, {
       text_body,
       post_id,
       commenter_id

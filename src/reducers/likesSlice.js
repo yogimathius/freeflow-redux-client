@@ -5,6 +5,7 @@ import {
   createEntityAdapter
 } from '@reduxjs/toolkit'
 import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/likes'
 
@@ -18,7 +19,7 @@ const initialState = likesAdapter.getInitialState({
 })
 
 export const fetchLikes = createAsyncThunk('likes/fetchLikes', async () => {
-  const response = await axios.get('/api/likes')
+  const response = await axiosInstance.get('/api/likes')
   return response.data
 })
 
@@ -26,7 +27,7 @@ export const addNewLike = createAsyncThunk(
   'likes/addNewLike',
   async (initialLikes) => {
     const { post_id, liker_id } = initialLikes
-    const response = await axios.post(url, { post_id, liker_id })
+    const response = await axiosInstance.post(url, { post_id, liker_id })
     return response.data
   }
 )
@@ -40,7 +41,7 @@ export const removeLike = createAsyncThunk(
       liker_id,
       id
     }
-    const response = await axios.delete(url, {
+    const response = await axiosInstance.delete(url, {
       params: {
         removeLike
       }

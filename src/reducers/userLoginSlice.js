@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 import { loadState } from '../helpers/localStorage'
 // Slice
 const url = '/api/login-real'
@@ -28,7 +28,7 @@ const { loginSuccess, logoutSuccess } = userLoginSlice.actions
 
 export const login = (username, password) => async dispatch => {
   try {
-    const res = await axios.post(url, { username, password })
+    const res = await axiosInstance.post(url, { username, password })
     if (res.status === 200) {
       const userId = res.data
       dispatch(loginSuccess(userId))

@@ -5,7 +5,7 @@ import {
   createSelector,
   createEntityAdapter
 } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../../../axiosInstance'
 
 const url = '/api/posts'
 
@@ -19,7 +19,7 @@ const initialState = postsAdapter.getInitialState({
 })
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await axios.get('/api/posts')
+  const response = await axiosInstance.get('/api/posts')
   return response.data
 })
 
@@ -41,7 +41,7 @@ export const addNewPost = createAsyncThunk(
       skill_ids
     }
 
-    const response = await axios.post(url, newPost)
+    const response = await axiosInstance.post(url, newPost)
 
     return response.data
   }
@@ -51,7 +51,7 @@ export const removePost = createAsyncThunk(
   'posts/removePost',
   async (initialPost) => {
     const post_id = initialPost
-    const response = await axios.delete(url, {
+    const response = await axiosInstance.delete(url, {
       params: {
         post_id
       }
@@ -64,7 +64,7 @@ export const updatePost = createAsyncThunk(
   'posts/updatePost',
   async (initialPost) => {
     const { text_body, post_id } = initialPost
-    const response = await axios.put(url, {
+    const response = await axiosInstance.put(url, {
       text_body,
       post_id
     })
