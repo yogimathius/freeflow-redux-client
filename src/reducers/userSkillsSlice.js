@@ -6,6 +6,7 @@ import {
   createSelector
 } from '@reduxjs/toolkit'
 import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/user_skills'
 
@@ -19,7 +20,7 @@ const initialState = userSkillsAdapter.getInitialState({
 })
 
 export const fetchUserSkills = createAsyncThunk('skills/fetchUserSkills', async () => {
-  const response = await axios.get(url)
+  const response = await axiosInstance.get(url)
   return response.data
 })
 
@@ -27,7 +28,7 @@ export const addNewUserSkill = createAsyncThunk(
   'userSkills/addNewUserSkill',
   async (initialUserSkills) => {
     const { name } = initialUserSkills
-    const response = await axios.post(url, { name })
+    const response = await axiosInstance.post(url, { name })
     return response.data
   }
 )
@@ -40,7 +41,7 @@ export const removeUserSkill = createAsyncThunk(
       name,
       user_id: userId
     }
-    const response = await axios.delete(url, {
+    const response = await axiosInstance.delete(url, {
       params: {
         removeUserSkill
       }

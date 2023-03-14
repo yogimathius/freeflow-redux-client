@@ -4,7 +4,7 @@ import {
   createEntityAdapter
   // createSelector,
 } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 // import { normalize, schema } from 'normalizr'
 
 const url = '/api/messages'
@@ -14,13 +14,13 @@ const messagesAdapter = createEntityAdapter({
 })
 
 export const fetchMessages = createAsyncThunk('messages/fetchMessages', async (userId) => {
-  const response = await axios.get(`${url}/${userId}`)
+  const response = await axiosInstance.get(`${url}/${userId}`)
 
   return response.data
 })
 
 export const fetchUnreadCount = createAsyncThunk('messages/fetchMessages', async (userId) => {
-  const response = await axios.get(`${url}/unread_count`, { userID: userId })
+  const response = await axiosInstance.get(`${url}/unread_count`, { userID: userId })
   return response.data
 })
 
@@ -35,7 +35,7 @@ export const addNewMessage = createAsyncThunk(
       receiver
     } = initialMessage
 
-    const response = await axios.post(`${url}/new`, {
+    const response = await axiosInstance.post(`${url}/new`, {
       senderID,
       receiverID,
       textInput: content,
@@ -51,7 +51,7 @@ export const updateMessage = createAsyncThunk(
   'messages/updatePost',
   async (initialPost) => {
     const { text_body, post_id, messager_id } = initialPost
-    const response = await axios.put(url, {
+    const response = await axiosInstance.put(url, {
       text_body,
       post_id,
       messager_id
