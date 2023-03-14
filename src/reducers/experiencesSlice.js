@@ -4,7 +4,7 @@ import {
   createSelector,
   createEntityAdapter
 } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/experiences'
 
@@ -18,12 +18,12 @@ const initialState = experiencesAdapter.getInitialState({
 })
 
 export const fetchExperiences = createAsyncThunk('experiences/fetchExperiences', async () => {
-  const response = await axios.get(url)
+  const response = await axiosInstance.get(url)
   return response.data
 })
 
 export const getExperienceCountByUser = createAsyncThunk('experiences/getExperienceCount', async () => {
-  const response = await axios.get('/api/experiences/user')
+  const response = await axiosInstance.get('/api/experiences/user')
   return response.data
 })
 
@@ -32,7 +32,7 @@ export const addNewExperience = createAsyncThunk(
   async (initialExperiences) => {
     const { helper_id, helped_id, creator_id } = initialExperiences
 
-    const response = await axios.post(`${url}/new`, { helper_id, helped_id, creator_id })
+    const response = await axiosInstance.post(`${url}/new`, { helper_id, helped_id, creator_id })
     return response.data
   }
 )
@@ -43,7 +43,7 @@ export const acceptExperience = createAsyncThunk(
     const { id } = initialExperiences
 
     const experienceId = id
-    const response = await axios.put(`${url}/accept`, { experienceId })
+    const response = await axiosInstance.put(`${url}/accept`, { experienceId })
     return response.data
   }
 )
@@ -54,7 +54,7 @@ export const completeExperience = createAsyncThunk(
     const { id } = initialExperiences
     const experienceId = id
 
-    const response = await axios.put(`${url}/complete`, { experienceId })
+    const response = await axiosInstance.put(`${url}/complete`, { experienceId })
 
     return response.data
   }
@@ -66,7 +66,7 @@ export const removeExperience = createAsyncThunk(
     const { id } = initialExperiences
 
     const experienceId = id
-    const response = await axios.delete(`${url}/delete`, {
+    const response = await axiosInstance.delete(`${url}/delete`, {
       params: { experienceId }
     })
     return response.data

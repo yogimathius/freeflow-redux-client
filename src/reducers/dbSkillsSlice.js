@@ -6,13 +6,14 @@ import {
   createSelector
 } from '@reduxjs/toolkit'
 import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/db_skills'
 
 const skillsAdapter = createEntityAdapter()
 
 export const fetchSkills = createAsyncThunk('skills/fetchSkills', async () => {
-  const response = await axios.get(url)
+  const response = await axiosInstance.get(url)
   return response.data
 })
 
@@ -26,7 +27,7 @@ export const addNewSkill = createAsyncThunk(
   'skills/addNewLike',
   async (intitialSkills) => {
     const { name } = intitialSkills
-    const response = await axios.post(url, { name })
+    const response = await axiosInstance.post(url, { name })
     return response.data
   }
 )
@@ -39,7 +40,7 @@ export const removeSkill = createAsyncThunk(
       post_id: post_id,
       skill_id: skill_id
     }
-    const response = await axios.delete(url, {
+    const response = await axiosInstance.delete(url, {
       params: {
         removeSkill
       }

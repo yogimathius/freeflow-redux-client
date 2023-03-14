@@ -2,12 +2,12 @@ import {
   createSlice,
   createAsyncThunk
 } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/conversations'
 
 export const fetchConversations = createAsyncThunk('conversations/fetchConversations', async (userId) => {
-  const response = await axios.get(`${url}/${userId}`)
+  const response = await axiosInstance.get(`${url}/${userId}`)
   return response.data
 })
 
@@ -22,7 +22,7 @@ export const addNewMessage = createAsyncThunk(
       receiver
     } = initialMessage
 
-    const response = await axios.post('/api/messages/new', {
+    const response = await axiosInstance.post('/api/messages/new', {
       senderID,
       receiverID,
       textInput: content,
@@ -38,7 +38,7 @@ export const removeMessage = createAsyncThunk(
   'conversations/removeMessage',
   async (initialMessages) => {
     const { messageId } = initialMessages
-    const response = await axios.delete(`/api/messages/${messageId}`, {
+    const response = await axiosInstance.delete(`/api/messages/${messageId}`, {
       params: {
         messageId
       }
@@ -51,7 +51,7 @@ export const updateMessage = createAsyncThunk(
   'messages/updatePost',
   async (initialPost) => {
     const { text_body, post_id, messager_id } = initialPost
-    const response = await axios.put(url, {
+    const response = await axiosInstance.put(url, {
       text_body,
       post_id,
       messager_id

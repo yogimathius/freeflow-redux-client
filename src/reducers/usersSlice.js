@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit'
 // import { client } from '../../api/client'
 // import { api } from '../../.api/index';
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const usersAdapter = createEntityAdapter()
 
@@ -14,12 +14,12 @@ const initialState = usersAdapter.getInitialState({
 })
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await axios.get('/api/users')
+  const response = await axiosInstance.get('/api/users')
   return response.data
 })
 
 export const fetchUserPosts = createAsyncThunk('users/fetchUserPostings', async () => {
-  const response = await axios.get('/api/users/:id/postings')
+  const response = await axiosInstance.get('/api/users/:id/postings')
   return response.data
 })
 

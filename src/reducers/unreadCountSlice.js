@@ -4,12 +4,12 @@ import {
   createEntityAdapter
   // createSelector,
 } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosInstance from '../axiosInstance'
 
 const url = '/api/messages'
 
 export const fetchUnreadCount = createAsyncThunk('messages/fetchMessages', async (userId) => {
-  const response = await axios.get(`${url}/unread_count`, { userID: userId })
+  const response = await axiosInstance.get(`${url}/unread_count`, { userID: userId })
   return response.data
 })
 
