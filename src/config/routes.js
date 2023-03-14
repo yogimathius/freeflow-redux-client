@@ -6,12 +6,22 @@ import LoginPage from '../pages/login'
 import ExperiencesPage from '../pages/experiences'
 import MessagesPage from '../pages/messages'
 import PostsPage from '../pages/posts'
+import { fetchSkills } from './reducers/dbSkillsSlice.js'
+import { fetchPosts } from './features/posts/reducers/postsSlice.js'
+import { fetchUsers } from './reducers/usersSlice.js'
+import { fetchComments } from './reducers/commentsSlice.js'
+import { fetchUserSkills } from './reducers/userSkillsSlice'
+import {
+  fetchExperiences
+} from './reducers/experiencesSlice.js'
+import { fetchConversations } from './reducers'
 
 const routes = [
   {
     path: '/dashboard',
     component: PostsPage,
     isPrivate: true
+    loader: 
   },
   {
     path: '/login',

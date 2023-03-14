@@ -1,10 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = ({ handleLogin }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   return (
@@ -12,7 +12,7 @@ const LoginForm = ({ handleLogin }) => {
     className="flex justify-center"
     initialValues={{ username: '', password: '' }}
     onSubmit={(values) => {
-      handleLogin(values, dispatch, history)
+      handleLogin(values, dispatch, navigate)
     }}
     validate={(values) => {
       const errors = {}

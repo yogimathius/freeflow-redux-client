@@ -2,28 +2,26 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
     'standard',
-    'plugin:cypress/recommended'
+    'plugin:cypress/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  plugins: [
-    'react'
-  ],
+  plugins: ['react'],
   rules: {
     'react/prop-types': 0,
     camelcase: 0,
     'no-unused-vars': 0,
-    semi: 2,
-    'react/display-name': 'off'
-  }
-}
+    semi: 1,
+    'react/display-name': 'off',
+  },
+};

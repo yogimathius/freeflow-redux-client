@@ -1,17 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { redirect } from 'react-router-dom'
 import LoginForm from './LoginForm'
-import { checkLoggedIn, handleLogin } from './loginHelpers'
+import { handleLogin, checkLoggedIn } from './loginHelpers'
 import LoginDetails from './LoginDetails'
 
 export default function LoginPage () {
   const dispatch = useDispatch()
-
   if (checkLoggedIn(dispatch)) {
-    return (
-      <Redirect to={{ pathname: '/dashboard' }} />
-    )
+    redirect('/dashboard')
   }
 
   return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../reducers/userLoginSlice'
 import { saveState } from '../helpers/localStorage'
 import logo from '../images/logo.png'
@@ -11,11 +11,11 @@ import DropDown from './DropDown'
 export const Navbar = ({ experience }) => {
   const { user } = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [_, setCurrentPage] = useState('/')
   const handleLogout = () => {
     dispatch(logout())
-    history.push('/login')
+    navigate('/login')
   }
 
   useEffect(() => {

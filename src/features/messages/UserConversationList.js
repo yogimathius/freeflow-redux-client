@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Route, Routes, useResolvedPath } from 'react-router-dom'
 
 import useVisualMode from '../../hooks/useVisualMode'
 
@@ -24,7 +24,7 @@ const COMPOSE = 'COMPOSE'
 const UserConversationList = () => {
   const dispatch = useDispatch()
   const { mode, transition } = useVisualMode(SHOW)
-  const { path, url } = useRouteMatch()
+  const { path, url } = useResolvedPath('').pathname
   const { id } = loadState()
   const conversationsStatus = useSelector((state) => state.userConversations.status)
 
@@ -78,13 +78,13 @@ const UserConversationList = () => {
 
           {mode === SHOW && (
             <div className="row-start-3 row-span-7 col-start-2 col-span-3 ">
-              <Switch>
+              <Routes>
                 <Route path={`${path}/:messagerId`}>
                   <SelectedUserConversation
                     sortedMessages={conversations?.messages} userId={id}
                   />
                 </Route>
-              </Switch>
+              </Routes>
             </div>
           )}
 

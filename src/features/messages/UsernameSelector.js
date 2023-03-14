@@ -1,15 +1,35 @@
 /* eslint-disable no-tabs */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, withRouter } from 'react-router-dom'
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from 'react-router-dom'
 import Select from 'react-select'
 
 import { selectAllUsers } from '../../reducers/usersSlice'
 import { setSelectedUser } from '../../reducers/selectedUserSlice'
 import { addUserConversation } from '../../reducers/userConversationsSlice'
 
+function withRouter (Component) {
+  function ComponentWithRouterProp (props) {
+    const location = useLocation()
+    const navigate = useNavigate()
+    const params = useParams()
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    )
+  }
+
+  return ComponentWithRouterProp
+}
+
 const UsernameSelector = ({ sortedMessages, userId, messagers, currentThread, setCurrentThread, url, path }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const users = useSelector(selectAllUsers)
 
@@ -30,14 +50,14 @@ const UsernameSelector = ({ sortedMessages, userId, messagers, currentThread, se
       const username = selectedUser.value.username
       dispatch(addUserConversation({ name: username, userId: selectedUser.value.userIdInList }))
       setCurrentThread(username)
-      history.push(`${url}/${username}`)
+      navigate(`${url}/${username}`)
     }
 
     if (userAlreadyInMessages !== undefined) {
       dispatch(setSelectedUser({ selectedUser }))
       const username = userAlreadyInMessages.name
       setCurrentThread(username)
-      history.push(`${url}/${username}`)
+      navigate(`${url}/${username}`)
     }
   }
 
