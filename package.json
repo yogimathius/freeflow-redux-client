@@ -4,8 +4,8 @@
   "private": true,
   "proxy": "https://freeflow-api-production.up.railway.app/",
   "scripts": {
-    "start": "react-scripts --max_old_space_size=8192 start",
-    "build": "react-scripts --max_old_space_size=8192 build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
     "test": "jest",
